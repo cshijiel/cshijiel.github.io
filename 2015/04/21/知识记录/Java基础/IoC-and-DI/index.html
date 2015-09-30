@@ -1,0 +1,730 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.5.1"/>
+
+
+    <meta name="description" content="诚信，认真，专注，踏实" />
+
+
+
+  <meta name="keywords" content="DI,IoC,java," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
+
+
+<meta name="description" content="IOC：Inversion of Control 控制反转DI:Dependency Injection 依赖注入
+控制反转，从字面意思来看，就是控制权又被动变主动，最后又变回被动。
+举个例子：你的主管要求你做一件事情，这个时候就存在这么几个过程，
+主管命令你做事情（这个时候主动权在主管，你是被动的）
+你接到命令做事情（这个时候主题是你，你是主动的，控制权在你手里）
+你完成事情（这个时候主题依然是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IoC and DI">
+<meta property="og:url" content="http://coderroc.com/2015/04/21/知识记录/Java基础/IoC-and-DI/index.html">
+<meta property="og:site_name" content="Roc`s 随想录">
+<meta property="og:description" content="IOC：Inversion of Control 控制反转DI:Dependency Injection 依赖注入
+控制反转，从字面意思来看，就是控制权又被动变主动，最后又变回被动。
+举个例子：你的主管要求你做一件事情，这个时候就存在这么几个过程，
+主管命令你做事情（这个时候主动权在主管，你是被动的）
+你接到命令做事情（这个时候主题是你，你是主动的，控制权在你手里）
+你完成事情（这个时候主题依然是">
+<meta property="og:updated_time" content="2015-04-21T02:14:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IoC and DI">
+<meta name="twitter:description" content="IOC：Inversion of Control 控制反转DI:Dependency Injection 依赖注入
+控制反转，从字面意思来看，就是控制权又被动变主动，最后又变回被动。
+举个例子：你的主管要求你做一件事情，这个时候就存在这么几个过程，
+主管命令你做事情（这个时候主动权在主管，你是被动的）
+你接到命令做事情（这个时候主题是你，你是主动的，控制权在你手里）
+你完成事情（这个时候主题依然是">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'hide'
+  };
+</script>
+
+  <title> IoC and DI | Roc`s 随想录 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-next-logo"></i>
+      </span>
+      <span class="site-title">Roc`s 随想录</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-next-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-next-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-next-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-next-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-next-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content"> 
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              IoC and DI
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-21T10:10:32+08:00" content="2015-04-21">
+            2015-04-21
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Java基础/" itemprop="url" rel="index">
+                  <span itemprop="name">Java基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/21/知识记录/Java基础/IoC-and-DI/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/21/知识记录/Java基础/IoC-and-DI/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>IOC：Inversion of Control 控制反转<br>DI:Dependency Injection 依赖注入</p>
+<p>控制反转，从字面意思来看，就是控制权又被动变主动，最后又变回被动。</p>
+<p>举个例子：<br>你的主管要求你做一件事情，这个时候就存在这么几个过程，</p>
+<p>主管命令你做事情（这个时候主动权在主管，你是被动的）</p>
+<p>你接到命令做事情（这个时候主题是你，你是主动的，控制权在你手里）</p>
+<p>你完成事情（这个时候主题依然是你，控制权在你手里）</p>
+<p>报告主管做完事情（主动权又叫交到主管手里了）</p>
+<p>上面的整个过程就完成了一次IOC，从上面可以看出，IOC的基本思想是控制权的转换过程。<br><a id="more"></a><br>举个代码的例子：</p>
+<p>假如有Class A，Class B，在A内部会初始化一个B，调用B的一个方法DoMethod</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Class B&#10;&#123;&#10;&#12288;&#12288;public void DoMethod&#65288;&#65289;&#10;&#12288;&#12288;&#123;&#10;&#12288;&#12288;  // do somthing&#65307;&#10;    &#125;&#10;&#125;&#10;&#10;public Class A&#10;&#123;&#10;  public void Excute&#65288;&#65289;&#10;  &#123;&#10;    B b = new B&#65288;&#65289;&#65307;&#10;     b.DoMethod&#65288;&#65289;&#65307;&#10;  &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p> 假如在Main函数中如下执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#12288;&#12288;A a = new A();&#10;&#12288;&#12288;a.Excute();</span><br></pre></td></tr></table></figure></p>
+<p>从这两行代码来看，事实上也存在一个IOC的过程，a——&gt;b——&gt;a，理解的关键点就在在A的内部调用Excute的时候，方法b.DoMethod的执行。</p>
+<p>理解了IOC，我们再看一下DI。</p>
+<p>从上面A调用B我们可以看出，在初始化一个A的实例时，也必须实例化一个B，也就是说如果没有B或者B出了问题，A就无法实例化，这就产生了一种依赖，就是A依赖B，这种依赖从设计的角度来说就是耦合，显然它是无法满足高内聚低耦合的要求的。这个时候就需要解耦，当然解耦有很多种方法，而DI就是其中一种。不管任何一种解耦方法，都不是说使A和B完全没有关系，而是把这种关系的实现变得隐晦，不那么直接，但是又很容易实现，而且易于扩展，不像上面的代码那样，直接new一个B出来。</p>
+<p>那为什么我们总是把IOC和DI联系到一起呢？是因为DI的基本思想就是IOC，而体现IOC 思想的方法还有另外一个，那就是Service Locator，这个方法好像涉及到的很少。</p>
+<p>DI，依赖注入，从字面意思就可以看出，依赖是通过外接注入的方式来实现的。这就实现了解耦，而DI的方式通常有三种，</p>
+<ul>
+<li>构造器注入</li>
+<li>属性设置器注入</li>
+<li>接口注入（我感觉接口注入是同时存在于上两种注入方式的，而不应该独立出来）</li>
+</ul>
+<p>以上的阐述只是为了先让我们能对IOC和DI有一个感性的理解，那么IOC真正解决的问题是什么呢？</p>
+<p>我们讲了那么多主动被动的问题，那我们是从什么视角来看待这个问题的呢？</p>
+<p>所谓为什么你是主动，而我不是主动呢？这就需要一个参照物，那这个参照物是什么呢？就是容器，在容器中来体现主动和被动。</p>
+<p>用白话来讲，就是由容器控制程序之间的关系，而非传统实现中，由程序代码直接操控。这也就是所谓“控制反转”的概念所在：控制权由应用代码中转到了外部容器，控制权的转移，是所谓“反转”，这是通常对IOC的一个解释。</p>
+<p>从容器的角度来看主动和被动，和由容器来控制程序之间的关系，应该是相通的，是一个意思。</p>
+<p>IOC要解决的就是程序之间调用的一个问题，它应该是一个思想层面的东西，是一个中心，就像一支乐队的指挥，而程序就是乐器，通过指挥来协调各种乐器，来演奏出美好的音乐来。</p>
+<p>以下文字参考：<a href="http://www.cnblogs.com/gooddasenlin/archive/2009/03/02/1401631.html" target="_blank" rel="external">http://www.cnblogs.com/gooddasenlin/archive/2009/03/02/1401631.html</a></p>
+<p>Interface Driven Design 接口驱动</p>
+<p>接口驱动有很多好处，可以提供不同灵活的子类实现，增加代码稳定和健壮性等等，但是接口一定是需要实现的，也就是如下语句迟早要执行：AInterface a = new AInterfaceImp(); 这样一来，耦合关系就产生了。</p>
+<p>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class A&#10;&#123;&#10;   AInterface a;&#10;   A()&#123;&#125;&#10;   aMethod()&#10;   &#123;&#10;     a = new AInterfaceImp();&#10;   &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>ClassA与AInterfaceImp就是依赖关系，如果想使用AInterface的另外一个实现就需要更改代码了。</p>
+<p>当然我们可以建立一个Factory来根据条件生成想要的AInterface的具体实现，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InterfaceImplFactory&#10;&#123;&#10;   AInterface create(Object condition)&#10;   &#123;&#10;      if(condition = condA)&#10;        &#123;&#10;          return new AInterfaceImpA();&#10;        &#125;&#10;      elseif(condition = condB)&#10;        &#123;&#10;          return new AInterfaceImpB();&#10;        &#125;&#10;      else&#10;        &#123;&#10;          return new AInterfaceImp();&#10;        &#125;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>表面上是在一定程度上缓解了以上问题，但实质上这种代码耦合并没有改变。</p>
+<p>通过IoC模式可以彻底解决这种耦合，它把耦合从代码中移出去，放到统一的XML文件中，通过一个容器在需要的时候把这个依赖关系形成，即把需要的接口实现注入到需要它的类中，这可能就是“依赖注入”说法的来源了。</p>
+<p>IOC模式系统中，通过引入实现IOC模式的IOC容器，即可由IOC容器来管理对象的生命周期、依赖关系等，从而使得应用程序的配置和依赖性规范与实际的应用程序代码分开。其中一个特点就是通过文本的配置文件进行应用程序组件间相互关系的配置，而不用重新修改并编译具体的代码。</p>
+<p>当前比较知名的IOC容器有：Pico Container、Avalon 、Spring、JBoss、HiveMind、EJB等。其中，轻量级的有Pico Container、Avalon、Spring、HiveMind等，超重量级的有EJB，而半轻半重的有容器有JBoss，Jdon等。</p>
+<p>可以把IoC模式看做是工厂模式的升华，可以把IoC看作是一个大工厂，只不过这个大工厂里要生成的对象都是在XML文件中给出定义的，然后利用Java 的“反射”编程，根据XML中给出的类名生成相应的对象。从实现来看，IoC是把以前在工厂方法里写死的对象生成代码，改变为由XML文件来定义，也就是把工厂和对象生成这两者独立分隔开来，目的就是提高灵活性和可维护性。</p>
+<p>IoC中最基本的Java技术就是“反射”编程。反射又是一个生涩的名词，通俗的说反射就是根据给出的类名（字符串）来生成对象。这种编程方式可以让对象在生成时才决定要生成哪一种对象。反射的应用是很广泛的，象Hibernate、String中都是用“反射”做为最基本的技术手段。</p>
+<p>IoC最大的好处是什么？因为把对象生成放在了XML里定义，所以当我们需要换一个实现子类将会变成很简单（一般这样的对象都是现实于某种接口的），只要修改XML就可以了。</p>
+<blockquote>
+<p>当然，也可以通过注解<code>@Resource</code>。</p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DI/" rel="tag">#DI</a>
+          
+            <a href="/tags/IoC/" rel="tag">#IoC</a>
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/21/知识记录/Resource-Autowired-Inject/" rel="prev">spring下应用@Resource, @Autowired 和 @Inject注解进行依赖注入的差别</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/20/知识记录/Java基础/handler-picture/" rel="next">图片裁剪整理</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/04/21/知识记录/Java基础/IoC-and-DI/"
+     data-title="IoC and DI"
+     data-content=""
+     data-url="http://coderroc.com/2015/04/21/知识记录/Java基础/IoC-and-DI/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+ </div>
+
+        
+
+        
+          <div class="comments" id="comments">
+            
+              <div class="ds-thread" data-thread-key="2015/04/21/知识记录/Java基础/IoC-and-DI/"
+                   data-title="IoC and DI" data-url="http://coderroc.com/2015/04/21/知识记录/Java基础/IoC-and-DI/">
+              </div>
+            
+          </div>
+        
+      </div>
+
+      
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/photo.jpg" alt="Coder_Roc" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Coder_Roc</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">诚信，认真，专注，踏实</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/cshijiel" target="_blank">github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/cshijiel" target="_blank">weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/cshijiel" target="_blank">zhihu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner"> <div class="copyright" >
+  
+  &copy; &nbsp;  2014 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder_Roc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+ </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"usee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.1"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.1"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.5.1" id="motion.global"></script>
+
+
+
+
+  <script type="text/javascript" src="/js/nav-toggle.js?v=0.4.5.1"></script>
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.1" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+      if (isMobile()) {
+        FastClick.attach(document.body);
+      }
+    });
+  </script>
+
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/lazyload.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("#posts").find('img').lazyload({
+        placeholder: "/images/loading.gif",
+        effect: "fadeIn"
+      });
+    });
+  </script>
+</body>
+</html>
