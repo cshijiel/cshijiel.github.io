@@ -227,7 +227,7 @@
 
       
         
-          <span itemprop="articleBody"><h3 id="函数式接口（Functional_Interface）">函数式接口（Functional Interface）</h3><p>函数式接口是Java 8 对一类特殊类型的接口的称呼。</p>
+          <h3 id="函数式接口（Functional_Interface）">函数式接口（Functional Interface）</h3><p>函数式接口是Java 8 对一类特殊类型的接口的称呼。</p>
 <h3 id="Java_8_之前”已有”的函数式接口">Java 8 之前”已有”的函数式接口</h3><pre><code>java<span class="class">.lang</span><span class="class">.Runnable</span>
 java<span class="class">.util</span><span class="class">.concurrent</span><span class="class">.Callable</span>
 java<span class="class">.security</span><span class="class">.PrivilegedAction</span>
@@ -235,42 +235,12 @@ java<span class="class">.util</span><span class="class">.Comparator</span>
 java<span class="class">.io</span><span class="class">.FileFilter</span>
 java<span class="class">.io</span><span class="class">.file</span><span class="class">.pathMatcher</span>
 ...
-</code></pre><h3 id="新定义的函数式接口">新定义的函数式接口</h3><p><code>java.util.function</code>中定义了几组类型的函数式接口以及针对基本数据类型的子接口：</p>
-<pre><code>Predicate
-传入一个参数，返回一个bool结果，方法为boolean <span class="function"><span class="title">test</span><span class="params">(T t)</span></span>
-
-Consumer
-传入一个参数，无返回值，纯消费。方法为 void <span class="function"><span class="title">accept</span><span class="params">(T t)</span></span>
-
-Function
-传入一个参数，返回一个结果，方法为R <span class="function"><span class="title">apply</span><span class="params">(T t)</span></span>
-
-Supplier
-无参数传入，返回一个结果，方法为T <span class="function"><span class="title">get</span><span class="params">()</span></span>
-</code></pre><p>这是<code>java.util.function</code>下的所有函数式接口，可以根据名称看到大致的用途：<br><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/95484557-79ee-4ac6-b453-f4b61786f1c1.png" alt="java.util.function下的所有函数式接口"></p>
-<p>可以根据需要使用。</p>
-<p><strong><code>Predicate</code>的用法：</strong></p>
-<pre><code>import java.util.function.Predicate;
-
-<span class="comment">/**
- * Created by Roc on 15/9/30.
- */</span>
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Kik</span> {
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>{
-        System.<span class="keyword">out</span>.println(<span class="string">"TestPredicate"</span>);
-        String input = <span class="string">"test"</span>;
-        testFunction((<span class="keyword">string</span>) -&gt; input.equals(<span class="keyword">string</span>));
-    }
-
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testFunction</span>(<span class="params">Predicate predicate</span>) </span>{
-        System.<span class="keyword">out</span>.println(predicate.test(<span class="string">"test"</span>));
-    }
-}
-</code></pre><blockquote>
-<p><strong>双冒号调用</strong>：静态调用，适合简单函数体。</p>
-</blockquote>
-</span>
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/01/知识记录/Java基础/Java8-interface-lambda/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
