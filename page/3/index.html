@@ -883,6 +883,119 @@ System.out.<span class="built_in">println</span>(sc==sd); <span class="comment">
           
           
             
+              <a class="post-title-link" href="/2015/04/07/知识记录/SpringBoot中读取YAML/" itemprop="url">
+                SpringBoot中读取YAML
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+            2015-04-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/知识记录/" itemprop="url" rel="index">
+                  <span itemprop="name">知识记录</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/07/知识记录/SpringBoot中读取YAML/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/SpringBoot中读取YAML/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><ol>
+<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
+</ol>
+<ol>
+<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
+</ol>
+<hr>
+<p>读取YAML步骤：</p>
+<ol>
+<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
+<pre><code>my:
+    servers:
+        - dev<span class="class">.bar</span><span class="class">.com</span>
+        - foo<span class="class">.bar</span><span class="class">.com</span>
+</code></pre></li>
+<li><p>在需要注解信息的Java文件中进行以下注解：</p>
+<pre><code><span class="annotation">@Component</span>(<span class="string">"config"</span>)
+<span class="annotation">@ConfigurationProperties</span>(prefix = <span class="string">"my"</span>)
+public <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>{
+    <span class="comment">//@Value("my.servers") </span>
+        <span class="comment">//这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！</span>
+    private <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; servers = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">String</span>&gt;();
+    public <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; getServers() {
+        <span class="keyword">return</span> <span class="keyword">this</span>.servers;
+    }
+}
+</code></pre></li>
+<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
+</li>
+</ol>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/Java5新特征之foreach语句使用总结/" itemprop="url">
                 Java5新特征之foreach语句使用总结
               </a>
@@ -987,8 +1100,8 @@ System.out.<span class="built_in">println</span>(sc==sd); <span class="comment">
           
           
             
-              <a class="post-title-link" href="/2015/04/07/知识记录/SpringBoot中读取YAML/" itemprop="url">
-                SpringBoot中读取YAML
+              <a class="post-title-link" href="/2015/04/07/知识记录/YAML格式简介/" itemprop="url">
+                YAML格式简介
               </a>
             
           
@@ -1024,8 +1137,8 @@ System.out.<span class="built_in">println</span>(sc==sd); <span class="comment">
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/SpringBoot中读取YAML/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/SpringBoot中读取YAML/" itemprop="commentsCount"></span>
+              <a href="/2015/04/07/知识记录/YAML格式简介/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/YAML格式简介/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -1040,36 +1153,17 @@ System.out.<span class="built_in">println</span>(sc==sd); <span class="comment">
 
       
         
-          <span itemprop="articleBody"><ol>
-<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
-</ol>
-<ol>
-<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
-</ol>
-<hr>
-<p>读取YAML步骤：</p>
-<ol>
-<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
-<pre><code>my:
-    servers:
-        - dev<span class="class">.bar</span><span class="class">.com</span>
-        - foo<span class="class">.bar</span><span class="class">.com</span>
-</code></pre></li>
-<li><p>在需要注解信息的Java文件中进行以下注解：</p>
-<pre><code><span class="annotation">@Component</span>(<span class="string">"config"</span>)
-<span class="annotation">@ConfigurationProperties</span>(prefix = <span class="string">"my"</span>)
-public <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>{
-    <span class="comment">//@Value("my.servers") </span>
-        <span class="comment">//这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！</span>
-    private <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; servers = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">String</span>&gt;();
-    public <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; getServers() {
-        <span class="keyword">return</span> <span class="keyword">this</span>.servers;
-    }
-}
-</code></pre></li>
-<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
-</li>
-</ol>
+          <span itemprop="articleBody"><h2 id="1-_概念">1. 概念</h2><p>YAML是一种人们可以轻松阅读的数据序列化格式，并且它非常适合对动态编程语言中使用的数据类型进行编码。YAML是<code>YAML Ain&#39;t Markup Language</code>简写，和GNU(“GNU’s Not Unix!”)一样，YAML是一个递归着说“不”的名字。不同的是，GNU对UNIX说不，YAML说不的对象是XML。YAML不是XML。它可以用作数据序列，配置文件，log文件，Internat信息和过滤。</p>
+<h2 id="2-_优点">2. 优点</h2><ul>
+<li>YAML的可读性好</li>
+<li>YAML和脚本语言的交互性好</li>
+<li>YAML使用实现语言的数据类型</li>
+<li>YAML有一个一致的信息模型</li>
+<li>YAML易于实现</li>
+</ul>
+<h2 id="3-_YAML的适用范围">3. YAML的适用范围</h2><p>由于实现简单，解析成本很低，YAML特别适合在脚本语言中使用。列一下现有的语言实现：Ruby，Java，Perl，Python，PHP，OCaml，JavaScript。除了Java，其他都是脚本语言.<br>YAML比较适合做序列化。因为它是宿主语言数据类型直转的。<br>YAML做配置文件也不错。比如Ruby on Rails的配置就选用的YAML。对ROR而言，这很自然，也很省事。<br><strong>由于兼容性问题，不同语言间的数据流转建议现在不要用YAML.</strong></p>
+<h2 id="4-_YAML不足">4. YAML不足</h2><p>YAML和XML不同，没有自己的数据类型的定义，而是使用实现语言的数据类型。这一点，有可能是出奇制胜的地方，也可能是一个败笔。如果兼容性保证的不好的话，YAML数据在不同语言间流转会有问题。<br>假如兼容性没问题的话，YAML就太完美了。<strong>轻巧，敏捷，高效，简便，通用</strong>。</p>
+<h2 id="5-_JYaml简介">5. JYaml简介</h2><p><strong><code>JYAML</code></strong>是<code>YAML</code>的<code>Java</code>实现。<br>YAML使用实现语言的数据类型。我们看一下一些JYaml支持的Java数据类型：<br>原始数据和封装类（比如int，java.lang.Integer）<br>JavaBean兼容对象（Structure支持）<br>Collection （sequence支持）<br>List<br>Set<br>Map （map支持）<br>Arrays （sequence支持）<br>BigInteger 和BigDecimal<br>Date<br>注：我把我个人认为较好的文章推荐如下，方便我们共同学习和交流。<br>参考文献：<br>1 《YAML 简介》 <a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/index.html" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/index.html</a><br>2 《YAML 对 XML 的改进》<a href="http://www.ibm.com/developerworks/cn/xml/x-matters/part23/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/xml/x-matters/part23/</a><br>3 <a href="http://jyaml.sourceforge.net/" target="_blank" rel="external">http://jyaml.sourceforge.net/</a><br>4 <a href="http://www.yaml.org/" target="_blank" rel="external">http://www.yaml.org/</a></p>
 </span>
         
       
@@ -1187,100 +1281,6 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/07/知识记录/YAML格式简介/" itemprop="url">
-                YAML格式简介
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-            2015-04-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/知识记录/" itemprop="url" rel="index">
-                  <span itemprop="name">知识记录</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/YAML格式简介/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/YAML格式简介/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="1-_概念">1. 概念</h2><p>YAML是一种人们可以轻松阅读的数据序列化格式，并且它非常适合对动态编程语言中使用的数据类型进行编码。YAML是<code>YAML Ain&#39;t Markup Language</code>简写，和GNU(“GNU’s Not Unix!”)一样，YAML是一个递归着说“不”的名字。不同的是，GNU对UNIX说不，YAML说不的对象是XML。YAML不是XML。它可以用作数据序列，配置文件，log文件，Internat信息和过滤。</p>
-<h2 id="2-_优点">2. 优点</h2><ul>
-<li>YAML的可读性好</li>
-<li>YAML和脚本语言的交互性好</li>
-<li>YAML使用实现语言的数据类型</li>
-<li>YAML有一个一致的信息模型</li>
-<li>YAML易于实现</li>
-</ul>
-<h2 id="3-_YAML的适用范围">3. YAML的适用范围</h2><p>由于实现简单，解析成本很低，YAML特别适合在脚本语言中使用。列一下现有的语言实现：Ruby，Java，Perl，Python，PHP，OCaml，JavaScript。除了Java，其他都是脚本语言.<br>YAML比较适合做序列化。因为它是宿主语言数据类型直转的。<br>YAML做配置文件也不错。比如Ruby on Rails的配置就选用的YAML。对ROR而言，这很自然，也很省事。<br><strong>由于兼容性问题，不同语言间的数据流转建议现在不要用YAML.</strong></p>
-<h2 id="4-_YAML不足">4. YAML不足</h2><p>YAML和XML不同，没有自己的数据类型的定义，而是使用实现语言的数据类型。这一点，有可能是出奇制胜的地方，也可能是一个败笔。如果兼容性保证的不好的话，YAML数据在不同语言间流转会有问题。<br>假如兼容性没问题的话，YAML就太完美了。<strong>轻巧，敏捷，高效，简便，通用</strong>。</p>
-<h2 id="5-_JYaml简介">5. JYaml简介</h2><p><strong><code>JYAML</code></strong>是<code>YAML</code>的<code>Java</code>实现。<br>YAML使用实现语言的数据类型。我们看一下一些JYaml支持的Java数据类型：<br>原始数据和封装类（比如int，java.lang.Integer）<br>JavaBean兼容对象（Structure支持）<br>Collection （sequence支持）<br>List<br>Set<br>Map （map支持）<br>Arrays （sequence支持）<br>BigInteger 和BigDecimal<br>Date<br>注：我把我个人认为较好的文章推荐如下，方便我们共同学习和交流。<br>参考文献：<br>1 《YAML 简介》 <a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/index.html" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/index.html</a><br>2 《YAML 对 XML 的改进》<a href="http://www.ibm.com/developerworks/cn/xml/x-matters/part23/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/xml/x-matters/part23/</a><br>3 <a href="http://jyaml.sourceforge.net/" target="_blank" rel="external">http://jyaml.sourceforge.net/</a><br>4 <a href="http://www.yaml.org/" target="_blank" rel="external">http://www.yaml.org/</a></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1319,7 +1319,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1333,7 +1333,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

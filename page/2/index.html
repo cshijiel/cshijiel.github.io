@@ -174,6 +174,95 @@
           
           
             
+              <a class="post-title-link" href="/2015/04/20/知识记录/Java基础/handler-picture/" itemprop="url">
+                图片裁剪整理
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-20T23:09:09+08:00" content="2015-04-20">
+            2015-04-20
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Java基础/" itemprop="url" rel="index">
+                  <span itemprop="name">Java基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/20/知识记录/Java基础/handler-picture/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/20/知识记录/Java基础/handler-picture/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>图片裁剪，核心思想是指定<strong>起始点坐标</strong>和相对于起始点坐标的<strong>偏移向量</strong>，这样就可以精确的指定被裁减图片中的一个矩形区域。</p>
+<p>核心代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">String name = <span class="string">"D:/wiz/1.jpg"</span>;</span><br><span class="line">String subpath = <span class="string">"D:/wiz/2.jpg"</span>;</span><br><span class="line"></span><br><span class="line">ImageInputStream iis = ImageIO.createImageInputStream(<span class="keyword">new</span> FileInputStream(name));</span><br><span class="line">Iterator&lt;ImageReader&gt; it = ImageIO.getImageReadersByFormatName(<span class="string">"jpg"</span>);</span><br><span class="line">ImageReader reader = it.next();</span><br><span class="line">reader.setInput(iis, <span class="keyword">true</span>);</span><br><span class="line">ImageReadParam param = reader.getDefaultReadParam();</span><br><span class="line">Rectangle rect = <span class="keyword">new</span> Rectangle(<span class="number">100</span>, <span class="number">200</span>, <span class="number">320</span>, <span class="number">525</span>);</span><br><span class="line">param.setSourceRegion(rect);</span><br><span class="line">BufferedImage bi = reader.read(<span class="number">0</span>, param);</span><br><span class="line">ImageIO.write(bi, <span class="string">"jpg"</span>, <span class="keyword">new</span> File(subpath));</span><br></pre></td></tr></table></figure></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/04/20/知识记录/Java基础/handler-picture/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/04/15/知识记录/Linux基础/shell-echo-style/" itemprop="url">
                 shell中echo显示风格
               </a>
@@ -561,120 +650,6 @@
 <h2 id="合理的计划">合理的计划</h2><p>制定合理的计划，修正计划等。</p>
 <p><strong>可以专门的写个网页来记录</strong>，督促自己来完成。</p>
 <h2 id="素养、习惯和精神">素养、习惯和精神</h2><p>在面试的时候，有很多面试官喜欢问，看没有看过源代码，这个是怎么实现的等比较本质的东西。<br>对，本质永不落伍，本质才是最重要的，反映某些编程思想的所在。</p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/07/知识记录/Web高阶/WEB开发：解决网站高并发问题/" itemprop="url">
-                WEB开发：解决网站高并发问题
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-            2015-04-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Web高阶/" itemprop="url" rel="index">
-                  <span itemprop="name">Web高阶</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/Web高阶/WEB开发：解决网站高并发问题/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Web高阶/WEB开发：解决网站高并发问题/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>在大型网站开发和设计过程中，非常需要考虑的问题是网站的并发访问的问题，为此我也通过思考，通过借鉴前辈们设计思想，总结出一些解决方案：</p>
-<ol>
-<li>尽量将请求的<strong>页面静态化</strong>，静态化的页面为.html(.htm等)不需要web服务器重新加载项解析，只需要生成一次，以后每次都直接下载到客户端，效率高很多。<strong>javaWeb静态化的技术有<code>freemark</code>和<code>Velocity</code>等</strong>。</li>
-<li>将网站系统的web服务器、数据库服务器、图片和文件服务器<strong>分开</strong>，通过将服务器专业化分工，以提高网站访问速度。因为图片和文件在下载的时候无论是IIS、Apache等服务器都会有很大压力。</li>
-<li>可以设置专门的<strong>数据缓存服务器</strong>，将大量数据放到缓存数据区，在访问量少得时候存入数据，减少直接操作数据库的开销。</li>
-<li><p>数据库集群、库表散列</p>
-<blockquote>
-<p>大型网站都有复杂的应用，这些应用必须使用数据库，那么在面对大量访问的时候，数据库的瓶颈很快就能显现出来，这时一台数据库将很快无法满足应用，于是我们需要使用<strong>数据库集群或者库表散列</strong>。在数据库集群方面，很多数据库都有自己的解决方案，Oracle、Sybase等都有很好的方案，常用的MySQL提供的Master/Slave也是类似的方案，您使用了什么样的DB，就参考相应的解决方案来实施即可。</p>
-<p>上面提到的数据库集群由于在架构、成本、扩张性方面都会受到所采用DB类型的限制，于是我们需要从应用程序的角度来考虑改善系统架构，<strong>库表散列</strong>是常用并且最有效的解决方案。</p>
-<p>我们在应用程序中安装业务和应用或者功能模块将数据库进行分离，不同的模块对应不同的数据库或者表，再按照一定的策略对某个页面或者功能进行更小的数据库散列，比如用户表，按照用户ID进行表散列，这样就能够低成本的提升系统的性能并且有很好的扩展性。</p>
-<p><strong>sohu的论坛</strong>就是采用了这样的架构，将论坛的用户、设置、帖子等信息进行数据库分离，然后对帖子、用户按照板块和ID进行散列数据库和表，最终可以在配置文件中进行简单的配置便能让系统随时增加一台低成本的数据库进来补充系统性能</p>
-</blockquote>
-</li>
-<li><p>镜像<br>　　<br>镜像是大型网站常采用的提高性能和数据安全性的方式，镜像的技术可以解决不同网络接入商和地域带来的用户访问速度差异，比如ChinaNet和EduNet之间的差异就促使了很多网站在教育网内搭建镜像站点，数据进行定时更新或者实时更新。在镜像的细节技术方面，这里不阐述太深，有很多专业的现成的解决架构和产品可选。也有廉价的通过软件实现的思路，比如Linux上的rsync等工具。
-　　</p>
-</li>
-<li>负载均衡<br>负载均衡将是大型网站解决高负荷访问和大量并发请求采用的高端解决办法。<br>负载均衡技术发展了多年，有很多专业的服务提供商和产品可以选择，我个人接触过一些解决方法，其中有<strong>两个架构</strong>可以给大家做参考。</li>
-</ol>
-<ul>
-<li><p><strong>硬件四层交换</strong><br>第四层交换使用第三层和第四层信息包的报头信息，根据应用区间识别业务流，将整个区间段的业务流分配到合适的应用服务器进行处理。第四层交换功能就像是虚IP，指向物理服务器。它传输的业务服从的协议多种多样，有HTTP、FTP、NFS、Telnet或其他协议。这些业务在物理服务器基础上，需要复杂的载量平衡算法。在IP世界，业务类型由终端TCP或UDP端口地址来决定，在第四层交换中的应用区间则由源端和终端IP地址、TCP和UDP端口共同决定。<br>在硬件四层交换产品领域，有一些知名的产品可以选择，比如Alteon、F5等，这些产品很昂贵，但是物有所值，能够提供非常优秀的性能和很灵活的管理能力。“Yahoo中国”当初接近2000台服务器，只使用了三、四台Alteon就搞定了。</p>
-</li>
-<li><p><strong>软件四层交换</strong><br>大家知道了硬件四层交换机的原理后，基于OSI模型来实现的软件四层交换也就应运而生，这样的解决方案实现的原理一致，不过性能稍差。但是满足一定量的压力还是游刃有余的，有人说软件实现方式其实更灵活，处理能力完全看你配置的熟悉能力软件四层交换我们可以使用Linux上常用的LVS来解决，LVS就是LinuxVirtualServer，他提供了基于心跳线heartbeat的实时灾难应对解决方案，提高系统的强壮性，同时可供了灵活的虚拟VIP配置和管理功能，可以同时满足多种应用需求，这对于分布式的系统来说必不可少。<br>一个典型的使用负载均衡的策略就是，在软件或者硬件四层交换的基础上搭建squid集群，这种思路在很多大型网站包括搜索引擎上被采用，这样的架构低成本、高性能还有很强的扩张性，随时往架构里面增减节点都非常容易。<br>对于大型网站来说，前面提到的每个方法可能都会被同时使用到，这里介绍得比较浅显，具体实现过程中很多细节还需要大家慢慢熟悉和体会。有时一个很小的squid参数或者apache参数设置，对于系统性能的影响就会很大。
-　　</p>
-</li>
-</ul>
-<ol>
-<li>最新：CDN加速技术<blockquote>
-<p>什么是CDN？<br>CDN的全称是内容分发网络。其目的是通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络“边缘”，使用户可以就近取得所需的内容，提高用户访问网站的响应速度。<br>CDN有别于镜像，因为它比镜像更智能，或者可以做这样一个比喻：CDN=更智能的镜像+缓存+流量导流。因而，CDN可以明显提高Internet网络中信息流动的效率。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等问题，提高用户访问网站的响应速度。<br>CDN的类型特点CDN的实现分为三类：镜像、高速缓存、专线。</p>
-</blockquote>
-</li>
-</ol>
 </span>
         
       
@@ -2196,7 +2171,7 @@ dependencies {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2210,7 +2185,7 @@ dependencies {
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

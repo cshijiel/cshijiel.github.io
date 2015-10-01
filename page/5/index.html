@@ -174,6 +174,301 @@
           
           
             
+              <a class="post-title-link" href="/2015/04/07/数学和算法/LeetCode/LeetCode-Two Sum/" itemprop="url">
+                LeetCode-Two Sum
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+            2015-04-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                  <span itemprop="name">LeetCode</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/07/数学和算法/LeetCode/LeetCode-Two Sum/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/数学和算法/LeetCode/LeetCode-Two Sum/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p>Given an array of integers, find two numbers such that they add up to<br>a specific target number.</p>
+<p>The function twoSum should return indices of the two numbers such that<br>they add up to the target, where index1 must be less than index2.<br>Please note that your returned answers (both index1 and index2) are<br>not zero-based.</p>
+<p>You may assume that each input would have exactly one solution.</p>
+<p><strong>Input</strong>: numbers={2, 7, 11, 15}, target=9<br><strong>Output</strong>: index1=1, index2=2</p>
+</blockquote>
+<hr>
+<h3 id="Accepted_Code：">Accepted Code：</h3><pre><code><span class="keyword">public</span> <span class="keyword">class</span> Solution {      
+    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> target) {      
+        <span class="keyword">int</span>[] a = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>];      
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) {      
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; numbers.length; j++) {      
+                <span class="keyword">if</span> (numbers[i] + numbers[j] == target) {      
+                    a[<span class="number">0</span>] = i + <span class="number">1</span>;      
+                    a[<span class="number">1</span>] = j + <span class="number">1</span>;
+                    <span class="keyword">return</span> a;      
+                }      
+            }      
+        }      
+        <span class="keyword">return</span> a;      
+    }
+}
+</code></pre><p>Problems:</p>
+<ol>
+<li>Time Limit Exceeded(超时)。</li>
+</ol>
+<p>Then:</p>
+<pre><code><span class="keyword">if</span> (numbers[i] + numbers[j] == target) {
+    a[<span class="number">0</span>] = i + <span class="number">1</span>;
+    a[<span class="number">1</span>] = j + <span class="number">1</span>;
+    <span class="keyword">return</span> a;<span class="comment">//this line is the Key Code.</span>
+}
+</code></pre><p><strong>省略计算不必要的结果，得到正确结果立刻返回。</strong></p>
+<hr>
+<p>Other Solution:</p>
+<blockquote>
+<p>代码是其他语言。</p>
+</blockquote>
+<p>题目大意：给一个数组，找出其中是否有两个数之和等于给定的值。类似的还有3 sum ，4 sum ..等 K sum 问题。其实原理是差不多的，这样想：先取出一个数，那么我只要在剩下的数字里面找到两个数字使得他们的和等于(target – 那个取出的数)。</p>
+<p><strong>解法1：先排序，然后从开头和结尾同时向中间查找，原理也比较简单。复杂度O(nlogn)</strong></p>
+<pre><code>typedef <span class="keyword">struct</span> <span class="type">Node</span>{    
+    <span class="built_in">int</span> id,<span class="keyword">val</span>;
+}<span class="type">Node</span>;
+
+<span class="built_in">bool</span> compare(const <span class="type">Node</span> &amp;amp; a,const <span class="type">Node</span> &amp;amp; b){    
+    return a.<span class="keyword">val</span> &lt; b.<span class="keyword">val</span>;
+}
+
+class <span class="type">Solution</span> {
+    public:
+    <span class="built_in">vector</span>&lt;<span class="built_in">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="built_in">int</span>&gt; &amp;amp;numbers, <span class="built_in">int</span> target){
+
+        <span class="type">Node</span> nodes[numbers.size<span class="literal">()</span>];
+
+        for(unsigned <span class="built_in">int</span> i=<span class="number">0</span>; i&lt;numbers.size<span class="literal">()</span>; i++){
+
+        nodes[i].id = i+<span class="number">1</span>;
+
+        nodes[i].<span class="keyword">val</span> = numbers[i];
+
+    }
+    sort(nodes, nodes+numbers.size<span class="literal">()</span>, compare);
+    <span class="built_in">int</span> start=<span class="number">0</span>,<span class="keyword">end</span>=numbers.size<span class="literal">()</span>-<span class="number">1</span>;
+    <span class="built_in">vector</span>&lt;<span class="built_in">int</span>&gt; ans;
+    <span class="keyword">while</span>(start &lt; <span class="keyword">end</span>){
+
+        <span class="keyword">if</span>(nodes[start].<span class="keyword">val</span> + nodes[<span class="keyword">end</span>].<span class="keyword">val</span> == target){
+
+        <span class="keyword">if</span>(nodes[start].id &gt; nodes[<span class="keyword">end</span>].id)
+
+        swap(nodes[start].id , nodes[<span class="keyword">end</span>].id);
+
+        ans.push_back(nodes[start].id);
+
+        ans.push_back(nodes[<span class="keyword">end</span>].id);
+
+        return ans;
+
+        }<span class="keyword">else</span> <span class="keyword">if</span>( nodes[start].<span class="keyword">val</span> + nodes[<span class="keyword">end</span>].<span class="keyword">val</span> &lt;target ){        
+            start++;        
+        } <span class="keyword">else</span>        
+            <span class="keyword">end</span>--;
+        }
+    }
+};
+</code></pre><p><strong>解法2：使用HashMap。把每个数都存入map中，任何再逐个遍历，查找是否有 target – nubmers[i]。 时间复杂度 O(n)</strong></p>
+<pre><code><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;numbers, <span class="keyword">int</span> target) {
+        <span class="comment">// Start typing your C/C++ solution below</span>
+        <span class="comment">// DO NOT write int main() function</span>
+        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;
+        <span class="keyword">int</span> length = numbers.size();
+        <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; mp;
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i)
+            mp[numbers[i]] = i;
+        <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;::iterator it = mp.end();
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i) {
+            it = mp.find(target - numbers[i]);
+            <span class="keyword">if</span>(it != mp.end()) {
+                res.push_back(min(i+<span class="number">1</span>,it-&gt;second +<span class="number">1</span>));
+                res.push_back(max(i+<span class="number">1</span>,it-&gt;second +<span class="number">1</span>));
+                <span class="keyword">break</span>;
+            }
+        }
+        <span class="keyword">return</span> res;
+}
+</code></pre><p>其实可以优化一下，因为题目只要求要到一个解，找到后即可返回。</p>
+<pre><code><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;numbers, <span class="keyword">int</span> target) {
+        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;
+        <span class="keyword">int</span> length = numbers.size();
+        <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; mp;
+        <span class="keyword">int</span> find;
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i){
+            find=mp[target - numbers[i]];
+            <span class="keyword">if</span>( find ){
+                res.push_back(find);
+                res.push_back(i+<span class="number">1</span>);
+                <span class="keyword">break</span>;
+            }
+            mp[numbers[i]] = i+<span class="number">1</span>;
+        }
+        <span class="keyword">return</span> res;
+}
+</code></pre><hr>
+<p>Java 版本解法：</p>
+<p>Two Sum</p>
+<p>Given an array of integers, find two numbers such that they add up to a specific target number.</p>
+<p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.</p>
+<p>You may assume that each input would have exactly one solution.</p>
+<p>思路：</p>
+<p>先把原数组复制一遍，然后进行排序。在排序后的数组中找这两个数。最后再在原数组中找这两个数字的index即可。</p>
+<p>时间复杂度O(nlogn)+O(n)+O(n) = O(nlogn)</p>
+<p>注意的是结果有可能是两个数是相同的，比如 0 3 4 0, 0要返回1和4，不要返回成1和1或者4和4.</p>
+<p>代码：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> target) {
+    <span class="comment">// Start typing your Java solution below</span>
+    <span class="comment">// DO NOT write main() function</span>
+    <span class="comment">// Copy the original array and sort it</span>
+    <span class="keyword">int</span> N = numbers.length;
+    <span class="keyword">int</span>[] sorted = <span class="keyword">new</span> <span class="keyword">int</span>[N];
+    System.arraycopy(numbers, <span class="number">0</span>, sorted, <span class="number">0</span>, N);
+    Arrays.sort(sorted);
+    <span class="comment">// find the two numbers using the sorted arrays</span>
+    <span class="keyword">int</span> first = <span class="number">0</span>;
+    <span class="keyword">int</span> second = sorted.length - <span class="number">1</span>;
+    <span class="keyword">while</span> (first &lt; second) {
+
+        <span class="keyword">if</span> (sorted[first] + sorted[second] &lt; target) {
+
+            first++;
+
+            <span class="keyword">continue</span>;
+
+        }
+
+        <span class="keyword">else</span> <span class="keyword">if</span> (sorted[first] + sorted[second] &gt; target) {
+
+            second--;
+
+            <span class="keyword">continue</span>;
+
+        }
+
+        <span class="keyword">else</span>
+            <span class="keyword">break</span>;
+    }
+    <span class="keyword">int</span> number1 = sorted[first];
+    <span class="keyword">int</span> number2 = sorted[second];
+    <span class="comment">// Find the two indexes in the original array</span>
+    <span class="keyword">int</span> index1 = -<span class="number">1</span>, index2 = -<span class="number">1</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) {
+
+        <span class="keyword">if</span> ((numbers[i] == number1) || (numbers[i] == number2)) {
+
+            <span class="keyword">if</span> (index1 == -<span class="number">1</span>)
+
+                index1 = i + <span class="number">1</span>;
+
+            <span class="keyword">else</span>
+
+                index2 = i + <span class="number">1</span>;
+
+        }
+
+    }
+    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[] { index1, index2 };
+    Arrays.sort(result);
+    <span class="keyword">return</span> result;
+}
+</code></pre><p>还有个无耻地利用hashmap的O(n)的算法，原理和暴力搜索没有本质区别，只不过hashmap的搜索速度是O(1)。</p>
+<pre><code>public <span class="type">int</span>[] twoSum(<span class="type">int</span>[] numbers, <span class="type">int</span> target) {
+    // <span class="type">Start</span> typing your <span class="type">Java</span> solution below
+    // <span class="type">DO</span> <span class="type">NOT</span> write main() function
+
+    <span class="type">HashMap</span>&lt;<span class="type">Integer</span>, <span class="type">Integer</span>&gt; map = new <span class="type">HashMap</span>&lt;<span class="type">Integer</span>, <span class="type">Integer</span>&gt;();
+
+    <span class="type">int</span> n = numbers.length;
+
+    <span class="type">int</span>[] <span class="literal">result</span> = new <span class="type">int</span>[<span class="number">2</span>];
+
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numbers.length; i++) {
+        <span class="keyword">if</span> (map.containsKey(target - numbers[i])) {
+            <span class="literal">result</span>[<span class="number">0</span>] = map.get(target - numbers[i]) + <span class="number">1</span>;
+            <span class="literal">result</span>[<span class="number">1</span>] = i + <span class="number">1</span>;
+            <span class="keyword">break</span>;
+        } <span class="keyword">else</span> {
+            map.put(numbers[i], i);
+        }
+    }
+
+    <span class="keyword">return</span> <span class="literal">result</span>;
+}
+</code></pre><p>后记：你的想法很独特嘛。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/04/07/数学和算法/AES加密/" itemprop="url">
                 AES加密
               </a>
@@ -669,7 +964,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -683,7 +978,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">61</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
