@@ -53,7 +53,7 @@ public class Singleton {
 常见实现急加载（Eager Initialization）Initialization On Demand Holder
 public class Singleton {
     // 这个实例要不要不可变(final),一般不">
-<meta property="og:updated_time" content="2015-10-08T09:38:14.000Z">
+<meta property="og:updated_time" content="2015-10-08T09:50:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="也谈单例模式">
 <meta name="twitter:description" content="单例模式(Singleton)也叫单态模式。
@@ -250,7 +250,8 @@ public class Singleton {
         <span class="keyword">return</span> singleton;
     }
 }
-</code></pre><h5 id="DCL（Double-Checked_Locking）">DCL（Double-Checked Locking）</h5><p>支持延迟加载</p>
+</code></pre><a id="more"></a>
+<h5 id="DCL（Double-Checked_Locking）">DCL（Double-Checked Locking）</h5><p>支持延迟加载</p>
 <pre><code>public class <span class="built_in">Singleton</span> {
     private <span class="keyword">static</span> <span class="built_in">Singleton</span> <span class="built_in">singleton</span> = <span class="literal">null</span><span class="comment">;</span>
 
