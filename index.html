@@ -174,6 +174,160 @@
           
           
             
+              <a class="post-title-link" href="/2015/10/08/知识记录/Java基础/talk-about-singleton/" itemprop="url">
+                也谈单例模式
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-08T16:53:42+08:00" content="2015-10-08">
+            2015-10-08
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Java基础/" itemprop="url" rel="index">
+                  <span itemprop="name">Java基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/08/知识记录/Java基础/talk-about-singleton/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/08/知识记录/Java基础/talk-about-singleton/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>单例模式(<code>Singleton</code>)也叫单态模式。</p>
+<h4 id="用途">用途</h4><p>有时候需要内存中仅有一个某对象就足够了，出现多个就会出现内存浪费甚至逻辑错误。典型的有数据库连接池等，一个连接池就够了。</p>
+<h4 id="常见实现">常见实现</h4><h5 id="急加载（Eager_Initialization）">急加载（Eager Initialization）</h5><p>Initialization On Demand Holder</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Singleton</span> {
+    <span class="comment">// 这个实例要不要不可变(final),一般不需要</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">new</span> Singleton();
+
+    <span class="comment">// 私有化构造器</span>
+    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span>(<span class="params"></span>) </span>{
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>(<span class="params"></span>) </span>{
+        <span class="keyword">return</span> singleton;
+    }
+}
+</code></pre><h5 id="DCL（Double-Checked_Locking）">DCL（Double-Checked Locking）</h5><p>支持延迟加载</p>
+<pre><code>public class <span class="built_in">Singleton</span> {
+    private <span class="keyword">static</span> <span class="built_in">Singleton</span> <span class="built_in">singleton</span> = <span class="literal">null</span><span class="comment">;</span>
+
+    private <span class="built_in">Singleton</span>() {
+    }
+
+    public <span class="keyword">static</span> <span class="built_in">Singleton</span> getInstance() {
+        <span class="keyword">if</span> (<span class="literal">null</span> == <span class="built_in">singleton</span>) {
+            synchronized (<span class="built_in">Singleton</span>.class) {
+                <span class="keyword">if</span> (<span class="literal">null</span> == <span class="built_in">singleton</span>) {
+                    <span class="built_in">singleton</span> = new <span class="built_in">Singleton</span>()<span class="comment">;</span>
+                }
+            }
+        }
+        <span class="keyword">return</span> <span class="built_in">singleton</span><span class="comment">;</span>
+    }
+}
+</code></pre><p>但是，DCL仍然会出现失败的情况，<br>DCL失败的原因：<br>关键在于这一句<code>singleton = new Singleton();</code>，并不是原子操作，大致会做下面几件事：</p>
+<ul>
+<li><p>开辟内存空间；</p>
+</li>
+<li><p>引用指向内存空间（非null的一步）；</p>
+</li>
+<li><p>初始化内存空间；</p>
+</li>
+</ul>
+<p>但是，由于Java编译器允许处理器乱序执行（out-of-order），以及JDK1.5之前JMM（Java Memory Medel）中Cache、寄存器到主内存回写顺序的规定，初始化内存空间和连接引用与内存空间的执行顺序是不一定的，所以按照现在的顺序，有可能出现拿走一个为初始化的对象，造成很难fix的异常。<br>下面是优化版本。</p>
+<h5 id="双判空模式DCL_with_Volatile">双判空模式DCL with Volatile</h5><pre><code>public class <span class="built_in">Singleton</span> {
+    public <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="built_in">Singleton</span> <span class="built_in">singleton</span> = <span class="literal">null</span><span class="comment">;</span>
+
+    public <span class="keyword">static</span> <span class="built_in">Singleton</span> getInstance() {
+        <span class="built_in">Singleton</span> s = <span class="built_in">singleton</span><span class="comment">;</span>
+        <span class="keyword">if</span> (<span class="built_in">singleton</span> == <span class="literal">null</span>) {
+            synchronized (<span class="built_in">Singleton</span>.class) {
+                s = <span class="built_in">singleton</span><span class="comment">;</span>
+                <span class="keyword">if</span> (<span class="built_in">singleton</span> == <span class="literal">null</span>) {
+                    <span class="built_in">singleton</span> = s = new <span class="built_in">Singleton</span>()<span class="comment">;</span>
+                }
+            }
+        }
+        <span class="keyword">return</span> <span class="built_in">singleton</span><span class="comment">;</span>
+    }
+}
+</code></pre><h5 id="静态内部私有类（Static_Private_Inner_Class）">静态内部私有类（Static Private Inner Class）</h5><pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Singleton</span> {
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">HelperSingleton</span> {
+        <span class="keyword">public</span> <span class="keyword">static</span> Singleton singleton = <span class="keyword">new</span> Singleton();
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span>(<span class="params"></span>) </span>{
+        <span class="keyword">return</span> HelperSingleton.singleton;
+    }
+}
+</code></pre><h5 id="枚举单例模式">枚举单例模式</h5><pre><code>public <span class="class"><span class="keyword">enum</span> <span class="title">EnumSingle</span> {</span>
+    <span class="constant">INSTANCE</span>
+}
+</code></pre></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/01/知识记录/Java基础/Java8-interface-lambda/" itemprop="url">
                 Java 8 中的函数式接口与Lambda表达式
               </a>
@@ -1041,101 +1195,6 @@ DELETE /api/<span class="built_ins">user</span>/logins
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/21/知识记录/Java基础/IoC-and-DI/" itemprop="url">
-                IoC and DI
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-21T10:10:32+08:00" content="2015-04-21">
-            2015-04-21
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Java基础/" itemprop="url" rel="index">
-                  <span itemprop="name">Java基础</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/21/知识记录/Java基础/IoC-and-DI/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/21/知识记录/Java基础/IoC-and-DI/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p>IOC：Inversion of Control 控制反转<br>DI:Dependency Injection 依赖注入</p>
-<p>控制反转，从字面意思来看，就是控制权又被动变主动，最后又变回被动。</p>
-<p>举个例子：<br>你的主管要求你做一件事情，这个时候就存在这么几个过程，</p>
-<p>主管命令你做事情（这个时候主动权在主管，你是被动的）</p>
-<p>你接到命令做事情（这个时候主题是你，你是主动的，控制权在你手里）</p>
-<p>你完成事情（这个时候主题依然是你，控制权在你手里）</p>
-<p>报告主管做完事情（主动权又叫交到主管手里了）</p>
-<p>上面的整个过程就完成了一次IOC，从上面可以看出，IOC的基本思想是控制权的转换过程。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/21/知识记录/Java基础/IoC-and-DI/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1174,7 +1233,7 @@ DELETE /api/<span class="built_ins">user</span>/logins
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
