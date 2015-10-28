@@ -174,6 +174,153 @@
           
           
             
+              <a class="post-title-link" href="/2015/10/28/数学和算法/微信红包随机算法初探/" itemprop="url">
+                微信红包随机算法初探
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-10-28T20:49:09+08:00" content="2015-10-28">
+            2015-10-28
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                  <span itemprop="name">数学和算法</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/10/28/数学和算法/微信红包随机算法初探/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/28/数学和算法/微信红包随机算法初探/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。</p>
+<h3 id="算法">算法</h3><p>算法很简单，不是提前算好，而是抢红包时计算：</p>
+<blockquote>
+<p>红包里的金额怎么算？为什么出现各个红包金额相差很大？<br>答：随机，额度在0.01和剩余平均值*2之间。</p>
+</blockquote>
+<h3 id="实现">实现</h3><p>实现上述算法的逻辑主要是：</p>
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getRandomMoney</span><span class="params">(LeftMoneyPackage _leftMoneyPackage)</span> </span>{
+    <span class="keyword">if</span> (_leftMoneyPackage.peoples == <span class="number">1</span>) {
+        _leftMoneyPackage.peoples--;
+        <span class="keyword">return</span> (<span class="keyword">double</span>) Math.round(_leftMoneyPackage.leftMoney * <span class="number">100</span>) / <span class="number">100</span>;
+    }
+    Random r     = <span class="keyword">new</span> Random();
+    <span class="keyword">double</span> min   = <span class="number">0.01</span>;
+    <span class="keyword">double</span> max   = _leftMoneyPackage.leftMoney / _leftMoneyPackage.peoples * <span class="number">2</span>;
+    <span class="keyword">double</span> money = r.nextDouble() * max;
+    money = money &lt; min ? min : money;
+    money = (<span class="keyword">double</span>) Math.<span class="built_in">floor</span>(money * <span class="number">100</span>) / <span class="number">100</span>;
+    _leftMoneyPackage.peoples--;
+    _leftMoneyPackage.leftMoney -= money;
+    <span class="keyword">return</span> money;
+}
+</code></pre><p><code>LeftMoneyPackage</code>数据结构如下：</p>
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">LeftMoneyPackage</span> </span>{
+    <span class="keyword">int</span>    peoples;
+    <span class="keyword">double</span> leftMoney;
+}
+</code></pre><p>测试时初始化相关数据是：</p>
+<pre><code><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{
+    leftMoneyPackage.peoples = <span class="number">30</span>;
+    leftMoneyPackage.leftMoney = <span class="number">500</span>;
+}
+</code></pre><h3 id="测试结果">测试结果</h3><h4 id="单词测试随机红包">单词测试随机红包</h4><p>以上面的初始化数据（30人抢500块），执行了两次，结果如下：</p>
+<pre><code><span class="comment">// 第一次</span>
+<span class="number">15.69</span>    <span class="number">21.18</span>    <span class="number">24.11</span>    <span class="number">30.85</span>    <span class="number">0.74</span>    <span class="number">20.85</span>    <span class="number">2.96</span>    <span class="number">13.43</span>    <span class="number">11.12</span>    <span class="number">24.87</span>    <span class="number">1.86</span>    <span class="number">19.62</span>    <span class="number">5.97</span>    <span class="number">29.33</span>    <span class="number">3.05</span>    <span class="number">26.94</span>    <span class="number">18.69</span>    <span class="number">34.47</span>    <span class="number">9.4</span>    <span class="number">29.83</span>    <span class="number">5.17</span>    <span class="number">24.67</span>    <span class="number">17.09</span>    <span class="number">29.96</span>    <span class="number">6.77</span>    <span class="number">5.79</span>    <span class="number">0.34</span>    <span class="number">23.89</span>    <span class="number">40.44</span>    <span class="number">0.92</span>
+
+<span class="comment">// 第二次</span>
+<span class="number">10.44</span>    <span class="number">18.01</span>    <span class="number">17.01</span>    <span class="number">21.07</span>    <span class="number">11.87</span>    <span class="number">4.78</span>    <span class="number">30.14</span>    <span class="number">32.05</span>    <span class="number">16.68</span>    <span class="number">20.34</span>    <span class="number">12.94</span>    <span class="number">27.98</span>    <span class="number">9.31</span>    <span class="number">17.97</span>    <span class="number">12.93</span>    <span class="number">28.75</span>    <span class="number">12.1</span>    <span class="number">12.77</span>    <span class="number">7.54</span>    <span class="number">10.87</span>    <span class="number">4.16</span>    <span class="number">25.36</span>    <span class="number">26.89</span>    <span class="number">5.73</span>    <span class="number">11.59</span>    <span class="number">23.91</span>    <span class="number">17.77</span>    <span class="number">15.85</span>    <span class="number">23.42</span>    <span class="number">9.77</span>
+</code></pre><p>对应图表如下：<br><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/7682b4d2-e67f-47b4-9282-31da086ffb55.png" alt="第一次随机红包数据展示"><br>还有一张：</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/a615bbc4-4dbf-42da-a1a1-e4afcb908752.png" alt="第二次随机红包数据展示"></p>
+<h4 id="多次均值">多次均值</h4><p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/20d36929-634f-4655-90d2-64fffa43838f.png" alt="重复执行200次的均值"></p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/dfddb714-72fb-40e2-805d-cbc43b944f4d.png" alt="重复执行2000次的均值"></p>
+<p>可以看到，这个算法可以让大家抢到的红包面额在概率上是大致均匀的。</p>
+<hr>
+<p>转一下原文</p>
+<h3 id="微信红包的架构设计简介">微信红包的架构设计简介</h3><p><strong>@来源于QCon某高可用架构群整理，整理朱玉华。</strong></p>
+<p><strong>背景：</strong>有某个朋友在朋友圈咨询微信红包的架构，于是乎有了下面的文字（有误请提出，谢谢）</p>
+<p><strong>概况：</strong>2014年微信红包使用数据库硬抗整个流量，2015年使用cache抗流量。</p>
+<h4 id="微信的金额什么时候算？">微信的金额什么时候算？</h4><p>答：微信金额是拆的时候实时算出来，不是预先分配的，采用的是纯内存计算，不需要预算空间存储。<br>采取实时计算金额的考虑：预算需要占存储，实时效率很高，预算才效率低。</p>
+<h4 id="实时性：为什么明明抢到红包，点开后发现没有？">实时性：为什么明明抢到红包，点开后发现没有？</h4><p>答：2014年的红包一点开就知道金额，分两次操作，先抢到金额，然后再转账。<br>2015年的红包的拆和抢是分离的，需要点两次，因此会出现抢到红包了，但点开后告知红包已经被领完的状况。进入到第一个页面不代表抢到，只表示当时红包还有。</p>
+<h4 id="分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？">分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？</h4><p>答：随机，额度在0.01和剩余平均值<em>2之间。<br>例如：发100块钱，总共10个红包，那么平均值是10块钱一个，那么发出来的红包的额度在0.01元～20元之间波动。<br>当前面3个红包总共被领了40块钱时，剩下60块钱，总共7个红包，那么这7个红包的额度在：0.01～（60/7</em>2）=17.14之间。<br>注意：这里的算法是每被抢一个后，剩下的会再次执行上面的这样的算法（Tim老师也觉得上述算法太复杂，不知基于什么样的考虑）。</p>
+<h4 id="这样算下去，会超过最开始的全部金额，因此到了最后面如果不够这么算，那么会采取如下算法：保证剩余用户能拿到最低1分钱即可。">这样算下去，会超过最开始的全部金额，因此到了最后面如果不够这么算，那么会采取如下算法：保证剩余用户能拿到最低1分钱即可。</h4><h4 id="如果前面的人手气不好，那么后面的余额越多，红包额度也就越多，因此实际概率一样的。">如果前面的人手气不好，那么后面的余额越多，红包额度也就越多，因此实际概率一样的。</h4><h4 id="红包的设计">红包的设计</h4><p>答：微信从财付通拉取金额数据郭莱，生成个数/红包类型/金额放到redis集群里，app端将红包ID的请求放入请求队列中，如果发现超过红包的个数，直接返回。根据红包的裸祭处理成功得到令牌请求，则由财付通进行一致性调用，通过像比特币一样，两边保存交易记录，交易后交给第三方服务审计，如果交易过程中出现不一致就强制回归。</p>
+<h4 id="发性处理：红包如何计算被抢完？">发性处理：红包如何计算被抢完？</h4><p>答：cache会抵抗无效请求，将无效的请求过滤掉，实际进入到后台的量不大。cache记录红包个数，原子操作进行个数递减，到0表示被抢光。财付通按照20万笔每秒入账准备，但实际还不到8万每秒。</p>
+<h4 id="通如何保持8w每秒的写入？">通如何保持8w每秒的写入？</h4><p>答：多主sharding，水平扩展机器。</p>
+<h4 id="据容量多少？">据容量多少？</h4><p>答：一个红包只占一条记录，有效期只有几天，因此不需要太多空间。</p>
+<h4 id="询红包分配，压力大不？">询红包分配，压力大不？</h4><p>答：抢到红包的人数和红包都在一条cache记录上，没有太大的查询压力。</p>
+<h4 id="一个红包一个队列？">一个红包一个队列？</h4><p>答：没有队列，一个红包一条数据，数据上有一个计数器字段。</p>
+<h4 id="有没有从数据上证明每个红包的概率是不是均等？">有没有从数据上证明每个红包的概率是不是均等？</h4><p>答：不是绝对均等，就是一个简单的拍脑袋算法。</p>
+<h4 id="拍脑袋算法，会不会出现两个最佳？">拍脑袋算法，会不会出现两个最佳？</h4><p>答：会出现金额一样的，但是手气最佳只有一个，先抢到的那个最佳。</p>
+<h4 id="每领一个红包就更新数据么？">每领一个红包就更新数据么？</h4><p>答：每抢到一个红包，就cas更新剩余金额和红包个数。</p>
+<h4 id="红包如何入库入账？">红包如何入库入账？</h4><p>数据库会累加已经领取的个数与金额，插入一条领取记录。入账则是后台异步操作。</p>
+<h4 id="入帐出错怎么办？比如红包个数没了，但余额还有？">入帐出错怎么办？比如红包个数没了，但余额还有？</h4><p>答：最后会有一个take all操作。另外还有一个对账来保障。</p>
+<blockquote>
+<p>原文链接：<a href="https://www.zybuluo.com/yulin718/note/93148" target="_blank" rel="external">https://www.zybuluo.com/yulin718/note/93148</a></p>
+</blockquote>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/10/08/知识记录/Java基础/talk-about-singleton/" itemprop="url">
                 也谈单例模式
               </a>
@@ -1037,113 +1184,6 @@ DELETE /api/<span class="built_ins">user</span>/logins
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/21/知识记录/Resource-Autowired-Inject/" itemprop="url">
-                spring下应用@Resource, @Autowired 和 @Inject注解进行依赖注入的差别
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-21T17:20:08+08:00" content="2015-04-21">
-            2015-04-21
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/知识记录/" itemprop="url" rel="index">
-                  <span itemprop="name">知识记录</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/21/知识记录/Resource-Autowired-Inject/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/21/知识记录/Resource-Autowired-Inject/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h2 id="Overview">Overview</h2><p>When using Spring there’s the choice of 3 annotations for injecting resources with advantages and disadvantages :<br><code>@Autowired</code><br>The original, “proprietary” annotation from Spring. </p>
-<ul>
-<li>not standard, Spring proprietary </li>
-</ul>
-<ul>
-<li>resolves by type </li>
-<li>for optional dependencies<br><code>@Resource</code><br>The  <code>JSR-250</code> annotation </li>
-<li>standard dependency injection </li>
-</ul>
-<ul>
-<li>resolves by name, fallback by type </li>
-<li>not for optional dependencies<br><code>@Inject</code><br>The  <code>JSR-330</code> annotation </li>
-</ul>
-<ul>
-<li>resolves by type </li>
-<li>standard dependency injection </li>
-</ul>
-<ul>
-<li>not for optional dependencies </li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/21/知识记录/Resource-Autowired-Inject/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1182,7 +1222,7 @@ DELETE /api/<span class="built_ins">user</span>/logins
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">47</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1196,7 +1236,7 @@ DELETE /api/<span class="built_ins">user</span>/logins
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">62</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
