@@ -65,8 +65,7 @@ KV键值对
 数组为基础，辅助以链表的数据结构
 
 因为是散列函数，实际的">
-<meta property="og:image" content="https://www.baidu.com/img/bdlogo.png">
-<meta property="og:updated_time" content="2015-09-12T05:19:58.000Z">
+<meta property="og:updated_time" content="2015-10-28T02:21:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈HashMap">
 <meta name="twitter:description" content="导言：
@@ -286,9 +285,7 @@ boolean <span class="function"><span class="title">containsValue</span><span cla
 
 <span class="function"><span class="title">get</span><span class="params">(Object key)</span></span>
 <span class="function"><span class="title">put</span><span class="params">(Object key,Object value)</span></span>
-</code></pre><hr>
-<p><img src="https://www.baidu.com/img/bdlogo.png" alt="ddd"></p>
-<h3 id="新的理解和问题">新的理解和问题</h3><p>HashMap是一个数组，每个元素都是一个链表。由链表组成的数组。<br>HashMap属于Key-Value型数据结构。Key与元素在数组中的位置有关，插入顺序与元素在链表中的位置有关。引出问题：从Key到数组序号是怎么映射的，有哪些问题（怎样减少重复而且均匀、重复之后怎么办）被引入，又是怎么解决的。关键词：均匀不重复、Key+key.hashCode()查找元素。<br>HashMap的基础是数组，怎样扩容，扩容是的元素重排是怎样的。</p>
+</code></pre><h3 id="新的理解和问题">新的理解和问题</h3><p>HashMap是一个数组，每个元素都是一个链表。由链表组成的数组。<br>HashMap属于Key-Value型数据结构。Key与元素在数组中的位置有关，插入顺序与元素在链表中的位置有关。引出问题：从Key到数组序号是怎么映射的，有哪些问题（怎样减少重复而且均匀、重复之后怎么办）被引入，又是怎么解决的。关键词：均匀不重复、Key+key.hashCode()查找元素。<br>HashMap的基础是数组，怎样扩容，扩容是的元素重排是怎样的。</p>
 </span>
       
     </div>
