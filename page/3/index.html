@@ -564,6 +564,167 @@ public <span class="class"><span class="keyword">class</span> <span class="title
           
           
             
+              <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/Thread类与多线程/" itemprop="url">
+                Thread类与多线程
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+            2015-04-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Java基础/" itemprop="url" rel="index">
+                  <span itemprop="name">Java基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/07/知识记录/Java基础/Thread类与多线程/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Java基础/Thread类与多线程/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>首先是ThreadA类，继承了Thread，重写了run().</p>
+<pre><code><span class="keyword">package</span> cn.wiz.roc.thread;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Thread</span> {</span>
+    public <span class="type">ThreadA</span>(<span class="type">String</span> name) {
+        <span class="keyword">super</span>(name);
+    }
+
+    public synchronized void run() {
+        <span class="keyword">try</span> {
+            <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) {
+                <span class="type">System</span>.out.println(<span class="keyword">this</span>.getName() + <span class="string">":"</span> + i);
+                <span class="keyword">if</span> (i % <span class="number">3</span> == <span class="number">0</span>)
+                    <span class="comment">//每隔3的时候线程休眠1000ms</span>
+                    <span class="type">Thread</span>.sleep(<span class="number">1000</span>);
+            }
+        } <span class="keyword">catch</span> (<span class="type">InterruptedException</span> e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p>ThreadB类似：</p>
+<pre><code><span class="keyword">package</span> cn.wiz.roc.thread;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">ThreadB</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Thread</span> {</span>
+    public <span class="type">ThreadB</span>(<span class="type">String</span> name) {
+        <span class="keyword">super</span>(name);
+    }
+
+    public synchronized void run() {
+        <span class="keyword">try</span> {
+            <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) {
+                <span class="type">System</span>.out.println(<span class="keyword">this</span>.getName() + <span class="string">":"</span> + i);
+                <span class="comment">// i能被4整除时，休眠100毫秒</span>
+                <span class="keyword">if</span> (i % <span class="number">4</span> == <span class="number">0</span>)
+                    <span class="type">Thread</span>.sleep(<span class="number">1500</span>);
+            }
+        } <span class="keyword">catch</span> (<span class="type">InterruptedException</span> e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p>SleepTest.java    </p>
+<pre><code><span class="keyword">package</span> cn.wiz.roc.thread;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SleepTest</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        ThreadA t1 = <span class="keyword">new</span> ThreadA(<span class="string">"A"</span>);
+        ThreadB t2 = <span class="keyword">new</span> ThreadB(<span class="string">"B"</span>);
+        t1.start();
+        t2.start();
+    }
+}
+</code></pre><p>其中一段执行结果：</p>
+<pre><code>...
+<span class="label">A:</span><span class="number">16</span>
+<span class="label">A:</span><span class="number">17</span>
+<span class="label">A:</span><span class="number">18</span>
+<span class="label">A:</span><span class="number">19</span>
+<span class="label">A:</span><span class="number">20</span>
+<span class="label">A:</span><span class="number">21</span>
+<span class="label">B:</span><span class="number">17</span>
+<span class="label">B:</span><span class="number">18</span>
+<span class="label">B:</span><span class="number">19</span>
+<span class="label">B:</span><span class="number">20</span>
+...
+</code></pre><blockquote>
+<p>对于多线程环境，<code>start()</code>方法会通过底层的API执行重写的<code>run()</code>方法，使该方法获得竞争CPU计算的能力。在方法的执行过程中，原来的调用环境依次往下执行，不会等待<code>run()</code>方法执行结束。<br>run()的过程里，可以调用<code>Thread.sleep(1000);</code>使得线程休眠。当然，Thread还有其他几个方法，在此不再赘述。<br>–Roc</p>
+</blockquote>
+<hr>
+<h2 id="Thread-sleep()和Thread-currentThread()-sleep()区别">Thread.sleep()和Thread.currentThread().sleep()区别</h2><blockquote>
+<p>线程可以用继承<strong>Thread类</strong>或者实现<strong>Runnable接口</strong>来实现.</p>
+<p>Thread.sleep()是Thread类的方法,只对当前线程起作用,睡眠一段时间.</p>
+<p>如果线程是通过继承Thread实现的话这2个方法没有区别；</p>
+<p>如果线程是通过实现Runnable接口来实现的,则不是Thread类,不能直接使用Thread.sleep()</p>
+<p>必须使用Thread.currentThread()来得到当前线程的引用才可以调用sleep(),</p>
+<p>所以要用Thread.currentThread().sleep()来睡眠…</p>
+</blockquote>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/04/07/知识记录/what-is-cdn/" itemprop="url">
                 what-is-cdn
               </a>
@@ -636,105 +797,6 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 <li>用户端得到由缓存服务器传回的数据后显示出来，至此完成整个域名访问过程。</li>
 </ol>
 <p>通过以上分析可以看到，不论是否使用CDN网络，普通用户客户端设置不需做任何改变，直接使用被加速网站原有域名访问即可。对于要加速的网站，只需修改整个访问过程中的域名解析部分，便能实现透明的网络加速服务。 </p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/String相关类对比2/" itemprop="url">
-                String相关类对比2
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-            2015-04-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Java基础/" itemprop="url" rel="index">
-                  <span itemprop="name">Java基础</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/Java基础/String相关类对比2/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Java基础/String相关类对比2/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间,StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象,StringBuffer和StringBuilder类功能基本相似.   </p>
-<h3 id="1-_String_类">1. String 类</h3><p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间。   </p>
-<pre><code>String <span class="operator">a</span> = <span class="string">"a"</span>;<span class="comment"> //假设a指向地址0x0001 </span>
-<span class="operator">a</span> = <span class="string">"b"</span><span class="comment">;//重新赋值后a指向地址0x0002，但0x0001地址中保存的"a"依旧存在，但已经不再是a所指向的,a 已经指向了其它地址。 </span>
-</code></pre><p>因此String的操作都是改变赋值地址而不是改变值操作。 </p>
-<h3 id="2-_StringBuffer_类">2. StringBuffer 类</h3><p>StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象。 每个StringBuffer对象都有一定的缓冲区容量，当字符串大小没有超过容量时，不会分配新的容量，当字符串大小超过容量时，会自动增加容量。 </p>
-<pre><code><span class="built_in">StringBuffer</span> buf=<span class="keyword">new</span> <span class="built_in">StringBuffer</span>(); <span class="comment">//分配长16字节的字符缓冲区 </span>
-<span class="built_in">StringBuffer</span> buf=<span class="keyword">new</span> <span class="built_in">StringBuffer</span>(<span class="number">512</span>); <span class="comment">//分配长512字节的字符缓冲区 </span>
-<span class="built_in">StringBuffer</span> buf=<span class="keyword">new</span> <span class="built_in">StringBuffer</span>(<span class="string">"this is a test"</span>)<span class="comment">//在缓冲区中存放了字符串，并在后面预留了16字节的空缓冲区。 </span>
-</code></pre><h3 id="3-StringBuffer">3.StringBuffer</h3><p>StringBuffer和StringBuilder类功能基本相似，主要区别在于StringBuffer类的方法是多线程、安全的，而StringBuilder不是线程安全的，相比而言，StringBuilder类会略微快一点。对于经常要改变值的字符串应该使用StringBuffer和StringBuilder类。 </p>
-<h3 id="4-线程安全">4.线程安全</h3><ul>
-<li>StringBuffer 线程安全   </li>
-<li>StringBuilder 线程不安全 </li>
-</ul>
-<h3 id="5-速度">5.速度</h3><p>一般情况下,速度从快到慢:<strong>StringBuilder&gt;StringBuffer&gt;String</strong>,这种比较是相对的，不是绝对的。 </p>
-<h3 id="6-总结">6.总结</h3><p>（1）.如果要操作少量的数据用 = String<br>（2）.<strong>单线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuilder<br>（3）.<strong>多线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuffer </p>
 </span>
         
       
@@ -1411,7 +1473,7 @@ tick fdafds
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">47</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1425,7 +1487,7 @@ tick fdafds
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">62</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
