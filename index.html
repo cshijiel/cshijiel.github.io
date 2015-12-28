@@ -174,6 +174,80 @@
           
           
             
+              <a class="post-title-link" href="/2015/12/28/知识记录/how-to-read-other`s-code/" itemprop="url">
+                怎样阅读别人的代码？
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-12-28T17:40:46+08:00" content="2015-12-28">
+            2015-12-28
+          </time>
+        </span>
+
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/28/知识记录/how-to-read-other`s-code/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/28/知识记录/how-to-read-other`s-code/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h3 id="背景:">背景:</h3><p>最近接到一个任务, 在原有的项目基础上进行开发, 增加一个新功能, 有之前的类似功能对照.看起来挺简单的, 然后立刻准备开发, 但是碰壁一头雾水, 工程太复杂了, 涉及的子工程比较多, 类/配置文件等特别多.</p>
+<h3 id="简要:">简要:</h3><p>然后开始从网上搜索–”怎样阅读别人的代码”, 总结了下:<br>收集相关的资料, 阅读代码，追踪数据流，仿写，测试。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/28/知识记录/how-to-read-other`s-code/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/11/04/任务和计划/2015年11月总结/" itemprop="url">
                 2015年11月总结
               </a>
@@ -1033,110 +1107,6 @@ i = temp<span class="comment">; </span>
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/" itemprop="url">
-                Node:WebSocket,REST,权限等
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-08-05T12:20:36+08:00" content="2015-08-05">
-            2015-08-05
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Node-js/" itemprop="url" rel="index">
-                  <span itemprop="name">Node.js</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h3 id="设计原则">设计原则</h3><p>好的原则可以让开发更规范，而且更好维护，易懂。现在主要想到的原则有：</p>
-<ul>
-<li>传输数据格式：JSON</li>
-<li>风格 or 规范：REST</li>
-<li>实时传输使用websocket</li>
-<li>更好地结合websocket与REST</li>
-</ul>
-<h3 id="关于REST">关于REST</h3><p>REST将每个URI看做一个资源，websocket同样可以借鉴这个想法。</p>
-<p>在项目中可以把每一个URI看做一个资源集合。</p>
-<p>例如：</p>
-<pre><code>POST /api/workflow/changes
-[ <span class="list">{}</span> , <span class="list">{}</span> ]
-</code></pre><p>单个元素的信息传递可以看做只含有一个元素的集合。</p>
-<p>同样的，登录和注销这种也可以看做资源：</p>
-<pre><code>POST /api/<span class="built_ins">user</span>/logins
-DELETE /api/<span class="built_ins">user</span>/logins
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1175,7 +1145,7 @@ DELETE /api/<span class="built_ins">user</span>/logins
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1189,7 +1159,7 @@ DELETE /api/<span class="built_ins">user</span>/logins
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">66</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

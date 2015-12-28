@@ -174,6 +174,110 @@
           
           
             
+              <a class="post-title-link" href="/2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/" itemprop="url">
+                Node:WebSocket,REST,权限等
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-08-05T12:20:36+08:00" content="2015-08-05">
+            2015-08-05
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Node-js/" itemprop="url" rel="index">
+                  <span itemprop="name">Node.js</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h3 id="设计原则">设计原则</h3><p>好的原则可以让开发更规范，而且更好维护，易懂。现在主要想到的原则有：</p>
+<ul>
+<li>传输数据格式：JSON</li>
+<li>风格 or 规范：REST</li>
+<li>实时传输使用websocket</li>
+<li>更好地结合websocket与REST</li>
+</ul>
+<h3 id="关于REST">关于REST</h3><p>REST将每个URI看做一个资源，websocket同样可以借鉴这个想法。</p>
+<p>在项目中可以把每一个URI看做一个资源集合。</p>
+<p>例如：</p>
+<pre><code>POST /api/workflow/changes
+[ <span class="list">{}</span> , <span class="list">{}</span> ]
+</code></pre><p>单个元素的信息传递可以看做只含有一个元素的集合。</p>
+<p>同样的，登录和注销这种也可以看做资源：</p>
+<pre><code>POST /api/<span class="built_ins">user</span>/logins
+DELETE /api/<span class="built_ins">user</span>/logins
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/05/知识记录/Node.js/node-with-websocket-rest-authority-etc/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2015/07/21/知识记录/Java基础/浅谈HashMap/" itemprop="url">
                 浅谈HashMap
               </a>
@@ -981,136 +1085,6 @@
           
           
             
-              <a class="post-title-link" href="/2015/04/07/知识记录/Node.js/Node.js 的一些零碎知识/" itemprop="url">
-                Node.js 的一些零碎知识
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-            2015-04-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Node-js/" itemprop="url" rel="index">
-                  <span itemprop="name">Node.js</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/Node.js/Node.js 的一些零碎知识/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Node.js/Node.js 的一些零碎知识/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h3 id="1-_NPM">1. NPM</h3><p>npm 全称是 Node Package Manager，相当于Java世界中的Maven。</p>
-<p>操作办法，首先确认安装了node.js和npm模块，然后在node项目文件夹创建package.json，执行npm install会安装（npm install xxx）package内包含的库。例如：</p>
-<pre><code>{
-  "<span class="attribute">name</span>": <span class="value"><span class="string">"ShareConnect"</span></span>,
-  "<span class="attribute">version</span>": <span class="value"><span class="string">"0.0.0"</span></span>,
-  "<span class="attribute">private</span>": <span class="value"><span class="literal">true</span></span>,
-  "<span class="attribute">scripts</span>": <span class="value">{
-    "<span class="attribute">start</span>": <span class="value"><span class="string">"node ./bin/www"</span>
-  </span>}</span>,
-  "<span class="attribute">dependencies</span>": <span class="value">{
-    "<span class="attribute">body-parser</span>": <span class="value"><span class="string">"~1.12.0"</span></span>,
-    "<span class="attribute">cookie-parser</span>": <span class="value"><span class="string">"~1.3.4"</span></span>,
-    "<span class="attribute">debug</span>": <span class="value"><span class="string">"~2.1.1"</span></span>,
-    "<span class="attribute">ejs</span>": <span class="value"><span class="string">"~2.3.1"</span></span>,
-    "<span class="attribute">express</span>": <span class="value"><span class="string">"~4.12.2"</span></span>,
-    "<span class="attribute">morgan</span>": <span class="value"><span class="string">"~1.5.1"</span></span>,
-    "<span class="attribute">serve-favicon</span>": <span class="value"><span class="string">"~2.2.0"</span></span>,
-    "<span class="attribute">uuid-js</span>": <span class="value"><span class="string">"~0.7.5"</span></span>,
-    "<span class="attribute">redis</span>": <span class="value"><span class="string">"~0.12.1"</span></span>,
-    "<span class="attribute">connect</span>": <span class="value"><span class="string">"~2.9.0"</span>
-  </span>}
-</span>}
-</code></pre><p>还有这样一篇文章：<a href="http://www.infoq.com/cn/articles/msh-using-npm-manage-node.js-dependence" target="_blank" rel="external">如何使用NPM来管理你的Node.js依赖</a></p>
-<h3 id="2-_项目结构">2. 项目结构</h3><p>MVC分层结构经久考验，在此之上沉淀的技术资源也很丰富，Node.js同样可以设计出优雅高效的分层结果。</p>
-<p>Connet中间件在MVC中合理的使用。</p>
-<blockquote>
-<p>借助Connect可以自由定制中间件的优势，可以自行提升性能或是设计出适合自己需要的项目。Connect自身提供了路由功能，在此基础上，可以轻松搭建MVC模式的框架，以达到开发效率和执行效率的平衡。以下是笔者项目中采用的目录结构，清晰地划分目录结构可以帮助划分代码的职责，此处仅供参考。</p>
-</blockquote>
-<pre><code>├── Makefile <span class="comment">// 构建文件，通常用于启动单元测试运行等操作</span>
-├── app<span class="class">.js</span> <span class="comment">// 应用文件</span>
-├── automation  <span class="comment">// 自动化测试目录</span>
-├── bin  <span class="comment">// 存放启动应用相关脚本的目录</span>
-├── conf  <span class="comment">// 配置文件目录</span>
-├── controllers  <span class="comment">// 控制层目录------------------------C，Controller，控制器</span>
-├── helpers  <span class="comment">// 帮助类库</span>
-├── middlewares  <span class="comment">// 自定义中间件目录</span>
-├── models  <span class="comment">// 数据层目录-----------------------------M，Model，模型</span>
-├── node_modules  <span class="comment">// 第三方模块目录</span>
-├── package<span class="class">.json</span>  <span class="comment">// 项目包描述文件</span>
-├── public  <span class="comment">// 静态文件目录</span>
-│   ├── images  <span class="comment">// 图片目录</span>
-│   ├── libs  <span class="comment">// 第三方前端JavaScript库目录</span>
-│   ├── scripts  <span class="comment">// 前端JavaScript脚本目录</span>
-│   └── styles  <span class="comment">// 样式表目录</span>
-├── test  <span class="comment">// 单元测试目录</span>
-└── views  <span class="comment">// 视图层目录-----------------------------V，View，视图</span>
-</code></pre><h3 id="3-_关于本项目基本的设计">3. 关于本项目基本的设计</h3><p>可以一个图来解释：<br><img src="http://note.wiz.cn/api/document/files/unzip/66e5c3f6-8482-11e1-a525-00237def97cc/6d3b0fec-73aa-4846-a15d-ff78e296af74.32632/index_files/f76767cb-d24f-4ef4-a718-cc3264db2dde.png" alt="UDP-返回-Post-set"></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/java多线程中的volatile/" itemprop="url">
                 java多线程中的volatile
               </a>
@@ -1275,7 +1249,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1289,7 +1263,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-count">66</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
