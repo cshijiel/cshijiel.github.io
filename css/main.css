@@ -1055,7 +1055,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #320eff;
+  background: #ff2b33;
 }
 .sidebar-nav {
   margin: 0;
@@ -2217,4 +2217,7 @@ ul li {
 }
 .posts-expand .post-body .fancybox img {
   margin: 0 auto;
+}
+#money_getter img {
+  margin: 14px auto;
 }
