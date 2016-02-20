@@ -73,6 +73,16 @@
 <![endif]-->
   
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3d0b52366e3d42e3387d71167ae773c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
   <div class="container one-column 
@@ -162,6 +172,137 @@
       <div class="main-inner">
         <div id="content" class="content"> 
   <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/04/07/知识记录/Linux基础/shell-export/" itemprop="url">
+                shell-export
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+            2015-04-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Linux基础/" itemprop="url" rel="index">
+                  <span itemprop="name">Linux基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/07/知识记录/Linux基础/shell-export/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Linux基础/shell-export/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>在shell中，有的时候会重用一部分代码，例如变量或者函数等，就会用到export。</p>
+<p>使用例子如下：<br>首先是父进程：<code>father.sh</code></p>
+<pre><code><span class="shebang">#! /bin/bash</span>
+<span class="built_in">echo</span> <span class="string">"this is the father"</span>
+FILM=<span class="string">"A Few Good Men"</span>
+<span class="built_in">echo</span> <span class="string">"I like the film : <span class="variable">$FILM</span>"</span>
+
+<span class="function"><span class="title">tick</span></span>()
+{
+        <span class="built_in">echo</span> <span class="variable">$1</span>;
+        <span class="built_in">return</span> <span class="variable">$1</span>;
+}
+
+tick fdjk
+
+<span class="comment">#call the child script</span>
+<span class="built_in">export</span> FILM
+<span class="built_in">export</span> <span class="operator">-f</span> tick
+./child.sh
+<span class="built_in">echo</span> <span class="string">"back to father"</span>
+<span class="built_in">echo</span> <span class="string">"and the film is : <span class="variable">$FILM</span>"</span>
+<span class="built_in">exit</span>
+</code></pre><p>然后是子进程：child.sh  </p>
+<pre><code><span class="shebang">#! /bin/bash</span>
+<span class="built_in">echo</span> <span class="string">"called from father...i am the child"</span>
+<span class="built_in">echo</span> <span class="string">"filem name is : <span class="variable">$FILM</span>"</span>
+FILM=<span class="string">"Die Hard"</span>
+<span class="built_in">echo</span> <span class="string">"changing film to :<span class="variable">$FILM</span>"</span>
+
+tick fdafds
+
+<span class="built_in">exit</span>
+</code></pre><hr>
+<h2 id="shell_与_export命令">shell 与 export命令</h2><p>用户登录到Linux系统后，系统将启动一个用户shell。在这个shell中，可以使用shell命令</p>
+<p>或声明变量，也可以创建并运行shell脚本程序。运行shell脚本程序时，系统将创建一个子shell。</p>
+<p>此时，系统中将有两个shell，一个是登录时系统启动的shell，另一个是系统为运行脚本程序创建</p>
+<p>的shell。当一个脚本程序运行完毕，脚本shell将终止，返回到执行该脚本之前的shell。</p>
+<p>从这种意义上来说，用户可以有许多 shell，每个shell都是由某个shell（称为父shell）派生的。</p>
+<p>在子shell中定义的变量只在该子shell内有效。如果在一个shell脚本程序中定义了一个变量，</p>
+<p>当该脚本程序运行时，这个定义的变量只是该脚本程序内的一个局部变量，其他的shell不能引用它，</p>
+<p>要使某个变量的值可以在其他shell中被改变，可以使用export命令对已定义的变量进行输出。</p>
+<p>export命令将使系统在创建每一个新的shell时，定义这个变量的一个拷贝。</p>
+<p>这个过程称之为变量输出。</p>
+<h2 id="export_功能说明：设置或显示环境变量。">export 功能说明：设置或显示环境变量。</h2><p><strong>语　　法</strong>：export [-fnp][变量名称]=[变量设置值]<br><strong>补充说明</strong>：在shell中执行程序时，shell会提供一组环境变量。export可新增，修改或删除环境变量，供后续执行的程序使用。export的效力仅限于该次登陆操作。<br><strong>参　　数</strong>：<br>　<code>-f</code> 　代表[变量名称]中为函数名称。<br>　<code>-n</code> 　删除指定的变量。变量实际上并未删除，只是不会输出到后续指令的执行环境中。<br>　<code>-p</code> 　列出所有的shell赋予程序的环境变量。</p>
+<hr>
+<h2 id="其他">其他</h2><p>shell返回值只能是整数型数字，上边的例子会报错：</p>
+<pre><code><span class="string">return:</span> <span class="string">fdafds:</span> numeric argument required
+</code></pre><p>参考信息：<a href="http://blog.csdn.net/yasi_xi/article/details/8546758" target="_blank" rel="external">Shell 函数返回值</a></p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -1140,121 +1281,6 @@ console<span class="built_in">.</span><span class="keyword">log</span>(<span cla
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/07/数学和算法/树-数据结构预算法/" itemprop="url">
-                树-数据结构预算法
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-            2015-04-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/数学和算法/" itemprop="url" rel="index">
-                  <span itemprop="name">数学和算法</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/07/数学和算法/树-数据结构预算法/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/数学和算法/树-数据结构预算法/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><h2 id="4-1_预备知识">4.1 预备知识</h2><ol>
-<li>树的实现-定义</li>
-<li>树的遍历及应用</li>
-</ol>
-<h2 id="4-2_二叉树">4.2 二叉树</h2><ol>
-<li>实现</li>
-<li>例子：表达式树</li>
-</ol>
-<h2 id="4-3_查找树ADT-二叉查找树">4.3 查找树ADT-二叉查找树</h2><ol>
-<li>contains方法</li>
-<li>findMin方法和findMax方法</li>
-<li>insert方法</li>
-<li>remove方法</li>
-<li>平均情况分析</li>
-</ol>
-<h2 id="4-4_AVL树">4.4 AVL树</h2><ol>
-<li>单旋转</li>
-<li>双旋转</li>
-</ol>
-<h2 id="4-5_伸展树">4.5 伸展树</h2><ol>
-<li>一个简单的想法（不能直接使用）</li>
-<li>展开</li>
-</ol>
-<h2 id="4-6_树的遍历">4.6 树的遍历</h2><h2 id="4-7_B树">4.7 B树</h2><h2 id="4-8_标准库中的集合与映射">4.8 标准库中的集合与映射</h2><ol>
-<li>关于Set接口</li>
-<li>关于Map接口</li>
-<li>TreeSet接口和TreeMap类的实现</li>
-<li>使用多个映射的例</li>
-</ol>
-<h2 id="小结">小结</h2><blockquote>
-<p>暂不能总结</p>
-</blockquote>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1355,7 +1381,7 @@ console<span class="built_in">.</span><span class="keyword">log</span>(<span cla
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp;  2014 - 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

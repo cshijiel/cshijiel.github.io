@@ -39,38 +39,41 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。
+<meta name="description" content="本文简书备份地址：微信红包随机算法初探
+最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。
 算法算法很简单，不是提前算好，而是抢红包时计算：
 
 红包里的金额怎么算？为什么出现各个红包金额相差很大？答：随机，额度在0.01和剩余平均值*2之间。
 
 实现实现上述算法的逻辑主要是：
-public static double getRandomMoney(LeftMoneyPackage _leftMone">
+public static double getRandomMoney(RedPac">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信红包随机算法初探">
 <meta property="og:url" content="http://coderroc.com/2015/10/28/数学和算法/微信红包随机算法初探/index.html">
 <meta property="og:site_name" content="Roc`s 随想录">
-<meta property="og:description" content="最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。
+<meta property="og:description" content="本文简书备份地址：微信红包随机算法初探
+最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。
 算法算法很简单，不是提前算好，而是抢红包时计算：
 
 红包里的金额怎么算？为什么出现各个红包金额相差很大？答：随机，额度在0.01和剩余平均值*2之间。
 
 实现实现上述算法的逻辑主要是：
-public static double getRandomMoney(LeftMoneyPackage _leftMone">
+public static double getRandomMoney(RedPac">
 <meta property="og:image" content="http://7d9owd.com1.z0.glb.clouddn.com/images/7682b4d2-e67f-47b4-9282-31da086ffb55.png">
 <meta property="og:image" content="http://7d9owd.com1.z0.glb.clouddn.com/images/a615bbc4-4dbf-42da-a1a1-e4afcb908752.png">
 <meta property="og:image" content="http://7d9owd.com1.z0.glb.clouddn.com/images/20d36929-634f-4655-90d2-64fffa43838f.png">
 <meta property="og:image" content="http://7d9owd.com1.z0.glb.clouddn.com/images/dfddb714-72fb-40e2-805d-cbc43b944f4d.png">
-<meta property="og:updated_time" content="2015-10-29T12:38:23.000Z">
+<meta property="og:updated_time" content="2016-02-20T11:06:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信红包随机算法初探">
-<meta name="twitter:description" content="最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。
+<meta name="twitter:description" content="本文简书备份地址：微信红包随机算法初探
+最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。
 算法算法很简单，不是提前算好，而是抢红包时计算：
 
 红包里的金额怎么算？为什么出现各个红包金额相差很大？答：随机，额度在0.01和剩余平均值*2之间。
 
 实现实现上述算法的逻辑主要是：
-public static double getRandomMoney(LeftMoneyPackage _leftMone">
+public static double getRandomMoney(RedPac">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -95,6 +98,16 @@ public static double getRandomMoney(LeftMoneyPackage _leftMone">
   </div>
 <![endif]-->
   
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3d0b52366e3d42e3387d71167ae773c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -245,37 +258,40 @@ public static double getRandomMoney(LeftMoneyPackage _leftMone">
       
 
       
-        <span itemprop="articleBody"><p>最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。</p>
+        <span itemprop="articleBody"><p>本文简书备份地址：<a href="http://www.jianshu.com/p/026ceece4d80" target="_blank" rel="external">微信红包随机算法初探</a></p>
+<p>最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。</p>
 <h3 id="算法">算法</h3><p>算法很简单，不是提前算好，而是抢红包时计算：</p>
 <blockquote>
 <p>红包里的金额怎么算？为什么出现各个红包金额相差很大？<br>答：随机，额度在0.01和剩余平均值*2之间。</p>
 </blockquote>
 <h3 id="实现">实现</h3><p>实现上述算法的逻辑主要是：</p>
-<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getRandomMoney</span><span class="params">(LeftMoneyPackage _leftMoneyPackage)</span> </span>{
-    <span class="keyword">if</span> (_leftMoneyPackage.peoples == <span class="number">1</span>) {
-        _leftMoneyPackage.peoples--;
-        <span class="keyword">return</span> (<span class="keyword">double</span>) Math.round(_leftMoneyPackage.leftMoney * <span class="number">100</span>) / <span class="number">100</span>;
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getRandomMoney</span><span class="params">(RedPackage _redPackage)</span> </span>{
+    <span class="comment">// remainSize 剩余的红包数量</span>
+    <span class="comment">// remainMoney 剩余的钱</span>
+    <span class="keyword">if</span> (_redPackage.remainSize == <span class="number">1</span>) {
+        _redPackage.remainSize--;
+        <span class="keyword">return</span> (<span class="keyword">double</span>) Math.round(_redPackage.remainMoney * <span class="number">100</span>) / <span class="number">100</span>;
     }
     Random r     = <span class="keyword">new</span> Random();
-    <span class="keyword">double</span> min   = <span class="number">0.01</span>;
-    <span class="keyword">double</span> max   = _leftMoneyPackage.leftMoney / _leftMoneyPackage.peoples * <span class="number">2</span>;
+    <span class="keyword">double</span> min   = <span class="number">0.01</span>; <span class="comment">//</span>
+    <span class="keyword">double</span> max   = _redPackage.remainMoney / _redPackage.remainSize * <span class="number">2</span>;
     <span class="keyword">double</span> money = r.nextDouble() * max;
-    money = money &lt; min ? min : money;
-    money = (<span class="keyword">double</span>) Math.<span class="built_in">floor</span>(money * <span class="number">100</span>) / <span class="number">100</span>;
-    _leftMoneyPackage.peoples--;
-    _leftMoneyPackage.leftMoney -= money;
+    money = money &lt;= min ? <span class="number">0.01</span>: money;
+    money = Math.<span class="built_in">floor</span>(money * <span class="number">100</span>) / <span class="number">100</span>;
+    _redPackage.remainSize--;
+    _redPackage.remainMoney -= money;
     <span class="keyword">return</span> money;
 }
 </code></pre><a id="more"></a>
 <p><code>LeftMoneyPackage</code>数据结构如下：</p>
-<pre><code><span class="class"><span class="keyword">class</span> <span class="title">LeftMoneyPackage</span> </span>{
-    <span class="keyword">int</span>    peoples;
-    <span class="keyword">double</span> leftMoney;
+<pre><code><span class="class"><span class="keyword">class</span> <span class="title">RedPackage</span> </span>{
+    <span class="keyword">int</span>    remainSize;
+    <span class="keyword">double</span> remainMoney;
 }
 </code></pre><p>测试时初始化相关数据是：</p>
 <pre><code><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{
-    leftMoneyPackage.peoples = <span class="number">30</span>;
-    leftMoneyPackage.leftMoney = <span class="number">500</span>;
+    redPackage.remainSize  = <span class="number">30</span>;
+    redPackage.remainMoney = <span class="number">500</span>;
 }
 </code></pre><h3 id="测试结果">测试结果</h3><h4 id="单词测试随机红包">单词测试随机红包</h4><p>以上面的初始化数据（30人抢500块），执行了两次，结果如下：</p>
 <pre><code><span class="comment">// 第一次</span>
@@ -298,7 +314,7 @@ public static double getRandomMoney(LeftMoneyPackage _leftMone">
 <h4 id="分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？">分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？</h4><p>答：随机，额度在0.01和(剩余平均值*2)之间。<br>例如：发100块钱，总共10个红包，那么平均值是10块钱一个，那么发出来的红包的额度在0.01元～20元之间波动。<br>当前面3个红包总共被领了40块钱时，剩下60块钱，总共7个红包，那么这7个红包的额度在：0.01～（60/7*2）=17.14之间。<br>注意：这里的算法是每被抢一个后，剩下的会再次执行上面的这样的算法（Tim老师也觉得上述算法太复杂，不知基于什么样的考虑）。</p>
 <p>这样算下去，会超过最开始的全部金额，因此到了最后面如果不够这么算，那么会采取如下算法：保证剩余用户能拿到最低1分钱即可。</p>
 <p>如果前面的人手气不好，那么后面的余额越多，红包额度也就越多，因此实际概率一样的。</p>
-<h4 id="红包的设计">红包的设计</h4><p>答：微信从财付通拉取金额数据郭莱，生成个数/红包类型/金额放到redis集群里，app端将红包ID的请求放入请求队列中，如果发现超过红包的个数，直接返回。根据红包的裸祭处理成功得到令牌请求，则由财付通进行一致性调用，通过像比特币一样，两边保存交易记录，交易后交给第三方服务审计，如果交易过程中出现不一致就强制回归。</p>
+<h4 id="红包的设计">红包的设计</h4><p>答：微信从财付通拉取金额数据郭莱，生成个数/红包类型/金额放到redis集群里，app端将红包ID的请求放入请求队列中，如果发现超过红包的个数，直接返回。根据红包的裸祭(逻辑)处理成功得到令牌请求，则由财付通进行一致性调用，通过像比特币一样，两边保存交易记录，交易后交给第三方服务审计，如果交易过程中出现不一致就强制回归。</p>
 <h4 id="发性处理：红包如何计算被抢完？">发性处理：红包如何计算被抢完？</h4><p>答：cache会抵抗无效请求，将无效的请求过滤掉，实际进入到后台的量不大。cache记录红包个数，原子操作进行个数递减，到0表示被抢光。财付通按照20万笔每秒入账准备，但实际还不到8万每秒。</p>
 <h4 id="通如何保持8w每秒的写入？">通如何保持8w每秒的写入？</h4><p>答：多主sharding，水平扩展机器。</p>
 <h4 id="据容量多少？">据容量多少？</h4><p>答：一个红包只占一条记录，有效期只有几天，因此不需要太多空间。</p>
@@ -497,7 +513,7 @@ public static double getRandomMoney(LeftMoneyPackage _leftMone">
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp;  2014 - 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

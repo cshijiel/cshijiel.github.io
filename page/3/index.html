@@ -73,6 +73,16 @@
 <![endif]-->
   
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3d0b52366e3d42e3387d71167ae773c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
   <div class="container one-column 
@@ -162,6 +172,143 @@
       <div class="main-inner">
         <div id="content" class="content"> 
   <section id="posts" class="posts-expand">
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/java多线程中的volatile/" itemprop="url">
+                java多线程中的volatile
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+            2015-04-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Java基础/" itemprop="url" rel="index">
+                  <span itemprop="name">Java基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/07/知识记录/Java基础/java多线程中的volatile/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Java基础/java多线程中的volatile/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><blockquote>
+<p><strong>volatile：</strong><br>英[‘vɒlətaɪl] 美[ˈvɑlətl, -ˌtaɪl]<br>adj. 易变的，不稳定的;（液体或油）易挥发的;爆炸性的;快活的，轻快的<br>[例句]A volatile political system makes these reforms hard to achieve.<br>而反复无常的政治体系又让这些方面的改革无法实施。<br>–xx翻译</p>
+</blockquote>
+<h1 id="一、volatile简述">一、volatile简述</h1><p>Java 语言提供了一种稍弱的同步机制,即 volatile 变量.用来确保将变量的更新操作通知到其他线程,保证了新值能立即同步到主内存,以及每次使用前立即从主内存刷新. 当把变量声明为volatile类型后,编译器与运行时都会注意到这个变量是共享的.</p>
+<h1 id="二、_volatile线程安全？">二、 volatile线程安全？</h1><p>volatile 变量对所有线程是立即可见的,对 volatile 变量所有的写操作都能立即反应到其他线程之中,换句话说:volatile 变量在各个线程中是一致的,所以基于 volatile 变量的运算是线程安全的.  </p>
+<p>这句话论据貌似没有错,论点确实错的.</p>
+<h1 id="三、_valotile_为什么是线程不安全的？">三、 valotile 为什么是线程不安全的？</h1><pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VolatileTest</span>{
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">int</span>  i;
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increase</span>(<span class="params"></span>)</span>{
+        i++;
+    }
+}
+</code></pre><p>编译（<code>javap -c -l VolatileTest.class</code>）后，</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> VolatileTest {
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">int</span> i;
+
+  <span class="function"><span class="keyword">public</span> <span class="title">VolatileTest</span><span class="params">()</span></span>;
+    Code:
+       <span class="number">0</span>: aload_0       
+       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>                  <span class="comment">// Method java/lang/Object."&lt;init&gt;":()V</span></span>
+       <span class="number">4</span>: <span class="keyword">return</span>        
+    LineNumberTable:
+      line <span class="number">1</span>: <span class="number">0</span>
+
+  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>;
+    Code:
+       <span class="number">0</span>: getstatic     <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field i:I, 把i的值取到了操作栈顶,volatile保证了i值此时是正确的. </span></span>
+       <span class="number">3</span>: iconst_1      
+       <span class="number">4</span>: iadd                              <span class="comment">// increase,但其他线程此时可能已经把i值加大了好多</span>
+       <span class="number">5</span>: putstatic     <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field i:I ,把这个已经out of date的i值同步回主内存中,i值被破坏了.</span></span>
+       <span class="number">8</span>: <span class="keyword">return</span>        
+    LineNumberTable:
+      line <span class="number">6</span>: <span class="number">0</span>
+      line <span class="number">7</span>: <span class="number">8</span>
+}
+</code></pre><p>从这个角度说 volatile 并不完全是线程安全的.</p>
+<h1 id="四、_常见的用法">四、 常见的用法</h1><p>在Java内存模型中，有main memory，每个线程也有自己的memory (例如寄存器)。为了性能，一个线程会在自己的memory中保持要访问的变量的副本。这样就会出现同一个变量在某个瞬间，在一个线程的memory中的值可能与另外一个线程memory中的值，或者main memory中的值不一致的情况。<br>一个变量声明为volatile，就意味着这个变量是随时会被其他线程修改的，因此不能将它cache在线程memory中。以下例子展现了volatile的作用：</p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StoppableTask</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>{
+    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> pleaseStop;
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        <span class="keyword">while</span> (!pleaseStop) {
+            <span class="comment">// do some stuff...</span>
+        }
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tellMeToStop</span><span class="params">()</span> </span>{
+        pleaseStop = <span class="keyword">true</span>;
+    }
+}
+</code></pre><p>假如pleaseStop没有被声明为volatile，线程执行run的时候检查的是自己的副本，就不能及时得知其他线程已经调用tellMeToStop()修改了pleaseStop的值。 </p>
+<p>Volatile一般情况下不能代替sychronized，因为volatile不能保证操作的原子性，即使只是i++，实际上也是由多个原子操作组成：read i; inc; write i，假如多个线程同时执行i++，volatile只能保证他们操作的i是同一块内存，但依然可能出现写入脏数据的情况。如果配合Java 5增加的atomic wrapper classes，对它们的increase之类的操作就不需要sychronized。 </p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -564,167 +711,6 @@ public <span class="class"><span class="keyword">class</span> <span class="title
           
           
             
-              <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/Thread类与多线程/" itemprop="url">
-                Thread类与多线程
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-            2015-04-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Java基础/" itemprop="url" rel="index">
-                  <span itemprop="name">Java基础</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/Java基础/Thread类与多线程/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Java基础/Thread类与多线程/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>首先是ThreadA类，继承了Thread，重写了run().</p>
-<pre><code><span class="keyword">package</span> cn.wiz.roc.thread;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Thread</span> {</span>
-    public <span class="type">ThreadA</span>(<span class="type">String</span> name) {
-        <span class="keyword">super</span>(name);
-    }
-
-    public synchronized void run() {
-        <span class="keyword">try</span> {
-            <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) {
-                <span class="type">System</span>.out.println(<span class="keyword">this</span>.getName() + <span class="string">":"</span> + i);
-                <span class="keyword">if</span> (i % <span class="number">3</span> == <span class="number">0</span>)
-                    <span class="comment">//每隔3的时候线程休眠1000ms</span>
-                    <span class="type">Thread</span>.sleep(<span class="number">1000</span>);
-            }
-        } <span class="keyword">catch</span> (<span class="type">InterruptedException</span> e) {
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre><p>ThreadB类似：</p>
-<pre><code><span class="keyword">package</span> cn.wiz.roc.thread;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">ThreadB</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Thread</span> {</span>
-    public <span class="type">ThreadB</span>(<span class="type">String</span> name) {
-        <span class="keyword">super</span>(name);
-    }
-
-    public synchronized void run() {
-        <span class="keyword">try</span> {
-            <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) {
-                <span class="type">System</span>.out.println(<span class="keyword">this</span>.getName() + <span class="string">":"</span> + i);
-                <span class="comment">// i能被4整除时，休眠100毫秒</span>
-                <span class="keyword">if</span> (i % <span class="number">4</span> == <span class="number">0</span>)
-                    <span class="type">Thread</span>.sleep(<span class="number">1500</span>);
-            }
-        } <span class="keyword">catch</span> (<span class="type">InterruptedException</span> e) {
-            e.printStackTrace();
-        }
-    }
-}
-</code></pre><p>SleepTest.java    </p>
-<pre><code><span class="keyword">package</span> cn.wiz.roc.thread;
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SleepTest</span> </span>{
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
-        ThreadA t1 = <span class="keyword">new</span> ThreadA(<span class="string">"A"</span>);
-        ThreadB t2 = <span class="keyword">new</span> ThreadB(<span class="string">"B"</span>);
-        t1.start();
-        t2.start();
-    }
-}
-</code></pre><p>其中一段执行结果：</p>
-<pre><code>...
-<span class="label">A:</span><span class="number">16</span>
-<span class="label">A:</span><span class="number">17</span>
-<span class="label">A:</span><span class="number">18</span>
-<span class="label">A:</span><span class="number">19</span>
-<span class="label">A:</span><span class="number">20</span>
-<span class="label">A:</span><span class="number">21</span>
-<span class="label">B:</span><span class="number">17</span>
-<span class="label">B:</span><span class="number">18</span>
-<span class="label">B:</span><span class="number">19</span>
-<span class="label">B:</span><span class="number">20</span>
-...
-</code></pre><blockquote>
-<p>对于多线程环境，<code>start()</code>方法会通过底层的API执行重写的<code>run()</code>方法，使该方法获得竞争CPU计算的能力。在方法的执行过程中，原来的调用环境依次往下执行，不会等待<code>run()</code>方法执行结束。<br>run()的过程里，可以调用<code>Thread.sleep(1000);</code>使得线程休眠。当然，Thread还有其他几个方法，在此不再赘述。<br>–Roc</p>
-</blockquote>
-<hr>
-<h2 id="Thread-sleep()和Thread-currentThread()-sleep()区别">Thread.sleep()和Thread.currentThread().sleep()区别</h2><blockquote>
-<p>线程可以用继承<strong>Thread类</strong>或者实现<strong>Runnable接口</strong>来实现.</p>
-<p>Thread.sleep()是Thread类的方法,只对当前线程起作用,睡眠一段时间.</p>
-<p>如果线程是通过继承Thread实现的话这2个方法没有区别；</p>
-<p>如果线程是通过实现Runnable接口来实现的,则不是Thread类,不能直接使用Thread.sleep()</p>
-<p>必须使用Thread.currentThread()来得到当前线程的引用才可以调用sleep(),</p>
-<p>所以要用Thread.currentThread().sleep()来睡眠…</p>
-</blockquote>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
               <a class="post-title-link" href="/2015/04/07/知识记录/what-is-cdn/" itemprop="url">
                 what-is-cdn
               </a>
@@ -797,6 +783,105 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 <li>用户端得到由缓存服务器传回的数据后显示出来，至此完成整个域名访问过程。</li>
 </ol>
 <p>通过以上分析可以看到，不论是否使用CDN网络，普通用户客户端设置不需做任何改变，直接使用被加速网站原有域名访问即可。对于要加速的网站，只需修改整个访问过程中的域名解析部分，便能实现透明的网络加速服务。 </p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/String相关类对比2/" itemprop="url">
+                String相关类对比2
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+            2015-04-07
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <a href="/categories/Java基础/" itemprop="url" rel="index">
+                  <span itemprop="name">Java基础</span>
+                </a>
+              </span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/04/07/知识记录/Java基础/String相关类对比2/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Java基础/String相关类对比2/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间,StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象,StringBuffer和StringBuilder类功能基本相似.   </p>
+<h3 id="1-_String_类">1. String 类</h3><p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间。   </p>
+<pre><code>String <span class="operator">a</span> = <span class="string">"a"</span>;<span class="comment"> //假设a指向地址0x0001 </span>
+<span class="operator">a</span> = <span class="string">"b"</span><span class="comment">;//重新赋值后a指向地址0x0002，但0x0001地址中保存的"a"依旧存在，但已经不再是a所指向的,a 已经指向了其它地址。 </span>
+</code></pre><p>因此String的操作都是改变赋值地址而不是改变值操作。 </p>
+<h3 id="2-_StringBuffer_类">2. StringBuffer 类</h3><p>StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象。 每个StringBuffer对象都有一定的缓冲区容量，当字符串大小没有超过容量时，不会分配新的容量，当字符串大小超过容量时，会自动增加容量。 </p>
+<pre><code><span class="built_in">StringBuffer</span> buf=<span class="keyword">new</span> <span class="built_in">StringBuffer</span>(); <span class="comment">//分配长16字节的字符缓冲区 </span>
+<span class="built_in">StringBuffer</span> buf=<span class="keyword">new</span> <span class="built_in">StringBuffer</span>(<span class="number">512</span>); <span class="comment">//分配长512字节的字符缓冲区 </span>
+<span class="built_in">StringBuffer</span> buf=<span class="keyword">new</span> <span class="built_in">StringBuffer</span>(<span class="string">"this is a test"</span>)<span class="comment">//在缓冲区中存放了字符串，并在后面预留了16字节的空缓冲区。 </span>
+</code></pre><h3 id="3-StringBuffer">3.StringBuffer</h3><p>StringBuffer和StringBuilder类功能基本相似，主要区别在于StringBuffer类的方法是多线程、安全的，而StringBuilder不是线程安全的，相比而言，StringBuilder类会略微快一点。对于经常要改变值的字符串应该使用StringBuffer和StringBuilder类。 </p>
+<h3 id="4-线程安全">4.线程安全</h3><ul>
+<li>StringBuffer 线程安全   </li>
+<li>StringBuilder 线程不安全 </li>
+</ul>
+<h3 id="5-速度">5.速度</h3><p>一般情况下,速度从快到慢:<strong>StringBuilder&gt;StringBuffer&gt;String</strong>,这种比较是相对的，不是绝对的。 </p>
+<h3 id="6-总结">6.总结</h3><p>（1）.如果要操作少量的数据用 = String<br>（2）.<strong>单线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuilder<br>（3）.<strong>多线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuffer </p>
 </span>
         
       
@@ -1304,137 +1389,6 @@ System.out.<span class="built_in">println</span>(sc==sd); <span class="comment">
 
 
     
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/04/07/知识记录/Linux基础/shell-export/" itemprop="url">
-                shell-export
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-            2015-04-07
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Linux基础/" itemprop="url" rel="index">
-                  <span itemprop="name">Linux基础</span>
-                </a>
-              </span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/Linux基础/shell-export/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Linux基础/shell-export/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody"><p>在shell中，有的时候会重用一部分代码，例如变量或者函数等，就会用到export。</p>
-<p>使用例子如下：<br>首先是父进程：<code>father.sh</code></p>
-<pre><code><span class="shebang">#! /bin/bash</span>
-<span class="built_in">echo</span> <span class="string">"this is the father"</span>
-FILM=<span class="string">"A Few Good Men"</span>
-<span class="built_in">echo</span> <span class="string">"I like the film : <span class="variable">$FILM</span>"</span>
-
-<span class="function"><span class="title">tick</span></span>()
-{
-        <span class="built_in">echo</span> <span class="variable">$1</span>;
-        <span class="built_in">return</span> <span class="variable">$1</span>;
-}
-
-tick fdjk
-
-<span class="comment">#call the child script</span>
-<span class="built_in">export</span> FILM
-<span class="built_in">export</span> <span class="operator">-f</span> tick
-./child.sh
-<span class="built_in">echo</span> <span class="string">"back to father"</span>
-<span class="built_in">echo</span> <span class="string">"and the film is : <span class="variable">$FILM</span>"</span>
-<span class="built_in">exit</span>
-</code></pre><p>然后是子进程：child.sh  </p>
-<pre><code><span class="shebang">#! /bin/bash</span>
-<span class="built_in">echo</span> <span class="string">"called from father...i am the child"</span>
-<span class="built_in">echo</span> <span class="string">"filem name is : <span class="variable">$FILM</span>"</span>
-FILM=<span class="string">"Die Hard"</span>
-<span class="built_in">echo</span> <span class="string">"changing film to :<span class="variable">$FILM</span>"</span>
-
-tick fdafds
-
-<span class="built_in">exit</span>
-</code></pre><hr>
-<h2 id="shell_与_export命令">shell 与 export命令</h2><p>用户登录到Linux系统后，系统将启动一个用户shell。在这个shell中，可以使用shell命令</p>
-<p>或声明变量，也可以创建并运行shell脚本程序。运行shell脚本程序时，系统将创建一个子shell。</p>
-<p>此时，系统中将有两个shell，一个是登录时系统启动的shell，另一个是系统为运行脚本程序创建</p>
-<p>的shell。当一个脚本程序运行完毕，脚本shell将终止，返回到执行该脚本之前的shell。</p>
-<p>从这种意义上来说，用户可以有许多 shell，每个shell都是由某个shell（称为父shell）派生的。</p>
-<p>在子shell中定义的变量只在该子shell内有效。如果在一个shell脚本程序中定义了一个变量，</p>
-<p>当该脚本程序运行时，这个定义的变量只是该脚本程序内的一个局部变量，其他的shell不能引用它，</p>
-<p>要使某个变量的值可以在其他shell中被改变，可以使用export命令对已定义的变量进行输出。</p>
-<p>export命令将使系统在创建每一个新的shell时，定义这个变量的一个拷贝。</p>
-<p>这个过程称之为变量输出。</p>
-<h2 id="export_功能说明：设置或显示环境变量。">export 功能说明：设置或显示环境变量。</h2><p><strong>语　　法</strong>：export [-fnp][变量名称]=[变量设置值]<br><strong>补充说明</strong>：在shell中执行程序时，shell会提供一组环境变量。export可新增，修改或删除环境变量，供后续执行的程序使用。export的效力仅限于该次登陆操作。<br><strong>参　　数</strong>：<br>　<code>-f</code> 　代表[变量名称]中为函数名称。<br>　<code>-n</code> 　删除指定的变量。变量实际上并未删除，只是不会输出到后续指令的执行环境中。<br>　<code>-p</code> 　列出所有的shell赋予程序的环境变量。</p>
-<hr>
-<h2 id="其他">其他</h2><p>shell返回值只能是整数型数字，上边的例子会报错：</p>
-<pre><code><span class="string">return:</span> <span class="string">fdafds:</span> numeric argument required
-</code></pre><p>参考信息：<a href="http://blog.csdn.net/yasi_xi/article/details/8546758" target="_blank" rel="external">Shell 函数返回值</a></p>
-</span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1535,7 +1489,7 @@ tick fdafds
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp;  2014 - 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

@@ -73,6 +73,16 @@
 <![endif]-->
   
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3d0b52366e3d42e3387d71167ae773c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
   <div class="container one-column 
@@ -391,25 +401,28 @@
 
       
         
-          <p>最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。</p>
+          <p>本文简书备份地址：<a href="http://www.jianshu.com/p/026ceece4d80">微信红包随机算法初探</a></p>
+<p>最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。</p>
 <h3 id="算法">算法</h3><p>算法很简单，不是提前算好，而是抢红包时计算：</p>
 <blockquote>
 <p>红包里的金额怎么算？为什么出现各个红包金额相差很大？<br>答：随机，额度在0.01和剩余平均值*2之间。</p>
 </blockquote>
 <h3 id="实现">实现</h3><p>实现上述算法的逻辑主要是：</p>
-<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getRandomMoney</span><span class="params">(LeftMoneyPackage _leftMoneyPackage)</span> </span>{
-    <span class="keyword">if</span> (_leftMoneyPackage.peoples == <span class="number">1</span>) {
-        _leftMoneyPackage.peoples--;
-        <span class="keyword">return</span> (<span class="keyword">double</span>) Math.round(_leftMoneyPackage.leftMoney * <span class="number">100</span>) / <span class="number">100</span>;
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getRandomMoney</span><span class="params">(RedPackage _redPackage)</span> </span>{
+    <span class="comment">// remainSize 剩余的红包数量</span>
+    <span class="comment">// remainMoney 剩余的钱</span>
+    <span class="keyword">if</span> (_redPackage.remainSize == <span class="number">1</span>) {
+        _redPackage.remainSize--;
+        <span class="keyword">return</span> (<span class="keyword">double</span>) Math.round(_redPackage.remainMoney * <span class="number">100</span>) / <span class="number">100</span>;
     }
     Random r     = <span class="keyword">new</span> Random();
-    <span class="keyword">double</span> min   = <span class="number">0.01</span>;
-    <span class="keyword">double</span> max   = _leftMoneyPackage.leftMoney / _leftMoneyPackage.peoples * <span class="number">2</span>;
+    <span class="keyword">double</span> min   = <span class="number">0.01</span>; <span class="comment">//</span>
+    <span class="keyword">double</span> max   = _redPackage.remainMoney / _redPackage.remainSize * <span class="number">2</span>;
     <span class="keyword">double</span> money = r.nextDouble() * max;
-    money = money &lt; min ? min : money;
-    money = (<span class="keyword">double</span>) Math.<span class="built_in">floor</span>(money * <span class="number">100</span>) / <span class="number">100</span>;
-    _leftMoneyPackage.peoples--;
-    _leftMoneyPackage.leftMoney -= money;
+    money = money &lt;= min ? <span class="number">0.01</span>: money;
+    money = Math.<span class="built_in">floor</span>(money * <span class="number">100</span>) / <span class="number">100</span>;
+    _redPackage.remainSize--;
+    _redPackage.remainMoney -= money;
     <span class="keyword">return</span> money;
 }
 </code></pre>
@@ -1207,7 +1220,7 @@ i = temp<span class="comment">; </span>
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp;  2014 - 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>

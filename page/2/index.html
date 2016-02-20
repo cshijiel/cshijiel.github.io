@@ -73,6 +73,16 @@
 <![endif]-->
   
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3d0b52366e3d42e3387d71167ae773c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
   <div class="container one-column 
@@ -1085,8 +1095,8 @@ DELETE /api/<span class="built_ins">user</span>/logins
           
           
             
-              <a class="post-title-link" href="/2015/04/07/知识记录/Java基础/java多线程中的volatile/" itemprop="url">
-                java多线程中的volatile
+              <a class="post-title-link" href="/2015/04/07/知识记录/Node.js/Node.js 的一些零碎知识/" itemprop="url">
+                Node.js 的一些零碎知识
               </a>
             
           
@@ -1106,8 +1116,8 @@ DELETE /api/<span class="built_ins">user</span>/logins
             &nbsp; | &nbsp; 分类于
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                <a href="/categories/Java基础/" itemprop="url" rel="index">
-                  <span itemprop="name">Java基础</span>
+                <a href="/categories/Node-js/" itemprop="url" rel="index">
+                  <span itemprop="name">Node.js</span>
                 </a>
               </span>
 
@@ -1122,8 +1132,8 @@ DELETE /api/<span class="built_ins">user</span>/logins
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2015/04/07/知识记录/Java基础/java多线程中的volatile/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Java基础/java多线程中的volatile/" itemprop="commentsCount"></span>
+              <a href="/2015/04/07/知识记录/Node.js/Node.js 的一些零碎知识/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/知识记录/Node.js/Node.js 的一些零碎知识/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -1138,60 +1148,53 @@ DELETE /api/<span class="built_ins">user</span>/logins
 
       
         
-          <span itemprop="articleBody"><blockquote>
-<p><strong>volatile：</strong><br>英[‘vɒlətaɪl] 美[ˈvɑlətl, -ˌtaɪl]<br>adj. 易变的，不稳定的;（液体或油）易挥发的;爆炸性的;快活的，轻快的<br>[例句]A volatile political system makes these reforms hard to achieve.<br>而反复无常的政治体系又让这些方面的改革无法实施。<br>–xx翻译</p>
+          <span itemprop="articleBody"><h3 id="1-_NPM">1. NPM</h3><p>npm 全称是 Node Package Manager，相当于Java世界中的Maven。</p>
+<p>操作办法，首先确认安装了node.js和npm模块，然后在node项目文件夹创建package.json，执行npm install会安装（npm install xxx）package内包含的库。例如：</p>
+<pre><code>{
+  "<span class="attribute">name</span>": <span class="value"><span class="string">"ShareConnect"</span></span>,
+  "<span class="attribute">version</span>": <span class="value"><span class="string">"0.0.0"</span></span>,
+  "<span class="attribute">private</span>": <span class="value"><span class="literal">true</span></span>,
+  "<span class="attribute">scripts</span>": <span class="value">{
+    "<span class="attribute">start</span>": <span class="value"><span class="string">"node ./bin/www"</span>
+  </span>}</span>,
+  "<span class="attribute">dependencies</span>": <span class="value">{
+    "<span class="attribute">body-parser</span>": <span class="value"><span class="string">"~1.12.0"</span></span>,
+    "<span class="attribute">cookie-parser</span>": <span class="value"><span class="string">"~1.3.4"</span></span>,
+    "<span class="attribute">debug</span>": <span class="value"><span class="string">"~2.1.1"</span></span>,
+    "<span class="attribute">ejs</span>": <span class="value"><span class="string">"~2.3.1"</span></span>,
+    "<span class="attribute">express</span>": <span class="value"><span class="string">"~4.12.2"</span></span>,
+    "<span class="attribute">morgan</span>": <span class="value"><span class="string">"~1.5.1"</span></span>,
+    "<span class="attribute">serve-favicon</span>": <span class="value"><span class="string">"~2.2.0"</span></span>,
+    "<span class="attribute">uuid-js</span>": <span class="value"><span class="string">"~0.7.5"</span></span>,
+    "<span class="attribute">redis</span>": <span class="value"><span class="string">"~0.12.1"</span></span>,
+    "<span class="attribute">connect</span>": <span class="value"><span class="string">"~2.9.0"</span>
+  </span>}
+</span>}
+</code></pre><p>还有这样一篇文章：<a href="http://www.infoq.com/cn/articles/msh-using-npm-manage-node.js-dependence" target="_blank" rel="external">如何使用NPM来管理你的Node.js依赖</a></p>
+<h3 id="2-_项目结构">2. 项目结构</h3><p>MVC分层结构经久考验，在此之上沉淀的技术资源也很丰富，Node.js同样可以设计出优雅高效的分层结果。</p>
+<p>Connet中间件在MVC中合理的使用。</p>
+<blockquote>
+<p>借助Connect可以自由定制中间件的优势，可以自行提升性能或是设计出适合自己需要的项目。Connect自身提供了路由功能，在此基础上，可以轻松搭建MVC模式的框架，以达到开发效率和执行效率的平衡。以下是笔者项目中采用的目录结构，清晰地划分目录结构可以帮助划分代码的职责，此处仅供参考。</p>
 </blockquote>
-<h1 id="一、volatile简述">一、volatile简述</h1><p>Java 语言提供了一种稍弱的同步机制,即 volatile 变量.用来确保将变量的更新操作通知到其他线程,保证了新值能立即同步到主内存,以及每次使用前立即从主内存刷新. 当把变量声明为volatile类型后,编译器与运行时都会注意到这个变量是共享的.</p>
-<h1 id="二、_volatile线程安全？">二、 volatile线程安全？</h1><p>volatile 变量对所有线程是立即可见的,对 volatile 变量所有的写操作都能立即反应到其他线程之中,换句话说:volatile 变量在各个线程中是一致的,所以基于 volatile 变量的运算是线程安全的.  </p>
-<p>这句话论据貌似没有错,论点确实错的.</p>
-<h1 id="三、_valotile_为什么是线程不安全的？">三、 valotile 为什么是线程不安全的？</h1><pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">VolatileTest</span>{
-
-    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">int</span>  i;
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increase</span>(<span class="params"></span>)</span>{
-        i++;
-    }
-}
-</code></pre><p>编译（<code>javap -c -l VolatileTest.class</code>）后，</p>
-<pre><code><span class="keyword">public</span> <span class="keyword">class</span> VolatileTest {
-  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">int</span> i;
-
-  <span class="function"><span class="keyword">public</span> <span class="title">VolatileTest</span><span class="params">()</span></span>;
-    Code:
-       <span class="number">0</span>: aload_0       
-       <span class="number">1</span>: invokespecial <span class="preprocessor">#<span class="number">1</span>                  <span class="comment">// Method java/lang/Object."&lt;init&gt;":()V</span></span>
-       <span class="number">4</span>: <span class="keyword">return</span>        
-    LineNumberTable:
-      line <span class="number">1</span>: <span class="number">0</span>
-
-  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>;
-    Code:
-       <span class="number">0</span>: getstatic     <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field i:I, 把i的值取到了操作栈顶,volatile保证了i值此时是正确的. </span></span>
-       <span class="number">3</span>: iconst_1      
-       <span class="number">4</span>: iadd                              <span class="comment">// increase,但其他线程此时可能已经把i值加大了好多</span>
-       <span class="number">5</span>: putstatic     <span class="preprocessor">#<span class="number">2</span>                  <span class="comment">// Field i:I ,把这个已经out of date的i值同步回主内存中,i值被破坏了.</span></span>
-       <span class="number">8</span>: <span class="keyword">return</span>        
-    LineNumberTable:
-      line <span class="number">6</span>: <span class="number">0</span>
-      line <span class="number">7</span>: <span class="number">8</span>
-}
-</code></pre><p>从这个角度说 volatile 并不完全是线程安全的.</p>
-<h1 id="四、_常见的用法">四、 常见的用法</h1><p>在Java内存模型中，有main memory，每个线程也有自己的memory (例如寄存器)。为了性能，一个线程会在自己的memory中保持要访问的变量的副本。这样就会出现同一个变量在某个瞬间，在一个线程的memory中的值可能与另外一个线程memory中的值，或者main memory中的值不一致的情况。<br>一个变量声明为volatile，就意味着这个变量是随时会被其他线程修改的，因此不能将它cache在线程memory中。以下例子展现了volatile的作用：</p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StoppableTask</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>{
-    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> pleaseStop;
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
-        <span class="keyword">while</span> (!pleaseStop) {
-            <span class="comment">// do some stuff...</span>
-        }
-    }
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tellMeToStop</span><span class="params">()</span> </span>{
-        pleaseStop = <span class="keyword">true</span>;
-    }
-}
-</code></pre><p>假如pleaseStop没有被声明为volatile，线程执行run的时候检查的是自己的副本，就不能及时得知其他线程已经调用tellMeToStop()修改了pleaseStop的值。 </p>
-<p>Volatile一般情况下不能代替sychronized，因为volatile不能保证操作的原子性，即使只是i++，实际上也是由多个原子操作组成：read i; inc; write i，假如多个线程同时执行i++，volatile只能保证他们操作的i是同一块内存，但依然可能出现写入脏数据的情况。如果配合Java 5增加的atomic wrapper classes，对它们的increase之类的操作就不需要sychronized。 </p>
+<pre><code>├── Makefile <span class="comment">// 构建文件，通常用于启动单元测试运行等操作</span>
+├── app<span class="class">.js</span> <span class="comment">// 应用文件</span>
+├── automation  <span class="comment">// 自动化测试目录</span>
+├── bin  <span class="comment">// 存放启动应用相关脚本的目录</span>
+├── conf  <span class="comment">// 配置文件目录</span>
+├── controllers  <span class="comment">// 控制层目录------------------------C，Controller，控制器</span>
+├── helpers  <span class="comment">// 帮助类库</span>
+├── middlewares  <span class="comment">// 自定义中间件目录</span>
+├── models  <span class="comment">// 数据层目录-----------------------------M，Model，模型</span>
+├── node_modules  <span class="comment">// 第三方模块目录</span>
+├── package<span class="class">.json</span>  <span class="comment">// 项目包描述文件</span>
+├── public  <span class="comment">// 静态文件目录</span>
+│   ├── images  <span class="comment">// 图片目录</span>
+│   ├── libs  <span class="comment">// 第三方前端JavaScript库目录</span>
+│   ├── scripts  <span class="comment">// 前端JavaScript脚本目录</span>
+│   └── styles  <span class="comment">// 样式表目录</span>
+├── test  <span class="comment">// 单元测试目录</span>
+└── views  <span class="comment">// 视图层目录-----------------------------V，View，视图</span>
+</code></pre><h3 id="3-_关于本项目基本的设计">3. 关于本项目基本的设计</h3><p>可以一个图来解释：<br><img src="http://note.wiz.cn/api/document/files/unzip/66e5c3f6-8482-11e1-a525-00237def97cc/6d3b0fec-73aa-4846-a15d-ff78e296af74.32632/index_files/f76767cb-d24f-4ef4-a718-cc3264db2dde.png" alt="UDP-返回-Post-set"></p>
 </span>
         
       
@@ -1311,7 +1314,7 @@ DELETE /api/<span class="built_ins">user</span>/logins
       <div class="footer-inner"> <div class="copyright" >
   
   &copy; &nbsp;  2014 - 
-  <span itemprop="copyrightYear">2015</span>
+  <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart"></i>
   </span>
