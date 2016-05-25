@@ -561,3 +561,47 @@
 {"name":"hexo","hostname":"Rocs-rMBP.local","pid":8780,"level":20,"msg":"Rendering index: \u001b[35mindex.html\u001b[39m","time":"2016-05-23T08:50:50.072Z","v":0}
 {"name":"hexo","hostname":"Rocs-rMBP.local","pid":8780,"level":30,"msg":"Catch you later","time":"2016-05-23T08:51:09.104Z","v":0}
 {"name":"hexo","hostname":"Rocs-rMBP.local","pid":8780,"level":20,"msg":"Database saved","time":"2016-05-23T08:51:09.122Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Hexo version: \u001b[35m3.1.1\u001b[39m","time":"2016-05-24T12:52:23.191Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Working directory: \u001b[35m~/github/blog\u001b[39m","time":"2016-05-24T12:52:23.196Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Config loaded: \u001b[35m~/github/blog/_config.yml\u001b[39m","time":"2016-05-24T12:52:23.346Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-archive\u001b[39m","time":"2016-05-24T12:52:23.649Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-deployer-git\u001b[39m","time":"2016-05-24T12:52:23.650Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-baidu-sitemap\u001b[39m","time":"2016-05-24T12:52:24.147Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-category\u001b[39m","time":"2016-05-24T12:52:24.147Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-feed\u001b[39m","time":"2016-05-24T12:52:24.147Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-index\u001b[39m","time":"2016-05-24T12:52:24.148Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-sitemap\u001b[39m","time":"2016-05-24T12:52:24.148Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-tag\u001b[39m","time":"2016-05-24T12:52:24.148Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-ejs\u001b[39m","time":"2016-05-24T12:52:24.148Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-marked\u001b[39m","time":"2016-05-24T12:52:24.148Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-server\u001b[39m","time":"2016-05-24T12:52:24.149Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-stylus\u001b[39m","time":"2016-05-24T12:52:24.149Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/merge-configs.js\u001b[39m","time":"2016-05-24T12:52:24.149Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/full-image.js\u001b[39m","time":"2016-05-24T12:52:24.149Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/group-pictures.js\u001b[39m","time":"2016-05-24T12:52:24.151Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/center-quote.js\u001b[39m","time":"2016-05-24T12:52:24.151Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":60,"msg":"Port 4000 has been used. Try other port instead.","time":"2016-05-24T12:52:24.159Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":60,"err":{"message":"listen EADDRINUSE 0.0.0.0:4000","name":"Error","stack":"Error: listen EADDRINUSE 0.0.0.0:4000\n    at Object.exports._errnoException (util.js:837:11)\n    at exports._exceptionWithHostPort (util.js:860:20)\n    at Server._listen2 (net.js:1231:14)\n    at listen (net.js:1267:10)\n    at net.js:1376:9\n    at doNTCallback3 (node.js:440:9)\n    at process._tickCallback (node.js:346:17)","code":"EADDRINUSE"},"msg":"Something's wrong. Maybe you can find the solution here: \u001b[4mhttp://hexo.io/docs/troubleshooting.html\u001b[24m","time":"2016-05-24T12:52:24.161Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15875,"level":20,"msg":"Database saved","time":"2016-05-24T12:52:24.164Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Hexo version: \u001b[35m3.1.1\u001b[39m","time":"2016-05-24T12:53:11.984Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Working directory: \u001b[35m~/github/blog\u001b[39m","time":"2016-05-24T12:53:11.989Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Config loaded: \u001b[35m~/github/blog/_config.yml\u001b[39m","time":"2016-05-24T12:53:12.125Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-category\u001b[39m","time":"2016-05-24T12:53:12.546Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-archive\u001b[39m","time":"2016-05-24T12:53:12.546Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-baidu-sitemap\u001b[39m","time":"2016-05-24T12:53:12.547Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-deployer-git\u001b[39m","time":"2016-05-24T12:53:12.547Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-index\u001b[39m","time":"2016-05-24T12:53:12.547Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-sitemap\u001b[39m","time":"2016-05-24T12:53:12.547Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-feed\u001b[39m","time":"2016-05-24T12:53:12.547Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-generator-tag\u001b[39m","time":"2016-05-24T12:53:12.548Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-marked\u001b[39m","time":"2016-05-24T12:53:12.548Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-server\u001b[39m","time":"2016-05-24T12:53:12.877Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-ejs\u001b[39m","time":"2016-05-24T12:53:12.878Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Plugin loaded: \u001b[35mhexo-renderer-stylus\u001b[39m","time":"2016-05-24T12:53:12.878Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/merge-configs.js\u001b[39m","time":"2016-05-24T12:53:12.879Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/full-image.js\u001b[39m","time":"2016-05-24T12:53:12.880Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/center-quote.js\u001b[39m","time":"2016-05-24T12:53:12.880Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Script loaded: \u001b[35mthemes/next/scripts/tags/group-pictures.js\u001b[39m","time":"2016-05-24T12:53:12.880Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":60,"msg":"Port 4000 has been used. Try other port instead.","time":"2016-05-24T12:53:12.888Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":60,"err":{"message":"listen EADDRINUSE 0.0.0.0:4000","name":"Error","stack":"Error: listen EADDRINUSE 0.0.0.0:4000\n    at Object.exports._errnoException (util.js:837:11)\n    at exports._exceptionWithHostPort (util.js:860:20)\n    at Server._listen2 (net.js:1231:14)\n    at listen (net.js:1267:10)\n    at net.js:1376:9\n    at doNTCallback3 (node.js:440:9)\n    at process._tickCallback (node.js:346:17)","code":"EADDRINUSE"},"msg":"Something's wrong. Maybe you can find the solution here: \u001b[4mhttp://hexo.io/docs/troubleshooting.html\u001b[24m","time":"2016-05-24T12:53:12.890Z","v":0}
+{"name":"hexo","hostname":"Rocs-rMBP.local","pid":15887,"level":20,"msg":"Database saved","time":"2016-05-24T12:53:12.894Z","v":0}
