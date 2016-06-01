@@ -27,9 +27,7 @@ Mockito 是一个模拟框架，用起来非常好用。它允许你用干净简
 - Mockito是StackOverflow社区投票选出的最好的Java Mock 框架
 - 不仅仅在策划工具中，在所有的类库中，Mockito也是排名前十的Java类库。
 
-
-
-<!—more—>
+<!--more-->
 
 
 
