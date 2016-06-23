@@ -101,7 +101,7 @@ cip(){ echo $1|awk -F. '{n=0;for(i=1;i<=NF;i++){n*=256;n+=$i}print n}'; }
 
 
 
-## 参考
+### 参考
 
 1. [IPv4-维基百科](https://zh.wikipedia.org/wiki/IPv4)
 2. [IPv6_百科](http://baike.baidu.com/link?url=Sv2YQ3_y-SnieCKxsX04B8WYGA8HfeA9wrHEQ4NyaMOf3ZZRQUjPdEhoKSJmlYxg-5X8vr9ZY_8qJlzhojZmYK)
