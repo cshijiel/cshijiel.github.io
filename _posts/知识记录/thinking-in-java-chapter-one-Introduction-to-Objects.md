@@ -7,7 +7,7 @@ tags:
 ---
 
 ### 目录
-```
+```html
 第1章 对象导论
 
 	1.1 抽象过程
@@ -98,7 +98,7 @@ class Demo implements InterfaceA, InterfaceB {
 
 执行`new Demo().test()`，可以看到以下结果：
 
-```
+```html
 InterfaceA
 InterfaceB
 ```
