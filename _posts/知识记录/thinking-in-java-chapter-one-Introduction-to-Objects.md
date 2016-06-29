@@ -98,7 +98,7 @@ class Demo implements InterfaceA, InterfaceB {
 
 执行`new Demo().test()`，可以看到以下结果：
 
-```html
+```markdown
 InterfaceA
 InterfaceB
 ```
