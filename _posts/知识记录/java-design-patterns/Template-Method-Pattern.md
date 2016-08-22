@@ -40,6 +40,10 @@ categories: Java基础
 
 
 
+<!—more—>
+
+
+
 ### 模式实现
 
 #### 抽象类
@@ -186,7 +190,7 @@ public class AnotherAbstractFlowImpl extends AbstractFlow {
 
 执行结果：
 
-```
+```json
 do some thing
 AbstractFlowImpl1#step1
 AbstractFlowImpl1#step2
