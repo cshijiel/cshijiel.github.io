@@ -2,7 +2,10 @@ title: 也谈单例模式
 date: 2015-10-08 16:53:42
 tags:
 - java
+- 设计模式
+
 categories: Java基础
+
 ---
 
 单例模式(`Singleton`)也叫单态模式。
@@ -19,11 +22,11 @@ Initialization On Demand Holder
 	public class Singleton {
 		// 这个实例要不要不可变(final),一般不需要
 		private static Singleton singleton = new Singleton();
-
+	
 		// 私有化构造器
 		private Singleton() {
 		}
-
+	
 		public static Singleton getInstance() {
 			return singleton;
 		}
@@ -37,10 +40,10 @@ Initialization On Demand Holder
 
 	public class Singleton {
 		private static Singleton singleton = null;
-
+	
 		private Singleton() {
 		}
-
+	
 		public static Singleton getInstance() {
 			if (null == singleton) {
 				synchronized (Singleton.class) {
@@ -70,7 +73,7 @@ DCL失败的原因：
 
 	public class Singleton {
 		public static volatile Singleton singleton = null;
-
+	
 		public static Singleton getInstance() {
 			Singleton s = singleton;
 			if (singleton == null) {
@@ -93,7 +96,7 @@ DCL失败的原因：
 		private static class HelperSingleton {
 			public static Singleton singleton = new Singleton();
 		}
-
+	
 		public static Singleton getInstance() {
 			return HelperSingleton.singleton;
 		}
