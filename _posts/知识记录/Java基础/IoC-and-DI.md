@@ -143,4 +143,5 @@ IoC最大的好处是什么？因为把对象生成放在了XML里定义，所�
 
 >当然，也可以通过注解`@Resource`。
 
+<script src="https://gist.github.com/cshijiel/cf0797caba532b9bf908cb4f933d03cb.js"></script>
 
