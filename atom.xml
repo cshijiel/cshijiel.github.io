@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://coderroc.com/"/>
-  <updated>2017-01-04T10:56:39.000Z</updated>
+  <updated>2016-10-18T13:25:59.000Z</updated>
   <id>http://coderroc.com/</id>
   
   <author>
@@ -14,33 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://coderroc.com/article/hello-world.html"/>
-    <id>http://coderroc.com/article/hello-world.html</id>
-    <published>2017-01-04T10:56:39.000Z</published>
-    <updated>2017-01-04T10:56:39.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>[转] Java instanceof 关键字是如何实现的？</title>
@@ -1543,6 +1516,76 @@ DELETE /api/user/logins
       <category term="WebSocket" scheme="http://coderroc.com/tags/WebSocket/"/>
     
       <category term="权限" scheme="http://coderroc.com/tags/%E6%9D%83%E9%99%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈HashMap</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/%E6%B5%85%E8%B0%88HashMap.html"/>
+    <id>http://coderroc.com/article/知识记录/Java基础/浅谈HashMap.html</id>
+    <published>2015-07-21T00:13:30.000Z</published>
+    <updated>2015-10-28T02:21:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>导言：</p>
+<p>数组在O(1)时间复杂度可以定位元素(读)，但是随机插入元素(写)效率比较低。而链表则相反，随机插入元素效率很高，但是随机读取效率低。</p>
+<p>那有没有，读取和插入效率都很高的数据结构呢？</p>
+<p>答案当然是有，HashMap就是一种读取和插入效率都很高的数据结构。</p>
+<h3 id="基础特性"><a href="#基础特性" class="headerlink" title="基础特性"></a>基础特性</h3><p>HashMap的几个必要的基础特性：</p>
+<ul>
+<li>hashCode()</li>
+<li>KV键值对</li>
+<li>数组为基础，辅助以链表的数据结构</li>
+</ul>
+<p>因为是散列函数，实际的键在数组中是分散存在的，占有一定的比例，如果比例高的时候容易出现键一样值不一样的情况（在该处形成链表），所以有初始容量和加载因子两个参数。</p>
+<p>通常，默认加载因子是0.75，这是在时间和空间上的一种折中。</p>
+<a id="more"></a>
+<h3 id="存储节点"><a href="#存储节点" class="headerlink" title="存储节点"></a>存储节点</h3><p>HashMap中的Key-Value都是存储在Entry数组中的。</p>
+<pre><code>static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
+    final K key;
+    V value;
+    // 指向下一个节点
+    Entry&lt;K,V&gt; next;
+    final int hash;
+
+    //...other
+}
+</code></pre><h3 id="常用用法"><a href="#常用用法" class="headerlink" title="常用用法"></a>常用用法</h3><pre><code>clear()--清空HashMap
+boolean containsKey(Object key)
+boolean containsValue(Object value)
+getEntry(Object key)
+
+entrySet()/values()/keySet()
+
+get(Object key)
+put(Object key,Object value)
+</code></pre><h3 id="新的理解和问题"><a href="#新的理解和问题" class="headerlink" title="新的理解和问题"></a>新的理解和问题</h3><p>HashMap是一个数组，每个元素都是一个链表。由链表组成的数组。<br>HashMap属于Key-Value型数据结构。Key与元素在数组中的位置有关，插入顺序与元素在链表中的位置有关。引出问题：从Key到数组序号是怎么映射的，有哪些问题（怎样减少重复而且均匀、重复之后怎么办）被引入，又是怎么解决的。关键词：均匀不重复、Key+key.hashCode()查找元素。<br>HashMap的基础是数组，怎样扩容，扩容是的元素重排是怎样的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;导言：&lt;/p&gt;
+&lt;p&gt;数组在O(1)时间复杂度可以定位元素(读)，但是随机插入元素(写)效率比较低。而链表则相反，随机插入元素效率很高，但是随机读取效率低。&lt;/p&gt;
+&lt;p&gt;那有没有，读取和插入效率都很高的数据结构呢？&lt;/p&gt;
+&lt;p&gt;答案当然是有，HashMap就是一种读取和插入效率都很高的数据结构。&lt;/p&gt;
+&lt;h3 id=&quot;基础特性&quot;&gt;&lt;a href=&quot;#基础特性&quot; class=&quot;headerlink&quot; title=&quot;基础特性&quot;&gt;&lt;/a&gt;基础特性&lt;/h3&gt;&lt;p&gt;HashMap的几个必要的基础特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hashCode()&lt;/li&gt;
+&lt;li&gt;KV键值对&lt;/li&gt;
+&lt;li&gt;数组为基础，辅助以链表的数据结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为是散列函数，实际的键在数组中是分散存在的，占有一定的比例，如果比例高的时候容易出现键一样值不一样的情况（在该处形成链表），所以有初始容量和加载因子两个参数。&lt;/p&gt;
+&lt;p&gt;通常，默认加载因子是0.75，这是在时间和空间上的一种折中。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="数据结构" scheme="http://coderroc.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="HashMap" scheme="http://coderroc.com/tags/HashMap/"/>
     
   </entry>
   

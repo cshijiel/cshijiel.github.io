@@ -275,8 +275,8 @@
             
               
                 
-                <a class="post-title-link" href="/article/数学和算法/LeetCode/LeetCode-Two Sum.html" itemprop="url">
-                  LeetCode-Two Sum
+                <a class="post-title-link" href="/article/生活与心情/how-the-time-is-used.html" itemprop="url">
+                  how-the-time-is-used
                 </a>
               
             
@@ -303,8 +303,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
-                    <span itemprop="name">LeetCode</span>
+                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
+                    <span itemprop="name">生活与心情</span>
                   </a>
                 </span>
 
@@ -319,8 +319,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/数学和算法/LeetCode/LeetCode-Two Sum.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/LeetCode/LeetCode-Two Sum.html" itemprop="commentsCount"></span>
+                <a href="/article/生活与心情/how-the-time-is-used.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/how-the-time-is-used.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,7 +330,7 @@
 
           
           
-             <span id="/article/数学和算法/LeetCode/LeetCode-Two Sum.html" class="leancloud_visitors" data-flag-title="LeetCode-Two Sum">
+             <span id="/article/生活与心情/how-the-time-is-used.html" class="leancloud_visitors" data-flag-title="how-the-time-is-used">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -354,359 +354,22 @@
       
         
           
-            <blockquote>
-<p>Given an array of integers, find two numbers such that they add up to<br>a specific target number.</p>
-<p>The function twoSum should return indices of the two numbers such that<br>they add up to the target, where index1 must be less than index2.<br>Please note that your returned answers (both index1 and index2) are<br>not zero-based.</p>
-<p>You may assume that each input would have exactly one solution.</p>
-<p><strong>Input</strong>: numbers={2, 7, 11, 15}, target=9<br><strong>Output</strong>: index1=1, index2=2</p>
+            <h2 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h2><p>昨天晚上，捣鼓微博和看codepiano的微博，<strong>remove掉了自己原先的微博记录，写了一个小脚本</strong>。</p>
+<p>早晨9：23第一次醒，没注意，接着睡。</p>
+<p>然后，过了一个钟头吧，又一次醒了，玩了会手机一直到12：00.期间下载了豆瓣，发了一条微博，刷了很多知乎。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这期间我收获了什么？</p>
+<p>貌似不多，大量的时间被浪费，截止到现在，估计浪费了2小时。2小时可以完成老师的任务了吧。</p>
+<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><blockquote>
+<p>斜体表示已经完成。</p>
 </blockquote>
-<hr>
-<h3 id="Accepted-Code："><a href="#Accepted-Code：" class="headerlink" title="Accepted Code："></a>Accepted Code：</h3><pre><code>public class Solution {      
-    public int[] twoSum(int[] numbers, int target) {      
-        int[] a = new int[2];      
-        for (int i = 0; i &lt; numbers.length; i++) {      
-            for (int j = i + 1; j &lt; numbers.length; j++) {      
-                if (numbers[i] + numbers[j] == target) {      
-                    a[0] = i + 1;      
-                    a[1] = j + 1;
-                    return a;      
-                }      
-            }      
-        }      
-        return a;      
-    }
-}
-</code></pre><p>Problems:</p>
-<ol>
-<li>Time Limit Exceeded(超时)。</li>
-</ol>
-<p>Then:</p>
-<pre><code>if (numbers[i] + numbers[j] == target) {
-    a[0] = i + 1;
-    a[1] = j + 1;
-    return a;//this line is the Key Code.
-}
-</code></pre><p><strong>省略计算不必要的结果，得到正确结果立刻返回。</strong></p>
-<hr>
-<p>Other Solution:</p>
-<blockquote>
-<p>代码是其他语言。</p>
-</blockquote>
-<p>题目大意：给一个数组，找出其中是否有两个数之和等于给定的值。类似的还有3 sum ，4 sum ..等 K sum 问题。其实原理是差不多的，这样想：先取出一个数，那么我只要在剩下的数字里面找到两个数字使得他们的和等于(target – 那个取出的数)。</p>
-<p><strong>解法1：先排序，然后从开头和结尾同时向中间查找，原理也比较简单。复杂度O(nlogn)</strong></p>
-<pre><code>typedef struct Node{    
-    int id,val;
-}Node;
-
-bool compare(const Node &amp;amp; a,const Node &amp;amp; b){    
-    return a.val &lt; b.val;
-}
-
-class Solution {
-    public:
-    vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;amp;numbers, int target){
-
-        Node nodes[numbers.size()];
-
-        for(unsigned int i=0; i&lt;numbers.size(); i++){
-
-        nodes[i].id = i+1;
-
-        nodes[i].val = numbers[i];
-
-    }
-    sort(nodes, nodes+numbers.size(), compare);
-    int start=0,end=numbers.size()-1;
-    vector&lt;int&gt; ans;
-    while(start &lt; end){
-
-        if(nodes[start].val + nodes[end].val == target){
-
-        if(nodes[start].id &gt; nodes[end].id)
-
-        swap(nodes[start].id , nodes[end].id);
-
-        ans.push_back(nodes[start].id);
-
-        ans.push_back(nodes[end].id);
-
-        return ans;
-
-        }else if( nodes[start].val + nodes[end].val &lt;target ){        
-            start++;        
-        } else        
-            end--;
-        }
-    }
-};
-</code></pre><p><strong>解法2：使用HashMap。把每个数都存入map中，任何再逐个遍历，查找是否有 target – nubmers[i]。 时间复杂度 O(n)</strong></p>
-<pre><code>vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;numbers, int target) {
-        // Start typing your C/C++ solution below
-        // DO NOT write int main() function
-        vector&lt;int&gt; res;
-        int length = numbers.size();
-        map&lt;int,int&gt; mp;
-        for(int i = 0; i &lt; length; ++i)
-            mp[numbers[i]] = i;
-        map&lt;int,int&gt;::iterator it = mp.end();
-        for(int i = 0; i &lt; length; ++i) {
-            it = mp.find(target - numbers[i]);
-            if(it != mp.end()) {
-                res.push_back(min(i+1,it-&gt;second +1));
-                res.push_back(max(i+1,it-&gt;second +1));
-                break;
-            }
-        }
-        return res;
-}
-</code></pre><p>其实可以优化一下，因为题目只要求要到一个解，找到后即可返回。</p>
-<pre><code>vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;numbers, int target) {
-        vector&lt;int&gt; res;
-        int length = numbers.size();
-        map&lt;int,int&gt; mp;
-        int find;
-        for(int i = 0; i &lt; length; ++i){
-            find=mp[target - numbers[i]];
-            if( find ){
-                res.push_back(find);
-                res.push_back(i+1);
-                break;
-            }
-            mp[numbers[i]] = i+1;
-        }
-        return res;
-}
-</code></pre><hr>
-<p>Java 版本解法：</p>
-<p>Two Sum</p>
-<p>Given an array of integers, find two numbers such that they add up to a specific target number.</p>
-<p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.</p>
-<p>You may assume that each input would have exactly one solution.</p>
-<p>思路：</p>
-<p>先把原数组复制一遍，然后进行排序。在排序后的数组中找这两个数。最后再在原数组中找这两个数字的index即可。</p>
-<p>时间复杂度O(nlogn)+O(n)+O(n) = O(nlogn)</p>
-<p>注意的是结果有可能是两个数是相同的，比如 0 3 4 0, 0要返回1和4，不要返回成1和1或者4和4.</p>
-<p>代码：</p>
-<pre><code>public int[] twoSum(int[] numbers, int target) {
-    // Start typing your Java solution below
-    // DO NOT write main() function
-    // Copy the original array and sort it
-    int N = numbers.length;
-    int[] sorted = new int[N];
-    System.arraycopy(numbers, 0, sorted, 0, N);
-    Arrays.sort(sorted);
-    // find the two numbers using the sorted arrays
-    int first = 0;
-    int second = sorted.length - 1;
-    while (first &lt; second) {
-
-        if (sorted[first] + sorted[second] &lt; target) {
-
-            first++;
-
-            continue;
-
-        }
-
-        else if (sorted[first] + sorted[second] &gt; target) {
-
-            second--;
-
-            continue;
-
-        }
-
-        else
-            break;
-    }
-    int number1 = sorted[first];
-    int number2 = sorted[second];
-    // Find the two indexes in the original array
-    int index1 = -1, index2 = -1;
-    for (int i = 0; i &lt; N; i++) {
-
-        if ((numbers[i] == number1) || (numbers[i] == number2)) {
-
-            if (index1 == -1)
-
-                index1 = i + 1;
-
-            else
-
-                index2 = i + 1;
-
-        }
-
-    }
-    int[] result = new int[] { index1, index2 };
-    Arrays.sort(result);
-    return result;
-}
-</code></pre><p>还有个无耻地利用hashmap的O(n)的算法，原理和暴力搜索没有本质区别，只不过hashmap的搜索速度是O(1)。</p>
-<pre><code>public int[] twoSum(int[] numbers, int target) {
-    // Start typing your Java solution below
-    // DO NOT write main() function
-
-    HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;Integer, Integer&gt;();
-
-    int n = numbers.length;
-
-    int[] result = new int[2];
-
-    for (int i = 0; i &lt; numbers.length; i++) {
-        if (map.containsKey(target - numbers[i])) {
-            result[0] = map.get(target - numbers[i]) + 1;
-            result[1] = i + 1;
-            break;
-        } else {
-            map.put(numbers[i], i);
-        }
-    }
-
-    return result;
-}
-</code></pre><p>后记：你的想法很独特嘛。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/article/思维改变生活/应该选择怎样一款笔记？.html" itemprop="url">
-                  应该选择怎样一款笔记？
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-              2015-04-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/思维改变生活/" itemprop="url" rel="index">
-                    <span itemprop="name">思维改变生活</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/article/思维改变生活/应该选择怎样一款笔记？.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/思维改变生活/应该选择怎样一款笔记？.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/article/思维改变生活/应该选择怎样一款笔记？.html" class="leancloud_visitors" data-flag-title="应该选择怎样一款笔记？">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>随着知识的越来越多，需要认真收集和管理的知识也越来越多，管理的难度也越来越大，越来越力不从心。先看下选择历程吧。</p>
-<h3 id="1-选择历程"><a href="#1-选择历程" class="headerlink" title="1. 选择历程"></a>1. 选择历程</h3><h4 id="1-1-网页标签"><a href="#1-1-网页标签" class="headerlink" title="1.1 网页标签"></a>1.1 网页标签</h4><p>首先是网页标签。首先是IE浏览器，在Win8时代开始可以同步网页书签了，然后使用了Chrome，同样是基于书签的知识收集，没有多少整理。</p>
-<h4 id="1-2-Office-OneNote"><a href="#1-2-Office-OneNote" class="headerlink" title="1.2 Office OneNote"></a>1.2 Office OneNote</h4><p>在这个阶段整理了大部分的笔记。目前还是那里最多。</p>
-<h4 id="1-3-WordPress-Typecho等博客程序"><a href="#1-3-WordPress-Typecho等博客程序" class="headerlink" title="1.3 WordPress Typecho等博客程序"></a>1.3 WordPress Typecho等博客程序</h4><p>内容也不是很多.</p>
-<h4 id="1-4-微博标记、网易Lofter记录"><a href="#1-4-微博标记、网易Lofter记录" class="headerlink" title="1.4 微博标记、网易Lofter记录"></a>1.4 微博标记、网易Lofter记录</h4><p>很少。优点是没有朋友圈，不会打扰到别人。</p>
-<h4 id="1-5-Github和印象笔记"><a href="#1-5-Github和印象笔记" class="headerlink" title="1.5 Github和印象笔记"></a>1.5 Github和印象笔记</h4><p>Github支持Markdown，但是没有方便的客户端，印象笔记的马克飞象又是收费的，哎，还要继续寻找。</p>
-<h4 id="1-6-直到这里-gt-为知笔记"><a href="#1-6-直到这里-gt-为知笔记" class="headerlink" title="1.6 直到这里-&gt;为知笔记"></a>1.6 直到这里-&gt;<em>为知笔记</em></h4><p>既支持Markdown又支持各种客户端，可以方便查阅，目前使用中。</p>
-<h3 id="2-对，其实我的要求很简单："><a href="#2-对，其实我的要求很简单：" class="headerlink" title="2. 对，其实我的要求很简单："></a>2. 对，其实我的要求很简单：</h3><ul>
-<li>支持各种客户端，现在使用的有：Windows，Android和iOS</li>
-<li>支持Markdown。我讨厌排版，调整字号。Markdown支持简单丰富易用的语法来实现层次逻辑和排版。对，它还支持<strong>程序代码</strong>！</li>
-<li>必要时可以分享，即有公开链接。</li>
+<ul>
+<li><em>Python入门，重点是UDP和TCP的实现</em></li>
+<li><em>吴雄华老师的推荐系统</em></li>
+<li>理学院数学文化节</li>
+<li><em>我知科技的脚本执行shell实现，更改ip：重点有两个地方，<code>inip.pp</code> 和 <code>ifcfg-eth0</code> 修改</em></li>
 </ul>
-<h3 id="3-现在开始，认真梳理丰富自己的知识架构"><a href="#3-现在开始，认真梳理丰富自己的知识架构" class="headerlink" title="3. 现在开始，认真梳理丰富自己的知识架构"></a>3. 现在开始，认真梳理丰富自己的知识架构</h3>
+<p>加油！</p>
+
           
         
       
@@ -951,8 +614,8 @@ class Solution {
             
               
                 
-                <a class="post-title-link" href="/article/知识记录/SpringBoot中读取YAML.html" itemprop="url">
-                  SpringBoot中读取YAML
+                <a class="post-title-link" href="/article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="url">
+                  表、栈和队列-数据结构与算法
                 </a>
               
             
@@ -979,8 +642,8 @@ class Solution {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/知识记录/" itemprop="url" rel="index">
-                    <span itemprop="name">知识记录</span>
+                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数学和算法</span>
                   </a>
                 </span>
 
@@ -995,8 +658,8 @@ class Solution {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/知识记录/SpringBoot中读取YAML.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/SpringBoot中读取YAML.html" itemprop="commentsCount"></span>
+                <a href="/article/数学和算法/表、栈和队列-数据结构与算法.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1006,7 +669,7 @@ class Solution {
 
           
           
-             <span id="/article/知识记录/SpringBoot中读取YAML.html" class="leancloud_visitors" data-flag-title="SpringBoot中读取YAML">
+             <span id="/article/数学和算法/表、栈和队列-数据结构与算法.html" class="leancloud_visitors" data-flag-title="表、栈和队列-数据结构与算法">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1030,37 +693,29 @@ class Solution {
       
         
           
-            <ol>
-<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
+            <h2 id="第3章-表、栈和队列"><a href="#第3章-表、栈和队列" class="headerlink" title="第3章 表、栈和队列"></a>第3章 表、栈和队列</h2><h3 id="3-3-Java-Collection-API中的表"><a href="#3-3-Java-Collection-API中的表" class="headerlink" title="3.3 Java Collection API中的表"></a>3.3 Java Collection API中的表</h3><h4 id="3-3-1-Collection接口"><a href="#3-3-1-Collection接口" class="headerlink" title="3.3.1 Collection接口"></a>3.3.1 Collection接口</h4><h4 id="3-3-2-Iterator接口"><a href="#3-3-2-Iterator接口" class="headerlink" title="3.3.2 Iterator接口"></a>3.3.2 Iterator接口</h4><h4 id="3-3-3-List接口、ArrayList类和LinkedList类"><a href="#3-3-3-List接口、ArrayList类和LinkedList类" class="headerlink" title="3.3.3 List接口、ArrayList类和LinkedList类"></a>3.3.3 List接口、ArrayList类和LinkedList类</h4><h4 id="3-3-5关于ListIterator接口"><a href="#3-3-5关于ListIterator接口" class="headerlink" title="3.3.5关于ListIterator接口"></a>3.3.5关于ListIterator接口</h4><h3 id="3-4-ArrayList类的实现"><a href="#3-4-ArrayList类的实现" class="headerlink" title="3.4 ArrayList类的实现"></a>3.4 ArrayList类的实现</h3><ol>
+<li>基本类</li>
+<li>迭代其、Java嵌套类和内部类</li>
 </ol>
-<ol>
-<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
-</ol>
-<hr>
-<p>读取YAML步骤：</p>
-<ol>
-<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
-<pre><code>my:
-    servers:
-        - dev.bar.com
-        - foo.bar.com
-</code></pre></li>
-<li><p>在需要注解信息的Java文件中进行以下注解：</p>
-<pre><code>@Component(&quot;config&quot;)
-@ConfigurationProperties(prefix = &quot;my&quot;)
-public class Config {
-    //@Value(&quot;my.servers&quot;) 
-        //这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！
-    private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
-    public List&lt;String&gt; getServers() {
-        return this.servers;
-    }
-}
-</code></pre></li>
-<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
+<h3 id="3-5-LinkedList类的实现"><a href="#3-5-LinkedList类的实现" class="headerlink" title="3.5 LinkedList类的实现"></a>3.5 LinkedList类的实现</h3><h3 id="3-6-栈ADT"><a href="#3-6-栈ADT" class="headerlink" title="3.6 栈ADT"></a>3.6 栈ADT</h3><ol>
+<li>栈模型</li>
+<li>栈的实现</li>
+<li>应用<ul>
+<li>平衡符号</li>
+<li>后缀表达式</li>
+<li>方法调用</li>
+</ul>
 </li>
 </ol>
-
+<h3 id="3-7-队列ADT"><a href="#3-7-队列ADT" class="headerlink" title="3.7 队列ADT"></a>3.7 队列ADT</h3><ol>
+<li>队列模型</li>
+<li>队列的数组实现</li>
+<li>队列的应用</li>
+</ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
+<p>表、栈和队列或许是在全部计算机科学重视三个基本的数据结构，大量的例子证明了他们广泛的用途。 特别的，我们看到栈是如何用来<strong>记录过程</strong>和<strong>方法调用</strong>的，以及递归是如何实现的。这对我们的理解非常重要，其原因不只因为它使得过程语言成为可能，而且还因为知道递归的实现从而消除了围绕其使用的大量谜团。<br>–《教科书》</p>
+</blockquote>
+<h3 id="做课后习题"><a href="#做课后习题" class="headerlink" title="做课后习题"></a>做课后习题</h3>
           
         
       
@@ -1531,8 +1186,8 @@ Iterator&amp;lt;T&gt; iterator();
             
               
                 
-                <a class="post-title-link" href="/article/知识记录/JavaScript 中的回调函数.html" itemprop="url">
-                  JavaScript 中的回调函数
+                <a class="post-title-link" href="/article/知识记录/SpringBoot中读取YAML.html" itemprop="url">
+                  SpringBoot中读取YAML
                 </a>
               
             
@@ -1575,8 +1230,8 @@ Iterator&amp;lt;T&gt; iterator();
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/知识记录/JavaScript 中的回调函数.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/JavaScript 中的回调函数.html" itemprop="commentsCount"></span>
+                <a href="/article/知识记录/SpringBoot中读取YAML.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/SpringBoot中读取YAML.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1586,7 +1241,7 @@ Iterator&amp;lt;T&gt; iterator();
 
           
           
-             <span id="/article/知识记录/JavaScript 中的回调函数.html" class="leancloud_visitors" data-flag-title="JavaScript 中的回调函数">
+             <span id="/article/知识记录/SpringBoot中读取YAML.html" class="leancloud_visitors" data-flag-title="SpringBoot中读取YAML">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1610,48 +1265,36 @@ Iterator&amp;lt;T&gt; iterator();
       
         
           
-            <p>在Node.js中使用异步的方式读取一个文件：</p>
-<pre><code>/**
- * Created by chen on 1月14日.
- */
-var fs = require(&apos;fs&apos;);
-fs.readFile(&apos;readfile.js&apos;,&apos;utf-8&apos;,function(err,data){
-    if(err){
-        console.error(err);
-    }else{
-        console.log(data);
+            <ol>
+<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
+</ol>
+<ol>
+<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
+</ol>
+<hr>
+<p>读取YAML步骤：</p>
+<ol>
+<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
+<pre><code>my:
+    servers:
+        - dev.bar.com
+        - foo.bar.com
+</code></pre></li>
+<li><p>在需要注解信息的Java文件中进行以下注解：</p>
+<pre><code>@Component(&quot;config&quot;)
+@ConfigurationProperties(prefix = &quot;my&quot;)
+public class Config {
+    //@Value(&quot;my.servers&quot;) 
+        //这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！
+    private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
+    public List&lt;String&gt; getServers() {
+        return this.servers;
     }
-    console.log(&apos;21212123.&apos;)
-});
-console.log(&apos;end.&apos;);
-</code></pre><p>运行结果如下：</p>
-<pre><code>end.
-/**
- * Created by chen on 1月14日.
- */
-....
-</code></pre><blockquote>
-<p>基于多线程的模型也有相应的解决方案，如轻量级线程（<code>lightweight thread</code>）等。事件驱动的单线程异步模型与多线程同步模型到底谁更好是一件非常有争议的事情，因为尽管消耗资源，后者的吞吐率并不比前者低。</p>
-</blockquote>
-<p>Node.js也提供了同步读取文件的API：</p>
-<pre><code>/**
- * Created by chen on 1月14日.
- */
-
-/***另一种的读取方式***/
-//readfilesync.js
-
-var fs = require(&apos;fs&apos;);
-var data =  fs.readFileSync(&apos;index.js&apos;,&apos;utf-8&apos;);
-console.log(data);
-console.log(&apos;end.&apos;);
-</code></pre><p>运行结果与前面不同，如下所示：</p>
-<pre><code>$ node readfilesync.js
-Contents of the file.
-end.
-</code></pre><p>同步读取文件的方式比较容易理解，将文件名作为参数</p>
-<p>同步式读取文件的方式比较容易理解，将文件名作为参数传入 <code>fs.readFileSync</code> 函数，阻塞等待读取完成后，将文件的内容作为函数的返回值赋给 <code>data</code> 变量，接下来控制台<br>输出 <code>data</code> 的值，最后输出 <code>end.</code> 。<br>异步式读取文件就稍微有些违反直觉了， <code>end.</code> 先被输出。要想理解结果，我们必须先知道在 <code>Node.js</code> 中，异步式 <code>I/O</code> 是通过回调函数来实现的。 <code>fs.readFile</code> 接收了三个参数，第一个是文件名，第二个是编码方式，第三个是一个函数，我们称这个函数为<strong>回调函数</strong>。<br><code>JavaScript</code> 支持匿名的函数定义方式，譬如我们例子中回调函数的定义就是嵌套在 <code>fs.readFile</code> 的参数表中的。这种定义方式在 <code>JavaScript</code> 程序中极为普遍。</p>
-<p><code>fs.readFile</code> 调用时所做的工作只是将异步式 <code>I/O</code> 请求发送给了操作系统，然后立即返回并执行后面的语句，执行完以后进入事件循环监听事件。当 <code>fs</code> 接收到 <code>I/O</code> 请求完成的<br>事件时，事件循环会主动调用回调函数以完成后续工作。因此我们会先看到 <code>end.</code>，再看到<br><code>file.txt</code> 文件的内容。</p>
+}
+</code></pre></li>
+<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
+</li>
+</ol>
 
           
         
@@ -1802,6 +1445,236 @@ public void readByBufferedReader() throws IOException {
     }
 }
 </code></pre><p>读取 3608 行数据耗时 <strong>0.174</strong>s</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/知识记录/Java基础/StringStringBuilderStringBuffer对比.html" itemprop="url">
+                  StringStringBuilderStringBuffer对比
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/Java基础/StringStringBuilderStringBuffer对比.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/StringStringBuilderStringBuffer对比.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/Java基础/StringStringBuilderStringBuffer对比.html" class="leancloud_visitors" data-flag-title="StringStringBuilderStringBuffer对比">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>作者：每次上网冲杯Java时，都能看到关于String无休无止的争论。还是觉得有必要让这个讨厌又很可爱的String美眉，赤裸裸的站在我们这些Java色狼面前了。嘿嘿….</p>
+<p>众所周知，String是由字符组成的串，在程序中使用频率很高。Java中的String是一个类，而并非基本数据类型。 不过她却不是普通的类哦！！！</p>
+</blockquote>
+<h3 id="1-String对象的创建"><a href="#1-String对象的创建" class="headerlink" title="1. String对象的创建"></a>1. String对象的创建</h3><p>关于类对象的创建，很普通的一种方式就是利用构造器，String类也不例外：String s=new String(“Hello world”); 问题是参数”Hello world”是什么东西，也是字符串对象吗?莫非用字符串对象创建一个字符串对象?  </p>
+<p>当然，String类对象还有一种大家都很喜欢的创建方式：String s=”Hello world”; 但是有点怪呀，怎么与基本数据类型的赋值操作（int i=1）很像呀?  </p>
+<p>在开始解释这些问题之前，我们先引入一些必要的知识:</p>
+<h4 id="1-1-Java-class文件结构-和常量池"><a href="#1-1-Java-class文件结构-和常量池" class="headerlink" title="1.1 Java class文件结构 和常量池"></a>1.1 Java class文件结构 和常量池</h4><p>我们都知道，Java程序要运行，首先需要编译器将源代码文件编译成字节码文件(也就是.class文件)。然后在由JVM解释执行。  </p>
+<p>class文件是8位字节的二进制流 。这些二进制流的涵义由一些紧凑的有意义的项 组成。比如class字节流中最开始的4个字节组成的项叫做魔数 (magic)，其意义在于分辨class文件(值为0xCAFEBABE)与非class文件。class字节流大致结构如下图左侧。</p>
+<p>其中，在class文件中有一个非常重要的项——常量池 。这个常量池专门放置源代码中的符号信息(并且不同的符号信息放置在不同标志的常量表中)。如上图右侧是HelloWorld代码中的常量表（HelloWorld代码如下），其中有四个不同类型的常量表(四个不同的常量池入口)。关于常量池的具体细节，请参照我的博客《<a href="http://www.iteye.com/blog/687660" target="_blank" rel="external">Class文件内容及常量池 </a>》</p>
+<pre><code>public class HelloWorld{  
+    void hello(){  
+        System.out.println(&quot;Hello world&quot;);  
+    }  
+} 
+</code></pre><p>通过上图可见，代码中的”Hello world”字符串字面值被编译之后，可以清楚的看到存放在了class常量池中的字符串常量表中(上图右侧红框区域)。</p>
+<h4 id="1-2-JVM运行class文件"><a href="#1-2-JVM运行class文件" class="headerlink" title="1.2 JVM运行class文件"></a>1.2 JVM运行class文件</h4><p>源代码编译成class文件之后，JVM就要运行这个class文件。它首先会用类装载器加载进class文件。然后需要创建许多内存数据结构来存放class文件中的字节数据。比如class文件对应的类信息数据、常量池结构、方法中的二进制指令序列、类方法与字段的描述信息等等。当然，在运行的时候，还需要为方法创建栈帧等。这么多的内存结构当然需要管理，JVM会把这些东西都组织到几个“运行时数据区 ”中。这里面就有我们经常说的“方法区 ”、“堆 ”、“Java栈 ”等。详细请参见我的博客《<a href="http://www.iteye.com/blog/676235" target="_blank" rel="external">Java 虚拟机体系结构</a>》 。</p>
+<p>上面我们提到了，在Java源代码中的每一个字面值字符串，都会在编译成class文件阶段，形成标志号 为8(CONSTANT_String_info)的常量表 。 当JVM加载 class文件的时候，会为对应的常量池建立一个内存数据结构，并存放在方法区中。同时JVM会自动为CONSTANT_String_info常量表中 的字符串常量字面值 在堆中 创建 新的String对象(intern字符串 对象，又叫拘留字符串对象)。然后把CONSTANT_String_info常量表的入口地址转变成这个堆中String对象的直接地址(常量池解 析)。 </p>
+<p>这里很关键的就是这个<strong>拘留字符串对象</strong> 。源代码中所有相同字面值的字符串常量只可能建立唯一一个拘留字符串对象。 实际上JVM是通过一个记录了拘留字符串引用的内部数据结构来维持这一特性的。在Java程序中，可以调用String的intern()方法来使得一个常规字符串对象成为拘留字符串对象。我们会在后面介绍这个方法的。</p>
+<h4 id="1-3操作码助忆符指令"><a href="#1-3操作码助忆符指令" class="headerlink" title="1.3操作码助忆符指令"></a>1.3操作码助忆符指令</h4><p>有了上面阐述的两个知识前提，下面我们将根据二进制指令来区别两种字符串对象的创建方式：<br>(1) <code>String s=new String(&quot;Hello world&quot;);</code>编译成class文件后的指令(在myeclipse中查看):<br>Class字节码指令集代码  </p>
+<pre><code>0  new java.lang.String [15]  //在堆中分配一个String类对象的空间，并将该对象的地址堆入操作数栈。  
+3  dup //复制操作数栈顶数据，并压入操作数栈。该指令使得操作数栈中有两个String对象的引用值。  
+4  ldc &lt;String &quot;Hello world&quot;&gt; [17] //将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  
+6  invokespecial java.lang.String(java.lang.String) [19] //调用String的初始化方法，弹出操作数栈栈顶的两个对象地址，用拘留String对象的值初始化new指令创建的String对象，然后将这个对象的引用压入操作数栈  
+9  astore_1 [s] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是new指令创建出的，已经被初始化的String对象的地址 （此时的栈顶值弹出存入局部变量中去)。  
+</code></pre><p>注意：  </p>
+<blockquote>
+<p>【这里有个dup指令。其作用就是复制之前分配的Java.lang.String空间的引用并压入栈顶。那么这里为什么需要这样么做呢？因为invokespecial指令通过[15]这个常量池入口寻找到了java.lang.String()构造方法，构造方法虽然找到了。但是必须还得知道是谁的构造方法，所以要将之前分配的空间的应用压入栈顶让invokespecial命令应用才知道原来这个构造方法是刚才创建的那个引用的，调用完成之后将栈顶的值弹出。之后调用astore_1将此时的栈顶值弹出存入局部变量中去。】     </p>
+</blockquote>
+<p> 事实上，在运行这段指令之前，JVM就已经为”Hello world”在堆中创建了一个拘留字符串( 值得注意的是：如果源程序中还有一个”Hello world”字符串常量，那么他们都对应了同一个堆中的拘留字符串)。然后用这个拘留字符串的值来初始化堆中用new指令创建出来的新的String对象，局部变量s实际上存储的是new出来的堆对象地址。 大家注意了，此时在JVM管理的堆中，有两个相同字符串值的String对象：一个是拘留字符串对象，一个是new新建的字符串对象。如果还有一条创建语句String s1=new String(“Hello world”)；堆中有几个值为”Hello world”的字符串呢? 答案是3个，大家好好想想为什么吧！</p>
+<p>(2)将<code>String s=&quot;Hello world&quot;;</code>编译成class文件后的指令:<br>Class字节码指令集代码  </p>
+<pre><code>0  ldc &lt;String &quot;Hello world&quot;&gt; [15]//将常量池中的字符串常量&quot;Hello world&quot;指向的堆中拘留String对象的地址压入操作数栈  
+2  astore_1 [str] // 弹出操作数栈顶数据存放在局部变量区的第一个位置上。此时存放的是拘留字符串对象在堆中的地址  
+</code></pre><p>和上面的创建指令有很大的不同，<strong>局部变量s存储的是早已创建好的拘留字符串的堆地址(没有new 的对象了)</strong>。 大家好好想想，如果还有一条穿件语句<code>String s1=&quot;Hello word&quot;；</code>此时堆中有几个值为”Hello world”的字符串呢?答案是1个。那么局部变量s与s1存储的地址是否相同呢？  呵呵, 这个你应该知道了吧。</p>
+<h4 id="镜头总结："><a href="#镜头总结：" class="headerlink" title="镜头总结："></a>镜头总结：</h4><p>String类型脱光了其实也很普通。真正让她神秘的原因就在于<strong>CONSTANT_String_info常量表</strong> 和<strong>拘留字符串对象</strong> 的存在。现在我们可以解决江湖上的许多纷争了。</p>
+<h4 id="【-纷争1】关于字符串相等关系的争论"><a href="#【-纷争1】关于字符串相等关系的争论" class="headerlink" title="【 纷争1】关于字符串相等关系的争论"></a>【 纷争1】关于字符串相等关系的争论</h4><pre><code>//代码1  
+String sa=new String(&quot;Hello world&quot;);            
+String sb=new String(&quot;Hello world&quot;);      
+System.out.println(sa==sb);  // false  
+
+
+//代码2    
+String sc=&quot;Hello world&quot;;    
+String sd=&quot;Hello world&quot;;  
+System.out.println(sc==sd);  // true   
+</code></pre><p>代码1中局部变量sa,sb中存储的是JVM在堆中new出来的两个String对象的内存地址。虽然这两个String对象的值(char[]存放的字符序列)都是”Hello world”。 因此”==”比较的是两个不同的堆地址。代码2中局部变量sc,sd中存储的也是地址，但却都是常量池中”Hello world”指向的堆的唯一的那个拘留字符串对象的地址 。自然相等了。<br>  【纷争2】 字符串“+”操作的内幕</p>
+<pre><code>//代码1  
+String sa = &quot;ab&quot;;                                          
+String sb = &quot;cd&quot;;                                       
+String sab=sa+sb;                                      
+String s=&quot;abcd&quot;;  
+System.out.println(sab==s); // false  
+//代码2  
+String sc=&quot;ab&quot;+&quot;cd&quot;;  
+String sd=&quot;abcd&quot;;  
+System.out.println(sc==sd); //true  
+</code></pre><p>代码1中局部变量sa,sb存储的是堆中两个拘留字符串对象的地址。而当执行sa+sb时，JVM首先会在堆中创建一个StringBuilder类，同时用sa指向的拘留字符串对象完成初始化，然后调用append方法完成对sb所指向的拘留字符串的合并操作，接着调用StringBuilder的toString()方法在堆中创建一个String对象，最后将刚生成的String对象的堆地址存放在局部变量sab中。而局部变量s存储的是常量池中”abcd”所对应的拘留字符串对象的地址。 sab与s地址当然不一样了。这里要注意了，代码1的堆中实际上有五个字符串对象：三个拘留字符串对象、一个String对象和一个StringBuilder对象。</p>
+<p>代码2中”ab”+”cd”会直接在编译期就合并成常量”abcd”， 因此相同字面值常量”abcd”所对应的是同一个拘留字符串对象，自然地址也就相同。</p>
+<p>【镜头二】  String三姐妹(String,StringBuffer,StringBuilder)<br>String扒的差不多了。但他还有两个妹妹StringBuffer,StringBuilder长的也不错哦！我们也要下手了：</p>
+<pre><code>String(大姐，出生于JDK1.0时代)          不可变字符序列
+StringBuffer(二姐，出生于JDK1.0时代)    线程安全的可变字符序列
+StringBuilder(小妹，出生于JDK1.5时代)   非线程安全的可变字符序列 
+</code></pre><p>★StringBuffer与String的可变性问题。<br>我们先看看这两个类的部分源代码：</p>
+<pre><code>//String   
+public final class String  
+{  
+        private final char value[];  
+
+         public String(String original) {  
+              // 把原字符串original切分成字符数组并赋给value[];  
+         }  
+}  
+
+//StringBuffer   
+public final class StringBuffer extends AbstractStringBuilder  
+{  
+         char value[]; //继承了父类AbstractStringBuilder中的value[]  
+         public StringBuffer(String str) {  
+                 super(str.length() + 16); //继承父类的构造器，并创建一个大小为str.length()+16的value[]数组  
+                 append(str); //将str切分成字符序列并加入到value[]中  
+        }  
+}  
+</code></pre><p>很显然，String和StringBuffer中的value[]都用于存储字符序列。但是,</p>
+<p>(1) String中的是常量(final)数组，只能被赋值一次。<br>比如：new String(“abc”)使得value[]={‘a’,’b’,’c’}(查看jdk String 就是这么实现的)，之后这个String对象中的value[]再也不能改变了。这也正是大家常说的，String是不可变的原因 。<br>注意：这个对初学者来说有个误区，有人说String str1=new String(“abc”); str1=new String(“cba”);不是改变了字符串str1吗？那么你有必要先搞懂对象引用和对象本身的区别。这里我简单的说明一下，对象本身指的是存放在堆空间中的该对象的实例数据(非静态非常量字段)。而对象引用指的是堆中对象本身所存放的地址，一般方法区和Java栈中存储的都是对象引用，而非对象本身的数据。</p>
+<p>(2) StringBuffer中的value[]就是一个很普通的数组，而且可以通过append()方法将新字符串加入value[]末尾。这样也就改变了value[]的内容和大小了。<br>比如：new StringBuffer(“abc”)使得value[]={‘a’,’b’,’c’,’’,’’…}(注意构造的长度是str.length()+16)。如果再将这个对象append(“abc”)，那么这个对象中的value[]={‘a’,’b’,’c’,’a’,’b’,’c’,’’….}。这也就是为什么大家说 StringBuffer是可变字符串 的涵义了。从这一点也可以看出，StringBuffer中的value[]完全可以作为字符串的缓冲区功能。其累加性能是很不错的，在后面我们会进行比较。</p>
+<p>总结，讨论String和StringBuffer可不可变。本质上是指对象中的value[]字符数组可不可变，而不是对象引用可不可变。 </p>
+<p>★StringBuffer与StringBuilder的线程安全性问题<br>StringBuffer和StringBuilder可以算是双胞胎了，这两者的方法没有很大区别。但在线程安全性方面，StringBuffer允许多线程进行字符操作。这是因为在源代码中StringBuffer的很多方法都被关键字synchronized 修饰了，而StringBuilder没有。<br>有多线程编程经验的程序员应该知道synchronized。这个关键字是为线程同步机制 设定的。我简要阐述一下synchronized的含义：<br>每一个类对象都对应一把锁，当某个线程A调用类对象O中的synchronized方法M时，必须获得对象O的锁才能够执行M方法，否则线程A阻塞。一旦线程A开始执行M方法，将独占对象O的锁。使得其它需要调用O对象的M方法的线程阻塞。只有线程A执行完毕，释放锁后。那些阻塞线程才有机会重新调用M方法。这就是解决线程同步问题的锁机制。<br>了解了synchronized的含义以后，大家可能都会有这个感觉。多线程编程中StringBuffer比StringBuilder要安全多了 ，事实确实如此。如果有多个线程需要对同一个字符串缓冲区进行操作的时候，StringBuffer应该是不二选择。<br>注意：是不是String也不安全呢？事实上不存在这个问题，String是不可变的。线程对于堆中指定的一个String对象只能读取，无法修改。试问：还有什么不安全的呢？ </p>
+<p>★String和StringBuffer的效率问题（这可是个热门话题呀!）<br>首先说明一点：StringBuffer和StringBuilder可谓双胞胎，StringBuilder是1.5新引入的，其前身就是StringBuffer。StringBuilder的效率比StringBuffer稍高，如果不考虑线程安全，StringBuilder应该是首选。另外，JVM运行程序主要的时间耗费是在创建对象和回收对象上。</p>
+<p>我们用下面的代码运行1W次字符串的连接操作，测试String,StringBuffer所运行的时间。</p>
+<pre><code>//测试代码  
+public class RunTime{  
+    public static void main(String[] args){  
+           ● 测试代码位置1  
+          long beginTime=System.currentTimeMillis();  
+          for(int i=0;i&lt;10000;i++){  
+                 ● 测试代码位置2  
+          }  
+          long endTime=System.currentTimeMillis();  
+          System.out.println(endTime-beginTime);     
+    }  
+}  
+</code></pre><h2 id="★-镜头总结："><a href="#★-镜头总结：" class="headerlink" title="★ 镜头总结："></a>★ 镜头总结：</h2><p>(1) 在编译阶段就能够确定的字符串常量，完全没有必要创建String或StringBuffer对象。直接使用字符串常量的”+”连接操作效率最高。<br>(2) StringBuffer对象的append效率要高于String对象的”+”连接操作。<br>(3) 不停的创建对象是程序低效的一个重要原因。那么相同的字符串值能否在堆中只创建一个String对象那。显然拘留字符串能够做到这一点，除了程序中的字符串常量会被JVM自动创建拘留字符串之外，调用String的intern()方法也能做到这一点。当调用intern()时，如果常量池中已经有了当前String的值，那么返回这个常量指向拘留对象的地址。如果没有，则将String值加入常量池中，并创建一个新的拘留字符串对象。</p>
 
           
         
@@ -2019,7 +1892,7 @@ StringBuffer buf=new StringBuffer(&quot;this is a test&quot;)//在缓冲区中�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
