@@ -1,0 +1,2496 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,互联网,NodeJS" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Roc`s 随想录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="关注技术趋势，服务端技术细节，Java语言，技术热点等，关注思维和最佳实践。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Roc`s 随想录">
+<meta property="og:url" content="http://coderroc.com/page/6/index.html">
+<meta property="og:site_name" content="Roc`s 随想录">
+<meta property="og:description" content="关注技术趋势，服务端技术细节，Java语言，技术热点等，关注思维和最佳实践。">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Roc`s 随想录">
+<meta name="twitter:description" content="关注技术趋势，服务端技术细节，Java语言，技术热点等，关注思维和最佳实践。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2079911,
+      author: '博主大大'
+    }
+  };
+</script>
+
+  <title> Roc`s 随想录 </title>
+  <script type="text/javascript">
+  // 404 auto 
+  (function(){
+      var path = window.location.pathname;
+      if (path.startsWith("/201")) {
+        var targetPath = "/article" + path.substring(11, path.length-1) + ".html";
+        window.location.href = targetPath;
+      }
+  })();
+  </script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3d0b52366e3d42e3387d71167ae773c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Roc`s 随想录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">诚信，认真，专注，踏实</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/数学和算法/树-数据结构预算法.html" itemprop="url">
+                  树-数据结构预算法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数学和算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/数学和算法/树-数据结构预算法.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/树-数据结构预算法.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/数学和算法/树-数据结构预算法.html" class="leancloud_visitors" data-flag-title="树-数据结构预算法">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="4-1-预备知识"><a href="#4-1-预备知识" class="headerlink" title="4.1 预备知识"></a>4.1 预备知识</h2><ol>
+<li>树的实现-定义</li>
+<li>树的遍历及应用</li>
+</ol>
+<h2 id="4-2-二叉树"><a href="#4-2-二叉树" class="headerlink" title="4.2 二叉树"></a>4.2 二叉树</h2><ol>
+<li>实现</li>
+<li>例子：表达式树</li>
+</ol>
+<h2 id="4-3-查找树ADT-二叉查找树"><a href="#4-3-查找树ADT-二叉查找树" class="headerlink" title="4.3 查找树ADT-二叉查找树"></a>4.3 查找树ADT-二叉查找树</h2><ol>
+<li>contains方法</li>
+<li>findMin方法和findMax方法</li>
+<li>insert方法</li>
+<li>remove方法</li>
+<li>平均情况分析</li>
+</ol>
+<h2 id="4-4-AVL树"><a href="#4-4-AVL树" class="headerlink" title="4.4 AVL树"></a>4.4 AVL树</h2><ol>
+<li>单旋转</li>
+<li>双旋转</li>
+</ol>
+<h2 id="4-5-伸展树"><a href="#4-5-伸展树" class="headerlink" title="4.5 伸展树"></a>4.5 伸展树</h2><ol>
+<li>一个简单的想法（不能直接使用）</li>
+<li>展开</li>
+</ol>
+<h2 id="4-6-树的遍历"><a href="#4-6-树的遍历" class="headerlink" title="4.6 树的遍历"></a>4.6 树的遍历</h2><h2 id="4-7-B树"><a href="#4-7-B树" class="headerlink" title="4.7 B树"></a>4.7 B树</h2><h2 id="4-8-标准库中的集合与映射"><a href="#4-8-标准库中的集合与映射" class="headerlink" title="4.8 标准库中的集合与映射"></a>4.8 标准库中的集合与映射</h2><ol>
+<li>关于Set接口</li>
+<li>关于Map接口</li>
+<li>TreeSet接口和TreeMap类的实现</li>
+<li>使用多个映射的例</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
+<p>暂不能总结</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/知识记录/Linux基础/shell-export.html" itemprop="url">
+                  shell-export
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/Linux基础/shell-export.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Linux基础/shell-export.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/Linux基础/shell-export.html" class="leancloud_visitors" data-flag-title="shell-export">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在shell中，有的时候会重用一部分代码，例如变量或者函数等，就会用到export。</p>
+<p>使用例子如下：<br>首先是父进程：<code>father.sh</code></p>
+<pre><code>#! /bin/bash
+echo &quot;this is the father&quot;
+FILM=&quot;A Few Good Men&quot;
+echo &quot;I like the film : $FILM&quot;
+
+tick()
+{
+        echo $1;
+        return $1;
+}
+
+tick fdjk
+
+#call the child script
+export FILM
+export -f tick
+./child.sh
+echo &quot;back to father&quot;
+echo &quot;and the film is : $FILM&quot;
+exit
+</code></pre><p>然后是子进程：child.sh  </p>
+<pre><code>#! /bin/bash
+echo &quot;called from father...i am the child&quot;
+echo &quot;filem name is : $FILM&quot;
+FILM=&quot;Die Hard&quot;
+echo &quot;changing film to :$FILM&quot;
+
+tick fdafds
+
+exit
+</code></pre><hr>
+<h2 id="shell-与-export命令"><a href="#shell-与-export命令" class="headerlink" title="shell 与 export命令"></a>shell 与 export命令</h2><p>用户登录到Linux系统后，系统将启动一个用户shell。在这个shell中，可以使用shell命令</p>
+<p>或声明变量，也可以创建并运行shell脚本程序。运行shell脚本程序时，系统将创建一个子shell。</p>
+<p>此时，系统中将有两个shell，一个是登录时系统启动的shell，另一个是系统为运行脚本程序创建</p>
+<p>的shell。当一个脚本程序运行完毕，脚本shell将终止，返回到执行该脚本之前的shell。</p>
+<p>从这种意义上来说，用户可以有许多 shell，每个shell都是由某个shell（称为父shell）派生的。</p>
+<p>在子shell中定义的变量只在该子shell内有效。如果在一个shell脚本程序中定义了一个变量，</p>
+<p>当该脚本程序运行时，这个定义的变量只是该脚本程序内的一个局部变量，其他的shell不能引用它，</p>
+<p>要使某个变量的值可以在其他shell中被改变，可以使用export命令对已定义的变量进行输出。</p>
+<p>export命令将使系统在创建每一个新的shell时，定义这个变量的一个拷贝。</p>
+<p>这个过程称之为变量输出。</p>
+<h2 id="export-功能说明：设置或显示环境变量。"><a href="#export-功能说明：设置或显示环境变量。" class="headerlink" title="export 功能说明：设置或显示环境变量。"></a>export 功能说明：设置或显示环境变量。</h2><p><strong>语　　法</strong>：export [-fnp][变量名称]=[变量设置值]<br><strong>补充说明</strong>：在shell中执行程序时，shell会提供一组环境变量。export可新增，修改或删除环境变量，供后续执行的程序使用。export的效力仅限于该次登陆操作。<br><strong>参　　数</strong>：<br>　<code>-f</code> 　代表[变量名称]中为函数名称。<br>　<code>-n</code> 　删除指定的变量。变量实际上并未删除，只是不会输出到后续指令的执行环境中。<br>　<code>-p</code> 　列出所有的shell赋予程序的环境变量。</p>
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>shell返回值只能是整数型数字，上边的例子会报错：</p>
+<pre><code>return: fdafds: numeric argument required
+</code></pre><p>参考信息：<a href="http://blog.csdn.net/yasi_xi/article/details/8546758" target="_blank" rel="external">Shell 函数返回值</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/数学和算法/Poj等价表达式.html" itemprop="url">
+                  Poj等价表达式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数学和算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/数学和算法/Poj等价表达式.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/Poj等价表达式.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/数学和算法/Poj等价表达式.html" class="leancloud_visitors" data-flag-title="Poj等价表达式">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>描述</strong><br>判断两个表达式在数学上是否是等价的。<br><strong>输入</strong><br>第一行：N（1&lt;=N&lt;=20），表示测试数据组数。<br>接下来每组测试数据包括两行，每行包括一个数学表达式，每个表达式的长度不超过80个字符。输入数据没有空行。</p>
+<p><strong>一个表达式可能包括：</strong></p>
+<ul>
+<li>单个英文字母表示的变量（区分大小写）</li>
+<li>数字（只有一位数）</li>
+<li>配对的括号</li>
+<li>运算符加+、减-、乘*</li>
+<li>任意数量的空格或tab（可能出现在表达式中间的任何位置）</li>
+</ul>
+<blockquote>
+<p>注意：表达式保证是语法正确的，且所有运算符的优先级相同，运算次序从左至右。变量的系数和指数保证不超过16位整数。</p>
+</blockquote>
+<p><strong>输出</strong><br>对每个测试数据，输出一行：等价则输出“YES”，不等价则输出“NO”。<br><em>样例输入</em></p>
+<p>  3<br>  (a+b-c)<em>2<br>  (a+a)+(b</em>2)-(3<em>c)+c<br>  a</em>2-(a+c)+((a+c+e)<em>2)<br>  3</em>a+c+(2<em>e)<br>  (a-b)</em>(a-b)<br>  (a<em>a)-(2</em>a<em>b)-(b</em>b)</p>
+<p><em>样例输出</em></p>
+<p>  YES<br>  YES<br>  NO</p>
+<h1 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h1><hr>
+<p>首先将计算式入栈，然后通过随机性的测试数据来进行检测两个式子代表的值是否相等。</p>
+<p>栈、优先级、算式表达式、波兰表达式等。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/知识记录/Node.js/Node.js 的一些零碎知识.html" itemprop="url">
+                  Node.js 的一些零碎知识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/Node.js/Node.js 的一些零碎知识.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Node.js/Node.js 的一些零碎知识.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/Node.js/Node.js 的一些零碎知识.html" class="leancloud_visitors" data-flag-title="Node.js 的一些零碎知识">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-NPM"><a href="#1-NPM" class="headerlink" title="1. NPM"></a>1. NPM</h3><p>npm 全称是 Node Package Manager，相当于Java世界中的Maven。</p>
+<p>操作办法，首先确认安装了node.js和npm模块，然后在node项目文件夹创建package.json，执行npm install会安装（npm install xxx）package内包含的库。例如：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;ShareConnect&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;private&quot;: true,
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;node ./bin/www&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;body-parser&quot;: &quot;~1.12.0&quot;,
+    &quot;cookie-parser&quot;: &quot;~1.3.4&quot;,
+    &quot;debug&quot;: &quot;~2.1.1&quot;,
+    &quot;ejs&quot;: &quot;~2.3.1&quot;,
+    &quot;express&quot;: &quot;~4.12.2&quot;,
+    &quot;morgan&quot;: &quot;~1.5.1&quot;,
+    &quot;serve-favicon&quot;: &quot;~2.2.0&quot;,
+    &quot;uuid-js&quot;: &quot;~0.7.5&quot;,
+    &quot;redis&quot;: &quot;~0.12.1&quot;,
+    &quot;connect&quot;: &quot;~2.9.0&quot;
+  }
+}
+</code></pre><p>还有这样一篇文章：<a href="http://www.infoq.com/cn/articles/msh-using-npm-manage-node.js-dependence" target="_blank" rel="external">如何使用NPM来管理你的Node.js依赖</a></p>
+<h3 id="2-项目结构"><a href="#2-项目结构" class="headerlink" title="2. 项目结构"></a>2. 项目结构</h3><p>MVC分层结构经久考验，在此之上沉淀的技术资源也很丰富，Node.js同样可以设计出优雅高效的分层结果。</p>
+<p>Connet中间件在MVC中合理的使用。</p>
+<blockquote>
+<p>借助Connect可以自由定制中间件的优势，可以自行提升性能或是设计出适合自己需要的项目。Connect自身提供了路由功能，在此基础上，可以轻松搭建MVC模式的框架，以达到开发效率和执行效率的平衡。以下是笔者项目中采用的目录结构，清晰地划分目录结构可以帮助划分代码的职责，此处仅供参考。</p>
+</blockquote>
+<pre><code>├── Makefile // 构建文件，通常用于启动单元测试运行等操作
+├── app.js // 应用文件
+├── automation  // 自动化测试目录
+├── bin  // 存放启动应用相关脚本的目录
+├── conf  // 配置文件目录
+├── controllers  // 控制层目录------------------------C，Controller，控制器
+├── helpers  // 帮助类库
+├── middlewares  // 自定义中间件目录
+├── models  // 数据层目录-----------------------------M，Model，模型
+├── node_modules  // 第三方模块目录
+├── package.json  // 项目包描述文件
+├── public  // 静态文件目录
+│   ├── images  // 图片目录
+│   ├── libs  // 第三方前端JavaScript库目录
+│   ├── scripts  // 前端JavaScript脚本目录
+│   └── styles  // 样式表目录
+├── test  // 单元测试目录
+└── views  // 视图层目录-----------------------------V，View，视图
+</code></pre><h3 id="3-关于本项目基本的设计"><a href="#3-关于本项目基本的设计" class="headerlink" title="3. 关于本项目基本的设计"></a>3. 关于本项目基本的设计</h3><p>可以一个图来解释：<br><img src="http://note.wiz.cn/api/document/files/unzip/66e5c3f6-8482-11e1-a525-00237def97cc/6d3b0fec-73aa-4846-a15d-ff78e296af74.32632/index_files/f76767cb-d24f-4ef4-a718-cc3264db2dde.png" alt="UDP-返回-Post-set"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/数学和算法/AES加密.html" itemprop="url">
+                  AES加密
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数学和算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/数学和算法/AES加密.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/AES加密.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/数学和算法/AES加密.html" class="leancloud_visitors" data-flag-title="AES加密">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="加密的历程："><a href="#加密的历程：" class="headerlink" title="加密的历程："></a>加密的历程：</h2><p>从 <strong>按规则替换</strong> -&gt; <strong>对称加密</strong> -&gt; <strong>非对称加密</strong> 的过程，看到加密技术的不断进化。</p>
+<h3 id="破解方式："><a href="#破解方式：" class="headerlink" title="破解方式："></a>破解方式：</h3><p>按规则替换：根据频率破解。<br>对称加密：截获密钥。<br>非对称加密：？？？    </p>
+<h2 id="非对称加密："><a href="#非对称加密：" class="headerlink" title="非对称加密："></a>非对称加密：</h2><p>非对称加密又称公开密钥加密。</p>
+<blockquote>
+<p>公开密钥加密（英语：public-key cryptography，又译为公开密钥加密），也称为非对称加密（asymmetric cryptography），一种密码学算法类型，在这种密码学方法中，需要一对密钥，一是个私人密钥，另一个则是公开密钥。这两个密钥是数学相关，用某用户密钥加密后所得的信息，只能用该用户的解密密钥才能解密。如果知道了其中一个，并不能计算出另外一个。因此如果公开了一对密钥中的一个，并不会危害到另外一个的秘密性质。称公开的密钥为公钥；不公开的密钥为私钥。<br>–<strong>wiki</strong></p>
+</blockquote>
+<p>在非对称加密中使用的主要算法有：RSA、Elgamal、背包算法、Rabin、D-H、ECC（椭圆曲线加密算法）等。</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>与对称密钥加密相比，优点在于无需共享的通用密钥，解密的私钥不发往任何用户。即使公钥在网上被截获，如果没有与其匹配的私钥，也无法解密，所截获的公钥是没有任何用处的。</p>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>假设两个用户A向B发送信息。B的公钥为c，对应私钥（也是属于B的）为d，明文为x.  </p>
+<ol>
+<li>A用公钥对明文进行加密形成密文c(x)，然后传输密文；  </li>
+<li>B收到密文，用私钥对密文进行解密d(c(x)),得到要通信的明文x。<br>B向A发送信息反之。</li>
+</ol>
+<p>现在主要解释RSA加密原理。</p>
+<hr>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="互质关系"><a href="#互质关系" class="headerlink" title="互质关系"></a>互质关系</h3><p>如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是互质关系（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。</p>
+<p>有以上，不难得到以下结论：  </p>
+<ol>
+<li>任意两个质数构成互质关系，比如13和61。  </li>
+<li>一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。  </li>
+<li>如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。  </li>
+<li>1和任意一个自然数是都是互质关系，比如1和99。  </li>
+<li>p是大于1的整数，则p和p-1构成互质关系，比如57和56。  </li>
+<li>p是大于1的奇数，则p和p-2构成互质关系，比如17和15。  </li>
+</ol>
+<h3 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h3><p>请思考一下问题：</p>
+<blockquote>
+<p>任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系？（比如，在1到8之中，有多少个数与8构成互质关系？）<br>–阮一峰</p>
+</blockquote>
+<p>计算这个值的方法就叫做欧拉函数，以φ(n)表示。在1到8之中，与8形成互质关系的是1、3、5、7，所以 φ(n) = 4。<br>φ(n) 的计算方法并不复杂，但是为了得到最后那个公式，需要一步步讨论。  </p>
+<h4 id="第一种情况"><a href="#第一种情况" class="headerlink" title="第一种情况"></a>第一种情况</h4><p>如果n=1，则 φ(1) = 1 。因为1与任何数（包括自身）都构成互质关系。</p>
+<h4 id="第二种情况"><a href="#第二种情况" class="headerlink" title="第二种情况"></a>第二种情况</h4><p>如果n是质数，则 φ(n)=n-1 。因为质数与小于它的每一个数，都构成互质关系。比如5与1、2、3、4都构成互质关系。</p>
+<h4 id="第三种情况"><a href="#第三种情况" class="headerlink" title="第三种情况"></a>第三种情况</h4><p>如果n是质数的某一个次方，即 n = p^k (p为质数，k为大于等于1的整数)，则<br>$$\phi(p^k)=p^k-p^{k-1}$$<br>比如 φ(8) = φ(2^3) =2^3 - 2^2 = 8 -4 = 4。<br>这是因为只有当一个数不包含质数p，才可能与n互质。而包含质数p的数一共有p^(k-1)个，即1×p、2×p、3×p、…、p^(k-1)×p，把它们去除，剩下的就是与n互质的数。<br>上面的式子还可以写成下面的形式：<br>$$\phi(p^k)=p^k-p^{k-1}=p^k(1-\frac{1}{p})$$<br>可以看出，上面的第二种情况是 k=1 时的特例。</p>
+<h4 id="第四种情况"><a href="#第四种情况" class="headerlink" title="第四种情况"></a>第四种情况</h4><p>如果n可以分解成两个互质的整数之积，<br>$$n=p_1<em>p_2$$<br>则<br>$$\phi(n)=\phi(p_1p_2)=\phi(p_1)\phi(p_2)$$<br>即积的欧拉函数等于各个因子的欧拉函数之积。比如，<em>*φ(56)=φ(8×7)=φ(8)×φ(7)=4×6=24</em></em>。<br>这一条的证明要用到”中国剩余定理”，这里就不展开了，只简单说一下思路：如果a与p1互质(a&lt;p1)，b与p2互质(b&lt;p2)，c与p1p2互质(c&lt;p1p2)，则c与数对 (a,b) 是一一对应关系。由于a的值有φ(p1)种可能，b的值有φ(p2)种可能，则数对 (a,b) 有φ(p1)φ(p2)种可能，而c的值有φ(p1p2)种可能，所以φ(p1p2)就等于φ(p1)φ(p2)。</p>
+<h4 id="第五种情况"><a href="#第五种情况" class="headerlink" title="第五种情况"></a>第五种情况</h4><p>待续…</p>
+<p>—未完待续：<a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/知识记录/Web高阶/WEB开发：解决网站高并发问题.html" itemprop="url">
+                  WEB开发：解决网站高并发问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Web高阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Web高阶</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/Web高阶/WEB开发：解决网站高并发问题.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Web高阶/WEB开发：解决网站高并发问题.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/Web高阶/WEB开发：解决网站高并发问题.html" class="leancloud_visitors" data-flag-title="WEB开发：解决网站高并发问题">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在大型网站开发和设计过程中，非常需要考虑的问题是网站的并发访问的问题，为此我也通过思考，通过借鉴前辈们设计思想，总结出一些解决方案：</p>
+<ol>
+<li>尽量将请求的<strong>页面静态化</strong>，静态化的页面为.html(.htm等)不需要web服务器重新加载项解析，只需要生成一次，以后每次都直接下载到客户端，效率高很多。<strong>javaWeb静态化的技术有<code>freemark</code>和<code>Velocity</code>等</strong>。</li>
+<li>将网站系统的web服务器、数据库服务器、图片和文件服务器<strong>分开</strong>，通过将服务器专业化分工，以提高网站访问速度。因为图片和文件在下载的时候无论是IIS、Apache等服务器都会有很大压力。</li>
+<li>可以设置专门的<strong>数据缓存服务器</strong>，将大量数据放到缓存数据区，在访问量少得时候存入数据，减少直接操作数据库的开销。</li>
+<li><p>数据库集群、库表散列</p>
+<blockquote>
+<p>大型网站都有复杂的应用，这些应用必须使用数据库，那么在面对大量访问的时候，数据库的瓶颈很快就能显现出来，这时一台数据库将很快无法满足应用，于是我们需要使用<strong>数据库集群或者库表散列</strong>。在数据库集群方面，很多数据库都有自己的解决方案，Oracle、Sybase等都有很好的方案，常用的MySQL提供的Master/Slave也是类似的方案，您使用了什么样的DB，就参考相应的解决方案来实施即可。</p>
+<p>上面提到的数据库集群由于在架构、成本、扩张性方面都会受到所采用DB类型的限制，于是我们需要从应用程序的角度来考虑改善系统架构，<strong>库表散列</strong>是常用并且最有效的解决方案。</p>
+<p>我们在应用程序中安装业务和应用或者功能模块将数据库进行分离，不同的模块对应不同的数据库或者表，再按照一定的策略对某个页面或者功能进行更小的数据库散列，比如用户表，按照用户ID进行表散列，这样就能够低成本的提升系统的性能并且有很好的扩展性。</p>
+<p><strong>sohu的论坛</strong>就是采用了这样的架构，将论坛的用户、设置、帖子等信息进行数据库分离，然后对帖子、用户按照板块和ID进行散列数据库和表，最终可以在配置文件中进行简单的配置便能让系统随时增加一台低成本的数据库进来补充系统性能</p>
+</blockquote>
+</li>
+<li><p>镜像<br>　　<br>镜像是大型网站常采用的提高性能和数据安全性的方式，镜像的技术可以解决不同网络接入商和地域带来的用户访问速度差异，比如ChinaNet和EduNet之间的差异就促使了很多网站在教育网内搭建镜像站点，数据进行定时更新或者实时更新。在镜像的细节技术方面，这里不阐述太深，有很多专业的现成的解决架构和产品可选。也有廉价的通过软件实现的思路，比如Linux上的rsync等工具。
+　　</p>
+</li>
+<li>负载均衡<br>负载均衡将是大型网站解决高负荷访问和大量并发请求采用的高端解决办法。<br>负载均衡技术发展了多年，有很多专业的服务提供商和产品可以选择，我个人接触过一些解决方法，其中有<strong>两个架构</strong>可以给大家做参考。</li>
+</ol>
+<ul>
+<li><p><strong>硬件四层交换</strong><br>第四层交换使用第三层和第四层信息包的报头信息，根据应用区间识别业务流，将整个区间段的业务流分配到合适的应用服务器进行处理。第四层交换功能就像是虚IP，指向物理服务器。它传输的业务服从的协议多种多样，有HTTP、FTP、NFS、Telnet或其他协议。这些业务在物理服务器基础上，需要复杂的载量平衡算法。在IP世界，业务类型由终端TCP或UDP端口地址来决定，在第四层交换中的应用区间则由源端和终端IP地址、TCP和UDP端口共同决定。<br>在硬件四层交换产品领域，有一些知名的产品可以选择，比如Alteon、F5等，这些产品很昂贵，但是物有所值，能够提供非常优秀的性能和很灵活的管理能力。“Yahoo中国”当初接近2000台服务器，只使用了三、四台Alteon就搞定了。</p>
+</li>
+<li><p><strong>软件四层交换</strong><br>大家知道了硬件四层交换机的原理后，基于OSI模型来实现的软件四层交换也就应运而生，这样的解决方案实现的原理一致，不过性能稍差。但是满足一定量的压力还是游刃有余的，有人说软件实现方式其实更灵活，处理能力完全看你配置的熟悉能力软件四层交换我们可以使用Linux上常用的LVS来解决，LVS就是LinuxVirtualServer，他提供了基于心跳线heartbeat的实时灾难应对解决方案，提高系统的强壮性，同时可供了灵活的虚拟VIP配置和管理功能，可以同时满足多种应用需求，这对于分布式的系统来说必不可少。<br>一个典型的使用负载均衡的策略就是，在软件或者硬件四层交换的基础上搭建squid集群，这种思路在很多大型网站包括搜索引擎上被采用，这样的架构低成本、高性能还有很强的扩张性，随时往架构里面增减节点都非常容易。<br>对于大型网站来说，前面提到的每个方法可能都会被同时使用到，这里介绍得比较浅显，具体实现过程中很多细节还需要大家慢慢熟悉和体会。有时一个很小的squid参数或者apache参数设置，对于系统性能的影响就会很大。
+　　</p>
+</li>
+</ul>
+<ol>
+<li>最新：CDN加速技术<blockquote>
+<p>什么是CDN？<br>CDN的全称是内容分发网络。其目的是通过在现有的Internet中增加一层新的网络架构，将网站的内容发布到最接近用户的网络“边缘”，使用户可以就近取得所需的内容，提高用户访问网站的响应速度。<br>CDN有别于镜像，因为它比镜像更智能，或者可以做这样一个比喻：CDN=更智能的镜像+缓存+流量导流。因而，CDN可以明显提高Internet网络中信息流动的效率。从技术上全面解决由于网络带宽小、用户访问量大、网点分布不均等问题，提高用户访问网站的响应速度。<br>CDN的类型特点CDN的实现分为三类：镜像、高速缓存、专线。</p>
+</blockquote>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/生活与心情/recall-3-days.html" itemprop="url">
+                  recall-3-days
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
+                    <span itemprop="name">生活与心情</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/生活与心情/recall-3-days.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/recall-3-days.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/生活与心情/recall-3-days.html" class="leancloud_visitors" data-flag-title="recall-3-days">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>完成了一个小项目：推荐系统-基于多维空间两向量近似度的计算</p>
+<p>这个项目运行在了MoPaas上，<a href="http://command.sturgeon.mopaas.com" target="_blank" rel="external">项目地址</a>。</p>
+<h1 id="反思："><a href="#反思：" class="headerlink" title="反思："></a>反思：</h1><p>每天晚上都会很晚才休息，早上起床也比较晚。时间观念不好，浪费了很多时间。</p>
+<h1 id="措施"><a href="#措施" class="headerlink" title="措施"></a>措施</h1><p>11:00 泡脚</p>
+<p>12:00 之前必须睡觉</p>
+<p>早晨8:00起床，慢慢练习到6:30。</p>
+<hr>
+<p>最后想问自己的是：<strong>你到底想要什么？敢不敢为了自己的梦想去奋斗！！！</strong></p>
+<p>赶紧休息吧，明天工作。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/知识记录/深入学习微框架：Spring Boot.html" itemprop="url">
+                  深入学习微框架：Spring Boot
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/知识记录/" itemprop="url" rel="index">
+                    <span itemprop="name">知识记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/深入学习微框架：Spring Boot.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/深入学习微框架：Spring Boot.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/深入学习微框架：Spring Boot.html" class="leancloud_visitors" data-flag-title="深入学习微框架：Spring Boot">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>转自：<a href="http://www.infoq.com/cn/articles/microframeworks1-spring-boot" target="_blank" rel="external">http://www.infoq.com/cn/articles/microframeworks1-spring-boot</a><br>参考视频：<a href="http://www.tudou.com/programs/view/gWhLS4wIvgU/" target="_blank" rel="external">http://www.tudou.com/programs/view/gWhLS4wIvgU/</a><br><a href="http://www.cnblogs.com/suncj/p/4065589.html" target="_blank" rel="external">http://www.cnblogs.com/suncj/p/4065589.html</a><br><a href="http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-creating-and-dropping-jpa-databases" target="_blank" rel="external">http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#boot-features-creating-and-dropping-jpa-databases</a><br><a href="http://www.infoq.com/cn/articles/microframeworks1-spring-boot" target="_blank" rel="external">http://www.infoq.com/cn/articles/microframeworks1-spring-boot</a></p>
+<blockquote>
+<p>@Query()使用HQL语句。Hibernate查询方式。</p>
+</blockquote>
+<p>SpringBoot的Pom文件简介</p>
+<blockquote>
+<p>HSQLDB是一个开放源代码的JAVA数据库</p>
+</blockquote>
+<p>Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而<strong>使开发人员不再需要定义样板化的配置</strong>。通过这种方式，Boot致力于在蓬勃发展的快速应用开发领域（rapid application development）成为领导者。</p>
+<p>多年以来，Spring IO平台饱受非议的一点就是<strong>大量的XML配置以及复杂的依赖管理</strong>。在去年的SpringOne 2GX会议上，Pivotal的CTO Adrian Colyer回应了这些批评，并且特别提到该平台将来的目标之一就是实现免XML配置的开发体验。Boot所实现的功能超出了这个任务的描述，开发人员不仅不再需要编写XML，而且在一些场景中甚至不需要编写繁琐的import语句。在对外公开的beta版本刚刚发布之时，<strong>Boot描述了如何使用该框架在140个字符内实现可运行的web应用，从而获得了极大的关注度，该样例发表在tweet上</strong>。</p>
+<p>然而，Spring Boot并不是要成为Spring IO平台里面众多“Foundation”层项目的替代者。Spring Boot的目标不在于为已解决的问题域提供新的解决方案，而是<strong>为平台带来另一种开发体验</strong>，从而简化对这些已有技术的使用。对于已经熟悉Spring生态系统的开发人员来说，Boot是一个很理想的选择，不过对于采用Spring技术的新人来说，Boot提供一种更简洁的方式来使用这些技术。</p>
+<p>在追求开发体验的提升方面，Spring Boot，甚至可以说整个Spring生态系统都使用到了Groovy编程语言。Boot所提供的众多便捷功能，都是借助于Groovy强大的MetaObject协议、可插拔的AST转换过程以及内置的依赖解决方案引擎所实现的。在其核心的编译模型之中，Boot使用Groovy来构建工程文件，所以它可以使用通用的导入和样板方法（如类的main方法）对类所生成的字节码进行装饰（decorate）。这样使用Boot编写的应用就能保持非常简洁，却依然可以提供众多的功能。</p>
+<h3 id="安装Boot"><a href="#安装Boot" class="headerlink" title="安装Boot"></a>安装Boot</h3><p>从最根本上来讲，<strong>Spring Boot就是一些库的集合</strong>，它能够被任意项目的构建系统所使用。简便起见，该框架也提供了命令行界面，它可以用来运行和测试Boot应用。框架的发布版本，包括集成的CLI（命令行界面），可以在Spring仓库中手动下载和安装。一种更为简便的方式是使用<strong>Groovy</strong>环境管理器（Groovy enVironment Manager，GVM），它会处理Boot版本的安装和管理。Boot及其CLI可以通过GVM的命令行gvm install springboot进行安装。在OS X上安装Boot可以使用Homebrew包管理器。为了完成安装，首先要使用brew tap pivotal/tap切换到Pivotal仓库中，然后执行brew install springboot命令。</p>
+<p>要进行打包和分发的工程会依赖于像Maven或Gradle这样的构建系统。为了简化依赖图，Boot的功能是模块化的，通过导入Boot所谓的“starter”模块，可以将许多的依赖添加到工程之中。为了更容易地管理依赖版本和使用默认配置，框架提供了一个parent POM，工程可以继承它。Spring Boot工程的样例POM文件定义如程序清单1所示。</p>
+<p>程序清单1</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;myproject&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+
+    &lt;!-- Inherit defaults from Spring Boot --&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.0.0.RC1&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;!-- Add typical dependencies for a web application --&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;spring-snapshots&lt;/id&gt;
+            &lt;url&gt;http://repo.spring.io/libs-snapshot&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+
+    &lt;pluginRepositories&gt;
+        &lt;pluginRepository&gt;
+            &lt;id&gt;spring-snapshots&lt;/id&gt;
+            &lt;url&gt;http://repo.spring.io/libs-snapshot&lt;/url&gt;
+        &lt;/pluginRepository&gt;
+    &lt;/pluginRepositories&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre><p>为了实现更为简单的构建配置，开发人员可以使用Gradle构建系统中简洁的Groovy DSL，如程序清单1.1所示。</p>
+<p>程序清单1.1</p>
+<pre><code>buildscript {
+  repositories {
+    maven { url &quot;http://repo.spring.io/libs-snapshot&quot; }
+    mavenCentral()
+  }
+  dependencies {
+    classpath(&quot;org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC1&quot;)
+  }
+}
+
+apply plugin: &apos;java&apos;
+apply plugin: &apos;spring-boot&apos;
+repositories {
+  mavenCentral()
+  maven { url &quot;http://repo.spring.io/libs-snapshot&quot;  }
+}
+
+dependencies {
+  compile &apos;org.springframework.boot:spring-boot-starter-actuator:1.0.0.RC1&apos;
+}
+</code></pre><p>为了快速地搭建和运行Boot工程，Pivotal提供了称之为“Spring Initializr” 的web界面，用于下载预先定义好的Maven或Gradle构建配置。我们也可以使用Lazybones模板实现快速起步，在执行lazybones create spring-boot-actuator my-app命令后，它会为Boot应用创建必要的工程结构以及gradle构建文件。</p>
+<h3 id="开发Spring-Boot应用"><a href="#开发Spring-Boot应用" class="headerlink" title="开发Spring Boot应用"></a>开发Spring Boot应用</h3><p>Spring Boot在刚刚公开宣布之后就将一个样例发布到了Twitter上，它目前成为了最流行的一个应用样例。它的全部描述如程序清单1.2所示，一个非常简单的Groovy文件可以生成功能强大的以Spring为后端的web应用。</p>
+<p>程序清单1.2</p>
+<pre><code>@RestController
+class App {
+  @RequestMapping(&quot;/&quot;)
+  String home() {
+    &quot;hello&quot;
+  }
+}
+</code></pre><p>这个应用可以通过spring run App.groovy命令在Spring Boot CLI中运行。Boot会分析文件并根据各种“编译器自动配置（compiler auto-configuration）”标示符来确定其意图是生成Web应用。然后，它会在一个嵌入式的Tomcat中启动Spring应用上下文，并且使用默认的8080端口。打开浏览器并导航到给定的URL，随后将会加载一个页面并展现简单的文本响应：“hello”。提供默认应用上下文以及嵌入式容器的这些过程，能够让开发人员更加关注于开发应用以及业务逻辑，从而不用再关心繁琐的样板式配置。</p>
+<p>Boot能够自动确定类所需的功能，这一点使其成为了强大的快速应用开发工具。当应用在Boot CLI中执行时，它们在使用内部的Groovy编译器进行构建，这个编译器可以在字节码生成的时候以编码的方式探查并修改类。通过这种方式，使用CLI的开发人员不仅可以省去定义默认配置，在一定程度上甚至可以不用定义特定的导入语句，它们可以在编译的过程中识别出来并自动进行添加。除此之外，当应用在CLI中运行时，Groovy内置的依赖管理器，“Grape”，将会解析编译期和运行时的类路径依赖，与Boot编译器的自动配置机制类似。这种方式不仅使得框架更加对用户友好，而且能够让不同版本的Spring Boot与特定版本的来自于Spring IO平台的库相匹配，这样一来开发人员就不用关心如何管理复杂的依赖图和版本结构了。另外，它还有助于快速原型的开发并生成概念原型的工程代码。</p>
+<p><strong>对于不是使用CLI构建的工程，Boot提供了许多的“starter”模块，它们定义了一组依赖，这些依赖能够添加到构建系统之中，从而解析框架及其父平台所需的特定类库。</strong>例如，spring-boot-starter-actuator依赖会引入一组基本的Spring项目，从而实现应用的快速配置和即时可用。关于这种依赖，值得强调的一点就是当开发Web应用，尤其是RESTful Web服务的时候，如果包含了spring-boot-starter-web依赖，它就会为你提供启动嵌入式Tomcat容器的自动化配置，并且提供对微服务应用有价值的端点信息，如服务器信息、应用指标（metrics）以及环境详情。除此之外，如果引入spring-boot-starter-security模块的话，actuator会自动配置Spring Security，从而为应用提供基本的认证以及其他高级的安全特性。它还会为应用结构引入一个内部的审计框架，这个框架可以用来生成报告或其他的用途，比如开发认证失败的锁定策略。</p>
+<p>为了阐述在Java Maven工程中，如何快速地使Spring Web工程准备就绪，考虑一下程序清单1.3中的应用程序代码。</p>
+<p>程序清单1.3</p>
+<pre><code>package com.infoq.springboot;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@EnableAutoConfiguration
+public class Application {
+
+  @RequestMapping(&quot;/&quot;)
+  public String home() {
+    return &quot;Hello&quot;;
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
+}
+</code></pre><p>在Application类上的@EnableAutoConfiguration注解会告知Boot要采用一种特定的方式来对应用进行配置。这种方法会将其他样板式的配置均假设为框架默认的约定，因此能够聚焦于如何尽快地使应用准备就绪以便运行起来。Application类是可运行的，因此，当我们以Java Application的方式运行这个类时，就能启动该应用及其嵌入式的容器，这样也能实现即时地开发。</p>
+<p>为了发布版本而构建工程时，Boot的Maven和Gradle插件可以嵌入（hook）到这些构建系统的打包过程中，以生成可执行的“胖jar包（fat jar）”，这种jar包含了工程的所有依赖并且能够以可运行jar的方式执行。使用Maven打包Boot应用只需运行mvn package命令，与之类似，使用Gradle时，执行gradle build命令将会在构建的目标地址下生成可运行的jar。</p>
+<p>开发微服务</p>
+<p>Boot对Spring应用的开发进行了简化，提供了模块化方式导入依赖的能力，强调了开发RESTful Web服务的功能并提供了生成可运行jar的能力，这一切都清晰地表明在开发可部署的微服务方面Boot框架是一个强大的工具。正如前面的例子所示，借助于Boot，让一个RESTful Web工程运行起来是一件很容易的事情；不过，为了了解Boot所有潜在的功能，我们会阐述在开发完整功能的微服务时，会遇到的所有繁琐的事情。在企业级基础<strong>设施领域，微服务是一种越来越流行的应用架构，因为它能够实现快速开发、更小的代码库、企业级集成以及模块化部署。</strong>有众多的框架致力于该领域的开发，该章节将会讨论使用Boot如何简化这一过程。</p>
+<h3 id="数据访问"><a href="#数据访问" class="headerlink" title="数据访问"></a>数据访问</h3><p>我们可以基于各种目的来构建微服务，但有一点是肯定的，<strong>那就是大多数都需要读取和写入数据库的能力</strong>。Spring Boot使数据库集成变成了一项非常简单的任务，<strong>因为它具有自动配置Spring Data以访问数据库的能力</strong>。只需在你的工程中将<code>spring-boot-starter-data-jpa</code>包含进来，Boot的自动配置引擎就能探测到你的工程需要数据访问功能，并且会在Spring应用上下文中创建必要的Bean，这样你就可以使用Repository和服务了。为了更具体地阐述这一点，请参见程序清单1.4中的Gradle构建文件，它列出了一个基于Groovy的微服务web应用的构建结构，该应用使用了Spring Data对JPA的支持来实现数据访问。</p>
+<p>程序清单1.4</p>
+<pre><code>buildscript {
+  repositories {
+    maven { url &quot;http://repo.spring.io/libs-snapshot&quot; }
+    mavenCentral()
+  }
+  dependencies {
+    classpath(&quot;org.springframework.boot:spring-boot-gradle-plugin:1.0.0.RC1&quot;)
+  }
+}
+
+apply plugin: &apos;groovy&apos;
+apply plugin: &apos;spring-boot&apos;
+
+repositories {
+  mavenCentral()
+  maven { url &quot;http://repo.spring.io/libs-snapshot&quot;  }
+}
+
+ext {
+  springBootVersion = &quot;1.0.0.RC1&quot;
+}
+
+dependencies {
+  compile &apos;org.codehaus.groovy:groovy-all:2.2.1&apos;
+  compile &quot;org.springframework.boot:spring-boot-starter-web:$springBootVersion&quot;
+  compile &quot;org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion&quot;
+  compile &quot;org.springframework.boot:spring-boot-starter-actuator:$springBootVersion&quot;
+}
+</code></pre><p>在这个配置中，Boot的actuator模块提供了对hsqldb的依赖，这会搭建所有必要的依赖——包括模式的创建——因此Spring Data可以使用这个内存数据库作为数据源。这种简便的方式能够让开发人员免于在开发期创建和管理复杂的XML配置，进而能够快速地开发数据库驱动的微服务。如果在classpath中有H2或Derby数据库的话，这种自动化配置也会生效。Boot所提供的另一个便利之处就是能够快速简便地使用相关数据启动应用的数据库模式。这在开发期是非常有用的，此时数据库可能是在内存中或者是不稳定的，开发人员需要保证的是在应用启动的时候能够访问到这些特定的数据。为了阐述这一点，考虑一下程序清单1.5中的示例JPA实体，它代表了微服务所提供的“User”数据结构。</p>
+<p>程序清单1.5</p>
+<pre><code>@Entity
+class User {
+  @Id
+  @GeneratedValue
+  Long id
+
+  String username
+  String firstName
+  String lastName
+  Date createdDate
+  Date lastAccessed
+
+  Boolean isActive = Boolean.TRUE
+}
+</code></pre><p>为了启用代表User对象的通用数据，我们只需创建一个名为schema.sql或data.sql的文件，并将其包含在classpath之中。这个文件会在模式创建完成之后执行，所以基于程序清单1.5所给出的实体，我们可以使用SQL语句启用一个用户账号，如程序清单1.6所示。</p>
+<p>程序清单1.6</p>
+<pre><code>insert into user(username, first_name, last_name, created_date) values (&apos;danveloper&apos;, &apos;Dan&apos;, &apos;Woods&apos;, now())
+</code></pre><p>在启动的时候，我们所提供的SQL代码会执行，这样就能确保有一个测试账号可以使用。微服务此时已经具有了数据访问的起始点，程序清单1.7展现了如何按照Spring Data的开发模式创建Repository接口，该接口会作为User实体的数据访问对象（Data Access Object）。</p>
+<p>程序清单1.7</p>
+<pre><code>public interface UserRepository extends CrudRepository&lt;User, Long&gt; {
+}
+</code></pre><p>CrudRepository提供了一些通用的接口方法来创建、查询、更新以及删除对象和对象集合。应用所需的其他特定功能可以按照Spring Data的Repository开发约定进行定义。一旦UserRepository接口创建成功，Boot的spring-data-jpa层会在工程中探测到它，并将其添加到Spring应用上下文之中，这样对于controller和sevice对象来说，它就成为可以进行自动注入的可选对象。这种自动化的配置只有在Boot应用要求按照这种方式初始化的时候才生效，这是通过存在@EnableAutoConfiguration注解来标识的。借助程序清单1.8中所实现的controller，微服务现在就可以定义RESTful端点了，服务的使用者可以获取到User的列表或单个User。</p>
+<p>程序清单1.8</p>
+<pre><code>@RestController
+@EnableAutoConfiguration
+@RequestMapping(&quot;/user&quot;)
+class UserController {
+
+  @Autowired
+  UserRepository repository
+
+  @RequestMapping(method=[RequestMethod.GET])
+  def get(Long id) {
+    id ? repository.findOne(id) : repository.findAll()
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run UserController, args
+  }
+}
+</code></pre><p>在启动的时候，应用将会输出日志，<strong>表明<code>Hibernate</code>按照User实体的定义创建数据库结构</strong>，在应用初始化的最后，Boot还会从schema.sql文件中导入数据。</p>
+<p>在开发微服务应用时，需要特别注意的一点是使用了@RequestMapping注解。这不是Boot特定的注解。不过，因为Boot安装了自己的端点以监控应用的性能、健康情况以及配置，所以需要确保应用的代码不要与这些内置的提供详情的路径解析相冲突。鉴于此，如果有从请求路径中解析属性的需求（在我们的场景中，也就是user的id属性），那么我们需要仔细考虑这个动态的属性解析会对微服务的其他行为产生什么影响。在本例中，只是简单地将controller映射到/user端点而不是根上下文，就能允许Boot的端点也可以进行访问。</p>
+<p>微服务所提供的数据并不一定全部适合关系型结构，针对这一点Spring Boot也暴露了一些模块，从而让开发人员可以使用Spring Data的MongoDB和Redis项目，不过依然采取特定的方式来进行配置。Spring Data用来定义数据访问对象（Data Access Object）的高层框架，这样快速切换JPA与非JPA数据源会变得非常容易。参见程序清单1.9，它展现了一个重新定义的UserRepository接口，这个接口设计为使用MongoDB取代JPA。</p>
+<p>程序清单1.9</p>
+<pre><code>public interface UserRepository extends MongoRepository&lt;User, Long&gt; {
+}
+</code></pre><p>MongoRepository接口也扩展了CrudRepository，因此微服务的Controller代码，也就是程序清单1.8所示并不需要修改。为了实现与MongoDB的集成，工程唯一要做的就是在应用的classpath中包含spring-boot-starter-data-mongodb。程序清单1.4所示的Gradle构建文件需要稍微调整一下依赖的部分，如程序清单1.10所示。</p>
+<p>程序清单1.10</p>
+<pre><code>dependencies {
+  compile &apos;org.codehaus.groovy:groovy-all:2.2.1&apos;
+  compile &quot;org.springframework.boot:spring-boot-starter-web:$springBootVersion&quot;
+  compile &quot;org.springframework.boot:spring-boot-starter-data-mongodb:$springBootVersion&quot;
+  compile &quot;org.springframework.boot:spring-boot-starter-actuator:$springBootVersion&quot;
+}
+</code></pre><p>MongoDB依赖都置于classpath之中以后，Boot将会自动配置Spring Data连接到localhost上的数据库，并且默认的数据库名为test。在这个库中，将会自动创建User集合（按照MongoDB的标准），微服务现在就能使用MongoDB作为后端了。对非JPA的数据存储来说，初始化数据比其他的方式更为简单，这主要是因为它不能针对MongoDB的文档存储和Redis的键值存储运行SQL文件。鉴于Spring Data会使用这些存储的持久化实例，这就意味着开发期创建的数据需要在重启后保留。为了持久化数据，我们需要修改微服务的controller，这样服务的使用者就能创建User实例了。我们也可以将微服务的UserController进行修改，使其符合通用的RESTful API结构，让controller以不同的方式处理不同的HTTP方法。程序清单1.11展现了为controller添加创建新User实例的功能。</p>
+<p>程序清单1.11</p>
+<pre><code>@RestController
+@RequestMapping(&quot;/user&quot;)
+@EnableAutoConfiguration
+class UserController {
+
+  @Autowired
+  UserRepository repository
+
+  @RequestMapping(method=[RequestMethod.GET])
+  def get(Long id) {
+    id ? repository.findOne(id) : repository.findAll()
+  }
+
+  @RequestMapping(method=[RequestMethod.POST])
+  def create(@RequestBody User user) {
+    repository.save user
+    user
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run UserController, args
+  }
+}
+</code></pre><p>当微服务的使用者往应用的端点上发送一个HTTP POST请求时，Spring将会把请求体转换为User实例。代码接下来会使用UserRepository将这个对象存储到MongoDB集合之中。使用curl创建User实例的样例如程序清单1.12所示。</p>
+<p>程序清单1.12</p>
+<pre><code>curl -v -H &quot;Content-Type: application/json&quot; -d &quot;{ \&quot;username\&quot;: \&quot;danveloper\&quot;, \&quot;firstName\&quot;: \&quot;Dan\&quot;, \&quot;lastName\&quot;: \&quot;Woods\&quot;, \&quot;createdDate\&quot;: \&quot;2014-02-02T00:00:00\&quot; }&quot; http://localhost:8080/user
+</code></pre><p>按照Boot针对Mongo数据源的特定配置，新的User实例默认会持久化到本地Mongo实例的test数据库的user集合之中。如果我们打开web浏览器并对微服务发起一个HTTP GET请求，我们就能看到所创建的user存在于返回的列表之中。</p>
+<p>配置</p>
+<p>我们可以很快地重写Spring Boot的默认配置。默认情况下，应用的配置可以使用Java属性文件来进行定义，这个文件名为application.properties并且位于应用的classpath根目录下。<strong>不过，一种更好的方式是使用 YAML配置，它提供了结构化以及嵌套的配置。</strong>在应用的运行时类路径之中包含snakeyaml之后，你的工程就可以在application.yml文件中直接定义配置了。为了详述这一点，考虑程序清单1.13的示例YAML配置，这里列出了应用的嵌入式HTTP服务器（默认是Tomcat，也可选择Jetty）的各种设置项。</p>
+<p>程序清单1.13</p>
+<pre><code># Server settings (ServerProperties)
+server:
+  port: 8080
+  address: 127.0.0.1
+  sessionTimeout: 30
+  contextPath: /
+
+  # Tomcat specifics
+  tomcat:
+    accessLogEnabled: false
+    protocolHeader: x-forwarded-proto
+    remoteIpHeader: x-forwarded-for
+    basedir:
+    backgroundProcessorDelay: 30 # secs
+</code></pre><p>允许重写Boot的自动化配置，这一点能够使你的应用从原型转化为真正的产品，Boot使用相同的<strong>application.yml</strong>文件进行配置，这样就会非常容易。自动化配置的指令被设计的尽可能简短，所以当使用actuator构建微服务时，会安装一个配置属性的端点，也就是/configprops，当确定哪些指令需要重写时可以进行参考。如果我们的微服务要使用持久化数据源，如MySQL，那么只需将MySQL的Java驱动添加到运行时classpath中，然后在application.yml中添加必要的配置指令即可，如程序清单1.14所示。</p>
+<p>程序清单1.14</p>
+<pre><code>spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/proddb
+    username: root
+    password
+</code></pre><p>在一些场景下你可能需要更为灵活的配置，Boot允许你通过Java的系统属性（System properties）重写很多它的默认配置。例如，如果你的应用需要在部署到产品化环境中使用不同的数据库用户，那么username配置指令可以通过标准的Java系统属性传入到应用之中，而这需要切换到命令行中执行-Dspring.datasource.username=user。关于这一点更为现实的场景是云部署环境，如Cloud Foundry或Heroku，这些平台需要应用启动特定的HTTP端口，这一点通过操作系统的环境变量可以实现。Boot能够从系统属性继承得到配置，这样你的应用就可以在命令行中使用-Dserver.port=$PORT来得到HTTP端口。在开发微服务时，这是一种相当有用的特性，因为它可以让微服务应用运行在各种环境配置之中。</p>
+<h3 id="外部化配置"><a href="#外部化配置" class="headerlink" title="外部化配置"></a>外部化配置</h3><p>微服务必须要支持的很重要的一点就是<strong>外部化配置</strong>。这种配置可以包含任何的内容，从占位符信息到数据库配置等等，在初始规划和构建应用原型时，这是必须要考虑的架构内容。在Spring IO平台中，已经存在各种导入配置的策略，但是应用能够以多种方式使用配置所造成的后果往往是产生冗长的编码性耦合。</p>
+<p>Boot一个很棒的特性在于它能管理外部化的配置并将其转换为对象结构，这个对象可以在整个应用上下文中使用。创建一个简单老式的Java/Groovy对象（Plain Old Java/Groovy Object），并使用@ConfigurationProperties注解，那么这个对象就能使用Boot配置结构中预先定义的name名下的配置项。更具体一点来讲，考虑一下程序清单1.15中的POGO，它能够得到application.key下的配置指令。</p>
+<p>程序清单1.15</p>
+<pre><code>@ConfigurationProperties(name = &quot;application&quot;)
+class ApplicationProperties {
+  String name
+  String version
+}
+</code></pre><p><strong>当ApplicationProperties对象在Spring上下文中创建完成之后，Boot将会识别出它是一个配置对象，并且会按照运行时classpath之中application.properties或application.yml文件中的配置指令填充它的属性。</strong>因此，如果我们在微服务的application.yml文件中添加application内容区的话，如程序清单1.16所示，那么我们就可以在应用的其他部分以编程的方式访问这些配置指令。</p>
+<p>程序清单1.16</p>
+<pre><code>application:
+  name: sb-ms-custdepl
+  version: 0.1-CUSTOMER
+</code></pre><p><strong>这些配置指令可以有各种用途，要访问这些指令的唯一要求就是代表它们的POJO/POGO必须是Spring应用上下文的成员。</strong> Boot能够将一个controller作为Spring Java配置对象，这样就能很容易地管理配置bean与应用上下文的集成，如程序清单1.17所示。</p>
+<p>程序清单1.17</p>
+<pre><code>@RestController
+@Configuration
+@RequestMapping(&quot;/appinfo&quot;)
+@EnableAutoConfiguration
+class AppInfoController {
+
+  @Autowired
+  ApplicationProperties applicationProperties
+
+  @RequestMapping(method=[RequestMethod.GET])
+  def get() {
+    [
+      name: applicationProperties.name,
+      version: applicationProperties.version
+    ]
+  }
+
+  @Bean
+  ApplicationProperties applicationProperties() {
+    new ApplicationProperties()
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run UserController, args
+  }
+}
+</code></pre><p>程序清单1.17中的样例代码可能有些牵强，不过，即便是在更为复杂的场景下，如何使用Boot来访问应用特定配置的原则是相同的。<strong>配置类也支持嵌套式的对象图</strong>，这样来自于配置中的深层数据就能更便利地进行访问，也有了更好的语义。例如，如果我们想要得到的配置指令是application.根下的那些metrics key，那么可以在ApplicationProperties POGO中添加一个嵌套对象来表示这些值，如程序清单1.18所示。</p>
+<p>程序清单1.18</p>
+<pre><code>@ConfigurationProperties(name = &quot;application&quot;)
+class ApplicationProperties {
+  String name
+  String version
+
+  final Metrics metrics = new Metrics()
+
+  static class Metrics {
+    String dbExecutionTimeKey
+  }
+}
+</code></pre><p>现在，我们的application.yml文件可以如程序清单1.19所示，它在application.代码块中包含了metrics配置。</p>
+<p>程序清单1.19</p>
+<pre><code>application:
+  name: sb-ms-custdepl
+  version: 0.1-CUSTOMER
+  metrics:
+    dbExecutionTimeKey: user.get.db.time
+</code></pre><p>当我们需要访问application.metrics.dbExecutionTimeKey的值时，能够以编程的方式通过ApplicationProperties对象来进行访问。</p>
+<p>为了在整个应用之中使用application.properties或application.yml文件中的这些配置指令，我们并不是必须要将其转换为对象图。Boot也为Spring应用上下文提供了PropertySourcesPlaceholderConfiguration，这样的话，来自于application.properties或application.yml文件的指令或者来自于Java系统的重写属性都可以作为Spring属性占位符来使用。Spring的这种机制能够让你以一种特定的语法来为属性定义占位符值，如果Spring发现了占位符配置的话，就会用这个配置来进行填充。<strong>作为示例，我们可以在controller中使用@Value注解来直接访问application.metrics.dbExecutionTimeKey，如程序清单1.20所示。</strong></p>
+<p>程序清单1.20</p>
+<pre><code>@RestController
+@RequestMapping(&quot;/user&quot;)
+@EnableAutoConfiguration
+class UserController {
+
+  @Autowired
+  UserRepository repository
+
+  @Autowired
+  GaugeService gaugeService
+
+  @Value(&apos;${application.metrics.dbExecutionTimeKey}&apos;)
+  String dbExecutionKey
+
+  @RequestMapping(method=[RequestMethod.GET])
+  def get(Long id) {
+    def start = new Date().time
+    def result = id ? repository.findOne(id) : repository.findAll()
+    gaugeService.submit dbExecutionKey, new Date().time - start
+    result
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run UserController, args
+  }
+}
+</code></pre><p><strong>关于应用指标的报告，后面会有更为详细的介绍，但现在重要的一点在于，理解@Value注解如何与Spring属性占位符一起使用，使Boot能够自动注入值，从而满足这个微服务的特定配置需求。</strong></p>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><p>在微服务的开发中，对于完备安全场景的需求会持续增长。为了满足这种需求，Boot引入了强大完整的Spring Security，并且提供了自动配置的功能，以快速简便地启用安全层。只需在应用的classpath中包含spring-boot-starter-security模块就能使Boot引入一些安全特性，如跨站脚本防护（cross-site scripting protection）并且会添加头信息以防止点击劫持（click-jacking）。除此之外，添加一条简单的配置指令就能启用基本认证来保护你的应用，如程序清单1.21所示。</p>
+<p>程序清单1.21</p>
+<pre><code>security:
+  basic:
+    enabled: true
+</code></pre><p>Boot会为你提供一个默认的用户账号user和默认角色USER，并且会在应用启动的时候在控制台上输出随机生成的密码。就像Boot的其他功能那样，对于内置的user账号，我们可以很容易地指定不同的用户名和密码（分别为“secured”和“foo”），这需要通过明确定义的配置指令来实现，如程序清单1.22所示。</p>
+<p>程序清单1.22</p>
+<pre><code>security:
+  basic:
+    enabled: true
+  user:
+    name: secured
+    password: foo
+</code></pre><p>对于简单的内部应用或开发原型来说，Boot内置的基础设施能够快速地在微服务中启用基本认证，这是非常有用的。随着需求的演化，你的应用毫无疑问会需要更细粒度的安全特性，如保护端点只能由特定的角色访问。从这个角度来看，我们可能希望具有USER角色的调用者只能读取数据（即GET请求），而对具有ADMIN角色的调用者可以读取和写入数据（即POST请求）。为了做到这一点，我们需要在工程的application.yml文件中禁用Boot的基本认证自动配置功能，并且定义我们自己的user和admin账号以及对应的角色。当你的需求超过Boot所提供的默认功能时，它通常很快就能实现，这可以作为佐证这一点的又一个例子。为了更具体地阐述这一点，考虑一下程序清单1.23中的代码。这个样例可以阐述如何发挥Spring Security所有潜在的功能以及更为复杂的认证策略，如基于JDBC后端、OpenID或<strong>单点登录（Single-Sign On）。</strong></p>
+<p>程序清单1.23</p>
+<pre><code>@RestController
+@RequestMapping(&quot;/user&quot;)
+@Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableAutoConfiguration
+class UserController extends WebSecurityConfigurerAdapter {
+
+  @Autowired
+  UserRepository repository
+
+  @RequestMapping(method = [GET])
+  @Secured([&apos;ROLE_USER&apos;])
+  def get(Long id) {
+    //这段代码写得很好，学习了。高度抽象
+    id ? repository.findOne(id) : repository.findAll()
+  }
+
+  @RequestMapping(method = [POST])
+  @Secured([&apos;ROLE_ADMIN&apos;])
+  def create(@RequestBody User user) {
+    repository.save user
+    user
+  }
+
+  @Override
+  void configure(AuthenticationManagerBuilder auth) {
+    auth
+    .inMemoryAuthentication()
+    .withUser &quot;user&quot; password &quot;password&quot; roles &quot;USER&quot; and() withUser &quot;admin&quot; password &quot;password&quot; roles &quot;USER&quot;, &quot;ADMIN&quot;
+  }
+
+  @Override
+  void configure(HttpSecurity http) throws Exception {
+    BasicAuthenticationEntryPoint entryPoint = new BasicAuthenticationEntryPoint()
+    entryPoint.realmName = &quot;Spring Boot&quot;
+    http.exceptionHandling().authenticationEntryPoint(entryPoint)
+    http.requestMatchers().antMatchers(&quot;/**&quot;).anyRequest()
+    .and().httpBasic().and().anonymous().disable().csrf().disable()
+  }
+
+  public static void main(String[] args) {
+    SpringApplication.run UserController, args
+  }
+}
+</code></pre><p>在程序清单1.23的样例之中，应用现在被明确地配置为要基于user和admin用户账号进行访问，它们的密码都是password，具有的角色分别是USER和ADMIN。微服务的GET和POST端点分别通过USER和ADMIN角色进行保护，这就意味着普通用户可以访问只读的数据，而执行读取-写入操作的话，需要admin用户凭证。</p>
+<p>对于微服务来说，基本认证是很好的一个选择，因为它遵循了很实用且广泛使用的认证协议。换句话说，很多的API调用者，包括移动应用，能够很容易地使用这一点来访问你的微服务。当你的认证需求超过了基本认证的功能时（如OpenID或OAuth），微服务可以使用Spring Security的全部功能来满足你的需求。</p>
+<h3 id="消息集成"><a href="#消息集成" class="headerlink" title="消息集成"></a>消息集成</h3><p>在任何的应用中，消息（messaging）都是一种很强大的工具，在一点上，微服务当然也不能例外。使用消息驱动架构开发的应用能够更好地支持可重用性和扩展性。Spring Boot能够让开发人员在编写微服务时将消息作为架构的核心组成部分，它使用到了Spring IO平台的企业集成模式（Enterprise Integration Patterns）实现，即Spring Integration。Spring Integration提供了开发消息驱动架构的基本结构，以及与分布式企业平台集成的模块。这种能力使得微服务可以使用来自抽象消息源的业务对象，这些消息源可以在应用内部，也可能是组织机构内部的其他服务所提供的。</p>
+<p>尽管Boot并没有提供明确的Spring上下文自动化配置，但是它为Spring Integration提供了一个starter模块，它会负责引入Spring Integration项目的一系列依赖。这些依赖包括Spring Integration的核心库（Core library）、HTTP模块（用来进行面向HTTP的企业集成）、IP模块（用来进行基于Socket的集成操作）、File模块（用于进行文件系统集成）以及Stream模块（用于支持使用Stream的操作，如stdin和stdout）。这个starter模块为开发人员提供了健壮的消息功能的工具集，可以使已有的基础设施适应微服务API。</p>
+<p>除了starter模块，Boot也为通过CLI构建的应用提供了编译器自动配置的功能。对于需要快速构建微服务原型并验证可行性的开发者来说，这种方式提供了一些捷径。使用企业级平台的应用可以快速地进行开发，在转移到正式的工程和构建系统之前，就能确认其价值。使用Spring Boot和Spring Integration使一个消息驱动的微服务运行起来非常简单，如程序清单1.24的样例代码所示。</p>
+<p>程序清单1.24</p>
+<pre><code>@RestController
+@EnableIntegrationPatterns
+class App {
+
+  @Bean
+  def userLookupChannel() {
+    new DirectChannel()
+  }
+
+  @Bean
+  def userTemplate() {
+    new MessagingTemplate(userLookupChannel())
+  }
+
+  @RequestMapping(method=[RequestMethod.GET])
+  def get(@RequestParam(required=false) Long id) {
+    userTemplate().convertSendAndReceive( id ? id : &quot;&quot;)
+  }
+}
+
+class User {
+  Long id
+}
+
+@MessageEndpoint
+class UserLookupObject {
+
+  @ServiceActivator(inputChannel=&quot;userLookupChannel&quot;)
+  def get(Long id) {
+    id ? new User(id:id) : new User()
+  }
+}
+</code></pre><p>使用消息驱动的方式来进行微服务的开发能提供很大的代码可重用性，并且能够与底层的服务提供者实现相解耦。在更为正式的场景之中，程序清单1.24的代码可能会负责组合数据，这些数据可能来自于数据库调用和企业组织中某个外部的服务集成。Spring Integration具有内置的设施用来进行负载路由（payload routing）和处理器链（handler chaining），这对于组合不同的数据来说，是一个很有吸引力的方案，我们的微服务可以作为一个数据的提供者（provider）。</p>
+<h3 id="提供度量指标"><a href="#提供度量指标" class="headerlink" title="提供度量指标"></a>提供度量指标</h3><p>微服务最重要的一个特性可能就是为报表终端（reporting agent）提供度量指标。不像那些功能完备的Web应用，微服务是轻量级的，设计时可能就不会规划提供报表界面或完备的接口来分析服务的活动。这种类型的操作最好是留给专门进行数据聚合和分析的应用，这些数据能够用来进行稳定性、性能以及商务智能的监控。基于这样的前提，微服务应该为这些工具提供端点，从而更加容易地获取有关该服务活动的数据。而报表工具负责将数据聚合到一个视图或报告中，对于关心数据的人这才是有意义的。</p>
+<p>微服务的一些指标如稳定性和性能，对所有的应用都是通用的，但是与业务操作相关的指标必须由应用本身来具体进行管理。针对这一点，Spring Boot的actuator模块为开发人员提供了一种机制，允许开发人员通过/metrics端点以编码的方式暴露微服务状态的细节。Boot将指标拆分为“counter”和“gauge”两种类别：counter是所有以Number类型来展现的指标，而gauge是衡量双精度计算的指标。为了让微服务的开发人员更加容易地使用指标，Boot暴露了CounterService和GaugeService，它们可以自动织入到应用上下文之中。请参见程序清单1.25的样例，它阐述了如何通过CounterService对外暴露点击数。</p>
+<p>程序清单1.25</p>
+<pre><code>@RestController
+@RequestMapping(&quot;/user&quot;)
+@EnableAutoConfiguration
+class UserController {
+
+  @Autowired
+  UserRepository repository
+
+  @Autowired
+  CounterService counterService
+
+  @RequestMapping(method = [GET])
+  def get() {
+    get(null)
+  }
+
+  @RequestMapping(value=&quot;/{id}&quot;, method = [GET])
+  def get(@PathVariable Long id) {
+    counterService.increment id ? &quot;queries.by.id.$id&quot; : &quot;queries.without.id&quot;
+    id ? repository.findOne(id) : repository.findAll()
+  }
+}
+</code></pre><p>在点击/user端点时，有可能提供ID也有可能不提供ID，/metrics端点都会在counter.父节点下记录新的key。例如，如果我们只是查询/user端点而不带有ID的话，那么就会注册counter.queries.without.id指标。类似的，如果我们带有ID的话，那么就会看到有一个<code>counter.queries.by.id.&lt;id&gt;</code>的key，它能用来标记对于给定的ID已经进行了多少次查询。这些指标可能会有助于掌握最经常访问的User对象并指导要采取的行为，如缓存或数据库索引。类似于递增指标的数值，CounterService也允许将指标的值将为零。这对于跟踪打开的连接数或其他频率分布（histographic）的测量都是很有用处的。</p>
+<p>gauge是稍微有所不同的一种类型指标，它会进行探索性的计算或基于请求来确定值。如GaugeService的JavaDocs所述，“gauge”可以测量任意的值，从方法执行的次数到会议室的温度。当需要为报表工具暴露细节时，这种类型的测量尤其适合于使用GaugeService。gauge的指标会在/metrics端点之下进行访问，并且带有gauge.前缀。它们的注册方式与counter有些差别，如程序清单1.26所示。</p>
+<p>程序清单1.26</p>
+<pre><code>@RestController
+@RequestMapping(&quot;/user&quot;)
+@EnableAutoConfiguration
+class UserController {
+
+  @Autowired
+  UserRepository repository
+
+  @Autowired
+  CounterService counterService
+
+  @RequestMapping(method = [GET])
+  def get() {
+    get(null)
+  }
+
+  @RequestMapping(value=&quot;/{id}&quot;, method = [GET])
+  def get(@PathVariable Long id) {
+    def start = new Date().time
+    def result = id ? repository.findOne(id) : repository.findAll()
+    def time = new Date().time - start
+    gaugeService.submit(&quot;user.get.db.time&quot;, time.doubleValue())
+    result
+  }
+}
+</code></pre><p>默认情况下，指标会存储在一个易失的内存数据库之中，但Boot同时也为应用上下文提供了MetricsRepository实现，它能支持更为持久化的行为。Boot自带了一个RedisMetricsRepository，它能够自动织入进来，从而将指标存储到Redis值存储之中，另外，可以编写自定义的实现将指标存储到任意的数据存储形式之中。</p>
+<p>Boot还提供了对Coda Hale Metrics库的支持，它会将以特定名称开头的指标强制转换为对应的Metrics类型。例如，如果有一个指标是以histogram.开头，那么这个值将会作为Histogram对象类型。这种自动化的强制转换对于meter.和timer.key也是有效的，而普通的指标将会作为Gauge类型。</p>
+<p>一旦微服务的指标在Boot中进行了注册，那么报表工具就可以通过/metrics端点来检索它们。已命名的指标可以通过/metrics端点获取，只需将指标的key名作为查询字符串的一部分即可。例如，如果只是访问gauge指标下的“user.get.db.time”，报表工具可以针对/metrics/gauge.user.get.db.time进行查询。</p>
+<h3 id="打包Boot应用"><a href="#打包Boot应用" class="headerlink" title="打包Boot应用"></a>打包Boot应用</h3><p>正如前面所讨论的，Boot提供了Maven和Gradle插件，它为构建系统的打包阶段提供了一种钩子（hook），以产生所谓的“胖jar”，在这种jar中包含了工程的所有依赖。当这个胖jar包执行时，应用将会运行在与工程开发期相同的嵌入式容器之中。这种简便的方式能够让开发人员省去很多麻烦，因为他们的部署包在开发期和运行时环境之中具有相同的依赖结构。这也能够缓解运维团队的焦虑，他们不用担心部署的场景，因为在部署时一个错误配置的运行时容器可能会带有某个特定的依赖，而在项目的开发期所依赖的可能是另外一个。</p>
+<p>为了在Maven下执行打包，只需执行mvn package命令。Spring Boot的插件会备份工程所创建的原始jar并且在文件名上添加“.original”。在这里，能够得到可运行的jar，文件符合Maven artifact的命名约定，它可以按照工程最合适的方式进行部署。使用Gradle构建Boot工程同样很简单，只需执行标准的gradle build命令即可。类似于Maven，Boot插件在原有的打包任务之后使用Gradle安装了一个生命周期事件，并且会在build/libs目录下创建胖jar包。对所生成的胖jar包进行检查的一种方式就是所有依赖的jar都会位于归档文件的lib/目录下。</p>
+<p>打包完成之后，胖jar包就能够像其他可运行的jar文件那样在命令行中执行了，也就是使用$JAVA_HOME/bin/java -jar path/to/myproject.jar命令。启动后，Boot应用的日志将会显示在控制台上。</p>
+<p>对于需要部署到传统servlet容器之中的应用，Boot提供了一种方式以编码的方式初始化Web配置。为了使用这一点，Boot提供了可选的WebApplicationInitializer，它会使用servlet容器来注册应用，这会通过Servlet 3.0 API以编码的方式注册servlet并且会用到ServletContext。通过提供SpringBootServletInitializer的子类，Boot应用能够使用嵌入的Spring上下文来注册配置，这个Spring上下文是在容器初始化的时候创建的。为了阐述这个功能，考虑程序清单1.27中的示例代码。</p>
+<p>程序清单1.27</p>
+<pre><code>@RestController
+@EnableAutoConfiguration
+class Application extends SpringBootServletInitializer {
+
+  @RequestMapping(method = RequestMethod.GET)
+  String get() {
+    &quot;home&quot;
+  }
+
+  static void main(String[] args) {
+    SpringApplication.run this, args
+  }
+
+  @Override
+  SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    application.sources Application
+  }
+}
+</code></pre><p>Application类中被重写的configure方法就是使用嵌入式的Spring上下文注册应用的地方。在更为正式的场景之中，这个方法可能会用来注册Spring Java配置类，它会定义应用中所有controller和服务的bean。</p>
+<p>当将应用打包部署到servlet容器之中时，工程要构建为一个war文件。在Maven工程中，为了适应这一点，需要移除Boot插件，并且packaging需要明确定义为“war”类型，如程序清单1.28所示。</p>
+<p>程序清单1.28</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.example&lt;/groupId&gt;
+    &lt;artifactId&gt;myproject&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;war&lt;/packaging&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;1.0.0.RC1&lt;/version&gt;
+    &lt;/parent&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;spring-snapshots&lt;/id&gt;
+            &lt;url&gt;http://repo.spring.io/libs-snapshot&lt;/url&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;
+</code></pre><p>对这个工程执行mvn install命令会在target目录下生成myproject-1.0.0-SNAPSHOT.war文件。使用Gradle构建的工程可以使用Gradle War Plugin，它为构建war文件暴露了一个war任务。类似于Maven的配置，Boot Gradle工程也需要移除所包含的Boot插件。产生war文件的示例Gradle构建脚本如程序清单1.29所示。</p>
+<p>程序清单1.29</p>
+<pre><code>apply plugin: &apos;java&apos;
+apply plugin: &apos;war&apos;
+
+repositories {
+    mavenCentral()
+    maven { url &quot;http://repo.spring.io/snapshot&quot; }
+    maven { url &quot;http://repo.spring.io/milestone&quot; }
+}
+
+ext {
+  springBootVersion = &apos;1.0.0.BUILD-SNAPSHOT&apos;
+}
+
+dependencies {
+    compile &quot;org.springframework.boot:spring-boot-starter-web:${springBootVersion}&quot;
+    compile &quot;org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}&quot;
+}
+</code></pre><p>对于Boot工程，使用这个构建脚本运行Gradle的war任务将会在build/libs目录下产生war文件。</p>
+<p>不管是Maven还是Gradle的配置，一旦war文件产生，它就可以部署到任意兼容Servlet 3.0的应用服务器之中。部分兼容的容器包括Tomcat 7+、Jetty 8、Glassfish 3.x、JBoss AS 6.x/7.x以及Websphere 8.0。</p>
+<hr>
+<p><strong>延伸阅读 Spring</strong></p>
+<blockquote>
+<p>Boot团队已经编写了完整的指导和样例来阐述框架的功能。Blog文章、参考资料以及API文档都可以在Spring.IO网站上找到。项目的GitHub页面上可以找到示例的工程，更为具体的细节可以阅读Spring<br>Boot的参考手册。SpringSourceDev YouTube频道有一个关于Spring<br>Boot的webinar，它概述了这个项目的目标和功能。在去年在伦敦举行的Groovy &amp; Grails Exchange上，David<br>Dawson做了一个使用Spring Boot开发微服务的演讲。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/bird2.png"
+               alt="Coder_Roc" />
+          <p class="site-author-name" itemprop="name">Coder_Roc</p>
+          <p class="site-description motion-element" itemprop="description">关注技术趋势，服务端技术细节，Java语言，技术热点等，关注思维和最佳实践。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/cshijiel" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/cshijiel" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/cshijiel" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-bookmark"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+        <div class="weibo-show">
+          <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=350&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=1343748654&verifier=8a8120bb&dpc=1"></iframe>
+        </div>
+
+      </section>
+
+      
+
+
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder_Roc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"usee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("4zfuNQmoeSA4vpznpvoFSsaU-gzGzoHsz", "vk0EjSiTyqtCRKd1Kx2NkuG7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>

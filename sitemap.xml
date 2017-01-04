@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://coderroc.com/article/hello-world.html</loc>
+    
+    <lastmod>2017-01-04T10:56:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/IoC-and-DI.html</loc>
+    
+    <lastmod>2016-11-01T06:21:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/instanceof-in-java.html</loc>
+    
+    <lastmod>2016-10-18T13:25:59.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Is-Java-%22pass-by-reference%22-or-%22pass-by-value%22.html</loc>
+    
+    <lastmod>2016-10-18T13:24:09.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/about/index.html</loc>
+    
+    <lastmod>2016-09-06T11:16:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Internet-Protocol-v4.html</loc>
+    
+    <lastmod>2016-08-30T08:29:36.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/java-design-patterns/Template-Method-Pattern.html</loc>
+    
+    <lastmod>2016-08-23T12:15:47.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/java-design-patterns/talk-about-singleton.html</loc>
+    
+    <lastmod>2016-08-22T11:49:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/2015-Peking-University-Commencement-Speech.html</loc>
+    
+    <lastmod>2016-07-07T12:57:05.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/thinking-in-java-chapter-one-Introduction-to-Objects.html</loc>
+    
+    <lastmod>2016-07-05T06:04:08.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/simple-mockito.html</loc>
+    
+    <lastmod>2016-06-01T09:13:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/what-is-cdn.html</loc>
+    
+    <lastmod>2016-06-01T09:08:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Consistent-Hashing.html</loc>
+    
+    <lastmod>2016-05-24T12:54:31.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/how-to-read-others-code.html</loc>
+    
+    <lastmod>2016-03-04T08:32:35.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/404.html</loc>
+    
+    <lastmod>2016-02-28T13:14:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2.html</loc>
+    
+    <lastmod>2016-02-20T11:13:49.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E4%BB%BB%E5%8A%A1%E5%92%8C%E8%AE%A1%E5%88%92/2015%E5%B9%B411%E6%9C%88%E6%80%BB%E7%BB%93.html</loc>
+    
+    <lastmod>2015-11-04T13:56:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/%E6%B5%85%E8%B0%88HashMap.html</loc>
+    
+    <lastmod>2015-10-28T02:21:51.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java8-interface-lambda.html</loc>
+    
+    <lastmod>2015-10-01T09:36:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Something-About-WebNote.html</loc>
+    
+    <lastmod>2015-09-16T06:09:06.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/WebNote-2.0-records.html</loc>
+    
+    <lastmod>2015-09-15T01:39:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java-multi-thread-Condition.html</loc>
+    
+    <lastmod>2015-09-08T01:53:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/node-with-websocket-rest-authority-etc.html</loc>
+    
+    <lastmod>2015-09-06T02:59:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/CoffeeScript.html</loc>
+    
+    <lastmod>2015-09-06T02:58:38.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/graduation-project.html</loc>
+    
+    <lastmod>2015-09-06T02:16:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Resource-Autowired-Inject.html</loc>
+    
+    <lastmod>2015-04-21T09:22:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/handler-picture.html</loc>
+    
+    <lastmod>2015-04-20T15:10:56.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/shell-echo-style.html</loc>
+    
+    <lastmod>2015-04-15T11:05:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/MyBatis.html</loc>
+    
+    <lastmod>2015-04-15T10:41:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/springmvc-url.html</loc>
+    
+    <lastmod>2015-04-15T03:15:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/how-the-time-is-used.html</loc>
+    
+    <lastmod>2015-04-10T16:19:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/task/index.html</loc>
+    
+    <lastmod>2015-04-10T10:47:40.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/how-to-grow-up-quickly.html</loc>
+    
+    <lastmod>2015-04-09T15:04:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/java%E4%B8%ADforeach%E4%B8%8Eiterator%E8%BF%AD%E4%BB%A3%E5%99%A8.html</loc>
+    
+    <lastmod>2015-04-09T11:05:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Today%60s%20Knowledge%20about%20Java.html</loc>
+    
+    <lastmod>2015-04-09T11:05:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6.html</loc>
+    
+    <lastmod>2015-04-09T11:05:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java5%E6%96%B0%E7%89%B9%E5%BE%81%E4%B9%8Bforeach%E8%AF%AD%E5%8F%A5%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93.html</loc>
+    
+    <lastmod>2015-04-09T11:05:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/Poj%E7%AD%89%E4%BB%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F.html</loc>
+    
+    <lastmod>2015-04-09T11:05:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E5%BE%AE%E6%A1%86%E6%9E%B6%EF%BC%9ASpring%20Boot.html</loc>
+    
+    <lastmod>2015-04-09T10:09:02.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/YAML%E6%A0%BC%E5%BC%8F%E7%AE%80%E4%BB%8B.html</loc>
+    
+    <lastmod>2015-04-09T10:08:58.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/IntelliJ%20Idea%20%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8.html</loc>
+    
+    <lastmod>2015-04-09T10:06:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Web%E9%AB%98%E9%98%B6/WEB%E5%BC%80%E5%8F%91%EF%BC%9A%E8%A7%A3%E5%86%B3%E7%BD%91%E7%AB%99%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98.html</loc>
+    
+    <lastmod>2015-04-09T10:05:46.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/Node.js%20%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86.html</loc>
+    
+    <lastmod>2015-04-09T10:05:30.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/Linux%E5%9F%BA%E6%9C%AC%E5%85%A5%E9%97%A8.html</loc>
+    
+    <lastmod>2015-04-09T10:04:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/shell-export.html</loc>
+    
+    <lastmod>2015-04-09T10:04:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/Linux%20Shell%E5%85%A5%E9%97%A8.html</loc>
+    
+    <lastmod>2015-04-09T10:03:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Thread%E7%B1%BB%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B.html</loc>
+    
+    <lastmod>2015-04-09T10:03:26.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%AF%B9%E6%AF%942.html</loc>
+    
+    <lastmod>2015-04-09T10:03:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/StringStringBuilderStringBuffer%E5%AF%B9%E6%AF%94.html</loc>
+    
+    <lastmod>2015-04-09T10:02:54.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/JDK1.8%20%E4%B8%AD%20%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C.html</loc>
+    
+    <lastmod>2015-04-09T10:02:24.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84volatile.html</loc>
+    
+    <lastmod>2015-04-09T10:01:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/%E5%BA%94%E8%AF%A5%E9%80%89%E6%8B%A9%E6%80%8E%E6%A0%B7%E4%B8%80%E6%AC%BE%E7%AC%94%E8%AE%B0%EF%BC%9F.html</loc>
+    
+    <lastmod>2015-04-09T10:00:36.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/%E5%88%A9%E7%94%A8%E6%9A%97%E6%97%B6%E9%97%B4.html</loc>
+    
+    <lastmod>2015-04-09T10:00:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E6%A0%91-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%84%E7%AE%97%E6%B3%95.html</loc>
+    
+    <lastmod>2015-04-09T09:59:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E8%A1%A8%E3%80%81%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.html</loc>
+    
+    <lastmod>2015-04-09T09:59:10.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/AES%E5%8A%A0%E5%AF%86.html</loc>
+    
+    <lastmod>2015-04-09T09:58:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E6%9C%80%E5%88%9D%E7%9A%84%E6%83%B3%E6%B3%95.html</loc>
+    
+    <lastmod>2015-04-09T09:57:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/LeetCode/LeetCode-Two%20Sum.html</loc>
+    
+    <lastmod>2015-04-09T09:56:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/SpringBoot%E4%B8%AD%E8%AF%BB%E5%8F%96YAML.html</loc>
+    
+    <lastmod>2015-04-09T09:37:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/JavaScript%20%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html</loc>
+    
+    <lastmod>2015-04-09T09:36:42.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/recall-3-days.html</loc>
+    
+    <lastmod>2015-04-09T09:31:12.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/categories/index.html</loc>
+    
+    <lastmod>2015-04-06T15:07:28.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/tags/index.html</loc>
+    
+    <lastmod>2015-04-06T14:28:46.000Z</lastmod>
+    
+  </url>
+  
+</urlset>

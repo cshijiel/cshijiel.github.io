@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://coderroc.com/article/hello-world.html</loc>
+    <lastmod>2017-01-04T10:56:39.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-01-04T10:56:39.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/IoC-and-DI.html</loc>
+    <lastmod>2016-11-01T06:21:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>IoC and DI</title>
+        <pubTime>2015-04-21T02:10:32.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>IoC</tag>
+         
+        <tag>DI</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/instanceof-in-java.html</loc>
+    <lastmod>2016-10-18T13:25:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>[转] Java instanceof 关键字是如何实现的？</title>
+        <pubTime>2016-10-18T13:24:43.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>instanceof</tag>
+         
+        <tag>java关键字</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Is-Java-%22pass-by-reference%22-or-%22pass-by-value%22.html</loc>
+    <lastmod>2016-10-18T13:24:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>java到底是值传递还是引用传递</title>
+        <pubTime>2016-07-05T03:14:26.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Internet-Protocol-v4.html</loc>
+    <lastmod>2016-08-30T08:29:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>IP地址的不同格式和转化</title>
+        <pubTime>2016-06-23T03:31:35.000Z</pubTime>
+        
+        <tag>IP</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/java-design-patterns/Template-Method-Pattern.html</loc>
+    <lastmod>2016-08-23T12:15:47.000Z</lastmod>
+    <data>
+        <display>
+        <title>模板方法模式--设计模式</title>
+        <pubTime>2016-08-22T11:48:22.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>设计模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/java-design-patterns/talk-about-singleton.html</loc>
+    <lastmod>2016-08-22T11:49:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>也谈单例模式</title>
+        <pubTime>2015-10-08T08:53:42.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>设计模式</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/2015-Peking-University-Commencement-Speech.html</loc>
+    <lastmod>2016-07-07T12:57:05.000Z</lastmod>
+    <data>
+        <display>
+        <title>看 ‘北大最短毕业致辞’ 的感受</title>
+        <pubTime>2016-07-07T12:40:14.000Z</pubTime>
+        
+        <tag>感触</tag>
+         
+        <tag>思考</tag>
+         
+         
+           
+             
+              <breadCrumb title="思维改变生活" url="http://coderroc.com/categories/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/thinking-in-java-chapter-one-Introduction-to-Objects.html</loc>
+    <lastmod>2016-07-05T06:04:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Thinking in Java 读书笔记 — 第1章 对象导论</title>
+        <pubTime>2016-06-29T12:49:01.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>Thinking in Java</tag>
+         
+        <tag>读书笔记</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/simple-mockito.html</loc>
+    <lastmod>2016-06-01T09:13:16.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mockito初使用</title>
+        <pubTime>2016-06-01T09:07:21.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>Test</tag>
+         
+        <tag>Mockito</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/what-is-cdn.html</loc>
+    <lastmod>2016-06-01T09:08:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>CDN是什么</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>CDN</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Consistent-Hashing.html</loc>
+    <lastmod>2016-05-24T12:54:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>一致性Hash算法</title>
+        <pubTime>2016-05-23T05:20:20.000Z</pubTime>
+        
+        <tag>Hash</tag>
+         
+        <tag>一致性Hash</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/how-to-read-others-code.html</loc>
+    <lastmod>2016-03-04T08:32:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>怎样阅读别人的代码？</title>
+        <pubTime>2015-12-28T09:40:46.000Z</pubTime>
+        
+        <tag>IDEA</tag>
+         
+        <tag>Debug</tag>
+         
+        <tag>阅读代码</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2.html</loc>
+    <lastmod>2016-02-20T11:13:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>微信红包随机算法初探</title>
+        <pubTime>2015-10-28T12:49:09.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>java</tag>
+         
+        <tag>WeChat</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学和算法" url="http://coderroc.com/categories/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E4%BB%BB%E5%8A%A1%E5%92%8C%E8%AE%A1%E5%88%92/2015%E5%B9%B411%E6%9C%88%E6%80%BB%E7%BB%93.html</loc>
+    <lastmod>2015-11-04T13:56:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>2015年11月总结</title>
+        <pubTime>2015-11-04T13:55:23.000Z</pubTime>
+        
+        <tag>总结</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活与心情" url="http://coderroc.com/categories/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/%E6%B5%85%E8%B0%88HashMap.html</loc>
+    <lastmod>2015-10-28T02:21:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>浅谈HashMap</title>
+        <pubTime>2015-07-21T00:13:30.000Z</pubTime>
+        
+        <tag>数据结构</tag>
+         
+        <tag>java</tag>
+         
+        <tag>HashMap</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java8-interface-lambda.html</loc>
+    <lastmod>2015-10-01T09:36:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java 8 中的函数式接口与Lambda表达式</title>
+        <pubTime>2015-10-01T06:21:44.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>interface</tag>
+         
+        <tag>lambda</tag>
+         
+        <tag>函数式编程</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Something-About-WebNote.html</loc>
+    <lastmod>2015-09-16T06:09:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于云笔记</title>
+        <pubTime>2015-09-11T08:03:29.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>webnote</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/WebNote-2.0-records.html</loc>
+    <lastmod>2015-09-15T01:39:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>WebNote 2.0 后记</title>
+        <pubTime>2015-09-13T13:39:04.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>SpringMVC</tag>
+         
+        <tag>Cookie</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java-multi-thread-Condition.html</loc>
+    <lastmod>2015-09-08T01:53:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>多线程之Condition</title>
+        <pubTime>2015-09-07T02:52:21.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>多线程</tag>
+         
+        <tag>Condition</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/node-with-websocket-rest-authority-etc.html</loc>
+    <lastmod>2015-09-06T02:59:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>Node:WebSocket,REST,权限等</title>
+        <pubTime>2015-08-05T04:20:36.000Z</pubTime>
+        
+        <tag>Node</tag>
+         
+        <tag>REST</tag>
+         
+        <tag>WebSocket</tag>
+         
+        <tag>权限</tag>
+         
+         
+           
+             
+              <breadCrumb title="Node.js" url="http://coderroc.com/categories/Node-js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/CoffeeScript.html</loc>
+    <lastmod>2015-09-06T02:58:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>CoffeeScript</title>
+        <pubTime>2015-08-24T00:20:36.000Z</pubTime>
+        
+        <tag>CoffeeScript</tag>
+         
+        <tag>JavaScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/graduation-project.html</loc>
+    <lastmod>2015-09-06T02:16:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>毕业设计整理</title>
+        <pubTime>2015-08-11T00:20:36.000Z</pubTime>
+        
+        <tag>毕业设计</tag>
+         
+        <tag>推荐系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="毕业设计" url="http://coderroc.com/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Resource-Autowired-Inject.html</loc>
+    <lastmod>2015-04-21T09:22:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>spring下应用@Resource, @Autowired 和 @Inject注解进行依赖注入的差别</title>
+        <pubTime>2015-04-21T09:20:08.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>Spring</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/handler-picture.html</loc>
+    <lastmod>2015-04-20T15:10:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>图片裁剪整理</title>
+        <pubTime>2015-04-20T15:09:09.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>Nodejs</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/shell-echo-style.html</loc>
+    <lastmod>2015-04-15T11:05:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>shell中echo显示风格</title>
+        <pubTime>2015-04-15T03:16:19.000Z</pubTime>
+        
+        <tag>shell</tag>
+         
+        <tag>echo</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux基础" url="http://coderroc.com/categories/Linux%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/MyBatis.html</loc>
+    <lastmod>2015-04-15T10:41:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>MyBatis</title>
+        <pubTime>2015-04-10T08:01:32.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>MyBatis</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/springmvc-url.html</loc>
+    <lastmod>2015-04-15T03:15:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>SpringMVC URL传参方式</title>
+        <pubTime>2015-04-15T03:04:43.000Z</pubTime>
+        
+        <tag>SpringMVC</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/how-the-time-is-used.html</loc>
+    <lastmod>2015-04-10T16:19:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>how-the-time-is-used</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>思考</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活与心情" url="http://coderroc.com/categories/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/how-to-grow-up-quickly.html</loc>
+    <lastmod>2015-04-09T15:04:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>怎样，才能更快的成长？</title>
+        <pubTime>2015-04-09T14:47:33.000Z</pubTime>
+        
+        <tag>思考</tag>
+         
+        <tag>成长</tag>
+         
+         
+           
+             
+              <breadCrumb title="思维改变生活" url="http://coderroc.com/categories/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/java%E4%B8%ADforeach%E4%B8%8Eiterator%E8%BF%AD%E4%BB%A3%E5%99%A8.html</loc>
+    <lastmod>2015-04-09T11:05:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>java中foreach与iterator迭代器</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Today%60s%20Knowledge%20about%20Java.html</loc>
+    <lastmod>2015-04-09T11:05:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Today`s Knowledge about Java</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java%E8%AF%BB%E5%8F%96%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6.html</loc>
+    <lastmod>2015-04-09T11:05:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java读取文本文件</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>读取文件</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java5%E6%96%B0%E7%89%B9%E5%BE%81%E4%B9%8Bforeach%E8%AF%AD%E5%8F%A5%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93.html</loc>
+    <lastmod>2015-04-09T11:05:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Java5新特征之foreach语句使用总结</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>foreach</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/Poj%E7%AD%89%E4%BB%B7%E8%A1%A8%E8%BE%BE%E5%BC%8F.html</loc>
+    <lastmod>2015-04-09T11:05:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>Poj等价表达式</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>数据结构</tag>
+         
+        <tag>java</tag>
+         
+        <tag>栈</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学和算法" url="http://coderroc.com/categories/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E5%BE%AE%E6%A1%86%E6%9E%B6%EF%BC%9ASpring%20Boot.html</loc>
+    <lastmod>2015-04-09T10:09:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>深入学习微框架：Spring Boot</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>Spring_Boot</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/YAML%E6%A0%BC%E5%BC%8F%E7%AE%80%E4%BB%8B.html</loc>
+    <lastmod>2015-04-09T10:08:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>YAML格式简介</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>YAML</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/IntelliJ%20Idea%20%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%88%97%E8%A1%A8.html</loc>
+    <lastmod>2015-04-09T10:06:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>IntelliJ Idea 常用快捷键列表</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>IDE</tag>
+         
+        <tag>Intellij</tag>
+         
+        <tag>快捷键</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Web%E9%AB%98%E9%98%B6/WEB%E5%BC%80%E5%8F%91%EF%BC%9A%E8%A7%A3%E5%86%B3%E7%BD%91%E7%AB%99%E9%AB%98%E5%B9%B6%E5%8F%91%E9%97%AE%E9%A2%98.html</loc>
+    <lastmod>2015-04-09T10:05:46.000Z</lastmod>
+    <data>
+        <display>
+        <title>WEB开发：解决网站高并发问题</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>高并发</tag>
+         
+        <tag>Web</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web高阶" url="http://coderroc.com/categories/Web%E9%AB%98%E9%98%B6/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/Node.js%20%E7%9A%84%E4%B8%80%E4%BA%9B%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86.html</loc>
+    <lastmod>2015-04-09T10:05:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Node.js 的一些零碎知识</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>Node</tag>
+         
+        <tag>NPM</tag>
+         
+         
+           
+             
+              <breadCrumb title="Node.js" url="http://coderroc.com/categories/Node-js/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/Linux%E5%9F%BA%E6%9C%AC%E5%85%A5%E9%97%A8.html</loc>
+    <lastmod>2015-04-09T10:04:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux基本入门</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux基础" url="http://coderroc.com/categories/Linux%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/shell-export.html</loc>
+    <lastmod>2015-04-09T10:04:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>shell-export</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>shell</tag>
+         
+        <tag>export</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux基础" url="http://coderroc.com/categories/Linux%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Linux%E5%9F%BA%E7%A1%80/Linux%20Shell%E5%85%A5%E9%97%A8.html</loc>
+    <lastmod>2015-04-09T10:03:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux Shell入门</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>Shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux基础" url="http://coderroc.com/categories/Linux%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Thread%E7%B1%BB%E4%B8%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B.html</loc>
+    <lastmod>2015-04-09T10:03:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>Thread类与多线程</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>多线程</tag>
+         
+        <tag>Thread</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%AF%B9%E6%AF%942.html</loc>
+    <lastmod>2015-04-09T10:03:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>String相关类对比2</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>String</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/StringStringBuilderStringBuffer%E5%AF%B9%E6%AF%94.html</loc>
+    <lastmod>2015-04-09T10:02:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>StringStringBuilderStringBuffer对比</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>String</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/JDK1.8%20%E4%B8%AD%20%E6%8E%A5%E5%8F%A3%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%9A%84%E5%BC%82%E5%90%8C.html</loc>
+    <lastmod>2015-04-09T10:02:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>JDK1.8 中 接口和抽象类的异同</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>Java8</tag>
+         
+        <tag>翻译</tag>
+         
+        <tag>接口</tag>
+         
+        <tag>抽象类</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%AD%E7%9A%84volatile.html</loc>
+    <lastmod>2015-04-09T10:01:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>java多线程中的volatile</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>volatile</tag>
+         
+         
+           
+             
+              <breadCrumb title="Java基础" url="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/%E5%BA%94%E8%AF%A5%E9%80%89%E6%8B%A9%E6%80%8E%E6%A0%B7%E4%B8%80%E6%AC%BE%E7%AC%94%E8%AE%B0%EF%BC%9F.html</loc>
+    <lastmod>2015-04-09T10:00:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>应该选择怎样一款笔记？</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>笔记</tag>
+         
+        <tag>记录</tag>
+         
+         
+           
+             
+              <breadCrumb title="思维改变生活" url="http://coderroc.com/categories/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/%E5%88%A9%E7%94%A8%E6%9A%97%E6%97%B6%E9%97%B4.html</loc>
+    <lastmod>2015-04-09T10:00:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>利用暗时间</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>思维</tag>
+         
+        <tag>时间管理</tag>
+         
+         
+           
+             
+              <breadCrumb title="思维改变生活" url="http://coderroc.com/categories/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E6%A0%91-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%84%E7%AE%97%E6%B3%95.html</loc>
+    <lastmod>2015-04-09T09:59:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>树-数据结构预算法</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>数据结构</tag>
+         
+        <tag>树</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学和算法" url="http://coderroc.com/categories/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E8%A1%A8%E3%80%81%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.html</loc>
+    <lastmod>2015-04-09T09:59:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>表、栈和队列-数据结构与算法</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>数据结构</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学和算法" url="http://coderroc.com/categories/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/AES%E5%8A%A0%E5%AF%86.html</loc>
+    <lastmod>2015-04-09T09:58:04.000Z</lastmod>
+    <data>
+        <display>
+        <title>AES加密</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>AES</tag>
+         
+        <tag>加密</tag>
+         
+        <tag>算法</tag>
+         
+         
+           
+             
+              <breadCrumb title="数学和算法" url="http://coderroc.com/categories/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/%E6%9C%80%E5%88%9D%E7%9A%84%E6%83%B3%E6%B3%95.html</loc>
+    <lastmod>2015-04-09T09:57:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>最初的想法</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>毕业设计</tag>
+         
+        <tag>推荐系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="毕业设计" url="http://coderroc.com/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/LeetCode/LeetCode-Two%20Sum.html</loc>
+    <lastmod>2015-04-09T09:56:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>LeetCode-Two Sum</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>LeetCode</tag>
+         
+        <tag>哈希</tag>
+         
+         
+           
+             
+              <breadCrumb title="LeetCode" url="http://coderroc.com/categories/LeetCode/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/SpringBoot%E4%B8%AD%E8%AF%BB%E5%8F%96YAML.html</loc>
+    <lastmod>2015-04-09T09:37:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>SpringBoot中读取YAML</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>Spring</tag>
+         
+        <tag>YAML</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/JavaScript%20%E4%B8%AD%E7%9A%84%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0.html</loc>
+    <lastmod>2015-04-09T09:36:42.000Z</lastmod>
+    <data>
+        <display>
+        <title>JavaScript 中的回调函数</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>Node</tag>
+         
+         
+           
+             
+              <breadCrumb title="知识记录" url="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://coderroc.com/article/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/recall-3-days.html</loc>
+    <lastmod>2015-04-09T09:31:12.000Z</lastmod>
+    <data>
+        <display>
+        <title>recall-3-days</title>
+        <pubTime>2015-04-06T16:20:36.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活与心情" url="http://coderroc.com/categories/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+</urlset>

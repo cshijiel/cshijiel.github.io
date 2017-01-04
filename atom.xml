@@ -1,0 +1,1549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Roc`s 随想录</title>
+  <subtitle>诚信，认真，专注，踏实</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://coderroc.com/"/>
+  <updated>2017-01-04T10:56:39.000Z</updated>
+  <id>http://coderroc.com/</id>
+  
+  <author>
+    <name>Coder_Roc</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://coderroc.com/article/hello-world.html"/>
+    <id>http://coderroc.com/article/hello-world.html</id>
+    <published>2017-01-04T10:56:39.000Z</published>
+    <updated>2017-01-04T10:56:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[转] Java instanceof 关键字是如何实现的？</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/instanceof-in-java.html"/>
+    <id>http://coderroc.com/article/知识记录/Java基础/instanceof-in-java.html</id>
+    <published>2016-10-18T13:24:43.000Z</published>
+    <updated>2016-10-18T13:25:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Q"><a href="#Q" class="headerlink" title="Q:"></a>Q:</h3><blockquote>
+<p>面试的时候碰到这个问题，面试官希望能从底层来分析一下。<br>我当时知道的只是在同一个类加载器加载的前提下，使用其生成的对象，去比较才有意义。不同的类加载器加载的类生成对象，互相instanceof返回false。<br>但我不晓得，底层是如何实现的。求各位Java，JVM大神指点迷津，感激不尽！</p>
+</blockquote>
+<h3 id="A"><a href="#A" class="headerlink" title="A:"></a>A:</h3><p><em>(by <a href="https://www.zhihu.com/people/rednaxelafx" target="_blank" rel="external">RednaxelaFX</a>) 链接：<a href="https://www.zhihu.com/question/21574535/answer/18998914" target="_blank" rel="external">https://www.zhihu.com/question/21574535/answer/18998914</a></em></p>
+<p>在进入正题前先得提一句：既然楼主提问的背景是“被面试问到”，那很重要的一点是揣摩面试官提问的意图。按照楼主的简单描述，面试官问的是“Java的instanceof关键字是如何实现的”，那要选择怎样的答案就得看面试官有怎样的背景。比较安全的应对方法是请求面试官澄清/细化他的问题——他想要的“底层”底到什么程度。</p>
+<h4 id="情形1：-lt-3K"><a href="#情形1：-lt-3K" class="headerlink" title="情形1：&lt;3K"></a>情形1：&lt;3K</h4><p>你在面月薪3000以下的Java码农职位。如果面试官也只是做做Java层开发的，他可能只是想让你回答Java语言层面的 instanceof 运算符的语义。Java语言的“意思”就已经是“底层”。这样的话只要参考Java语言规范对 instanceof 运算符的定义就好：<br><a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html%23jls-15.20.2" target="_blank" rel="external">15.20.2 Type Comparison Operator instanceof</a>, Java语言规范Java SE 7版<br>当然这实际上回答的不是“如何实现的”，而是“如何设计的”。但面试嘛⋯</p>
+<p>如果用Java的伪代码来表现Java语言规范所描述的运行时语义，会是这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// obj instanceof T</span></div><div class="line"><span class="keyword">boolean</span> result;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	T temp = (T) obj; <span class="comment">// checkcast</span></div><div class="line">	result = <span class="keyword">true</span>;</div><div class="line">&#125; <span class="keyword">catch</span> (ClassCastException e) &#123;</div><div class="line">	result = <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用中文说就是：如果有表达式 <code>obj instanceof T</code> ，那么如果 (T) obj 不抛 ClassCastException 异常则该表达式值为 true ，否则值为 false 。<br>注意这里完全没提到JVM啊Class对象啊啥的。另外要注意 instanceof 运算符除了运行时语义外还有部分编译时限制，详细参考规范。</p>
+<p>如果这样回答被面试官说“这不是废话嘛”，请见情形2。</p>
+<a id="more"></a>
+<h4 id="情形2：6K-8K"><a href="#情形2：6K-8K" class="headerlink" title="情形2：6K~8K"></a>情形2：6K~8K</h4><p>你在面月薪6000-8000的Java研发职位。面试官也知道JVM这么个大体概念，但知道的也不多。JVM这个概念本身就是“底层”。JVM有一条名为 instanceof 的指令，而Java源码编译到Class文件时会把Java语言中的 instanceof 运算符映射到JVM的 instanceof 指令上。</p>
+<p>你可以知道Java的源码编译器之一javac是这样做的：<br>instanceof 是javac能识别的一个关键字，对应到Token.INSTANCEOF的token类型。做词法分析的时候扫描到”instanceof”关键字就映射到了一个Token.INSTANCEOF token。<a href="http://hg.openjdk.java.net/jdk7u/jdk7u/langtools/file/tip/src/share/classes/com/sun/tools/javac/parser/Token.java" target="_blank" rel="external">jdk7u/jdk7u/langtools: 5c9759e0d341 src/share/classes/com/sun/tools/javac/parser/Token.java</a>该编译器的抽象语法树节点有一个JCTree.JCInstanceOf类用于表示instanceof运算。做语法分析的时候解析到instanceof运算符就会生成这个JCTree.JCInstanceof类型的节点。<a href="http://hg.openjdk.java.net/jdk7u/jdk7u/langtools/file/tip/src/share/classes/com/sun/tools/javac/parser/JavacParser.java" target="_blank" rel="external">jdk7u/jdk7u/langtools: 5c9759e0d341 src/share/classes/com/sun/tools/javac/parser/JavacParser.java</a> term2Rest()<br>中途还得根据Java语言规范对instanceof运算符的编译时检查的规定把有问题的情况找出来。到最后生成字节码的时候为JCTree.JCInstanceof节点生成instanceof字节码指令。<a href="http://hg.openjdk.java.net/jdk7u/jdk7u/langtools/file/tip/src/share/classes/com/sun/tools/javac/jvm/Gen.java" target="_blank" rel="external">jdk7u/jdk7u/langtools: 5c9759e0d341 src/share/classes/com/sun/tools/javac/jvm/Gen.java</a> visitTypeTest()<br>（Java语言君说：“instanceof 这问题直接交给JVM君啦”）<br>（面试官：你还给我废话⋯给我进情形3！）</p>
+<p>其实能回答到这层面就已经能解决好些实际问题了，例如说需要手工通过字节码增强来实现一些功能的话，知道JVM有这么条 instanceof 指令或许正好就能让你顺利的使用 <a href="http://asm.ow2.org/" target="_blank" rel="external">ASM</a> 之类的库完成工作。</p>
+<h4 id="情形3：-gt-10K"><a href="#情形3：-gt-10K" class="headerlink" title="情形3：&gt;10K"></a>情形3：&gt;10K</h4><p>你在面月薪10000的Java高级研发职位。面试官对JVM有一些了解，想让你说说JVM会如何实现 instanceof 指令。但他可能也没看过实际的JVM是怎么做的，只是臆想过一下而已。JVM的规定就是“底层”。这种情况就给他JVM规范对 instanceof 指令的定义就好：<br><a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html%23jvms-6.5.instanceof" target="_blank" rel="external">Chapter 6. The Java Virtual Machine Instruction Set</a>, JVM规范Java SE 7版<br>根据规范来臆想一下实现就能八九不离十的混过这题了。</p>
+<p>该层面的答案就照<a href="//www.zhihu.com/people/0e6a48c30b5c78c342ba35aab0a1ee9e">@敖琪</a>前面给出的就差不多了，这边不再重复。</p>
+<h4 id="情形4：简易JVM的研发职位"><a href="#情形4：简易JVM的研发职位" class="headerlink" title="情形4：简易JVM的研发职位"></a>情形4：简易JVM的研发职位</h4><p>你可能在面真的简易JVM的研发职位，或许是啥嵌入式JVM的实现。面试官会希望你对简易JVM的实现有所了解。JVM的直观实现就是“底层”。这个基本上跟情形3差不多，因为简易JVM通常会用很直观的方式去实现。但对具体VM实现得答对一些小细节，例如说这个JVM是如何管理类型信息的。</p>
+<p>这个情形的话下面举点例子来讲讲。</p>
+<h4 id="情形5：Java资深研发职位"><a href="#情形5：Java资深研发职位" class="headerlink" title="情形5：Java资深研发职位"></a>情形5：Java资深研发职位</h4><p>你在面试月薪10000以上的Java资深研发职位，注重性能调优啥的。这种职位虽然不直接涉及JVM的研发，但由于性能问题经常源自“<a href="http://www.joelonsoftware.com/articles/LeakyAbstractions.html" target="_blank" rel="external">抽象泄漏</a>”，对实际使用的JVM的实现的思路需要有所了解。面试官对JVM的了解可能也就在此程度。对付这个可以用一篇论文：<a href="http://dl.acm.org/citation.cfm%3Fid%3D583821" target="_blank" rel="external">Fast subtype checking in the HotSpot JVM</a>。之前有个讨论帖里讨论过对这篇论文的解读：<a href="http://hllvm.group.iteye.com/group/topic/26896" target="_blank" rel="external">请教一个share/vm/oops下的代码做fast subtype check的问题</a></p>
+<h4 id="情形6：高性能JVM的研发职位"><a href="#情形6：高性能JVM的研发职位" class="headerlink" title="情形6：高性能JVM的研发职位"></a>情形6：高性能JVM的研发职位</h4><p>你在面试真的高性能JVM的研发职位，例如 HotSpot VM 的研发。JVM在实际桌面或服务器环境中的具体实现是“底层”。呵呵这要回答起来就复杂了，必须回答出JVM实现中可能做的优化具体的实现。另外找地方详细写。</p>
+<p>我觉得会问这种问题的还是情形1和2的比例比较大，换句话说面试官也不知道真的JVM是如何实现这instanceof指令的，可能甚至连这指令的准确语义都无法描述对。那随便忽悠忽悠就好啦不用太认真。说不定他期待的答案本身就雾很大（逃</p>
+<p>碰上情形4、6的话，没有忽悠的余地，是怎样就得怎样。<br>情形5可能还稍微有点忽悠余地呃呵呵。</p>
+<h3 id="简易JVM实现（Kaffe、JamVM）"><a href="#简易JVM实现（Kaffe、JamVM）" class="headerlink" title="简易JVM实现（Kaffe、JamVM）"></a>简易JVM实现（Kaffe、JamVM）</h3><p>看俩实际存在的简易JVM的实现，Kaffe和JamVM。它们都以解释器为主，JIT的实现非常简单，主要功能还是在VM runtime里实现，所以方便考察。<br>主要考察的是：它们中Java对象的基本结构（如何找到类型信息），类型信息自身如何记录（内部用的类型信息与Java层的java.lang.Class对象的关系），以及instanceof具体是怎样实现的。</p>
+<h4 id="Kaffe"><a href="#Kaffe" class="headerlink" title="Kaffe"></a>Kaffe</h4><p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/include/native.h">https://github.com/kaffe/kaffe/blob/master/include/native.h</a><br>Kaffe中Java对象由Hjava_lang_Object结构体表示，里面有个struct _dispatchTable*类型的字段vtable，下面再说。</p>
+<p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/classMethod.h">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/classMethod.h</a><br>Java层的java.lang.Class实例在VM里由Hjava_lang_Class结构体表示。Kaffe直接使用Hjava_lang_Class来记录VM内部的类型信息。也就是说在Kaffe上运行的Java程序里持有的java.lang.Class的实例就是该JVM内部存类型信息的对象。<br>前面提到的_dispatchTable结构体也在该文件里定义。它是一个虚方法分派表，主要用于高效实现invokevirtual。<br>假如有Hjava_lang_Object* obj，要找到它对应的类型信息只要这样：<br><code>obj-&gt;vtable-&gt;class</code><br><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/soft.c">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/soft.c</a><br>instanceof的功能由soft.c的soft_instanceof()函数实现。该函数所调用的函数大部分都在这个文件里。</p>
+<p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/intrp/icode.h%23L295">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/intrp/icode.h#L295</a><br>这边定义了softcall_instanceof宏用于在解释器或者JIT编译后的代码里调用soft_instanceof()函数</p>
+<p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/kaffe.def%23L3299">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/kaffe.def#L3299</a><br>这边定义了instanceof字节码指令的处理要调用softcall_instanceof宏</p>
+<h4 id="JamVM"><a href="#JamVM" class="headerlink" title="JamVM"></a>JamVM</h4><p><a href="http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/jam.h%3Fview%3Dmarkup" target="_blank" rel="external">http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/jam.h?view=markup</a><br>JamVM中Java对象由Object结构体表示，Java层的java.lang.Class实例在VM里由Class表示（是个空Object），VM内部记录的类信息由ClassBlock结构体表示（类型名、成员、父类、实现的接口、类价值器啥的都记录在ClassBlock里）。比较特别的是每个Class与对应的ClassBlock实际上是粘在一起分配的，所以Class<em>与ClassBlock</em>可以很直接的相互转换。例如说如果有Class<em> c想拿到它对应的ClassBlock，只要：<br>`ClassBlock</em> cb = CLASS_CB(c);<br>`即可。<br>Object结构体里有Class*类型的成员class，用于记录对象的类型。</p>
+<p><a href="http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/cast.c%3Fview%3Dmarkup" target="_blank" rel="external">http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/cast.c?view=markup</a><br>instanceof的功能由cast.c第68行的isInstanceOf()函数实现。该函数所调用的函数大部分都在这个文件里。<br><a href="http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/interp.c%3Fview%3Dmarkup" target="_blank" rel="external">http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/interp.c?view=markup</a><br>解释器主循环的代码主要在interp.c里。把instanceof指令的参数所指定的常量池索引解析为实际类指针的逻辑在OPC_INSTANCEOF的实现里。JamVM做了个优化，在解析好类之后会把instanceof字节码改写为内部字节码instanceof_quick；调用isInstanceOf()的地方在2161行OPC_INSTANCEOF_QUICK的实现里，可以看到它调用的是isInstanceOf(class, obj-&gt;class)。</p>
+<p>上面介绍了Kaffe与JamVM里instanceof字节码的实现相关的代码在哪里。接下来简单分析下它们的实现策略。</p>
+<p>两者的实现策略其实几乎一样，基本上按照下面的步骤：<br>（假设要检查的对象引用是obj，目标的类型对象是T）<br>obj如果为null，则返回false；否则设S为obj的类型对象，剩下的问题就是检查S是否为T的子类型如果S == T，则返回true；接下来分为3种情况，S是数组类型、接口类型或者类类型。之所以要分情况是因为instanceof要做的是“子类型检查”，而Java语言的类型系统里数组类型、接口类型与普通类类型三者的子类型规定都不一样，必须分开来讨论。到这里虽然例中两个JVM的具体实现有点区别，但概念上都与JVM规范所描述的 <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html%23jvms-6.5.instanceof" target="_blank" rel="external">instanceof的基本算法</a> 几乎一样。其中一个细节是：对接口类型的instanceof就直接遍历S里记录的它所实现的接口，看有没有跟T一致的；而对类类型的instanceof则是遍历S的super链（继承链）一直到Object，看有没有跟T一致的。遍历类的super链意味着这个算法的性能会受类的继承深度的影响。<br>关于Java语言里子类型关系的定义，请参考：<a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html%23jls-4.10" target="_blank" rel="external">Chapter 4. Types, Values, and Variables</a><br>类类型和接口类型的子类型关系大家可能比较熟悉，而数组类型的子类型关系可能会让大家有点意外。<br>4.10.3. Subtyping among Array Types<br>The following rules define the direct supertype relation among array types:<br>If S and T are both reference types, then S[] &gt;1 T[] iff S &gt;1 T.Object &gt;1 Object[]Cloneable &gt;1 Object[]java.io.Serializable &gt;1 Object[]If P is a primitive type, then:<br>Object &gt;1 P[]Cloneable &gt;1 P[]java.io.Serializable &gt;1 P[]这里稍微举几个例子。以下子类型关系都成立（“&lt;:”符号表示左边是右边的子类型，“=&gt;”符号表示“推导出”）：<br>String[][][] &lt;: String[][][] （数组子类型关系的自反性）<br>String &lt;: CharSequence =&gt; String[] &lt;: CharSequence[] （数组的协变）<br>String[][][] &lt;: Object （所有数组类型是Object的子类型）<br>int[] &lt;: Serializable （原始类型数组实现java.io.Serializable接口）Object[] &lt;: Serializable （引用类型数组实现java.io.Serializable接口）int[][][] &lt;: Serializable[][] &lt;: Serializable[] &lt;: Serializable （上面几个例子的延伸⋯开始好玩了吧？）int[][][] &lt;: Object[][] &lt;: Object[] &lt;: Object好玩不？实际JVM在记录类型信息的时候必须想办法把这些相关类型都串起来以便查找。</p>
+<p>另外补充一点：楼主可能会觉得很困惑为啥说到这里只字未提ClassLoader——因为在这个问题里还轮不到它出场。<br>在一个JVM实例里，”(类型的全限定名, defining class loader)”这个二元组才可以唯一确定一个类。如果有两个类全限定名相同，也加载自同一个Class文件，但defining class loader不同，从VM的角度看它们就是俩不同的类，而且相互没有子类型关系。instanceof运算符只关心“是否满足子类型关系”，至于类型名是否相同之类的不需要关心。</p>
+<p>通过Kaffe与JamVM两个例子我们可以看到简单的JVM实现很多地方就是把JVM规范直观的实现了出来。这就解决了前面提到的情形4的需求。</p>
+<p>==============================================================</p>
+<p>至于情形5、6，细节讲解起来稍麻烦所以这里不想展开写。高性能的JVM跟简易JVM在细节上完全不是一回事。</p>
+<p>简单来说，优化的主要思路就是把Java语言的特点考虑进来：由于Java的类所继承的超类与所实现的接口都不会在运行时改变，整个继承结构是稳定的，某个类型C在继承结构里的“深度”是固定不变的。也就是说从某个类出发遍历它的super链，总是会遍历到不变的内容。<br>这样我们就可以把原本要循环遍历super链才可以找到的信息缓存在数组里，并且以特定的下标从这个数组找到我们要的信息。同时，Java的类继承深度通常不会很深，所以为这个缓存数组选定一个固定的长度就足以优化大部分需要做子类型判断的情况。</p>
+<p>HotSpot VM具体使用了长度为8的缓存数组，记录某个类从继承深度0到7的超类。HotSpot把类继承深度在7以内的超类叫做“主要超类型”（primary super），把所有其它超类型（接口、数组相关以及超过深度7的超类）叫做“次要超类型”（secondary super）。<br>对“主要超类型”的子类型判断不需要像Kaffe或JamVM那样沿着super链做遍历，而是直接就能判断子类型关系是否成立。这样，类的继承深度对HotSpot VM做子类型判断的性能影响就变得很小了。<br>对“次要超类型”，则是让每个类型把自己的“次要超类型”混在一起记录在一个数组里，要检查的时候就线性遍历这个数组。留意到这里把接口类型、数组类型之类的子类型关系都直接记录在同一个数组里了，只要在最初初始化secondary_supers数组时就分情况填好了，而不用像Kaffe、JamVM那样每次做instanceof运算时都分开处理这些情况。</p>
+<p>举例来说，如果有下述类继承关系：<br>Apple &lt;: Fruit &lt;: Plant &lt;: Object<br>并且以Object为继承深度0，那么对于Apple类来说，它的主要超类型就有：<br>0: Object<br>1: Plant<br>2: Fruit<br>3: Apple<br>这个信息就直接记录在Apple类的primary_supers数组里了。Fruit、Plant等类同理。</p>
+<p>如果我们有这样的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Object f = <span class="keyword">new</span> Apple();</div><div class="line"><span class="keyword">boolean</span> result = f <span class="keyword">instanceof</span> Plant;</div></pre></td></tr></table></figure></p>
+<p>也就是变量f实际指向一个Apple实例，而我们要问这个对象是否是Plant的实例。<br>可以知道f的实际类型是Apple；要测试的Plant类的继承深度是1，拿Apple类里继承深度为1的主要超类型来看是Plant，马上就能得出结论是true。<br>这样就不需要顺着Apple的继承链遍历过去一个个去看是否跟Plant相等了。</p>
+<p>对此感兴趣的同学请参考前面在情形5提到的两个链接。先读第一个链接那篇论文，然后看第二个链接里的讨论（没有ACM帐号无法从第一个链接下载到论文的同学可以在第二个链接里找到一个镜像）。</p>
+<p>JDK6至今的HotSpot VM实际采用的算法是：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">S.is_subtype_of(T) := &#123;</div><div class="line">  <span class="keyword">int</span> off = T.offset;</div><div class="line">  <span class="keyword">if</span> (S == T) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  <span class="keyword">if</span> (T == S[off]) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  <span class="keyword">if</span> (off != &amp;cache) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  <span class="keyword">if</span> ( S.scan_secondary_subtype_array(T) ) &#123;</div><div class="line">    S.cache = T;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（具体是什么意思请务必参考论文）</p>
+<p>这边想特别强调的一点是：那篇论文描述了HotSpot VM做子类型判断的算法，但其实只有HotSpot VM的解释器以及 <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Class.html%23isInstance%28java.lang.Object%29" target="_blank" rel="external">java.lang.Class.isInstance()</a> 的调用是真的完整按照那个算法来执行的。HotSpot VM的两个编译器，Client Compiler (C1) 与 Server Compiler (C2) 各自对子类型判断的实现有更进一步的优化。实际上在这个JVM里，instanceof的功能就实现了4份，VM runtime、解释器、C1、C2各一份。</p>
+<p>VM runtime的：<br><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/tip/src/share/vm/oops/oop.inline.hpp" target="_blank" rel="external">jdk7u/jdk7u/hotspot: e087a2088970 src/share/vm/oops/oop.inline.hpp</a> oopDesc::is_a()<br><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/tip/src/share/vm/oops/klass.hpp" target="_blank" rel="external">jdk7u/jdk7u/hotspot: e087a2088970 src/share/vm/oops/klass.hpp</a> is_subtype_of()<br><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/tip/src/share/vm/oops/klass.cpp" target="_blank" rel="external">jdk7u/jdk7u/hotspot: e087a2088970 src/share/vm/oops/klass.cpp</a>  Klass::search_secondary_supers()</p>
+<p>……后面省略。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Q&quot;&gt;&lt;a href=&quot;#Q&quot; class=&quot;headerlink&quot; title=&quot;Q:&quot;&gt;&lt;/a&gt;Q:&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;面试的时候碰到这个问题，面试官希望能从底层来分析一下。&lt;br&gt;我当时知道的只是在同一个类加载器加载的前提下，使用其生成的对象，去比较才有意义。不同的类加载器加载的类生成对象，互相instanceof返回false。&lt;br&gt;但我不晓得，底层是如何实现的。求各位Java，JVM大神指点迷津，感激不尽！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;A&quot;&gt;&lt;a href=&quot;#A&quot; class=&quot;headerlink&quot; title=&quot;A:&quot;&gt;&lt;/a&gt;A:&lt;/h3&gt;&lt;p&gt;&lt;em&gt;(by &lt;a href=&quot;https://www.zhihu.com/people/rednaxelafx&quot;&gt;RednaxelaFX&lt;/a&gt;) 链接：&lt;a href=&quot;https://www.zhihu.com/question/21574535/answer/18998914&quot;&gt;https://www.zhihu.com/question/21574535/answer/18998914&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;在进入正题前先得提一句：既然楼主提问的背景是“被面试问到”，那很重要的一点是揣摩面试官提问的意图。按照楼主的简单描述，面试官问的是“Java的instanceof关键字是如何实现的”，那要选择怎样的答案就得看面试官有怎样的背景。比较安全的应对方法是请求面试官澄清/细化他的问题——他想要的“底层”底到什么程度。&lt;/p&gt;
+&lt;h4 id=&quot;情形1：-lt-3K&quot;&gt;&lt;a href=&quot;#情形1：-lt-3K&quot; class=&quot;headerlink&quot; title=&quot;情形1：&amp;lt;3K&quot;&gt;&lt;/a&gt;情形1：&amp;lt;3K&lt;/h4&gt;&lt;p&gt;你在面月薪3000以下的Java码农职位。如果面试官也只是做做Java层开发的，他可能只是想让你回答Java语言层面的 instanceof 运算符的语义。Java语言的“意思”就已经是“底层”。这样的话只要参考Java语言规范对 instanceof 运算符的定义就好：&lt;br&gt;&lt;a href=&quot;http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html%23jls-15.20.2&quot;&gt;15.20.2 Type Comparison Operator instanceof&lt;/a&gt;, Java语言规范Java SE 7版&lt;br&gt;当然这实际上回答的不是“如何实现的”，而是“如何设计的”。但面试嘛⋯&lt;/p&gt;
+&lt;p&gt;如果用Java的伪代码来表现Java语言规范所描述的运行时语义，会是这样：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// obj instanceof T&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; result;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;try&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	T temp = (T) obj; &lt;span class=&quot;comment&quot;&gt;// checkcast&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	result = &lt;span class=&quot;keyword&quot;&gt;true&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125; &lt;span class=&quot;keyword&quot;&gt;catch&lt;/span&gt; (ClassCastException e) &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	result = &lt;span class=&quot;keyword&quot;&gt;false&lt;/span&gt;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;用中文说就是：如果有表达式 &lt;code&gt;obj instanceof T&lt;/code&gt; ，那么如果 (T) obj 不抛 ClassCastException 异常则该表达式值为 true ，否则值为 false 。&lt;br&gt;注意这里完全没提到JVM啊Class对象啊啥的。另外要注意 instanceof 运算符除了运行时语义外还有部分编译时限制，详细参考规范。&lt;/p&gt;
+&lt;p&gt;如果这样回答被面试官说“这不是废话嘛”，请见情形2。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="instanceof" scheme="http://coderroc.com/tags/instanceof/"/>
+    
+      <category term="java关键字" scheme="http://coderroc.com/tags/java%E5%85%B3%E9%94%AE%E5%AD%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>模板方法模式--设计模式</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/java-design-patterns/Template-Method-Pattern.html"/>
+    <id>http://coderroc.com/article/知识记录/java-design-patterns/Template-Method-Pattern.html</id>
+    <published>2016-08-22T11:48:22.000Z</published>
+    <updated>2016-08-23T12:15:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="模板方法概述"><a href="#模板方法概述" class="headerlink" title="模板方法概述"></a>模板方法概述</h3><p>在一个复杂的系统里，有很多类似的业务。整体业务有很多步骤，例如产品内部运营系统，包括销售创建、运营审核上线、商户推广等步骤。在很多业务中，有一些步骤是相同的，有一些步骤是不同的。例如销售创建部分，创建的内容类型等可能有很多种，而审核和推广则是相同的。</p>
+<p>模板方法适合解决这种场景的问题。模板中定义一个流程的骨架，具体的差异化的步骤在子类中实现。通常基类中的某些步骤是抽象的。</p>
+<p>定义如下：</p>
+<blockquote>
+<p>模板方法模式：定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</p>
+<p>Template Method Pattern:  Define the skeleton of an algorithm in an  operation, deferring some steps to subclasses. Template Method lets  subclasses redefine certain steps of an algorithm without changing the  algorithm’s structure.</p>
+</blockquote>
+<h3 id="模式中的角色"><a href="#模式中的角色" class="headerlink" title="模式中的角色"></a>模式中的角色</h3><ol>
+<li>抽象类(基类，AbstractClass): 定义模板方法，定义算法骨架（包括业务流程信息等）。</li>
+<li>具体类(SubClass): 实现抽象类中的抽象方法，通常是差异化业务部分。</li>
+</ol>
+<h3 id="模式的结构和实现"><a href="#模式的结构和实现" class="headerlink" title="模式的结构和实现"></a>模式的结构和实现</h3><h4 id="模式结构"><a href="#模式结构" class="headerlink" title="模式结构"></a>模式结构</h4><p>模板方法模式结构比较简单，其核心是抽象类和其中的模板方法的设计：</p>
+<p><img src="http://cshijiel.qiniudn.com/16-8-22/27086173.jpg" alt="模板方法模式典型的结构"></p>
+<p>其中，<code>AbstractFlow</code>是角色中的抽象类，<code>AbstractFlowImpl</code>和<code>AnotherAbstractFlowImpl</code>是具体类。</p>
+<a id="more"></a>
+<h3 id="模式实现"><a href="#模式实现" class="headerlink" title="模式实现"></a>模式实现</h3><h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><p>在这个抽象类中定义了总的流程信息方法，这个方法中包括一些基本步骤，这些基本步骤也是一些方法。有些方法在不同的业务中是不变的，可以在这个抽象类中直接实现；有的方法随不同的业务不同而不同，这些方法可以有一个默认实现，还可以直接定义成抽象方法（Abstract method）,强制要求在子类实现，建议使用抽象方法。</p>
+<p>在访问控制方面，通常流程信息方法是<strong>public</strong>的，具体的基本步骤是<strong>protect</strong>的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.roc.TemplatePattern;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 抽象基类,定义了一些没有实现的细节步骤和共同的流程信息</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> Roc</div><div class="line"> * <span class="doctag">@title</span> DesignPatterns</div><div class="line"> * <span class="doctag">@date</span> 16/8/22</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFlow</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 延迟到子类实现的一个步骤, 权限访问符是protected,不对外公开,可被子类修改.</span></div><div class="line">    <span class="comment">// abstract强制子类实现</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">step1</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">step2</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">// hook,钩子,可以做一些额外的处理.通常基类有一个空实现.不是必须的.</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">hook</span><span class="params">(String msg)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"AbstractFlow#"</span> + msg);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 对外公开的执行方法,里面是流程详细步骤的组合.</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exe</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"do some thing"</span>);</div><div class="line">        step1();</div><div class="line">        step2();</div><div class="line">        hook(<span class="string">"Hello"</span>);</div><div class="line">        System.out.println(<span class="string">"do some thing finish!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在抽象类中，模板方法exe()定义了算法的框架，在模板方法中调用基本方法以实现完整的算法。其中step1()和step2()都是抽象的，需要子类实现。其中hook()方法可以做一些额外的事情，如果整个流程还不足以完成整体业务，则可以在子类中覆盖hook()进行补充。</p>
+<h4 id="实现类："><a href="#实现类：" class="headerlink" title="实现类："></a>实现类：</h4><p>实现类对基类中的抽象方法和业务特定的方法进行实现 or 重写。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.roc.TemplatePattern;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 一个实现类,实现需要差异化的细节步骤</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> Roc</div><div class="line"> * <span class="doctag">@title</span> DesignPatterns</div><div class="line"> * <span class="doctag">@date</span> 16/8/22</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractFlowImpl</span> <span class="keyword">extends</span> <span class="title">AbstractFlow</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">step1</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"AbstractFlowImpl1#step1"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">step2</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"AbstractFlowImpl1#step2"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 可以覆盖,但不是必须的.</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">hook</span><span class="params">(String msg)</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"AbstractFlowImpl1#"</span> + msg);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="简单测试"><a href="#简单测试" class="headerlink" title="简单测试"></a>简单测试</h3><p>测试类如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.roc.TemplatePattern;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 执行入口</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> Roc</div><div class="line"> * <span class="doctag">@title</span> DesignPatterns</div><div class="line"> * <span class="doctag">@date</span> 16/8/22</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] as)</span> </span>&#123;</div><div class="line">        AbstractFlow flow = <span class="keyword">new</span> AbstractFlowImpl();</div><div class="line">        flow.exe();</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"\n==========================\n"</span>);</div><div class="line"></div><div class="line">        flow = <span class="keyword">new</span> AnotherAbstractFlowImpl();</div><div class="line">        flow.exe();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中<code>AnotherAbstractFlowImpl</code>是类似<code>AbstractFlowImpl</code>的一个实现类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.roc.TemplatePattern;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 另一个实现类,实现需要差异化的细节步骤</div><div class="line"> *</div><div class="line"> * <span class="doctag">@author</span> Roc</div><div class="line"> * <span class="doctag">@title</span> DesignPatterns</div><div class="line"> * <span class="doctag">@date</span> 16/8/22</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnotherAbstractFlowImpl</span> <span class="keyword">extends</span> <span class="title">AbstractFlow</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">step1</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"AnotherAbstractFlowImpl#step1"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">step2</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"AnotherAbstractFlowImpl#step2"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">do some thing</div><div class="line">AbstractFlowImpl1#step1</div><div class="line">AbstractFlowImpl1#step2</div><div class="line">AbstractFlowImpl1#Hello</div><div class="line">do some thing finish!</div><div class="line"></div><div class="line">==========================</div><div class="line"></div><div class="line">do some thing</div><div class="line">AnotherAbstractFlowImpl#step1</div><div class="line">AnotherAbstractFlowImpl#step2</div><div class="line">AbstractFlow#Hello</div><div class="line">do some thing finish!</div></pre></td></tr></table></figure>
+<h3 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h3><p><a href="https://github.com/cshijiel/DesignPatterns" target="_blank" rel="external">https://github.com/cshijiel/DesignPatterns</a></p>
+<h3 id="参考信息"><a href="#参考信息" class="headerlink" title="参考信息"></a>参考信息</h3><p><a href="http://meigesir.iteye.com/blog/1506484" target="_blank" rel="external">http://meigesir.iteye.com/blog/1506484</a></p>
+<p><a href="http://blog.csdn.net/lovelion/article/details/8299794" target="_blank" rel="external">http://blog.csdn.net/lovelion/article/details/8299794</a></p>
+<p><a href="http://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/strategy.html" target="_blank" rel="external">http://design-patterns.readthedocs.io/zh_CN/latest/behavioral_patterns/strategy.html</a></p>
+<p><a href="https://www.gitbook.com/book/quanke/design-pattern-java/details" target="_blank" rel="external">https://www.gitbook.com/book/quanke/design-pattern-java/details</a></p>
+<p><a href="http://blog.csdn.net/yanbober/article/details/45501715" target="_blank" rel="external">http://blog.csdn.net/yanbober/article/details/45501715</a></p>
+<hr>
+<h5 id="一个小问题："><a href="#一个小问题：" class="headerlink" title="一个小问题："></a>一个小问题：</h5><p>如果将基类AbstractFlow#exe方法的hook方法调用改成this.hook(“Hello”)，那么结果会是怎样显示呢？</p>
+<p><img src="http://cshijiel.qiniudn.com/16-8-22/63797067.jpg" alt="code diff"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;模板方法概述&quot;&gt;&lt;a href=&quot;#模板方法概述&quot; class=&quot;headerlink&quot; title=&quot;模板方法概述&quot;&gt;&lt;/a&gt;模板方法概述&lt;/h3&gt;&lt;p&gt;在一个复杂的系统里，有很多类似的业务。整体业务有很多步骤，例如产品内部运营系统，包括销售创建、运营审核上线、商户推广等步骤。在很多业务中，有一些步骤是相同的，有一些步骤是不同的。例如销售创建部分，创建的内容类型等可能有很多种，而审核和推广则是相同的。&lt;/p&gt;
+&lt;p&gt;模板方法适合解决这种场景的问题。模板中定义一个流程的骨架，具体的差异化的步骤在子类中实现。通常基类中的某些步骤是抽象的。&lt;/p&gt;
+&lt;p&gt;定义如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;模板方法模式：定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。&lt;/p&gt;
+&lt;p&gt;Template Method Pattern:  Define the skeleton of an algorithm in an  operation, deferring some steps to subclasses. Template Method lets  subclasses redefine certain steps of an algorithm without changing the  algorithm’s structure.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;模式中的角色&quot;&gt;&lt;a href=&quot;#模式中的角色&quot; class=&quot;headerlink&quot; title=&quot;模式中的角色&quot;&gt;&lt;/a&gt;模式中的角色&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;抽象类(基类，AbstractClass): 定义模板方法，定义算法骨架（包括业务流程信息等）。&lt;/li&gt;
+&lt;li&gt;具体类(SubClass): 实现抽象类中的抽象方法，通常是差异化业务部分。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;模式的结构和实现&quot;&gt;&lt;a href=&quot;#模式的结构和实现&quot; class=&quot;headerlink&quot; title=&quot;模式的结构和实现&quot;&gt;&lt;/a&gt;模式的结构和实现&lt;/h3&gt;&lt;h4 id=&quot;模式结构&quot;&gt;&lt;a href=&quot;#模式结构&quot; class=&quot;headerlink&quot; title=&quot;模式结构&quot;&gt;&lt;/a&gt;模式结构&lt;/h4&gt;&lt;p&gt;模板方法模式结构比较简单，其核心是抽象类和其中的模板方法的设计：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://cshijiel.qiniudn.com/16-8-22/27086173.jpg&quot; alt=&quot;模板方法模式典型的结构&quot;&gt;&lt;/p&gt;
+&lt;p&gt;其中，&lt;code&gt;AbstractFlow&lt;/code&gt;是角色中的抽象类，&lt;code&gt;AbstractFlowImpl&lt;/code&gt;和&lt;code&gt;AnotherAbstractFlowImpl&lt;/code&gt;是具体类。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="设计模式" scheme="http://coderroc.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>看 ‘北大最短毕业致辞’ 的感受</title>
+    <link href="http://coderroc.com/article/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/2015-Peking-University-Commencement-Speech.html"/>
+    <id>http://coderroc.com/article/思维改变生活/2015-Peking-University-Commencement-Speech.html</id>
+    <published>2016-07-07T12:40:14.000Z</published>
+    <updated>2016-07-07T12:57:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>有人说，美好的理想是廉价的，不能实在地为一个人带来金钱财富……</p>
+<p>而我觉得，理想是昂贵的，圣洁的。理想让一个人活的更有意义，哪怕让这个世界变得美好一点点也好。理想是昂贵的，追求理想获取会让我们耗费大量的时间、精力，但这也让追求理想变得弥足珍贵。</p>
+<p>以下是原文，演讲全文仅535字：</p>
+<hr>
+<p><strong>致辞：饶毅（教师代表、科学家）</strong></p>
+<h2 id="做自己尊重的人"><a href="#做自己尊重的人" class="headerlink" title="做自己尊重的人"></a>做自己尊重的人</h2><p><img src="http://cshijiel.qiniudn.com/16-7-7/76246992.jpg" alt="饶毅"></p>
+<p>在祝福裹着告诫呼啸而来的毕业季，请原谅我不敢祝愿每一位毕业生都成功、都幸福；因为历史不幸地记载着：有人的成功代价是丧失良知；有人的幸福代价是损害他人。</p>
+<a id="more"></a>
+<p>从物理学来说，无机的原子逆热力学第二定律出现生物是奇迹；</p>
+<p>从生物学来说，按进化规律产生遗传信息指导组装人类是奇迹。</p>
+<p>超越化学反应结果的每一位毕业生都是值得珍惜的奇迹；</p>
+<p>超越动物欲望总和的每一位毕业生都应做自己尊重的人。</p>
+<p>过去、现在、将来，能够完全知道个人行为和思想的只有自己；</p>
+<p>世界很多文化借助宗教信仰来指导人们生活的信念和世俗行为；</p>
+<p>而对无神论者——也就是大多数中国人——来说，自我尊重是重要的正道。</p>
+<p>在你们加入社会后看到各种离奇现象，知道自己更多弱点和缺陷，可能还遇到小难大灾后，如何在诱惑和艰难中保持人性的尊严、赢得自己的尊重并非易事，却很值得。</p>
+<p>这不是：</p>
+<p><strong>自恋、自大、自负、自夸、自欺、自闭、自缚、自怜；</strong></p>
+<p>而是：</p>
+<p><strong>自信、自豪、自量、自知、自省、自赎、自勉、自强。</strong></p>
+<p>自尊支撑自由的精神、自主的工作、自在的生活。</p>
+<p>我祝愿：</p>
+<p>退休之日，你觉得职业中的自己值得尊重；</p>
+<p>迟暮之年，你感到生活中的自己值得尊重。</p>
+<p>不要问我如何做到，50年后返校时告诉母校你如何做到：在你所含全部原子再度按热力学第二定律回归自然之前，它们</p>
+<p>既经历过物性的神奇，</p>
+<p>也产生过人性的可爱。</p>
+<h3>视频：</h3>
+
+<object width="640" height="360"><param name="movie" value="http://swf.ws.126.net/openplayer/v02/-0-2_MBNK60FSS_MBNK6CVL1-vimg1_ws_126_net//image/snapshot_movie/2016/6/T/T/MBNK6CSTT-1430711943278.swf"><param name="allowScriptAccess" value="always"><param name="wmode" value="transparent"><embed src="http://swf.ws.126.net/openplayer/v02/-0-2_MBNK60FSS_MBNK6CVL1-vimg1_ws_126_net//image/snapshot_movie/2016/6/T/T/MBNK6CSTT-1430711943278.swf" type="application/x-shockwave-flash" width="640" height="360" allowfullscreen="true" wmode="transparent" allowscriptaccess="always"></object>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有人说，美好的理想是廉价的，不能实在地为一个人带来金钱财富……&lt;/p&gt;
+&lt;p&gt;而我觉得，理想是昂贵的，圣洁的。理想让一个人活的更有意义，哪怕让这个世界变得美好一点点也好。理想是昂贵的，追求理想获取会让我们耗费大量的时间、精力，但这也让追求理想变得弥足珍贵。&lt;/p&gt;
+&lt;p&gt;以下是原文，演讲全文仅535字：&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;致辞：饶毅（教师代表、科学家）&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;做自己尊重的人&quot;&gt;&lt;a href=&quot;#做自己尊重的人&quot; class=&quot;headerlink&quot; title=&quot;做自己尊重的人&quot;&gt;&lt;/a&gt;做自己尊重的人&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://cshijiel.qiniudn.com/16-7-7/76246992.jpg&quot; alt=&quot;饶毅&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在祝福裹着告诫呼啸而来的毕业季，请原谅我不敢祝愿每一位毕业生都成功、都幸福；因为历史不幸地记载着：有人的成功代价是丧失良知；有人的幸福代价是损害他人。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="思维改变生活" scheme="http://coderroc.com/categories/%E6%80%9D%E7%BB%B4%E6%94%B9%E5%8F%98%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="感触" scheme="http://coderroc.com/tags/%E6%84%9F%E8%A7%A6/"/>
+    
+      <category term="思考" scheme="http://coderroc.com/tags/%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java到底是值传递还是引用传递</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Is-Java-%22pass-by-reference%22-or-%22pass-by-value%22.html"/>
+    <id>http://coderroc.com/article/知识记录/Is-Java-&quot;pass-by-reference&quot;-or-&quot;pass-by-value&quot;.html</id>
+    <published>2016-07-05T03:14:26.000Z</published>
+    <updated>2016-10-18T13:24:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景:"></a>背景:</h3><h3 id="简要"><a href="#简要" class="headerlink" title="简要:"></a>简要:</h3><blockquote>
+<p>传引用。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景:&quot;&gt;&lt;/a&gt;背景:&lt;/h3&gt;&lt;h3 id=&quot;简要&quot;&gt;&lt;a href=&quot;#简要&quot; class=&quot;headerlink&quot; title=&quot;简要:&quot;&gt;&lt;/a&gt;简要:&lt;/h3&gt;&lt;b
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Thinking in Java 读书笔记 — 第1章 对象导论</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/thinking-in-java-chapter-one-Introduction-to-Objects.html"/>
+    <id>http://coderroc.com/article/知识记录/thinking-in-java-chapter-one-Introduction-to-Objects.html</id>
+    <published>2016-06-29T12:49:01.000Z</published>
+    <updated>2016-07-05T06:04:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">第1章 对象导论</div><div class="line"></div><div class="line">	1.1 抽象过程</div><div class="line"></div><div class="line">	1.2 每个对象都有一个接口</div><div class="line"></div><div class="line">	1.3 每个对象都提供服务</div><div class="line"></div><div class="line">	1.4 被隐藏的具体实现</div><div class="line"></div><div class="line">	1.5 复用具体实现</div><div class="line"></div><div class="line">	1.6 继承</div><div class="line"></div><div class="line">		1.6.1 “是一个”与“像是一个”的关系</div><div class="line"></div><div class="line">	1.7 伴随多态的可互换现象</div><div class="line"></div><div class="line">	1.8 单根继承结构</div><div class="line"></div><div class="line">	1.9 容器</div><div class="line"></div><div class="line">		1.9.1 参数化类型</div><div class="line"></div><div class="line">	1.10 对象的创建和生命周期</div><div class="line"></div><div class="line">	1.11 异常处理：处理错误</div><div class="line"></div><div class="line">	1.12 并发编程</div><div class="line"></div><div class="line">	1.13 Java与Internet</div><div class="line"></div><div class="line">		1.13.1 Web是什么</div><div class="line"></div><div class="line">		1.13.2 客户端编程</div><div class="line"></div><div class="line">		1.13.3 服务端编程</div><div class="line"></div><div class="line">	1.14 总结</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<hr>
+<h3 id="我的总结"><a href="#我的总结" class="headerlink" title="我的总结"></a>我的总结</h3><p>Java是一种纯面向对象的语言（虽然含有基本数据类型，但那不是主要部分），我们经常谈到面向对象三大特性：继承、封装、多态，除此之外，还有以下的描述。</p>
+<ol>
+<li>万物皆对象。对象是抽象出来解决问题的任何程序构件，包括数据结构、班级、服务等。</li>
+<li>程序是对象的集合，通过结合使用不同的对象解决问题，对象通过发送消息（一般指方法调用）告知彼此所要做的。</li>
+<li>每个对象都有类型。通俗的说法是，每个对象都是某个类（class）的一个实例（instance）。类型决定对象的这个特性：可以发送什么样的消息给它。</li>
+<li>某一特定类型的所有对象都可以接受同样的消息。</li>
+</ol>
+<p>类是对象的接口，接口是一种协议，一种共同约定，发送/接收消息格式的限定。类似的，Java中有很多类似的思想，后面还会遇到。比如从class -&gt; SomeType —&gt; new —&gt; instance，中间有Interface、AbstractClass等，都有类似的思想。</p>
+<p>关于单根继承结构，在JDK 1.8中已经有了变化。Java是允许一个类实现多个接口的，到了JDK 1.8，接口引入了新的特性：默认实现，关键字是<code>default</code>。在下面的代码中，有相当于多根继承的特点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">InterfaceA</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"InterfaceA"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">InterfaceB</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"InterfaceB"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Demo</span> <span class="keyword">implements</span> <span class="title">InterfaceA</span>, <span class="title">InterfaceB</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</div><div class="line">        test1();</div><div class="line">        test2();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行<code>new Demo().test()</code>，可以看到以下结果：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">InterfaceA</div><div class="line">InterfaceB</div></pre></td></tr></table></figure>
+<p>虽然有悖于之前的直觉—Java是单继承的，但是并没有破坏其面向对象的原则。在Java中，接口更倾向于描述行为规范，与类型还是有区别的，是另一种维度的描述，所以在新版本引入这个特性也是可以理解的。</p>
+<p>关于并发，有很重要的一点是，尽量避免共享资源。</p>
+<p>除了良好的语言设计，Java的繁荣也是和丰富的开源资源分不开的。而且Java与时俱进，适时加入新特性，方便Developers不断地实现新需求。呵呵哒，需求的产生速度是永远远大于开发速度的，当然，这又是另一个问题了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;目录&quot;&gt;&lt;a href=&quot;#目录&quot; class=&quot;headerlink&quot; title=&quot;目录&quot;&gt;&lt;/a&gt;目录&lt;/h3&gt;&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;25&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;26&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;27&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;28&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;29&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;30&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;31&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;32&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;33&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;34&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;35&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;36&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;37&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;38&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;39&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;第1章 对象导论&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.1 抽象过程&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.2 每个对象都有一个接口&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.3 每个对象都提供服务&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.4 被隐藏的具体实现&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.5 复用具体实现&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.6 继承&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		1.6.1 “是一个”与“像是一个”的关系&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.7 伴随多态的可互换现象&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.8 单根继承结构&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.9 容器&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		1.9.1 参数化类型&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.10 对象的创建和生命周期&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.11 异常处理：处理错误&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.12 并发编程&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.13 Java与Internet&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		1.13.1 Web是什么&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		1.13.2 客户端编程&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;		1.13.3 服务端编程&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	1.14 总结&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="http://coderroc.com/tags/Java/"/>
+    
+      <category term="Thinking in Java" scheme="http://coderroc.com/tags/Thinking-in-Java/"/>
+    
+      <category term="读书笔记" scheme="http://coderroc.com/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IP地址的不同格式和转化</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Internet-Protocol-v4.html"/>
+    <id>http://coderroc.com/article/知识记录/Internet-Protocol-v4.html</id>
+    <published>2016-06-23T03:31:35.000Z</published>
+    <updated>2016-08-30T08:29:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a>摘要：</h3><p>Internet的发展离不开IP(Internet Protocol，网络之间互联的协议)，目前广泛应用的是IPv4，正在积极部署的是IPv6。</p>
+<p>本文主要介绍IP地址的不同表达格式和转化。</p>
+<a id="more"></a>
+<h3 id="IP的目的"><a href="#IP的目的" class="headerlink" title="IP的目的"></a>IP的目的</h3><p>网络之间互连的协议是为计算机网络相互连接进行通信而设计的协议。在因特网中，它是能使连接到网上的所有计算机网络实现相互通信的一套规则，规定了计算机在因特网上进行通信时应当遵守的规则。任何厂家生产的计算机系统，只要遵守IP协议就可以与因特网互连互通。</p>
+<h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p>IPv4使用32位（4字节）地址，因此地址空间中只有4,294,967,296（232）个地址。不过，一些地址是为特殊用途所保留的，如专用网络（约18百万个地址）和多播地址（约270百万个地址），这减少了可在互联网上路由的地址数量。随着地址不断被分配给最终用户，IPv4地址枯竭问题也在随之产生。</p>
+<p>为便于使用，IP地址常以<code>XXX.XXX.XXX.XXX</code>形式表现，每组XXX代表小于或等于255的10进制数。</p>
+<p>以下均是<code>192.0.2.235</code>，以此为例，有以下不同的格式。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">格式</th>
+<th style="text-align:left">值</th>
+<th style="text-align:left">从点分十进制转换</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">点分十进制</td>
+<td style="text-align:left">192.0.2.235</td>
+<td style="text-align:left">……</td>
+</tr>
+<tr>
+<td style="text-align:left">点分十六进制</td>
+<td style="text-align:left">0xC0.0x00.0x02.0xEB</td>
+<td style="text-align:left">每个字节被单独转换为十六进制</td>
+</tr>
+<tr>
+<td style="text-align:left">点分八进制</td>
+<td style="text-align:left">0300.0000.0002.0353</td>
+<td style="text-align:left">每个字节被单独转换为八进制</td>
+</tr>
+<tr>
+<td style="text-align:left">十六进制</td>
+<td style="text-align:left">0xC00002EB</td>
+<td style="text-align:left">将点分十六进制连在一起</td>
+</tr>
+<tr>
+<td style="text-align:left">十进制</td>
+<td style="text-align:left">3221226219</td>
+<td style="text-align:left">用十进制写出的32位整数</td>
+</tr>
+<tr>
+<td style="text-align:left">八进制</td>
+<td style="text-align:left">030000001353</td>
+<td style="text-align:left">用八进制写出的32位整数</td>
+</tr>
+</tbody>
+</table>
+<p>此外，在点分格式中，每个字节都可用任意的进制表达。如，<code>192.0x00.0002.235</code>是一种合法（但很不常用）的表示。</p>
+<p>以上IP值尽可以通过执行<code>ping</code>命令，并显示出点分十进制的值。<br><img src="http://cshijiel.qiniudn.com/16-6-23/74969066.jpg" alt="十进制到点分十进制"></p>
+<h4 id="IP地址相互转换"><a href="#IP地址相互转换" class="headerlink" title="IP地址相互转换"></a>IP地址相互转换</h4><p>一般我们见到的都是点分十进制，那从点分十进制到十进制怎样转换呢？</p>
+<p>同样以<code>192.0.2.235 -&gt; 3221226219</code>为例：</p>
+<p>即 <code>3221226219 = 192 * 256^3 + 0 * 256^2 + 2 * 256^1 + 235*256^0</code>。</p>
+<p>贴几行转换代码，不贴代码不舒服😂😂😂</p>
+<p>java:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 输入IP“192.0.2.235”, 返回对应的数字形式IP: 3221226219</div><div class="line"> * 3221226219 = 192 * 256^3 + 0 * 256^2 + 2 * 256^1 + 235*256^0</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Long <span class="title">calculateIpSum</span><span class="params">(String strIp)</span> </span>&#123;</div><div class="line">    validateIp(strIp); <span class="comment">// 检验输入IP合法性，不合法抛出错误异常</span></div><div class="line">    String[] ss = strIp.split(<span class="string">"\\."</span>);</div><div class="line">    <span class="keyword">long</span>[] longs = <span class="keyword">new</span> <span class="keyword">long</span>[ss.length];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; longs.length; i++) &#123;</div><div class="line">        longs[i] = Long.valueOf(ss[i]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">long</span> result = longs[<span class="number">0</span>] &lt;&lt; <span class="number">24</span>;</div><div class="line">    result += longs[<span class="number">1</span>] &lt;&lt; <span class="number">16</span>;</div><div class="line">    result += longs[<span class="number">2</span>] &lt;&lt; <span class="number">8</span>;</div><div class="line">    result += longs[<span class="number">3</span>];</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有更方便的shell版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cip()&#123; echo $1|awk -F. &apos;&#123;n=0;for(i=1;i&lt;=NF;i++)&#123;n*=256;n+=$i&#125;print n&#125;&apos;; &#125;</div></pre></td></tr></table></figure>
+<p>粘贴一下，就可以使用了~</p>
+<p><img src="http://cshijiel.qiniudn.com/16-6-23/63500394.jpg" alt="shell版本转换执行效果"></p>
+<p>其他类似，不一一赘述。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ol>
+<li><a href="https://zh.wikipedia.org/wiki/IPv4" target="_blank" rel="external">IPv4-维基百科</a></li>
+<li><a href="http://baike.baidu.com/link?url=Sv2YQ3_y-SnieCKxsX04B8WYGA8HfeA9wrHEQ4NyaMOf3ZZRQUjPdEhoKSJmlYxg-5X8vr9ZY_8qJlzhojZmYK" target="_blank" rel="external">IPv6_百科</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;摘要：&quot;&gt;&lt;a href=&quot;#摘要：&quot; class=&quot;headerlink&quot; title=&quot;摘要：&quot;&gt;&lt;/a&gt;摘要：&lt;/h3&gt;&lt;p&gt;Internet的发展离不开IP(Internet Protocol，网络之间互联的协议)，目前广泛应用的是IPv4，正在积极部署的是IPv6。&lt;/p&gt;
+&lt;p&gt;本文主要介绍IP地址的不同表达格式和转化。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="知识记录" scheme="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="IP" scheme="http://coderroc.com/tags/IP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mockito初使用</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/simple-mockito.html"/>
+    <id>http://coderroc.com/article/知识记录/simple-mockito.html</id>
+    <published>2016-06-01T09:07:21.000Z</published>
+    <updated>2016-06-01T09:13:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>作为一个研发工程师，自己的代码怎么可以不测试呢？</p>
+<p>但是自己跑单测的时候，有的时候某些RPC服务不好配置 or 无线下测试环境，所以我们需要对这些难以实例化等的对象进行Mock（adj. 模拟的；仿制的；虚假的；不真实的）。</p>
+<p><strong>这里我们使用Mockito。</strong></p>
+<h2 id="Mockito简介"><a href="#Mockito简介" class="headerlink" title="Mockito简介"></a>Mockito简介</h2><blockquote>
+<p>Mockito is a mocking framework that tastes really good. It lets you write beautiful tests with a clean &amp; simple API. Mockito doesn’t give you hangover because the tests are very readable and they produce clean verification errors. Read more about <a href="https://github.com/mockito/mockito/wiki/Features-And-Motivations" target="_blank" rel="external">features &amp; motivations</a>.</p>
+</blockquote>
+<p>Mockito 是一个模拟框架，用起来非常好用。它允许你用干净简单(too simple)的API写漂亮的测试方法。Mockito不会给你遗留物(不侵入源代码，不造成别的影响的意思吧)，因为这些测试可读性非常好，产生的可验证的错误也非常简洁。阅读更多信息参考上述链接。</p>
+<ul>
+<li>Mockito是StackOverflow社区投票选出的最好的Java Mock 框架</li>
+<li>不仅仅在策划工具中，在所有的类库中，Mockito也是排名前十的Java类库。</li>
+</ul>
+<a id="more"></a>
+<h2 id="简单配置"><a href="#简单配置" class="headerlink" title="简单配置"></a>简单配置</h2><h3 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- http://mvnrepository.com/artifact/org.mockito/mockito-all --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mockito<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mockito-all<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.10.19<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>最新版本<code>2.0.2-beta</code>。</p>
+<p>使用Gradle的同学可以自行搜索。</p>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><p>添加完上述依赖后，就可以简单使用了</p>
+<p>验证交互(调用方法等)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.mockito.Mockito.*;</div><div class="line"></div><div class="line"><span class="comment">// mock creation</span></div><div class="line">List mockedList = mock(List.class);</div><div class="line"></div><div class="line"><span class="comment">// using mock object - it does not throw any "unexpected interaction" exception</span></div><div class="line">mockedList.add(<span class="string">"one"</span>);</div><div class="line">mockedList.clear();</div><div class="line"></div><div class="line"><span class="comment">// selective, explicit, highly readable verification</span></div><div class="line">verify(mockedList).add(<span class="string">"one"</span>);</div><div class="line">verify(mockedList).clear();</div></pre></td></tr></table></figure>
+<p>设置一个期望行为的调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// you can mock concrete classes, not only interfaces</span></div><div class="line">LinkedList mockedList = mock(LinkedList.class);</div><div class="line"></div><div class="line"><span class="comment">// stubbing appears before the actual execution</span></div><div class="line">when(mockedList.get(<span class="number">0</span>)).thenReturn(<span class="string">"first"</span>);</div><div class="line"></div><div class="line"><span class="comment">// the following prints "first"</span></div><div class="line">System.out.println(mockedList.get(<span class="number">0</span>));</div><div class="line"></div><div class="line"><span class="comment">// the following prints "null" because get(999) was not stubbed</span></div><div class="line">System.out.println(mockedList.get(<span class="number">999</span>));</div></pre></td></tr></table></figure>
+<h2 id="常用-主要参考"><a href="#常用-主要参考" class="headerlink" title="常用/主要参考"></a>常用/主要参考</h2><ul>
+<li><code>mock()</code>/<code>@Mock</code>:创建一个Mock对象<ul>
+<li>通过<a href="http://mockito.github.io/mockito/docs/current/org/mockito/Mockito.html#field_summary" target="_blank" rel="external"><code>Answer</code></a>/<a href="http://mockito.github.io/mockito/docs/current/org/mockito/ReturnValues.html" target="_blank" rel="external"><code>ReturnValues</code></a>/<a href="http://mockito.github.io/mockito/docs/current/org/mockito/MockSettings.html" target="_blank" rel="external"><code>MockSettings</code></a> 随意指定这个对象怎样表现</li>
+<li>如果一个对象提供的行为（返回值等）不符合你的需求，可以自己写一个对Answer接口的实现</li>
+</ul>
+</li>
+<li><a href="http://mockito.github.io/mockito/docs/current/org/mockito/Mockito.html#spy(T" target="_blank" rel="external"><code>spy()</code></a>)/<a href="http://mockito.github.io/mockito/docs/current/org/mockito/Spy.html" target="_blank" rel="external"><code>@Spy</code></a>: 部分模拟，真实的方法被调用了，但是仍可以被验证和修改行为</li>
+</ul>
+<h2 id="自己的实践：数据源返回值的修改"><a href="#自己的实践：数据源返回值的修改" class="headerlink" title="自己的实践：数据源返回值的修改"></a>自己的实践：数据源返回值的修改</h2><p>在目前开发业务中，需要通过Atom组件根据id获取对应的字面，如果字面以”$_”开头，则执行其他逻辑。</p>
+<h3 id="构造一个Mock对象"><a href="#构造一个Mock对象" class="headerlink" title="构造一个Mock对象"></a>构造一个Mock对象</h3><p>此处的Atom组件数据源不可控，但可以在单测中使用，于是通过Spy(傀儡式mock)来修改对象返回值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 从Spring Context中拿到需要spy的对象</span></div><div class="line">AtomDriver atomDriver = <span class="keyword">this</span>.applicationContext.getBean(atomDriverBeanName, AtomDriver.class);</div><div class="line"></div><div class="line"><span class="keyword">final</span> Map&lt;Long, String&gt; mapResult = <span class="keyword">new</span> HashMap&lt;Long, String&gt;();</div><div class="line">mapResult.put(wordid, <span class="string">"$_cxvafdslakjf"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 以atomDriver为傀儡，在此基础上修改其返回值</span></div><div class="line">AtomDriver spy = spy(atomDriver);</div><div class="line">doAnswer(<span class="keyword">new</span> Answer() &#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> Object <span class="title">answer</span><span class="params">(InvocationOnMock invocationOnMock)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">    Map&lt;Long, String&gt; result = (Map&lt;Long, String&gt;) invocationOnMock.callRealMethod();</div><div class="line">    result.putAll(mapResult);</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">  &#125;</div><div class="line">&#125;).when(spy).queryWordNameById(Matchers.anyCollection());</div></pre></td></tr></table></figure>
+<p>当然有人说，可以直接在返回值AtomDriver.queryWordNameById()那里修改 or 再包装一层，也是可以的，<strong>但是使用Mockito可以做到无侵入</strong>。</p>
+<h3 id="将Mock注入到Spring-Context中"><a href="#将Mock注入到Spring-Context中" class="headerlink" title="将Mock注入到Spring Context中"></a>将Mock注入到Spring Context中</h3><p>这时，就可以将mock对象交给Spring管理了，使用mock对象替换原来Spring管理的对象，可以做到自动使用mock对象装配到需要的地方。<strong>有一个需要注意的地方，构造对象的scope如果不是单例模式，可能无效，待验证！</strong></p>
+<p>注入到Spring容器的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// inject into spring context</span></div><div class="line">ConfigurableApplicationContext applicationContext = (ConfigurableApplicationContext) <span class="keyword">this</span>.applicationContext;</div><div class="line">DefaultListableBeanFactory beanFactory = (DefaultListableBeanFactory) applicationContext.getBeanFactory();</div><div class="line"><span class="keyword">if</span> (beanFactory.containsBean(atomDriverBeanName)) &#123;</div><div class="line">  beanFactory.destroySingleton(atomDriverBeanName);</div><div class="line">&#125;</div><div class="line">beanFactory.registerSingleton(atomDriverBeanName, spy); <span class="comment">// spy为mock对象</span></div></pre></td></tr></table></figure>
+<p><strong>有更好的实践欢迎一起讨论。</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;作为一个研发工程师，自己的代码怎么可以不测试呢？&lt;/p&gt;
+&lt;p&gt;但是自己跑单测的时候，有的时候某些RPC服务不好配置 or 无线下测试环境，所以我们需要对这些难以实例化等的对象进行Mock（adj. 模拟的；仿制的；虚假的；不真实的）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;这里我们使用Mockito。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;Mockito简介&quot;&gt;&lt;a href=&quot;#Mockito简介&quot; class=&quot;headerlink&quot; title=&quot;Mockito简介&quot;&gt;&lt;/a&gt;Mockito简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Mockito is a mocking framework that tastes really good. It lets you write beautiful tests with a clean &amp;amp; simple API. Mockito doesn’t give you hangover because the tests are very readable and they produce clean verification errors. Read more about &lt;a href=&quot;https://github.com/mockito/mockito/wiki/Features-And-Motivations&quot;&gt;features &amp;amp; motivations&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Mockito 是一个模拟框架，用起来非常好用。它允许你用干净简单(too simple)的API写漂亮的测试方法。Mockito不会给你遗留物(不侵入源代码，不造成别的影响的意思吧)，因为这些测试可读性非常好，产生的可验证的错误也非常简洁。阅读更多信息参考上述链接。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mockito是StackOverflow社区投票选出的最好的Java Mock 框架&lt;/li&gt;
+&lt;li&gt;不仅仅在策划工具中，在所有的类库中，Mockito也是排名前十的Java类库。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="知识记录" scheme="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="Test" scheme="http://coderroc.com/tags/Test/"/>
+    
+      <category term="Mockito" scheme="http://coderroc.com/tags/Mockito/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一致性Hash算法</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Consistent-Hashing.html"/>
+    <id>http://coderroc.com/article/知识记录/Consistent-Hashing.html</id>
+    <published>2016-05-23T05:20:20.000Z</published>
+    <updated>2016-05-24T12:54:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一致性Hash算法是什么？"><a href="#一致性Hash算法是什么？" class="headerlink" title="一致性Hash算法是什么？"></a>一致性Hash算法是什么？</h3><blockquote>
+<p>一致性哈希（Consistent Hashing），是一种特殊的哈希算法。在使用一致哈希算法后，哈希表槽位数（大小）的改变平均只需要对K/n 个关键字重新映射，其中 K是关键字的数量，n是槽位数量。然而在传统的哈希表中，添加或删除一个槽位的几乎需要对所有关键字进行重新映射。</p>
+<p>–wiki</p>
+</blockquote>
+<p>现在这种思想已经被广泛的应用在了其他领域，尤其是分布式系统非常流行的今天。</p>
+<h3 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h3><p>在分布式系统中，比如典型的KV型缓存系统，存储的位置一般是通过hash(key)得到的值确定的。比较简单的，例如，通过hash(key) % N,确定存储的节点,其中N是存储节点个数。这是最简单直观的做法，但是有一个比较严重的问题，如果有新的机器加入或者退出，基本上所有的映射都对用不上了。</p>
+<p>$$<br>hash(Key)\pmod N<br>$$</p>
+<p>为了能够随时增加、减少机器并且造成的映射变化最小，在此基础上还可以尽可能的使内容比较均匀的分布在每个存储节点上等，1997年由麻省理工学院提出的一种分布式哈希（DHT，Distributed Hash Table，分布式哈希表）实现算法，即一致性哈希算法。</p>
+<a id="more"></a>
+<h3 id="一致性hash的特点"><a href="#一致性hash的特点" class="headerlink" title="一致性hash的特点"></a>一致性hash的特点</h3><p>好的一致性算法需满足以下几个方面：</p>
+<ul>
+<li><p>平衡性（Balance）</p>
+<p>平衡性是指哈希的结果能够尽可能分布到所有的缓冲中去，这样可以使得所有的缓冲空间都得到利用。很多哈希算法都能够满足这一条件。</p>
+</li>
+</ul>
+<ul>
+<li><p>单调性(Monotonicity)</p>
+<p>单调性是指如果已经有一些内容通过哈希分派到了相应的缓冲中，又有新的缓冲加入到系统中。哈希的结果应能够保证原有已分配的内容可以被映射到原有的或者新的缓冲中去，而不会被映射到旧的缓冲集合中的其他缓冲区。</p>
+</li>
+</ul>
+<ul>
+<li><p>分散性(Spread)</p>
+<p>在分布式环境中，终端有可能看不到所有的缓冲，而是只能看到其中的一部分。当终端希望通过哈希过程将内容映射到缓冲上时，由于不同终端所见的缓冲范围有可能不同，从而导致哈希的结果不一致，最终的结果是相同的内容被不同的终端映射到不同的缓冲区中。这种情况显然是应该避免的，因为它导致相同内容被存储到不同缓冲中去，降低了系统存储的效率。分散性的定义就是上述情况发生的严重程度。好的哈希算法应能够尽量避免不一致的情况发生，也就是尽量降低分散性。</p>
+</li>
+</ul>
+<ul>
+<li><p>负载(Load)</p>
+<p>负载问题实际上是从另一个角度看待分散性问题。既然不同的终端可能将相同的内容映射到不同的缓冲区中，那么对于一个特定的缓冲区而言，也可能被不同的用户映射为不同 的内容。与分散性一样，这种情况也是应当避免的，因此好的哈希算法应能够尽量降低缓冲的负荷。</p>
+</li>
+<li><p>平滑性(Smoothness)</p>
+<p>平滑性是指缓存服务器的数目平滑改变和缓存对象的平滑改变是一致的。</p>
+</li>
+</ul>
+<p>如果可以满足以上几个方面，则可以很低成本的增加、减少机器，这个分布式系统也就更加健壮。</p>
+<h3 id="实现原理-lt-转-gt"><a href="#实现原理-lt-转-gt" class="headerlink" title="实现原理&lt;转&gt;"></a>实现原理&lt;转&gt;</h3><p>不同于取模直接定位（可以认为是数学中的等式）存储节点的方式，一致性hash一般采用环形Hash空间的方式，从这个环上取几个节点，就近（或者顺时针、逆时针就近）存储，这样就变成了不等式的方式，更为灵活。</p>
+<h4 id="环形Hash空间"><a href="#环形Hash空间" class="headerlink" title="环形Hash空间"></a>环形Hash空间</h4><p>一致性哈希将整个哈希值空间组织成一个虚拟的圆环，如假设某哈希函数H的值空间为0-2^32-1（即哈希值是一个32位无符号整形），整个哈希空间环如下：</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/16-5-23/87078665.jpg" alt="一致性Hash环形空间"></p>
+<h4 id="将机器和存储的内容Hash落在环形空间"><a href="#将机器和存储的内容Hash落在环形空间" class="headerlink" title="将机器和存储的内容Hash落在环形空间"></a>将机器和存储的内容Hash落在环形空间</h4><p>首先将服务器通过使用某个Hash算法，映射到环形空间的某个位置，具体做法可以通过Hash(serverName or IP, etc),这样就会得到每个节点的位置。</p>
+<p>例如有A、B、C、D四个存储节点，Hash后如下：</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/16-5-23/65633344.jpg" alt="存储节点在环形空间的分布"></p>
+<p>然后将存储内容计算出Hash值，落在环形空间某一位置，接着顺时针寻找到第一个存储节点，存储完成。</p>
+<p>例如有Object A、Object B、Object C、Object D四个数据对象，经过哈希计算后，在环空间上的位置与节点的对应关系如下：</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/16-5-23/53690418.jpg" alt="存储内容最终定位到服务节点"></p>
+<p>根据一致性哈希算法，数据A会被定为到Node A上，B被定为到Node B上，C被定为到Node C上，D被定为到Node D上。</p>
+<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>下面分析一致性哈希算法的容错性和可扩展性。现假设Node C不幸宕机，可以看到此时对象A、B、D不会受到影响，只有C对象被重定位到Node D。一般的，在一致性哈希算法中，如果一个节点不可用，则受影响的数据仅仅是此服务器到其环空间中前一个节点（即沿着逆时针方向行走遇到的第一个节点）之间数据，其它不会受到影响。</p>
+<p>下面考虑另外一种情况，如果在系统中增加一个节点Node X，如下图所示：</p>
+<p> <img src="http://7d9owd.com1.z0.glb.clouddn.com/16-5-23/27515656.jpg" alt="新增Node X"></p>
+<p>此时对象Object A、B、D不受影响，只有对象C需要重定位到新的Node X 。一般的，在一致性哈希算法中，如果增加一个节点，则受影响的数据仅仅是新节点到其环空间中前一个节点（即沿着逆时针方向行走遇到的第一个节点）之间数据，其它数据也不会受到影响。</p>
+<p>综上所述，一致性哈希算法对于节点的增减都只需重定位环空间中的一小部分数据，<strong>具有较好的容错性和可扩展性</strong>。</p>
+<h4 id="虚拟节点"><a href="#虚拟节点" class="headerlink" title="虚拟节点"></a>虚拟节点</h4><p>假如，在这个分布式系统中，服务节点在环形空间分布不均衡时，容易造成数据存储倾斜问题。假如只有2个节点其环分布分布如下：</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/16-5-23/6466285.jpg" alt="更加不均匀的服务节点分布"></p>
+<p>此时必然造成大量数据集中到Node A上，而只有少量会定位到Node B上。为了解决这种数据倾斜问题，一致性哈希算法引入了虚拟节点机制，即对每一个服务节点计算多个哈希，每个计算结果位置都放置一个此服务节点，称为虚拟节点。具体做法可以在服务器ip或主机名的后面增加编号来实现。例如上面的情况，可以为每台服务器计算三个虚拟节点，于是可以分别计算 “Node A#1”、“Node A#2”、“Node A#3”、“Node B#1”、“Node B#2”、“Node B#3”的哈希值，于是形成六个虚拟节点：</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/16-5-23/54897555.jpg" alt="虚拟节点"></p>
+<p>同时数据定位算法不变，只是多了一步虚拟节点到实际节点的映射，例如定位到“Node A#1”、“Node A#2”、“Node A#3”三个虚拟节点的数据均定位到Node A上。这样就解决了服务节点少时数据倾斜的问题。在实际应用中，通常将虚拟节点数设置为32甚至更大，因此即使很少的服务节点也能做到相对均匀的数据分布。</p>
+<h3 id="延伸阅读："><a href="#延伸阅读：" class="headerlink" title="延伸阅读："></a>延伸阅读：</h3><p><a href="http://www.cnblogs.com/haippy/archive/2011/12/10/2282943.html" target="_blank" rel="external">一致性Hash背景</a></p>
+<p>一致性哈希. <a href="http://baike.baidu.com/view/1588037.htm" target="_blank" rel="external">http://baike.baidu.com/view/1588037.htm</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;一致性Hash算法是什么？&quot;&gt;&lt;a href=&quot;#一致性Hash算法是什么？&quot; class=&quot;headerlink&quot; title=&quot;一致性Hash算法是什么？&quot;&gt;&lt;/a&gt;一致性Hash算法是什么？&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;一致性哈希（Consistent Hashing），是一种特殊的哈希算法。在使用一致哈希算法后，哈希表槽位数（大小）的改变平均只需要对K/n 个关键字重新映射，其中 K是关键字的数量，n是槽位数量。然而在传统的哈希表中，添加或删除一个槽位的几乎需要对所有关键字进行重新映射。&lt;/p&gt;
+&lt;p&gt;–wiki&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;现在这种思想已经被广泛的应用在了其他领域，尤其是分布式系统非常流行的今天。&lt;/p&gt;
+&lt;h3 id=&quot;解决的问题&quot;&gt;&lt;a href=&quot;#解决的问题&quot; class=&quot;headerlink&quot; title=&quot;解决的问题&quot;&gt;&lt;/a&gt;解决的问题&lt;/h3&gt;&lt;p&gt;在分布式系统中，比如典型的KV型缓存系统，存储的位置一般是通过hash(key)得到的值确定的。比较简单的，例如，通过hash(key) % N,确定存储的节点,其中N是存储节点个数。这是最简单直观的做法，但是有一个比较严重的问题，如果有新的机器加入或者退出，基本上所有的映射都对用不上了。&lt;/p&gt;
+&lt;p&gt;$$&lt;br&gt;hash(Key)\pmod N&lt;br&gt;$$&lt;/p&gt;
+&lt;p&gt;为了能够随时增加、减少机器并且造成的映射变化最小，在此基础上还可以尽可能的使内容比较均匀的分布在每个存储节点上等，1997年由麻省理工学院提出的一种分布式哈希（DHT，Distributed Hash Table，分布式哈希表）实现算法，即一致性哈希算法。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="知识记录" scheme="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="Hash" scheme="http://coderroc.com/tags/Hash/"/>
+    
+      <category term="一致性Hash" scheme="http://coderroc.com/tags/%E4%B8%80%E8%87%B4%E6%80%A7Hash/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>怎样阅读别人的代码？</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/how-to-read-others-code.html"/>
+    <id>http://coderroc.com/article/知识记录/how-to-read-others-code.html</id>
+    <published>2015-12-28T09:40:46.000Z</published>
+    <updated>2016-03-04T08:32:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景:"></a>背景:</h3><p>最近接到一个任务, 在原有的项目基础上进行开发, 增加一个新功能, 有之前的类似功能对照.看起来挺简单的, 然后立刻准备开发, 但是碰壁一头雾水, 工程太复杂了, 涉及的子工程比较多, 类/配置文件等特别多.</p>
+<h3 id="简要"><a href="#简要" class="headerlink" title="简要:"></a>简要:</h3><p>然后开始从网上搜索–”怎样阅读别人的代码”, 总结了下:<br>收集相关的资料, 阅读代码，追踪数据流，仿写，测试。</p>
+<a id="more"></a>
+<h3 id="详细步骤"><a href="#详细步骤" class="headerlink" title="详细步骤:"></a>详细步骤:</h3><ol>
+<li><strong>收集相关背景资料。</strong> Wiki，PPT，MRD等都是重要的相关资料，阅读代码前可以先看看这些。从这里可以了解项目的背景，目的，甚至大致的结构等。</li>
+<li><strong>阅读代码。</strong>阅读代码可以借助IDE，这里推荐IDEA，当然哪一个熟练用哪一个了。如果有可以运行的测试用例的话（一般都有），那就debug测试用例，追踪数据流。这里一定要有耐心，不要急着跳过，尤其是第一遍，在关键位置最好是进入方法内部看一下，在关键的位置打上断点，中间使用expression等方法，辅助debug。在debug过程中，注意阅读注释，简要记录重要的对象和方法，对象是怎么样构造的和变化的。<br><em>这两步都是尽可能多的掌握有价值的信息，目的是为了下一步写出代码。</em></li>
+<li><strong>仿写。</strong> 准备的这么多，终于写代码了。其实代码是不急着写的，了解清楚了，花不了多久就能写完。写的时候注意别人的规范，力求代码规范一致。</li>
+<li><strong>测试。</strong>编写测试用例，很可能一次通过不了，还是通过上面阅读代码时的debug方法，一点点追踪定位问题，解决了就OK了。</li>
+</ol>
+<hr>
+<h3 id="IDEA-debug技巧"><a href="#IDEA-debug技巧" class="headerlink" title="IDEA debug技巧"></a>IDEA debug技巧</h3><p>主要看图，看图一目了然。<br><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/c65226c6-90aa-4b2e-b754-98778ae6bbd7.png" alt="IDEA debug面板"></p>
+<p>断点的设定和eclipse一样，只要点一下就可以，下面是我设定的几个断点，再下面的三个窗口是用来调试代码的，这个和eclipse类似。</p>
+<h4 id="调试常用的快捷键"><a href="#调试常用的快捷键" class="headerlink" title="调试常用的快捷键"></a>调试常用的快捷键</h4><pre><code>F9            resume programe 恢复程序
+Alt+F10       show execution point 显示执行断点
+F8            Step Over 相当于eclipse的f6      跳到下一步
+F7            Step Into 相当于eclipse的f5就是  进入到代码
+Alt+shift+F7  Force Step Into 这个是强制进入代码
+Shift+F8      Step Out  相当于eclipse的f8跳到下一个断点，也相当于eclipse的f7跳出函数
+Atl+F9        Run To Cursor 运行到光标处
+ctrl+shift+F9   debug运行java类
+ctrl+shift+F10  正常运行java类
+alt+F8          debug时选中查看值
+</code></pre><p>来源：<a href="http://my.oschina.net/nyp/blog/383673" target="_blank" rel="external">http://my.oschina.net/nyp/blog/383673</a></p>
+<h3 id="相关资料："><a href="#相关资料：" class="headerlink" title="相关资料："></a>相关资料：</h3><ul>
+<li><a href="http://blog.csdn.net/ilyfeng1314/article/details/7452326" target="_blank" rel="external">如何阅读别人的源代码？</a></li>
+<li><a href="https://www.zhihu.com/question/21186887" target="_blank" rel="external">如何阅读别人的代码？</a></li>
+<li><a href="http://www.cnblogs.com/snidget/articles/1951121.html" target="_blank" rel="external">怎么阅读别人的项目代码？</a></li>
+<li><a href="http://ylq365.iteye.com/blog/1953854" target="_blank" rel="external">mac下idea的使用之代码调试debug篇</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景:&quot;&gt;&lt;/a&gt;背景:&lt;/h3&gt;&lt;p&gt;最近接到一个任务, 在原有的项目基础上进行开发, 增加一个新功能, 有之前的类似功能对照.看起来挺简单的, 然后立刻准备开发, 但是碰壁一头雾水, 工程太复杂了, 涉及的子工程比较多, 类/配置文件等特别多.&lt;/p&gt;
+&lt;h3 id=&quot;简要&quot;&gt;&lt;a href=&quot;#简要&quot; class=&quot;headerlink&quot; title=&quot;简要:&quot;&gt;&lt;/a&gt;简要:&lt;/h3&gt;&lt;p&gt;然后开始从网上搜索–”怎样阅读别人的代码”, 总结了下:&lt;br&gt;收集相关的资料, 阅读代码，追踪数据流，仿写，测试。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="IDEA" scheme="http://coderroc.com/tags/IDEA/"/>
+    
+      <category term="Debug" scheme="http://coderroc.com/tags/Debug/"/>
+    
+      <category term="阅读代码" scheme="http://coderroc.com/tags/%E9%98%85%E8%AF%BB%E4%BB%A3%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2015年11月总结</title>
+    <link href="http://coderroc.com/article/%E4%BB%BB%E5%8A%A1%E5%92%8C%E8%AE%A1%E5%88%92/2015%E5%B9%B411%E6%9C%88%E6%80%BB%E7%BB%93.html"/>
+    <id>http://coderroc.com/article/任务和计划/2015年11月总结.html</id>
+    <published>2015-11-04T13:55:23.000Z</published>
+    <updated>2015-11-04T13:56:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>在Qzone的“去年的今天”里，有这样一条说说，发现来北京一年一年了。</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/02ef11ad-7165-493c-980b-fef3ba475586.png" alt="去年的今天"></p>
+<p>在这一年里，很充实。现进行反思和总结，给自己。</p>
+<a id="more"></a>
+<h3 id="心态的变化"><a href="#心态的变化" class="headerlink" title="心态的变化"></a>心态的变化</h3><h4 id="敏感"><a href="#敏感" class="headerlink" title="敏感"></a>敏感</h4><p>我算是一个敏感自卑的人吧，总想让自己变得自信阳光一些，在大学就一直努力，但是效果并不是很好。出了校园之后，心态慢慢的变好了，我观察自己的心态，原因大概是这样吧。</p>
+<p>在校园里，是在宿舍里，由于大家的作息不一致，在我们宿舍我想要有一个良好的睡眠是比较困难的。（这里有一个讲<a href="http://www.zhihu.com/topic/19804534/top-answers" target="_blank" rel="external">宿舍关系</a>，可以看看）也有说过，沟通过，但是效果不是很好。后来也不好意思再说了，反而认为是自己的问题，沟通、为人等。由于睡眠不好，白天没有精力，一不小心进入了恶性循环。出了校园之后，睡眠得到了保证，一切慢慢的好了起来，自己也会不断的充实自己，慢慢的走向了正向循环。</p>
+<p>我想，有两点很重要：</p>
+<ol>
+<li>不断的学习</li>
+<li>良好的睡眠</li>
+</ol>
+<p>良好的睡眠是精力的前提，有良好的精力才能全身心投入的做每一件事，做好的几率也更高。所以工作和生活的环境很重要，假如现在不够的话，也要努力让自己慢慢走到合适的环境、位置。</p>
+<p>说到精力，我发现身体素质不是很好了，不如以前，这也是一个信号，<strong>我需要锻炼了</strong>。</p>
+<h4 id="上进"><a href="#上进" class="headerlink" title="上进"></a>上进</h4><p>这算是我的一个优点吧，从来没有忘记学习的重要性，不断的学习各方面的知识，提升自己。的确，提升自己是一辈子的事情。那就说说提升自己遇到的一些问题吧。</p>
+<ol>
+<li>难以超越自身局限的努力：这个很难突破，但是是一个有意思的思考题</li>
+<li>一些方法论，提高工作效率、学习效率的方法</li>
+</ol>
+<h4 id="反思自己的成长"><a href="#反思自己的成长" class="headerlink" title="反思自己的成长"></a>反思自己的成长</h4><p>跟很多朋友讨论过，对一个人的成长来说，受哪些影响。我得到的回答很多的是父母。的确，父母是人生第一老师，重要性不言而喻。而对于父母那代人来说，肯定有现在认为不合理的地方。要是……那就好了之类的话在这种场景下毫无意义。</p>
+<p>对我来说，从反思自己的成长这件事来看，我看到了教育的重要性。另外的，那就是怎么做是有利于自己的，抱怨是无利于任何人，所以坦然接受才是最好的态度，并从中思考。</p>
+<h3 id="知乎"><a href="#知乎" class="headerlink" title="知乎"></a>知乎</h3><p>知乎，怎么说呢，给我的感觉比较复杂了。</p>
+<p>在知乎，的确收获了很多的知识，看待问题、事情的角度，以及很多大V的思想。</p>
+<p>但是，现在也有一些无用低营养价值的消息充斥在消息流。<strong>虽然收获很多，但是也浪费了很多时间。</strong>最近腾讯领投知乎C轮，希望能压制一下这方面的问题，<strong>还有做好知乎的搜索</strong>！</p>
+<p>还有就是收藏夹很多内容待处理。</p>
+<p>暂时的措施：</p>
+<ol>
+<li>取关</li>
+<li>处理收藏夹</li>
+</ol>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>设定一下以后一段时间的目标吧：</p>
+<ol>
+<li>高质量完成工作的每件事</li>
+<li>保持学习的习惯</li>
+<li>健身</li>
+<li>合理理财</li>
+</ol>
+<hr>
+<p>附：<a href="http://user.qzone.qq.com/745656593/blog/1413266364" target="_blank" rel="external">2014年10月份总结</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;引子&quot;&gt;&lt;a href=&quot;#引子&quot; class=&quot;headerlink&quot; title=&quot;引子&quot;&gt;&lt;/a&gt;引子&lt;/h3&gt;&lt;p&gt;在Qzone的“去年的今天”里，有这样一条说说，发现来北京一年一年了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://7d9owd.com1.z0.glb.clouddn.com/images/02ef11ad-7165-493c-980b-fef3ba475586.png&quot; alt=&quot;去年的今天&quot;&gt;&lt;/p&gt;
+&lt;p&gt;在这一年里，很充实。现进行反思和总结，给自己。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="生活与心情" scheme="http://coderroc.com/categories/%E7%94%9F%E6%B4%BB%E4%B8%8E%E5%BF%83%E6%83%85/"/>
+    
+    
+      <category term="总结" scheme="http://coderroc.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微信红包随机算法初探</title>
+    <link href="http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E5%88%9D%E6%8E%A2.html"/>
+    <id>http://coderroc.com/article/数学和算法/微信红包随机算法初探.html</id>
+    <published>2015-10-28T12:49:09.000Z</published>
+    <updated>2016-02-20T11:13:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文简书备份地址：<a href="http://www.jianshu.com/p/026ceece4d80" target="_blank" rel="external">微信红包随机算法初探</a></p>
+<p>最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>算法很简单，不是提前算好，而是抢红包时计算：</p>
+<blockquote>
+<p>红包里的金额怎么算？为什么出现各个红包金额相差很大？<br>答：随机，额度在0.01和剩余平均值*2之间。</p>
+</blockquote>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>实现上述算法的逻辑主要是：</p>
+<pre><code>public static double getRandomMoney(RedPackage _redPackage) {
+    // remainSize 剩余的红包数量
+    // remainMoney 剩余的钱
+    if (_redPackage.remainSize == 1) {
+        _redPackage.remainSize--;
+        return (double) Math.round(_redPackage.remainMoney * 100) / 100;
+    }
+    Random r     = new Random();
+    double min   = 0.01; //
+    double max   = _redPackage.remainMoney / _redPackage.remainSize * 2;
+    double money = r.nextDouble() * max;
+    money = money &lt;= min ? 0.01: money;
+    money = Math.floor(money * 100) / 100;
+    _redPackage.remainSize--;
+    _redPackage.remainMoney -= money;
+    return money;
+}
+</code></pre><a id="more"></a>
+<p><code>LeftMoneyPackage</code>数据结构如下：</p>
+<pre><code>class RedPackage {
+    int    remainSize;
+    double remainMoney;
+}
+</code></pre><p>测试时初始化相关数据是：</p>
+<pre><code>static void init() {
+    redPackage.remainSize  = 30;
+    redPackage.remainMoney = 500;
+}
+</code></pre><h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><h4 id="单词测试随机红包"><a href="#单词测试随机红包" class="headerlink" title="单词测试随机红包"></a>单词测试随机红包</h4><p>以上面的初始化数据（30人抢500块），执行了两次，结果如下：</p>
+<pre><code>// 第一次
+15.69    21.18    24.11    30.85    0.74    20.85    2.96    13.43    11.12    24.87    1.86    19.62    5.97    29.33    3.05    26.94    18.69    34.47    9.4    29.83    5.17    24.67    17.09    29.96    6.77    5.79    0.34    23.89    40.44    0.92
+
+// 第二次
+10.44    18.01    17.01    21.07    11.87    4.78    30.14    32.05    16.68    20.34    12.94    27.98    9.31    17.97    12.93    28.75    12.1    12.77    7.54    10.87    4.16    25.36    26.89    5.73    11.59    23.91    17.77    15.85    23.42    9.77
+</code></pre><p>对应图表如下：<br><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/7682b4d2-e67f-47b4-9282-31da086ffb55.png" alt="第一次随机红包数据展示"><br>还有一张：</p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/a615bbc4-4dbf-42da-a1a1-e4afcb908752.png" alt="第二次随机红包数据展示"></p>
+<h4 id="多次均值"><a href="#多次均值" class="headerlink" title="多次均值"></a>多次均值</h4><p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/20d36929-634f-4655-90d2-64fffa43838f.png" alt="重复执行200次的均值"></p>
+<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/dfddb714-72fb-40e2-805d-cbc43b944f4d.png" alt="重复执行2000次的均值"></p>
+<p>可以看到，这个算法可以让大家抢到的红包面额在概率上是大致均匀的。</p>
+<hr>
+<p>转一下原文</p>
+<h3 id="微信红包的架构设计简介"><a href="#微信红包的架构设计简介" class="headerlink" title="微信红包的架构设计简介"></a>微信红包的架构设计简介</h3><p><strong>@来源于QCon某高可用架构群整理，整理朱玉华。</strong></p>
+<p><strong>背景：</strong>有某个朋友在朋友圈咨询微信红包的架构，于是乎有了下面的文字（有误请提出，谢谢）</p>
+<p><strong>概况：</strong>2014年微信红包使用数据库硬抗整个流量，2015年使用cache抗流量。</p>
+<h4 id="微信的金额什么时候算？"><a href="#微信的金额什么时候算？" class="headerlink" title="微信的金额什么时候算？"></a>微信的金额什么时候算？</h4><p>答：微信金额是拆的时候实时算出来，不是预先分配的，采用的是纯内存计算，不需要预算空间存储。<br>采取实时计算金额的考虑：预算需要占存储，实时效率很高，预算才效率低。</p>
+<h4 id="实时性：为什么明明抢到红包，点开后发现没有？"><a href="#实时性：为什么明明抢到红包，点开后发现没有？" class="headerlink" title="实时性：为什么明明抢到红包，点开后发现没有？"></a>实时性：为什么明明抢到红包，点开后发现没有？</h4><p>答：2014年的红包一点开就知道金额，分两次操作，先抢到金额，然后再转账。<br>2015年的红包的拆和抢是分离的，需要点两次，因此会出现抢到红包了，但点开后告知红包已经被领完的状况。进入到第一个页面不代表抢到，只表示当时红包还有。</p>
+<h4 id="分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？"><a href="#分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？" class="headerlink" title="分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？"></a>分配：红包里的金额怎么算？为什么出现各个红包金额相差很大？</h4><p>答：随机，额度在0.01和(剩余平均值*2)之间。<br>例如：发100块钱，总共10个红包，那么平均值是10块钱一个，那么发出来的红包的额度在0.01元～20元之间波动。<br>当前面3个红包总共被领了40块钱时，剩下60块钱，总共7个红包，那么这7个红包的额度在：0.01～（60/7*2）=17.14之间。<br>注意：这里的算法是每被抢一个后，剩下的会再次执行上面的这样的算法（Tim老师也觉得上述算法太复杂，不知基于什么样的考虑）。</p>
+<p>这样算下去，会超过最开始的全部金额，因此到了最后面如果不够这么算，那么会采取如下算法：保证剩余用户能拿到最低1分钱即可。</p>
+<p>如果前面的人手气不好，那么后面的余额越多，红包额度也就越多，因此实际概率一样的。</p>
+<h4 id="红包的设计"><a href="#红包的设计" class="headerlink" title="红包的设计"></a>红包的设计</h4><p>答：微信从财付通拉取金额数据郭莱，生成个数/红包类型/金额放到redis集群里，app端将红包ID的请求放入请求队列中，如果发现超过红包的个数，直接返回。根据红包的裸祭(逻辑)处理成功得到令牌请求，则由财付通进行一致性调用，通过像比特币一样，两边保存交易记录，交易后交给第三方服务审计，如果交易过程中出现不一致就强制回归。</p>
+<h4 id="发性处理：红包如何计算被抢完？"><a href="#发性处理：红包如何计算被抢完？" class="headerlink" title="发性处理：红包如何计算被抢完？"></a>发性处理：红包如何计算被抢完？</h4><p>答：cache会抵抗无效请求，将无效的请求过滤掉，实际进入到后台的量不大。cache记录红包个数，原子操作进行个数递减，到0表示被抢光。财付通按照20万笔每秒入账准备，但实际还不到8万每秒。</p>
+<h4 id="通如何保持8w每秒的写入？"><a href="#通如何保持8w每秒的写入？" class="headerlink" title="通如何保持8w每秒的写入？"></a>通如何保持8w每秒的写入？</h4><p>答：多主sharding，水平扩展机器。</p>
+<h4 id="据容量多少？"><a href="#据容量多少？" class="headerlink" title="据容量多少？"></a>据容量多少？</h4><p>答：一个红包只占一条记录，有效期只有几天，因此不需要太多空间。</p>
+<h4 id="询红包分配，压力大不？"><a href="#询红包分配，压力大不？" class="headerlink" title="询红包分配，压力大不？"></a>询红包分配，压力大不？</h4><p>答：抢到红包的人数和红包都在一条cache记录上，没有太大的查询压力。</p>
+<h4 id="一个红包一个队列？"><a href="#一个红包一个队列？" class="headerlink" title="一个红包一个队列？"></a>一个红包一个队列？</h4><p>答：没有队列，一个红包一条数据，数据上有一个计数器字段。</p>
+<h4 id="有没有从数据上证明每个红包的概率是不是均等？"><a href="#有没有从数据上证明每个红包的概率是不是均等？" class="headerlink" title="有没有从数据上证明每个红包的概率是不是均等？"></a>有没有从数据上证明每个红包的概率是不是均等？</h4><p>答：不是绝对均等，就是一个简单的拍脑袋算法。</p>
+<h4 id="拍脑袋算法，会不会出现两个最佳？"><a href="#拍脑袋算法，会不会出现两个最佳？" class="headerlink" title="拍脑袋算法，会不会出现两个最佳？"></a>拍脑袋算法，会不会出现两个最佳？</h4><p>答：会出现金额一样的，但是手气最佳只有一个，先抢到的那个最佳。</p>
+<h4 id="每领一个红包就更新数据么？"><a href="#每领一个红包就更新数据么？" class="headerlink" title="每领一个红包就更新数据么？"></a>每领一个红包就更新数据么？</h4><p>答：每抢到一个红包，就cas更新剩余金额和红包个数。</p>
+<h4 id="红包如何入库入账？"><a href="#红包如何入库入账？" class="headerlink" title="红包如何入库入账？"></a>红包如何入库入账？</h4><p>数据库会累加已经领取的个数与金额，插入一条领取记录。入账则是后台异步操作。</p>
+<h4 id="入帐出错怎么办？比如红包个数没了，但余额还有？"><a href="#入帐出错怎么办？比如红包个数没了，但余额还有？" class="headerlink" title="入帐出错怎么办？比如红包个数没了，但余额还有？"></a>入帐出错怎么办？比如红包个数没了，但余额还有？</h4><p>答：最后会有一个take all操作。另外还有一个对账来保障。</p>
+<blockquote>
+<p>原文链接：<a href="https://www.zybuluo.com/yulin718/note/93148" target="_blank" rel="external">https://www.zybuluo.com/yulin718/note/93148</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文简书备份地址：&lt;a href=&quot;http://www.jianshu.com/p/026ceece4d80&quot;&gt;微信红包随机算法初探&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最近看了一篇文章，讲微信红包随机算法的。感觉很不错，所以自己实现了下，并进行了简单测试。&lt;/p&gt;
+&lt;h3 id=&quot;算法&quot;&gt;&lt;a href=&quot;#算法&quot; class=&quot;headerlink&quot; title=&quot;算法&quot;&gt;&lt;/a&gt;算法&lt;/h3&gt;&lt;p&gt;算法很简单，不是提前算好，而是抢红包时计算：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;红包里的金额怎么算？为什么出现各个红包金额相差很大？&lt;br&gt;答：随机，额度在0.01和剩余平均值*2之间。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;实现&quot;&gt;&lt;a href=&quot;#实现&quot; class=&quot;headerlink&quot; title=&quot;实现&quot;&gt;&lt;/a&gt;实现&lt;/h3&gt;&lt;p&gt;实现上述算法的逻辑主要是：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public static double getRandomMoney(RedPackage _redPackage) {
+    // remainSize 剩余的红包数量
+    // remainMoney 剩余的钱
+    if (_redPackage.remainSize == 1) {
+        _redPackage.remainSize--;
+        return (double) Math.round(_redPackage.remainMoney * 100) / 100;
+    }
+    Random r     = new Random();
+    double min   = 0.01; //
+    double max   = _redPackage.remainMoney / _redPackage.remainSize * 2;
+    double money = r.nextDouble() * max;
+    money = money &amp;lt;= min ? 0.01: money;
+    money = Math.floor(money * 100) / 100;
+    _redPackage.remainSize--;
+    _redPackage.remainMoney -= money;
+    return money;
+}
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="数学和算法" scheme="http://coderroc.com/categories/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="http://coderroc.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="WeChat" scheme="http://coderroc.com/tags/WeChat/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>也谈单例模式</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/java-design-patterns/talk-about-singleton.html"/>
+    <id>http://coderroc.com/article/知识记录/java-design-patterns/talk-about-singleton.html</id>
+    <published>2015-10-08T08:53:42.000Z</published>
+    <updated>2016-08-22T11:49:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>单例模式(<code>Singleton</code>)也叫单态模式。</p>
+<h4 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h4><p>有时候需要内存中仅有一个某对象就足够了，出现多个就会出现内存浪费甚至逻辑错误。典型的有数据库连接池等，一个连接池就够了。</p>
+<h4 id="常见实现"><a href="#常见实现" class="headerlink" title="常见实现"></a>常见实现</h4><h5 id="急加载（Eager-Initialization）"><a href="#急加载（Eager-Initialization）" class="headerlink" title="急加载（Eager Initialization）"></a>急加载（Eager Initialization）</h5><p>Initialization On Demand Holder</p>
+<pre><code>public class Singleton {
+    // 这个实例要不要不可变(final),一般不需要
+    private static Singleton singleton = new Singleton();
+
+    // 私有化构造器
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        return singleton;
+    }
+}
+</code></pre><a id="more"></a>
+<h5 id="DCL（Double-Checked-Locking）"><a href="#DCL（Double-Checked-Locking）" class="headerlink" title="DCL（Double-Checked Locking）"></a>DCL（Double-Checked Locking）</h5><p>支持延迟加载</p>
+<pre><code>public class Singleton {
+    private static Singleton singleton = null;
+
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        if (null == singleton) {
+            synchronized (Singleton.class) {
+                if (null == singleton) {
+                    singleton = new Singleton();
+                }
+            }
+        }
+        return singleton;
+    }
+}
+</code></pre><p>但是，DCL仍然会出现失败的情况，<br>DCL失败的原因：<br>关键在于这一句<code>singleton = new Singleton();</code>，并不是原子操作，大致会做下面几件事：</p>
+<ul>
+<li><p>开辟内存空间；</p>
+</li>
+<li><p>引用指向内存空间（非null的一步）；</p>
+</li>
+<li><p>初始化内存空间；</p>
+</li>
+</ul>
+<p>但是，由于Java编译器允许处理器乱序执行（out-of-order），以及JDK1.5之前JMM（Java Memory Medel）中Cache、寄存器到主内存回写顺序的规定，初始化内存空间和连接引用与内存空间的执行顺序是不一定的，所以按照现在的顺序，有可能出现拿走一个为初始化的对象，造成很难fix的异常。<br>下面是优化版本。</p>
+<h5 id="双判空模式DCL-with-Volatile"><a href="#双判空模式DCL-with-Volatile" class="headerlink" title="双判空模式DCL with Volatile"></a>双判空模式DCL with Volatile</h5><pre><code>public class Singleton {
+    public static volatile Singleton singleton = null;
+
+    public static Singleton getInstance() {
+        Singleton s = singleton;
+        if (singleton == null) {
+            synchronized (Singleton.class) {
+                s = singleton;
+                if (singleton == null) {
+                    singleton = s = new Singleton();
+                }
+            }
+        }
+        return singleton;
+    }
+}
+</code></pre><h5 id="静态内部私有类（Static-Private-Inner-Class）"><a href="#静态内部私有类（Static-Private-Inner-Class）" class="headerlink" title="静态内部私有类（Static Private Inner Class）"></a>静态内部私有类（Static Private Inner Class）</h5><pre><code>public class Singleton {
+    private static class HelperSingleton {
+        public static Singleton singleton = new Singleton();
+    }
+
+    public static Singleton getInstance() {
+        return HelperSingleton.singleton;
+    }
+}
+</code></pre><h5 id="枚举单例模式"><a href="#枚举单例模式" class="headerlink" title="枚举单例模式"></a>枚举单例模式</h5><pre><code>public enum EnumSingle {
+    INSTANCE
+}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;单例模式(&lt;code&gt;Singleton&lt;/code&gt;)也叫单态模式。&lt;/p&gt;
+&lt;h4 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h4&gt;&lt;p&gt;有时候需要内存中仅有一个某对象就足够了，出现多个就会出现内存浪费甚至逻辑错误。典型的有数据库连接池等，一个连接池就够了。&lt;/p&gt;
+&lt;h4 id=&quot;常见实现&quot;&gt;&lt;a href=&quot;#常见实现&quot; class=&quot;headerlink&quot; title=&quot;常见实现&quot;&gt;&lt;/a&gt;常见实现&lt;/h4&gt;&lt;h5 id=&quot;急加载（Eager-Initialization）&quot;&gt;&lt;a href=&quot;#急加载（Eager-Initialization）&quot; class=&quot;headerlink&quot; title=&quot;急加载（Eager Initialization）&quot;&gt;&lt;/a&gt;急加载（Eager Initialization）&lt;/h5&gt;&lt;p&gt;Initialization On Demand Holder&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;public class Singleton {
+    // 这个实例要不要不可变(final),一般不需要
+    private static Singleton singleton = new Singleton();
+
+    // 私有化构造器
+    private Singleton() {
+    }
+
+    public static Singleton getInstance() {
+        return singleton;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="设计模式" scheme="http://coderroc.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 8 中的函数式接口与Lambda表达式</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java8-interface-lambda.html"/>
+    <id>http://coderroc.com/article/知识记录/Java基础/Java8-interface-lambda.html</id>
+    <published>2015-10-01T06:21:44.000Z</published>
+    <updated>2015-10-01T09:36:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="函数式接口（Functional-Interface）"><a href="#函数式接口（Functional-Interface）" class="headerlink" title="函数式接口（Functional Interface）"></a>函数式接口（Functional Interface）</h3><p>函数式接口是Java 8 对一类特殊类型的接口的称呼。</p>
+<h3 id="Java-8-之前”已有”的函数式接口"><a href="#Java-8-之前”已有”的函数式接口" class="headerlink" title="Java 8 之前”已有”的函数式接口"></a>Java 8 之前”已有”的函数式接口</h3><pre><code>java.lang.Runnable
+java.util.concurrent.Callable
+java.security.PrivilegedAction
+java.util.Comparator
+java.io.FileFilter
+java.io.file.pathMatcher
+...
+</code></pre><a id="more"></a>
+<h3 id="新定义的函数式接口"><a href="#新定义的函数式接口" class="headerlink" title="新定义的函数式接口"></a>新定义的函数式接口</h3><p><code>java.util.function</code>中定义了几组类型的函数式接口以及针对基本数据类型的子接口：</p>
+<pre><code>Predicate
+传入一个参数，返回一个bool结果，方法为boolean test(T t)
+
+Consumer
+传入一个参数，无返回值，纯消费。方法为 void accept(T t)
+
+Function
+传入一个参数，返回一个结果，方法为R apply(T t)
+
+Supplier
+无参数传入，返回一个结果，方法为T get()
+</code></pre><p>这是<code>java.util.function</code>下的所有函数式接口，可以根据名称看到大致的用途：<br><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/95484557-79ee-4ac6-b453-f4b61786f1c1.png" alt="java.util.function下的所有函数式接口"></p>
+<p>可以根据需要使用。</p>
+<p><strong><code>Predicate</code>的用法：</strong></p>
+<pre><code>import java.util.function.Predicate;
+
+/**
+ * Created by Roc on 15/9/30.
+ */
+public class Kik {
+    public static void main(String[] args) {
+        System.out.println(&quot;TestPredicate&quot;);
+        String input = &quot;test&quot;;
+        testFunction((string) -&gt; input.equals(string));
+    }
+
+
+    public static void testFunction(Predicate predicate) {
+        System.out.println(predicate.test(&quot;test&quot;));
+    }
+}
+</code></pre><blockquote>
+<p><strong>双冒号调用</strong>：静态调用，适合简单函数体。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;函数式接口（Functional-Interface）&quot;&gt;&lt;a href=&quot;#函数式接口（Functional-Interface）&quot; class=&quot;headerlink&quot; title=&quot;函数式接口（Functional Interface）&quot;&gt;&lt;/a&gt;函数式接口（Functional Interface）&lt;/h3&gt;&lt;p&gt;函数式接口是Java 8 对一类特殊类型的接口的称呼。&lt;/p&gt;
+&lt;h3 id=&quot;Java-8-之前”已有”的函数式接口&quot;&gt;&lt;a href=&quot;#Java-8-之前”已有”的函数式接口&quot; class=&quot;headerlink&quot; title=&quot;Java 8 之前”已有”的函数式接口&quot;&gt;&lt;/a&gt;Java 8 之前”已有”的函数式接口&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;java.lang.Runnable
+java.util.concurrent.Callable
+java.security.PrivilegedAction
+java.util.Comparator
+java.io.FileFilter
+java.io.file.pathMatcher
+...
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="interface" scheme="http://coderroc.com/tags/interface/"/>
+    
+      <category term="lambda" scheme="http://coderroc.com/tags/lambda/"/>
+    
+      <category term="函数式编程" scheme="http://coderroc.com/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WebNote 2.0 后记</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/WebNote-2.0-records.html"/>
+    <id>http://coderroc.com/article/知识记录/WebNote-2.0-records.html</id>
+    <published>2015-09-13T13:39:04.000Z</published>
+    <updated>2015-09-15T01:39:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/2ab5959c-504c-433c-b0f8-d3e75371ddc3.png" alt="WebNote2.0"></p>
+<p>地址：<a href="http://webnote.coding.io" target="_blank" rel="external">http://webnote.coding.io</a></p>
+<p>回顾这两天写这个Markdown系统，走了很多之前踩过的坑，现在总结下。</p>
+<a id="more"></a>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><p>对于一个<strong>有用户</strong>的系统来说，与登录相关的Cookie操作必不可少，包括，</p>
+<ul>
+<li><strong>服务端</strong>Cookie的读取和设置</li>
+<li><strong>浏览器端（Javascript）</strong>对Cookie的读取和设置</li>
+</ul>
+<p>安全系数较高的系统应该使用KV映射用户主键，不能直接存放用户主键，且映射关系有有效期。</p>
+<h2 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h2><p>经常使用SpringMVC作为MVC框架，应该熟悉其常用的读取参数的方式。</p>
+<p>例如：</p>
+<ol>
+<li><p><code>@RequestMapping</code>可以使用在方法上，类上，有name、value(path)、method等。</p>
+<pre><code>@RequestMapping(&quot;/article&quot;)
+@Controller
+public class ArticleController {
+    //...
+}
+</code></pre></li>
+<li><p><code>@ResponseBody</code>可以直接在response响应流中写入方法的返回值，使用fastjson等库可以返回任意类型的JSON表示。<br>在返回值中还可以返回<code>&quot;forward&quot;</code>、<code>&quot;redirect&quot;</code>等表示，可以覆盖<code>@ResponseBody</code>。</p>
+<pre><code>return &quot;redirect:/&quot;;
+</code></pre></li>
+<li><p><code>@PathVariable</code>指定一个参数，<code>@ModelAttribute</code>自动构造对象。</p>
+<pre><code>@RequestMapping(value = &quot;/{articleCode}&quot;, method = RequestMethod.POST)
+@ResponseBody
+public String updateArticle(@PathVariable(&quot;articleCode&quot;) String articleCode, @ModelAttribute Article article) {
+    article.setCode(articleCode);
+    articleDao.updateArticle(article);
+    return &quot;OK&quot;;
+}
+</code></pre></li>
+<li><p>使用<code>response</code>下载文件</p>
+<pre><code>try (OutputStream out = response.getOutputStream()) {
+    out.write(builder.toString().getBytes());//向客户端输出，实际是把数据存放在response中，然后web服务器再去response中读取
+} catch (Exception e) {
+    e.printStackTrace();
+}
+</code></pre></li>
+</ol>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li><p>注销<br>尝试在服务端删除Cookie但是不可行，最终使用JS在浏览器进行Cookie删除(重置)。</p>
+<pre><code>// 注销
+$(&apos;.logout&apos;).click(function () {
+    $.ajax({
+        url    : &apos;/user/logins&apos;,
+        type   : &apos;DELETE&apos;,
+        success: function () {
+            document.cookie = &quot;userCode=;expires=-1;path=/&quot; // 删除 cookie
+            setTimeout(function () {
+                window.location.href = &apos;/&apos;;
+            }, 200);
+        }
+    });
+});
+</code></pre><p><del>使用<code>document.cookie = &quot;&quot;</code>应该也可以，待测试。</del><br>经测试，不可以。原因是该方法是设置(覆盖)，应该符合Cookie的描述。</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://7d9owd.com1.z0.glb.clouddn.com/images/2ab5959c-504c-433c-b0f8-d3e75371ddc3.png&quot; alt=&quot;WebNote2.0&quot;&gt;&lt;/p&gt;
+&lt;p&gt;地址：&lt;a href=&quot;http://webnote.coding.io&quot;&gt;http://webnote.coding.io&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;回顾这两天写这个Markdown系统，走了很多之前踩过的坑，现在总结下。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="知识记录" scheme="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="SpringMVC" scheme="http://coderroc.com/tags/SpringMVC/"/>
+    
+      <category term="Cookie" scheme="http://coderroc.com/tags/Cookie/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于云笔记</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Something-About-WebNote.html"/>
+    <id>http://coderroc.com/article/知识记录/Something-About-WebNote.html</id>
+    <published>2015-09-11T08:03:29.000Z</published>
+    <updated>2015-09-16T06:09:06.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="0-起因"><a href="#0-起因" class="headerlink" title="0. 起因"></a>0. 起因</h1><p>一直想找一款知识管理工具，但总不Match，从.txt开始，陆续使用、尝试了OneNote,WizNote,Typecho,WordPress,EverNote等，后来迷恋上了<a href="http://www.appinn.com/markdown/basic.html" target="_blank" rel="external">Markdown</a>，又重新审视了许多工具，但总是不Match.</p>
+<p>现在基本上使用Instapaper（Mac-&gt;iPad）做稍后读，筛选资料知识点，平时基本上用EverNote（全平台）记录，分享使用<a href="http://coderroc.com">Roc`s随想录</a>博客，该博客使用的是hexo，支持Markdown格式。</p>
+<p>但是，没有好的Markdown编辑器。</p>
+<ul>
+<li>要么支持图片上传，不支持快捷键；</li>
+<li>要么支持快捷键，不支持图片粘贴上传；</li>
+<li>倒是<a href="http://segmentfault.com/" target="_blank" rel="external">SegmentFault</a>全支持，但是发表博文老是失败，图片存储怕禁止外链。</li>
+</ul>
+<p>于是，还不如自己动手做一个。</p>
+<a id="more"></a>
+<p>Markdown编辑器：<a href="https://pandao.github.io/editor.md/" target="_blank" rel="external">Editor.md</a><br>图片上传图床：选择七牛云存储</p>
+<h1 id="1-进化路线"><a href="#1-进化路线" class="headerlink" title="1. 进化路线"></a>1. 进化路线</h1><p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/281e4952-c385-44f3-9c3b-f640b02a2497.png" alt="第一阶段基本流程"></p>
+<p>逐渐支持账户系统，可以注册，下载生成的Markdown文件，浏览自己创建的文件列表。</p>
+<p>二期权限、QQ第三方登录</p>
+<h1 id="2-源代码"><a href="#2-源代码" class="headerlink" title="2. 源代码"></a>2. 源代码</h1><p><a href="https://github.com/cshijiel/picture" target="_blank" rel="external">https://github.com/cshijiel/picture</a></p>
+<p>现在代码还比较原始，待完善…</p>
+<p>Let`s Go！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;0-起因&quot;&gt;&lt;a href=&quot;#0-起因&quot; class=&quot;headerlink&quot; title=&quot;0. 起因&quot;&gt;&lt;/a&gt;0. 起因&lt;/h1&gt;&lt;p&gt;一直想找一款知识管理工具，但总不Match，从.txt开始，陆续使用、尝试了OneNote,WizNote,Typecho,WordPress,EverNote等，后来迷恋上了&lt;a href=&quot;http://www.appinn.com/markdown/basic.html&quot;&gt;Markdown&lt;/a&gt;，又重新审视了许多工具，但总是不Match.&lt;/p&gt;
+&lt;p&gt;现在基本上使用Instapaper（Mac-&amp;gt;iPad）做稍后读，筛选资料知识点，平时基本上用EverNote（全平台）记录，分享使用&lt;a href=&quot;http://coderroc.com&quot;&gt;Roc`s随想录&lt;/a&gt;博客，该博客使用的是hexo，支持Markdown格式。&lt;/p&gt;
+&lt;p&gt;但是，没有好的Markdown编辑器。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;要么支持图片上传，不支持快捷键；&lt;/li&gt;
+&lt;li&gt;要么支持快捷键，不支持图片粘贴上传；&lt;/li&gt;
+&lt;li&gt;倒是&lt;a href=&quot;http://segmentfault.com/&quot;&gt;SegmentFault&lt;/a&gt;全支持，但是发表博文老是失败，图片存储怕禁止外链。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;于是，还不如自己动手做一个。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="知识记录" scheme="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="webnote" scheme="http://coderroc.com/tags/webnote/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>多线程之Condition</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/Java-multi-thread-Condition.html"/>
+    <id>http://coderroc.com/article/知识记录/Java基础/Java-multi-thread-Condition.html</id>
+    <published>2015-09-07T02:52:21.000Z</published>
+    <updated>2015-09-08T01:53:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="为什么使用多线程？"><a href="#为什么使用多线程？" class="headerlink" title="为什么使用多线程？"></a>为什么使用多线程？</h3><h3 id="带来的问题"><a href="#带来的问题" class="headerlink" title="带来的问题"></a>带来的问题</h3><ul>
+<li>执行顺序：需要达到某种条件次线程阻塞或者继续执行。某些情况可以用回调模型来处理这个问题。</li>
+<li><p>同步写：有时候并发写会造成数据出错，不一致，由于一般的写操作（如i++操作）是三个原子操作构成的：</p>
+<pre><code>取i; 
+temp = i+1; 
+i = temp; 
+//应该合并成一个操作的三步如果被中间执行污染数据的代码，那就造成错误。
+</code></pre></li>
+<li><p>由于需要同步的原因，引入锁的概念。但是锁也需要最小刻度。因为锁有性能开销。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="Condition的基本用法：解决执行条件-顺序问题"><a href="#Condition的基本用法：解决执行条件-顺序问题" class="headerlink" title="Condition的基本用法：解决执行条件/顺序问题"></a>Condition的基本用法：解决执行条件/顺序问题</h3><p>Condition解决的是线程通信问题，使用signal()提醒某些await()的线程.</p>
+<p>直接上代码：</p>
+<pre><code>package com.springapp.mvc;
+
+import java.util.PriorityQueue;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * Created by yp-tc-m-2795 on 15/9/6.
+ */
+public class ConditionTest {
+    private int                    queueSize = 10;
+    private PriorityQueue&lt;Integer&gt; queue     = new PriorityQueue&lt;&gt;(queueSize);
+    private Lock                   lock      = new ReentrantLock();
+    private Condition              notFull   = lock.newCondition();
+    private Condition              notEmpty  = lock.newCondition();
+
+    public static void main(String[] args) {
+        ConditionTest test     = new ConditionTest();
+        Producer      producer = test.new Producer();
+        Consumer      consumer = test.new Consumer();
+
+        producer.start();
+        consumer.start();
+    }
+
+    class Consumer extends Thread {
+
+        @Override
+        public void run() {
+            consume();
+        }
+
+        private void consume() {
+            while (true) {
+                lock.lock();
+                try {
+                    while (queue.size() == 0) {
+                        try {
+                            System.out.println(&quot;队列空，等待数据&quot;);
+                            notEmpty.await();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    queue.poll();                //每次移走队首元素
+                    notFull.signal();
+                    System.out.println(&quot;取走一个元素，队列剩余&quot; + queue.size() + &quot;个元素&quot;);
+                    try {
+                        Thread.sleep(800);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+    }
+
+    class Producer extends Thread {
+
+        @Override
+        public void run() {
+            produce();
+        }
+
+        private void produce() {
+            while (true) {
+                lock.lock();
+                try {
+                    while (queue.size() == queueSize) {
+                        try {
+                            System.out.println(&quot;队列满，等待有空余空间&quot;);
+                            notFull.await();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    queue.offer(1);        //每次插入一个元素
+                    notEmpty.signal();
+                    System.out.println(&quot;插入一个元素，队列剩余空间：&quot; + (queueSize - queue.size()));
+                    try {
+                        Thread.sleep(800);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } finally {
+                    lock.unlock();
+                }
+            }
+        }
+    }
+}
+</code></pre><p>在Condition中，用await()替换wait()，用signal()替换notify()，用signalAll()替换notifyAll()，传统线程的通信方式，Condition都可以实现，这里注意，Condition是被绑定到Lock上的，要创建一个Lock的Condition必须用newCondition()方法。</p>
+<blockquote>
+<p><strong><em>可以用signal()唤醒确定的线程，这是Object.notify()达不到的。</em></strong></p>
+</blockquote>
+<hr>
+<p>传统的notify()/notifyAll()写法：不保证唤醒后的抢占结果的顺序。</p>
+<pre><code>package com.springapp.mvc;
+
+/**
+ * Created by yp-tc-m-2795 on 15/9/6.
+ */
+public class NotifyTest {
+    public static Object object = new Object();
+
+    public static void main(String[] args) {
+        Thread1 threadA = new Thread1(&quot;A&quot;);
+        Thread1 threadB = new Thread1(&quot;B&quot;);
+        Thread1 threadC = new Thread1(&quot;C&quot;);
+        Thread2 thread2 = new Thread2();
+
+        threadA.start();
+        threadB.start();
+        threadC.start();
+
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        thread2.start();
+    }
+
+    static class Thread1 extends Thread {
+
+        Thread1(String name) {
+            super(name);
+        }
+
+        @Override
+        public void run() {
+            synchronized (object) {
+                System.out.println(&quot;加锁,然后释放锁&quot;);
+                try {
+                    object.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                object = &quot;Thread1&quot;;
+                System.out.println(&quot;线程&quot; + Thread.currentThread().getName() + &quot;获取到了锁-----&quot; + object);
+            }
+        }
+    }
+
+    static class Thread2 extends Thread {
+        @Override
+        public void run() {
+            synchronized (object) {
+                object.notifyAll();
+                object = &quot;Thread2&quot;;
+                System.out.println(&quot;线程&quot; + Thread.currentThread().getName() + &quot;调用了object.notify()---&quot; + object);
+            }
+            System.out.println(&quot;线程&quot; + Thread.currentThread().getName() + &quot;释放了锁&quot;);
+        }
+    }
+}
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;为什么使用多线程？&quot;&gt;&lt;a href=&quot;#为什么使用多线程？&quot; class=&quot;headerlink&quot; title=&quot;为什么使用多线程？&quot;&gt;&lt;/a&gt;为什么使用多线程？&lt;/h3&gt;&lt;h3 id=&quot;带来的问题&quot;&gt;&lt;a href=&quot;#带来的问题&quot; class=&quot;headerlink&quot; title=&quot;带来的问题&quot;&gt;&lt;/a&gt;带来的问题&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;执行顺序：需要达到某种条件次线程阻塞或者继续执行。某些情况可以用回调模型来处理这个问题。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;同步写：有时候并发写会造成数据出错，不一致，由于一般的写操作（如i++操作）是三个原子操作构成的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;取i; 
+temp = i+1; 
+i = temp; 
+//应该合并成一个操作的三步如果被中间执行污染数据的代码，那就造成错误。
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;由于需要同步的原因，引入锁的概念。但是锁也需要最小刻度。因为锁有性能开销。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="java" scheme="http://coderroc.com/tags/java/"/>
+    
+      <category term="多线程" scheme="http://coderroc.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="Condition" scheme="http://coderroc.com/tags/Condition/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CoffeeScript</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/CoffeeScript.html"/>
+    <id>http://coderroc.com/article/知识记录/Node.js/CoffeeScript.html</id>
+    <published>2015-08-24T00:20:36.000Z</published>
+    <updated>2015-09-06T02:58:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>CoffeeScript 是一门编译到 JavaScript 的小巧语言. 在 Java 般笨拙的外表下, JavaScript<br>其实有着一颗华丽的心脏. CoffeeScript 尝试用简洁的方式展示 JavaScript 优秀的部分.</p>
+<p>CoffeeScript 的指导原则是: “她仅仅是 JavaScript”. 代码一一对应地编译到 JS, 不会在编译过程中进行解释.<br>已有的 JavaScript 类库可以无缝地和 CoffeeScript 搭配使用, 反之亦然. 编译后的代码是可读的, 且经过美化,<br>能在所有 JavaScript 环境中运行, 并且应该和对应手写的 JavaScript 一样快或者更快.</p>
+</blockquote>
+<p>优点：</p>
+<ol>
+<li>抛弃诞生时的C/Java语法，改用类似Ruby/Python的语法—-更适合函数式+动态语言内核。 </li>
+<li>语法糖&amp;ECMAScript</li>
+</ol>
+<p>总结就是，屏蔽掉不优雅的地方。</p>
+<a id="more"></a>
+<p>安装：</p>
+<pre><code>sudo npm install -g coffee-script
+</code></pre><h4 id="语言手册："><a href="#语言手册：" class="headerlink" title="语言手册："></a>语言手册：</h4><p>一些基础：CoffeeScript使用显式的空白来区分代码块，换行就可以了。不需要花括号来包裹代码块。在函数，if表达式，switch，和try/catch当中使用缩进。传入参数不需要圆括号表明函数被执行。</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><pre><code>square = (x) -&gt; x * x
+cube   = (x) -&gt; square(x) * x
+</code></pre><p>带有默认值参数的函数</p>
+<pre><code>fill = (container, liquid = &quot;coffee&quot;) -&gt;
+  &quot;Filling the #{container} with #{liquid}...&quot;
+</code></pre><p>编译后</p>
+<pre><code>var fill;
+
+fill = function(container, liquid) {
+  if (liquid == null) {
+    liquid = &quot;coffee&quot;;
+  }
+  return &quot;Filling the &quot; + container + &quot; with &quot; + liquid + &quot;...&quot;;
+};      
+</code></pre><h4 id="对象和数组"><a href="#对象和数组" class="headerlink" title="对象和数组"></a>对象和数组</h4><pre><code>song = [&quot;do&quot;, &quot;re&quot;, &quot;mi&quot;, &quot;fa&quot;, &quot;so&quot;]
+
+singers = {Jagger: &quot;Rock&quot;, Elvis: &quot;Roll&quot;}
+
+bitlist = [
+  1, 0, 1
+  0, 0, 1
+  1, 1, 0
+]
+
+kids =
+  brother:
+    name: &quot;Max&quot;
+    age:  11
+  sister:
+    name: &quot;Ida&quot;
+    age:  9
+</code></pre><h4 id="if-else-unless-和条件赋值"><a href="#if-else-unless-和条件赋值" class="headerlink" title="if, else, unless 和条件赋值"></a>if, else, unless 和条件赋值</h4><pre><code>mood = greatlyImproved if singing
+
+if happy and knowsIt
+  clapsHands()
+  chaChaCha()
+else
+  showIt()
+
+date = if friday then sue else jill
+</code></pre><p>注意if and unless 意义的变化。</p>
+<blockquote>
+<p>待完成。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;CoffeeScript 是一门编译到 JavaScript 的小巧语言. 在 Java 般笨拙的外表下, JavaScript&lt;br&gt;其实有着一颗华丽的心脏. CoffeeScript 尝试用简洁的方式展示 JavaScript 优秀的部分.&lt;/p&gt;
+&lt;p&gt;CoffeeScript 的指导原则是: “她仅仅是 JavaScript”. 代码一一对应地编译到 JS, 不会在编译过程中进行解释.&lt;br&gt;已有的 JavaScript 类库可以无缝地和 CoffeeScript 搭配使用, 反之亦然. 编译后的代码是可读的, 且经过美化,&lt;br&gt;能在所有 JavaScript 环境中运行, 并且应该和对应手写的 JavaScript 一样快或者更快.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;优点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;抛弃诞生时的C/Java语法，改用类似Ruby/Python的语法—-更适合函数式+动态语言内核。 &lt;/li&gt;
+&lt;li&gt;语法糖&amp;amp;ECMAScript&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;总结就是，屏蔽掉不优雅的地方。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="知识记录" scheme="http://coderroc.com/categories/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/"/>
+    
+    
+      <category term="CoffeeScript" scheme="http://coderroc.com/tags/CoffeeScript/"/>
+    
+      <category term="JavaScript" scheme="http://coderroc.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>毕业设计整理</title>
+    <link href="http://coderroc.com/article/%E6%95%B0%E5%AD%A6%E5%92%8C%E7%AE%97%E6%B3%95/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/graduation-project.html"/>
+    <id>http://coderroc.com/article/数学和算法/毕业设计/graduation-project.html</id>
+    <published>2015-08-11T00:20:36.000Z</published>
+    <updated>2015-09-06T02:16:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h4><p>协同过滤推荐,其原理是利用人们共同的喜好和行为为相似的人推荐他 可能喜欢的信息,而用户的新的行为也会成为信息过滤的条件。1992 年,产 生了最早应用协同过滤系统的设计 Tapestry,主要是解决 Xerox 公司在 Palo Alto 的研究中心资讯过载的问题。1994 年,产生了里程碑式的 GroupLens, 这个系统主要是应用在新闻的筛选上,帮助新闻的阅听者过滤其感兴趣的新 闻内容,阅听者看过内容后给一个评比的分数,系统会将分数记录起来以备 未来参考之用。近年来,随着电子商务的兴起,电子商务的推荐系统也逐渐 成熟,最早的成熟代表应属亚马逊网络书店,这就是著名的“买了这本书的 人也买了什么”的算法。现在是一个信息严重过载的时代,从消息流中找寻 自己的爱好的信息也比较困难。协同过滤推荐过滤掉不喜欢的资讯,推荐用 户喜欢的资讯,节省时间提高效率。</p>
+<p>本论文通过对推荐系统的研究,进一步的说明推荐系统在信息过载时代 的重要性以及处理信息模型的精巧之处。本论文主要研究多维空间向量相似 度的在推荐系统的应用。根据这个算法,结合 Java 的一些特性,设计一个类 库,更方便的使用该算法进行过滤推荐。</p>
+<p>关键词:<code>协同过滤</code>;<code>Java</code>;<code>Web</code>;<code>反射</code>;<code>数据格式化</code>;<code>SpringMVC</code>;<code>Spring</code>; <code>Hibernate</code></p>
+<p>附件：</p>
+<ul>
+<li>🎓<a href="/file/毕业论文-陈鹏.pdf">毕业设计原文</a></li>
+<li>🎓<a href="/file/毕业演讲稿.pptx">毕业设计PPT</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h4&gt;&lt;p&gt;协同过滤推荐,其原理是利用人们共同的喜好和行为为相似的人推荐他 可能喜欢的信息,而用户的新的行为也会成为信息过滤的条件。1992 年,产 生
+    
+    </summary>
+    
+      <category term="毕业设计" scheme="http://coderroc.com/categories/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="毕业设计" scheme="http://coderroc.com/tags/%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1/"/>
+    
+      <category term="推荐系统" scheme="http://coderroc.com/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node:WebSocket,REST,权限等</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Node.js/node-with-websocket-rest-authority-etc.html"/>
+    <id>http://coderroc.com/article/知识记录/Node.js/node-with-websocket-rest-authority-etc.html</id>
+    <published>2015-08-05T04:20:36.000Z</published>
+    <updated>2015-09-06T02:59:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><p>好的原则可以让开发更规范，而且更好维护，易懂。现在主要想到的原则有：</p>
+<ul>
+<li>传输数据格式：JSON</li>
+<li>风格 or 规范：REST</li>
+<li>实时传输使用websocket</li>
+<li>更好地结合websocket与REST</li>
+</ul>
+<h3 id="关于REST"><a href="#关于REST" class="headerlink" title="关于REST"></a>关于REST</h3><p>REST将每个URI看做一个资源，websocket同样可以借鉴这个想法。</p>
+<p>在项目中可以把每一个URI看做一个资源集合。</p>
+<p>例如：</p>
+<pre><code>POST /api/workflow/changes
+[ {} , {} ]
+</code></pre><p>单个元素的信息传递可以看做只含有一个元素的集合。</p>
+<p>同样的，登录和注销这种也可以看做资源：</p>
+<pre><code>POST /api/user/logins
+DELETE /api/user/logins
+</code></pre><a id="more"></a>    
+<h3 id="一个不大不小的问题：如何在express中调用socket-io"><a href="#一个不大不小的问题：如何在express中调用socket-io" class="headerlink" title="一个不大不小的问题：如何在express中调用socket.io"></a>一个不大不小的问题：如何在express中调用socket.io</h3><p>关于结合websocket与REST，可以试试NodeJS的事件机制传递消息，或者采用函数调用的方式。</p>
+<blockquote>
+<p>后记：<br>最终解决方式是“setter”方式注入，获得可用对象后，操作对象，进行刷新前端页面等操作。</p>
+</blockquote>
+<p>中间遇到的问题：为什么在index.js中使用exports.injectIO()导出出错？错误为undefined<br>解决信息来源：<a href="http://www.cnblogs.com/pigtail/archive/2013/01/14/2859555.html" target="_blank" rel="external">nodejs中exports与module.exports的区别</a></p>
+<h3 id="前端的数据更新"><a href="#前端的数据更新" class="headerlink" title="前端的数据更新"></a>前端的数据更新</h3><ul>
+<li>增：OK </li>
+<li>删：refresh </li>
+<li>改：从未实现 </li>
+<li>查：OK</li>
+</ul>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><ul>
+<li>用户表 </li>
+<li>角色组 </li>
+<li>角色权限表</li>
+<li>权限表（id，url，description）</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>处理链中处理未登录状态的url权限，方式是URL资源白名单</li>
+<li>登录状态使用cookie+session+角色权限映射控制</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;设计原则&quot;&gt;&lt;a href=&quot;#设计原则&quot; class=&quot;headerlink&quot; title=&quot;设计原则&quot;&gt;&lt;/a&gt;设计原则&lt;/h3&gt;&lt;p&gt;好的原则可以让开发更规范，而且更好维护，易懂。现在主要想到的原则有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;传输数据格式：JSON&lt;/li&gt;
+&lt;li&gt;风格 or 规范：REST&lt;/li&gt;
+&lt;li&gt;实时传输使用websocket&lt;/li&gt;
+&lt;li&gt;更好地结合websocket与REST&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;关于REST&quot;&gt;&lt;a href=&quot;#关于REST&quot; class=&quot;headerlink&quot; title=&quot;关于REST&quot;&gt;&lt;/a&gt;关于REST&lt;/h3&gt;&lt;p&gt;REST将每个URI看做一个资源，websocket同样可以借鉴这个想法。&lt;/p&gt;
+&lt;p&gt;在项目中可以把每一个URI看做一个资源集合。&lt;/p&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;POST /api/workflow/changes
+[ {} , {} ]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;单个元素的信息传递可以看做只含有一个元素的集合。&lt;/p&gt;
+&lt;p&gt;同样的，登录和注销这种也可以看做资源：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;POST /api/user/logins
+DELETE /api/user/logins
+&lt;/code&gt;&lt;/pre&gt;
+    
+    </summary>
+    
+      <category term="Node.js" scheme="http://coderroc.com/categories/Node-js/"/>
+    
+    
+      <category term="Node" scheme="http://coderroc.com/tags/Node/"/>
+    
+      <category term="REST" scheme="http://coderroc.com/tags/REST/"/>
+    
+      <category term="WebSocket" scheme="http://coderroc.com/tags/WebSocket/"/>
+    
+      <category term="权限" scheme="http://coderroc.com/tags/%E6%9D%83%E9%99%90/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,922 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,instanceof,java关键字," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Roc`s 随想录" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Q:
+面试的时候碰到这个问题，面试官希望能从底层来分析一下。我当时知道的只是在同一个类加载器加载的前提下，使用其生成的对象，去比较才有意义。不同的类加载器加载的类生成对象，互相instanceof返回false。但我不晓得，底层是如何实现的。求各位Java，JVM大神指点迷津，感激不尽！
+
+A:(by RednaxelaFX) 链接：https://www.zhihu.com/question/2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[转] Java instanceof 关键字是如何实现的？">
+<meta property="og:url" content="http://coderroc.com/article/知识记录/Java基础/instanceof-in-java.html">
+<meta property="og:site_name" content="Roc`s 随想录">
+<meta property="og:description" content="Q:
+面试的时候碰到这个问题，面试官希望能从底层来分析一下。我当时知道的只是在同一个类加载器加载的前提下，使用其生成的对象，去比较才有意义。不同的类加载器加载的类生成对象，互相instanceof返回false。但我不晓得，底层是如何实现的。求各位Java，JVM大神指点迷津，感激不尽！
+
+A:(by RednaxelaFX) 链接：https://www.zhihu.com/question/2">
+<meta property="og:updated_time" content="2016-10-18T13:25:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[转] Java instanceof 关键字是如何实现的？">
+<meta name="twitter:description" content="Q:
+面试的时候碰到这个问题，面试官希望能从底层来分析一下。我当时知道的只是在同一个类加载器加载的前提下，使用其生成的对象，去比较才有意义。不同的类加载器加载的类生成对象，互相instanceof返回false。但我不晓得，底层是如何实现的。求各位Java，JVM大神指点迷津，感激不尽！
+
+A:(by RednaxelaFX) 链接：https://www.zhihu.com/question/2">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 2079911,
+      author: '博主大大'
+    }
+  };
+</script>
+
+  <title> [转] Java instanceof 关键字是如何实现的？ | Roc`s 随想录 </title>
+  <script type="text/javascript">
+  // 404 auto 
+  (function(){
+      var path = window.location.pathname;
+      if (path.startsWith("/201")) {
+        var targetPath = "/article" + path.substring(11, path.length-1) + ".html";
+        window.location.href = targetPath;
+      }
+  })();
+  </script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?3d0b52366e3d42e3387d71167ae773c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Roc`s 随想录</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">诚信，认真，专注，踏实</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [转] Java instanceof 关键字是如何实现的？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-18T21:24:43+08:00" content="2016-10-18">
+              2016-10-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/Java基础/instanceof-in-java.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/instanceof-in-java.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/Java基础/instanceof-in-java.html" class="leancloud_visitors" data-flag-title="[转] Java instanceof 关键字是如何实现的？">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Q"><a href="#Q" class="headerlink" title="Q:"></a>Q:</h3><blockquote>
+<p>面试的时候碰到这个问题，面试官希望能从底层来分析一下。<br>我当时知道的只是在同一个类加载器加载的前提下，使用其生成的对象，去比较才有意义。不同的类加载器加载的类生成对象，互相instanceof返回false。<br>但我不晓得，底层是如何实现的。求各位Java，JVM大神指点迷津，感激不尽！</p>
+</blockquote>
+<h3 id="A"><a href="#A" class="headerlink" title="A:"></a>A:</h3><p><em>(by <a href="https://www.zhihu.com/people/rednaxelafx" target="_blank" rel="external">RednaxelaFX</a>) 链接：<a href="https://www.zhihu.com/question/21574535/answer/18998914" target="_blank" rel="external">https://www.zhihu.com/question/21574535/answer/18998914</a></em></p>
+<p>在进入正题前先得提一句：既然楼主提问的背景是“被面试问到”，那很重要的一点是揣摩面试官提问的意图。按照楼主的简单描述，面试官问的是“Java的instanceof关键字是如何实现的”，那要选择怎样的答案就得看面试官有怎样的背景。比较安全的应对方法是请求面试官澄清/细化他的问题——他想要的“底层”底到什么程度。</p>
+<h4 id="情形1：-lt-3K"><a href="#情形1：-lt-3K" class="headerlink" title="情形1：&lt;3K"></a>情形1：&lt;3K</h4><p>你在面月薪3000以下的Java码农职位。如果面试官也只是做做Java层开发的，他可能只是想让你回答Java语言层面的 instanceof 运算符的语义。Java语言的“意思”就已经是“底层”。这样的话只要参考Java语言规范对 instanceof 运算符的定义就好：<br><a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html%23jls-15.20.2" target="_blank" rel="external">15.20.2 Type Comparison Operator instanceof</a>, Java语言规范Java SE 7版<br>当然这实际上回答的不是“如何实现的”，而是“如何设计的”。但面试嘛⋯</p>
+<p>如果用Java的伪代码来表现Java语言规范所描述的运行时语义，会是这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// obj instanceof T</span></div><div class="line"><span class="keyword">boolean</span> result;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">	T temp = (T) obj; <span class="comment">// checkcast</span></div><div class="line">	result = <span class="keyword">true</span>;</div><div class="line">&#125; <span class="keyword">catch</span> (ClassCastException e) &#123;</div><div class="line">	result = <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>用中文说就是：如果有表达式 <code>obj instanceof T</code> ，那么如果 (T) obj 不抛 ClassCastException 异常则该表达式值为 true ，否则值为 false 。<br>注意这里完全没提到JVM啊Class对象啊啥的。另外要注意 instanceof 运算符除了运行时语义外还有部分编译时限制，详细参考规范。</p>
+<p>如果这样回答被面试官说“这不是废话嘛”，请见情形2。</p>
+<a id="more"></a>
+<h4 id="情形2：6K-8K"><a href="#情形2：6K-8K" class="headerlink" title="情形2：6K~8K"></a>情形2：6K~8K</h4><p>你在面月薪6000-8000的Java研发职位。面试官也知道JVM这么个大体概念，但知道的也不多。JVM这个概念本身就是“底层”。JVM有一条名为 instanceof 的指令，而Java源码编译到Class文件时会把Java语言中的 instanceof 运算符映射到JVM的 instanceof 指令上。</p>
+<p>你可以知道Java的源码编译器之一javac是这样做的：<br>instanceof 是javac能识别的一个关键字，对应到Token.INSTANCEOF的token类型。做词法分析的时候扫描到”instanceof”关键字就映射到了一个Token.INSTANCEOF token。<a href="http://hg.openjdk.java.net/jdk7u/jdk7u/langtools/file/tip/src/share/classes/com/sun/tools/javac/parser/Token.java" target="_blank" rel="external">jdk7u/jdk7u/langtools: 5c9759e0d341 src/share/classes/com/sun/tools/javac/parser/Token.java</a>该编译器的抽象语法树节点有一个JCTree.JCInstanceOf类用于表示instanceof运算。做语法分析的时候解析到instanceof运算符就会生成这个JCTree.JCInstanceof类型的节点。<a href="http://hg.openjdk.java.net/jdk7u/jdk7u/langtools/file/tip/src/share/classes/com/sun/tools/javac/parser/JavacParser.java" target="_blank" rel="external">jdk7u/jdk7u/langtools: 5c9759e0d341 src/share/classes/com/sun/tools/javac/parser/JavacParser.java</a> term2Rest()<br>中途还得根据Java语言规范对instanceof运算符的编译时检查的规定把有问题的情况找出来。到最后生成字节码的时候为JCTree.JCInstanceof节点生成instanceof字节码指令。<a href="http://hg.openjdk.java.net/jdk7u/jdk7u/langtools/file/tip/src/share/classes/com/sun/tools/javac/jvm/Gen.java" target="_blank" rel="external">jdk7u/jdk7u/langtools: 5c9759e0d341 src/share/classes/com/sun/tools/javac/jvm/Gen.java</a> visitTypeTest()<br>（Java语言君说：“instanceof 这问题直接交给JVM君啦”）<br>（面试官：你还给我废话⋯给我进情形3！）</p>
+<p>其实能回答到这层面就已经能解决好些实际问题了，例如说需要手工通过字节码增强来实现一些功能的话，知道JVM有这么条 instanceof 指令或许正好就能让你顺利的使用 <a href="http://asm.ow2.org/" target="_blank" rel="external">ASM</a> 之类的库完成工作。</p>
+<h4 id="情形3：-gt-10K"><a href="#情形3：-gt-10K" class="headerlink" title="情形3：&gt;10K"></a>情形3：&gt;10K</h4><p>你在面月薪10000的Java高级研发职位。面试官对JVM有一些了解，想让你说说JVM会如何实现 instanceof 指令。但他可能也没看过实际的JVM是怎么做的，只是臆想过一下而已。JVM的规定就是“底层”。这种情况就给他JVM规范对 instanceof 指令的定义就好：<br><a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html%23jvms-6.5.instanceof" target="_blank" rel="external">Chapter 6. The Java Virtual Machine Instruction Set</a>, JVM规范Java SE 7版<br>根据规范来臆想一下实现就能八九不离十的混过这题了。</p>
+<p>该层面的答案就照<a href="//www.zhihu.com/people/0e6a48c30b5c78c342ba35aab0a1ee9e">@敖琪</a>前面给出的就差不多了，这边不再重复。</p>
+<h4 id="情形4：简易JVM的研发职位"><a href="#情形4：简易JVM的研发职位" class="headerlink" title="情形4：简易JVM的研发职位"></a>情形4：简易JVM的研发职位</h4><p>你可能在面真的简易JVM的研发职位，或许是啥嵌入式JVM的实现。面试官会希望你对简易JVM的实现有所了解。JVM的直观实现就是“底层”。这个基本上跟情形3差不多，因为简易JVM通常会用很直观的方式去实现。但对具体VM实现得答对一些小细节，例如说这个JVM是如何管理类型信息的。</p>
+<p>这个情形的话下面举点例子来讲讲。</p>
+<h4 id="情形5：Java资深研发职位"><a href="#情形5：Java资深研发职位" class="headerlink" title="情形5：Java资深研发职位"></a>情形5：Java资深研发职位</h4><p>你在面试月薪10000以上的Java资深研发职位，注重性能调优啥的。这种职位虽然不直接涉及JVM的研发，但由于性能问题经常源自“<a href="http://www.joelonsoftware.com/articles/LeakyAbstractions.html" target="_blank" rel="external">抽象泄漏</a>”，对实际使用的JVM的实现的思路需要有所了解。面试官对JVM的了解可能也就在此程度。对付这个可以用一篇论文：<a href="http://dl.acm.org/citation.cfm%3Fid%3D583821" target="_blank" rel="external">Fast subtype checking in the HotSpot JVM</a>。之前有个讨论帖里讨论过对这篇论文的解读：<a href="http://hllvm.group.iteye.com/group/topic/26896" target="_blank" rel="external">请教一个share/vm/oops下的代码做fast subtype check的问题</a></p>
+<h4 id="情形6：高性能JVM的研发职位"><a href="#情形6：高性能JVM的研发职位" class="headerlink" title="情形6：高性能JVM的研发职位"></a>情形6：高性能JVM的研发职位</h4><p>你在面试真的高性能JVM的研发职位，例如 HotSpot VM 的研发。JVM在实际桌面或服务器环境中的具体实现是“底层”。呵呵这要回答起来就复杂了，必须回答出JVM实现中可能做的优化具体的实现。另外找地方详细写。</p>
+<p>我觉得会问这种问题的还是情形1和2的比例比较大，换句话说面试官也不知道真的JVM是如何实现这instanceof指令的，可能甚至连这指令的准确语义都无法描述对。那随便忽悠忽悠就好啦不用太认真。说不定他期待的答案本身就雾很大（逃</p>
+<p>碰上情形4、6的话，没有忽悠的余地，是怎样就得怎样。<br>情形5可能还稍微有点忽悠余地呃呵呵。</p>
+<h3 id="简易JVM实现（Kaffe、JamVM）"><a href="#简易JVM实现（Kaffe、JamVM）" class="headerlink" title="简易JVM实现（Kaffe、JamVM）"></a>简易JVM实现（Kaffe、JamVM）</h3><p>看俩实际存在的简易JVM的实现，Kaffe和JamVM。它们都以解释器为主，JIT的实现非常简单，主要功能还是在VM runtime里实现，所以方便考察。<br>主要考察的是：它们中Java对象的基本结构（如何找到类型信息），类型信息自身如何记录（内部用的类型信息与Java层的java.lang.Class对象的关系），以及instanceof具体是怎样实现的。</p>
+<h4 id="Kaffe"><a href="#Kaffe" class="headerlink" title="Kaffe"></a>Kaffe</h4><p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/include/native.h">https://github.com/kaffe/kaffe/blob/master/include/native.h</a><br>Kaffe中Java对象由Hjava_lang_Object结构体表示，里面有个struct _dispatchTable*类型的字段vtable，下面再说。</p>
+<p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/classMethod.h">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/classMethod.h</a><br>Java层的java.lang.Class实例在VM里由Hjava_lang_Class结构体表示。Kaffe直接使用Hjava_lang_Class来记录VM内部的类型信息。也就是说在Kaffe上运行的Java程序里持有的java.lang.Class的实例就是该JVM内部存类型信息的对象。<br>前面提到的_dispatchTable结构体也在该文件里定义。它是一个虚方法分派表，主要用于高效实现invokevirtual。<br>假如有Hjava_lang_Object* obj，要找到它对应的类型信息只要这样：<br><code>obj-&gt;vtable-&gt;class</code><br><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/soft.c">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/soft.c</a><br>instanceof的功能由soft.c的soft_instanceof()函数实现。该函数所调用的函数大部分都在这个文件里。</p>
+<p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/intrp/icode.h%23L295">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/intrp/icode.h#L295</a><br>这边定义了softcall_instanceof宏用于在解释器或者JIT编译后的代码里调用soft_instanceof()函数</p>
+<p><a href="//link.zhihu.com/?target=https%3A//github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/kaffe.def%23L3299">https://github.com/kaffe/kaffe/blob/master/kaffe/kaffevm/kaffe.def#L3299</a><br>这边定义了instanceof字节码指令的处理要调用softcall_instanceof宏</p>
+<h4 id="JamVM"><a href="#JamVM" class="headerlink" title="JamVM"></a>JamVM</h4><p><a href="http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/jam.h%3Fview%3Dmarkup" target="_blank" rel="external">http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/jam.h?view=markup</a><br>JamVM中Java对象由Object结构体表示，Java层的java.lang.Class实例在VM里由Class表示（是个空Object），VM内部记录的类信息由ClassBlock结构体表示（类型名、成员、父类、实现的接口、类价值器啥的都记录在ClassBlock里）。比较特别的是每个Class与对应的ClassBlock实际上是粘在一起分配的，所以Class<em>与ClassBlock</em>可以很直接的相互转换。例如说如果有Class<em> c想拿到它对应的ClassBlock，只要：<br>`ClassBlock</em> cb = CLASS_CB(c);<br>`即可。<br>Object结构体里有Class*类型的成员class，用于记录对象的类型。</p>
+<p><a href="http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/cast.c%3Fview%3Dmarkup" target="_blank" rel="external">http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/cast.c?view=markup</a><br>instanceof的功能由cast.c第68行的isInstanceOf()函数实现。该函数所调用的函数大部分都在这个文件里。<br><a href="http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/interp.c%3Fview%3Dmarkup" target="_blank" rel="external">http://jamvm.cvs.sourceforge.net/viewvc/jamvm/jamvm/src/interp.c?view=markup</a><br>解释器主循环的代码主要在interp.c里。把instanceof指令的参数所指定的常量池索引解析为实际类指针的逻辑在OPC_INSTANCEOF的实现里。JamVM做了个优化，在解析好类之后会把instanceof字节码改写为内部字节码instanceof_quick；调用isInstanceOf()的地方在2161行OPC_INSTANCEOF_QUICK的实现里，可以看到它调用的是isInstanceOf(class, obj-&gt;class)。</p>
+<p>上面介绍了Kaffe与JamVM里instanceof字节码的实现相关的代码在哪里。接下来简单分析下它们的实现策略。</p>
+<p>两者的实现策略其实几乎一样，基本上按照下面的步骤：<br>（假设要检查的对象引用是obj，目标的类型对象是T）<br>obj如果为null，则返回false；否则设S为obj的类型对象，剩下的问题就是检查S是否为T的子类型如果S == T，则返回true；接下来分为3种情况，S是数组类型、接口类型或者类类型。之所以要分情况是因为instanceof要做的是“子类型检查”，而Java语言的类型系统里数组类型、接口类型与普通类类型三者的子类型规定都不一样，必须分开来讨论。到这里虽然例中两个JVM的具体实现有点区别，但概念上都与JVM规范所描述的 <a href="http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html%23jvms-6.5.instanceof" target="_blank" rel="external">instanceof的基本算法</a> 几乎一样。其中一个细节是：对接口类型的instanceof就直接遍历S里记录的它所实现的接口，看有没有跟T一致的；而对类类型的instanceof则是遍历S的super链（继承链）一直到Object，看有没有跟T一致的。遍历类的super链意味着这个算法的性能会受类的继承深度的影响。<br>关于Java语言里子类型关系的定义，请参考：<a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html%23jls-4.10" target="_blank" rel="external">Chapter 4. Types, Values, and Variables</a><br>类类型和接口类型的子类型关系大家可能比较熟悉，而数组类型的子类型关系可能会让大家有点意外。<br>4.10.3. Subtyping among Array Types<br>The following rules define the direct supertype relation among array types:<br>If S and T are both reference types, then S[] &gt;1 T[] iff S &gt;1 T.Object &gt;1 Object[]Cloneable &gt;1 Object[]java.io.Serializable &gt;1 Object[]If P is a primitive type, then:<br>Object &gt;1 P[]Cloneable &gt;1 P[]java.io.Serializable &gt;1 P[]这里稍微举几个例子。以下子类型关系都成立（“&lt;:”符号表示左边是右边的子类型，“=&gt;”符号表示“推导出”）：<br>String[][][] &lt;: String[][][] （数组子类型关系的自反性）<br>String &lt;: CharSequence =&gt; String[] &lt;: CharSequence[] （数组的协变）<br>String[][][] &lt;: Object （所有数组类型是Object的子类型）<br>int[] &lt;: Serializable （原始类型数组实现java.io.Serializable接口）Object[] &lt;: Serializable （引用类型数组实现java.io.Serializable接口）int[][][] &lt;: Serializable[][] &lt;: Serializable[] &lt;: Serializable （上面几个例子的延伸⋯开始好玩了吧？）int[][][] &lt;: Object[][] &lt;: Object[] &lt;: Object好玩不？实际JVM在记录类型信息的时候必须想办法把这些相关类型都串起来以便查找。</p>
+<p>另外补充一点：楼主可能会觉得很困惑为啥说到这里只字未提ClassLoader——因为在这个问题里还轮不到它出场。<br>在一个JVM实例里，”(类型的全限定名, defining class loader)”这个二元组才可以唯一确定一个类。如果有两个类全限定名相同，也加载自同一个Class文件，但defining class loader不同，从VM的角度看它们就是俩不同的类，而且相互没有子类型关系。instanceof运算符只关心“是否满足子类型关系”，至于类型名是否相同之类的不需要关心。</p>
+<p>通过Kaffe与JamVM两个例子我们可以看到简单的JVM实现很多地方就是把JVM规范直观的实现了出来。这就解决了前面提到的情形4的需求。</p>
+<p>==============================================================</p>
+<p>至于情形5、6，细节讲解起来稍麻烦所以这里不想展开写。高性能的JVM跟简易JVM在细节上完全不是一回事。</p>
+<p>简单来说，优化的主要思路就是把Java语言的特点考虑进来：由于Java的类所继承的超类与所实现的接口都不会在运行时改变，整个继承结构是稳定的，某个类型C在继承结构里的“深度”是固定不变的。也就是说从某个类出发遍历它的super链，总是会遍历到不变的内容。<br>这样我们就可以把原本要循环遍历super链才可以找到的信息缓存在数组里，并且以特定的下标从这个数组找到我们要的信息。同时，Java的类继承深度通常不会很深，所以为这个缓存数组选定一个固定的长度就足以优化大部分需要做子类型判断的情况。</p>
+<p>HotSpot VM具体使用了长度为8的缓存数组，记录某个类从继承深度0到7的超类。HotSpot把类继承深度在7以内的超类叫做“主要超类型”（primary super），把所有其它超类型（接口、数组相关以及超过深度7的超类）叫做“次要超类型”（secondary super）。<br>对“主要超类型”的子类型判断不需要像Kaffe或JamVM那样沿着super链做遍历，而是直接就能判断子类型关系是否成立。这样，类的继承深度对HotSpot VM做子类型判断的性能影响就变得很小了。<br>对“次要超类型”，则是让每个类型把自己的“次要超类型”混在一起记录在一个数组里，要检查的时候就线性遍历这个数组。留意到这里把接口类型、数组类型之类的子类型关系都直接记录在同一个数组里了，只要在最初初始化secondary_supers数组时就分情况填好了，而不用像Kaffe、JamVM那样每次做instanceof运算时都分开处理这些情况。</p>
+<p>举例来说，如果有下述类继承关系：<br>Apple &lt;: Fruit &lt;: Plant &lt;: Object<br>并且以Object为继承深度0，那么对于Apple类来说，它的主要超类型就有：<br>0: Object<br>1: Plant<br>2: Fruit<br>3: Apple<br>这个信息就直接记录在Apple类的primary_supers数组里了。Fruit、Plant等类同理。</p>
+<p>如果我们有这样的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Object f = <span class="keyword">new</span> Apple();</div><div class="line"><span class="keyword">boolean</span> result = f <span class="keyword">instanceof</span> Plant;</div></pre></td></tr></table></figure></p>
+<p>也就是变量f实际指向一个Apple实例，而我们要问这个对象是否是Plant的实例。<br>可以知道f的实际类型是Apple；要测试的Plant类的继承深度是1，拿Apple类里继承深度为1的主要超类型来看是Plant，马上就能得出结论是true。<br>这样就不需要顺着Apple的继承链遍历过去一个个去看是否跟Plant相等了。</p>
+<p>对此感兴趣的同学请参考前面在情形5提到的两个链接。先读第一个链接那篇论文，然后看第二个链接里的讨论（没有ACM帐号无法从第一个链接下载到论文的同学可以在第二个链接里找到一个镜像）。</p>
+<p>JDK6至今的HotSpot VM实际采用的算法是：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">S.is_subtype_of(T) := &#123;</div><div class="line">  <span class="keyword">int</span> off = T.offset;</div><div class="line">  <span class="keyword">if</span> (S == T) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  <span class="keyword">if</span> (T == S[off]) <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  <span class="keyword">if</span> (off != &amp;cache) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  <span class="keyword">if</span> ( S.scan_secondary_subtype_array(T) ) &#123;</div><div class="line">    S.cache = T;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（具体是什么意思请务必参考论文）</p>
+<p>这边想特别强调的一点是：那篇论文描述了HotSpot VM做子类型判断的算法，但其实只有HotSpot VM的解释器以及 <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Class.html%23isInstance%28java.lang.Object%29" target="_blank" rel="external">java.lang.Class.isInstance()</a> 的调用是真的完整按照那个算法来执行的。HotSpot VM的两个编译器，Client Compiler (C1) 与 Server Compiler (C2) 各自对子类型判断的实现有更进一步的优化。实际上在这个JVM里，instanceof的功能就实现了4份，VM runtime、解释器、C1、C2各一份。</p>
+<p>VM runtime的：<br><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/tip/src/share/vm/oops/oop.inline.hpp" target="_blank" rel="external">jdk7u/jdk7u/hotspot: e087a2088970 src/share/vm/oops/oop.inline.hpp</a> oopDesc::is_a()<br><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/tip/src/share/vm/oops/klass.hpp" target="_blank" rel="external">jdk7u/jdk7u/hotspot: e087a2088970 src/share/vm/oops/klass.hpp</a> is_subtype_of()<br><a href="http://hg.openjdk.java.net/jdk7u/jdk7u/hotspot/file/tip/src/share/vm/oops/klass.cpp" target="_blank" rel="external">jdk7u/jdk7u/hotspot: e087a2088970 src/share/vm/oops/klass.cpp</a>  Klass::search_secondary_supers()</p>
+<p>……后面省略。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-payforme.jpg" alt="Coder_Roc WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/instanceof/" rel="tag">#instanceof</a>
+          
+            <a href="/tags/java关键字/" rel="tag">#java关键字</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/article/知识记录/java-design-patterns/Template-Method-Pattern.html" rel="next" title="模板方法模式--设计模式">
+                <i class="fa fa-chevron-left"></i> 模板方法模式--设计模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/article/hello-world.html" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="article/知识记录/Java基础/instanceof-in-java.html"
+     data-title="[转] Java instanceof 关键字是如何实现的？"
+     data-content=""
+     data-url="http://coderroc.com/article/知识记录/Java基础/instanceof-in-java.html">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="article/知识记录/Java基础/instanceof-in-java.html"
+           data-title="[转] Java instanceof 关键字是如何实现的？" data-url="http://coderroc.com/article/知识记录/Java基础/instanceof-in-java.html">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/bird2.png"
+               alt="Coder_Roc" />
+          <p class="site-author-name" itemprop="name">Coder_Roc</p>
+          <p class="site-description motion-element" itemprop="description">关注技术趋势，服务端技术细节，Java语言，技术热点等，关注思维和最佳实践。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">58</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/cshijiel" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/cshijiel" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/cshijiel" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-bookmark"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+        <div class="weibo-show">
+          <iframe width="100%" height="350" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=350&fansRow=2&ptype=1&speed=0&skin=5&isTitle=0&noborder=0&isWeibo=1&isFans=0&uid=1343748654&verifier=8a8120bb&dpc=1"></iframe>
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A"><span class="nav-number">2.</span> <span class="nav-text">A:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#情形1：-lt-3K"><span class="nav-number">2.1.</span> <span class="nav-text">情形1：<3K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情形2：6K-8K"><span class="nav-number">2.2.</span> <span class="nav-text">情形2：6K~8K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情形3：-gt-10K"><span class="nav-number">2.3.</span> <span class="nav-text">情形3：>10K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情形4：简易JVM的研发职位"><span class="nav-number">2.4.</span> <span class="nav-text">情形4：简易JVM的研发职位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情形5：Java资深研发职位"><span class="nav-number">2.5.</span> <span class="nav-text">情形5：Java资深研发职位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#情形6：高性能JVM的研发职位"><span class="nav-number">2.6.</span> <span class="nav-text">情形6：高性能JVM的研发职位</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简易JVM实现（Kaffe、JamVM）"><span class="nav-number">3.</span> <span class="nav-text">简易JVM实现（Kaffe、JamVM）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kaffe"><span class="nav-number">3.1.</span> <span class="nav-text">Kaffe</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JamVM"><span class="nav-number">3.2.</span> <span class="nav-text">JamVM</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+
+    </div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Coder_Roc</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"usee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js"></script>
+    
+  
+
+
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//mathjax.josephjctang.com/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("4zfuNQmoeSA4vpznpvoFSsaU-gzGzoHsz", "vk0EjSiTyqtCRKd1Kx2NkuG7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
