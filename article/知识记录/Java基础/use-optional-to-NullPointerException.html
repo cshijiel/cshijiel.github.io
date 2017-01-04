@@ -99,7 +99,7 @@
 除此之外，在找不到对应资源的时候，除了抛异常，还可能返回null。
 例如在ja">
 <meta property="og:image" content="http://cshijiel.qiniudn.com/17-1-4/18091537-file_1483533846622_ecc7.png">
-<meta property="og:updated_time" content="2017-01-04T12:46:00.000Z">
+<meta property="og:updated_time" content="2017-01-04T12:49:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Optional处理NullPointerException">
 <meta name="twitter:description" content="一、 Java中的null在java中，使用null表示引用的默认值(null是Java中的关键字)。引用在声明的时候不指向任何实例，此时值为null。
@@ -368,6 +368,7 @@
 <p>关于<code>null</code>的更多信息：<a href="http://www.importnew.com/14229.html" target="_blank" rel="external">Java中有关Null的9件事</a></p>
 </blockquote>
 <p>综上几点，可以说<code>null</code>无处不在，因此导致到处需要判空操作 or 处理空指针异常（NullPointerException）。</p>
+<a id="more"></a>
 <h3 id="二、-Optional是怎样处理null值的？"><a href="#二、-Optional是怎样处理null值的？" class="headerlink" title="二、 Optional是怎样处理null值的？"></a>二、 Optional是怎样处理<code>null</code>值的？</h3><p>业务中，我们可能有这样的场景：<br>一个Map：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, Object&gt; subMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">subMap.put(<span class="string">"subkey"</span>, <span class="string">"subValue"</span>);</div><div class="line"></div><div class="line">Map&lt;String, Map&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">map.put(<span class="string">"key"</span>, subMap);</div></pre></td></tr></table></figure></p>
 <p>然后获取嵌套Map中的某个值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Object res = <span class="keyword">null</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (map.containsKey(<span class="string">"key"</span>)) &#123;</div><div class="line">    Map valueMap = map.get(<span class="string">"key"</span>);</div><div class="line">    <span class="keyword">if</span> (valueMap.containsKey(<span class="string">"subkey"</span>)) &#123;</div><div class="line">        res = valueMap.get(<span class="string">"subkey"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (res == <span class="keyword">null</span>) &#123;</div><div class="line">    res = <span class="string">"Empty"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">System.out.println(res);</div></pre></td></tr></table></figure></p>
 <p>Or</p>

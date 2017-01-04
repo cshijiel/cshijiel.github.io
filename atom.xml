@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://coderroc.com/"/>
-  <updated>2017-01-04T12:46:00.000Z</updated>
+  <updated>2017-01-04T12:49:35.000Z</updated>
   <id>http://coderroc.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/use-optional-to-NullPointerException.html"/>
     <id>http://coderroc.com/article/知识记录/Java基础/use-optional-to-NullPointerException.html</id>
     <published>2017-01-04T11:55:42.000Z</published>
-    <updated>2017-01-04T12:46:00.000Z</updated>
+    <updated>2017-01-04T12:49:35.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="一、-Java中的null"><a href="#一、-Java中的null" class="headerlink" title="一、 Java中的null"></a>一、 Java中的<code>null</code></h3><p>在java中，使用<code>null</code>表示引用的默认值(<code>null</code>是Java中的关键字)。引用在声明的时候不指向任何实例，此时值为<code>null</code>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object o1; <span class="comment">// null</span></div><div class="line">Object o2 = <span class="keyword">null</span>; <span class="comment">// null</span></div><div class="line">Object o3 = <span class="keyword">new</span> Object(); <span class="comment">// not null</span></div></pre></td></tr></table></figure>
@@ -31,6 +31,7 @@
 <p>关于<code>null</code>的更多信息：<a href="http://www.importnew.com/14229.html" target="_blank" rel="external">Java中有关Null的9件事</a></p>
 </blockquote>
 <p>综上几点，可以说<code>null</code>无处不在，因此导致到处需要判空操作 or 处理空指针异常（NullPointerException）。</p>
+<a id="more"></a>
 <h3 id="二、-Optional是怎样处理null值的？"><a href="#二、-Optional是怎样处理null值的？" class="headerlink" title="二、 Optional是怎样处理null值的？"></a>二、 Optional是怎样处理<code>null</code>值的？</h3><p>业务中，我们可能有这样的场景：<br>一个Map：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, Object&gt; subMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">subMap.put(<span class="string">"subkey"</span>, <span class="string">"subValue"</span>);</div><div class="line"></div><div class="line">Map&lt;String, Map&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">map.put(<span class="string">"key"</span>, subMap);</div></pre></td></tr></table></figure></p>
 <p>然后获取嵌套Map中的某个值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Object res = <span class="keyword">null</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (map.containsKey(<span class="string">"key"</span>)) &#123;</div><div class="line">    Map valueMap = map.get(<span class="string">"key"</span>);</div><div class="line">    <span class="keyword">if</span> (valueMap.containsKey(<span class="string">"subkey"</span>)) &#123;</div><div class="line">        res = valueMap.get(<span class="string">"subkey"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (res == <span class="keyword">null</span>) &#123;</div><div class="line">    res = <span class="string">"Empty"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">System.out.println(res);</div></pre></td></tr></table></figure></p>
 <p>Or</p>
@@ -45,7 +46,15 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;一、-Java中的null&quot;&gt;&lt;a href=&quot;#一、-Java中的null&quot; class=&quot;headerlink&quot; title=&quot;一、 Java中的null&quot;&gt;&lt;/a&gt;一、 Java中的&lt;code&gt;null&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;在java中，使用&lt;cod
+      &lt;h3 id=&quot;一、-Java中的null&quot;&gt;&lt;a href=&quot;#一、-Java中的null&quot; class=&quot;headerlink&quot; title=&quot;一、 Java中的null&quot;&gt;&lt;/a&gt;一、 Java中的&lt;code&gt;null&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;在java中，使用&lt;code&gt;null&lt;/code&gt;表示引用的默认值(&lt;code&gt;null&lt;/code&gt;是Java中的关键字)。引用在声明的时候不指向任何实例，此时值为&lt;code&gt;null&lt;/code&gt;。&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;Object o1; &lt;span class=&quot;comment&quot;&gt;// null&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Object o2 = &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;// null&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Object o3 = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Object(); &lt;span class=&quot;comment&quot;&gt;// not null&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;除此之外，在找不到对应资源的时候，除了抛异常，还可能返回&lt;code&gt;null&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;例如在&lt;code&gt;java.util.HashMap#get&lt;/code&gt;中，&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// 在没有输入key对应的value时，返回null&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; V &lt;span class=&quot;title&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Object key)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    Node&amp;lt;K,V&amp;gt; e;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (e = getNode(hash(key), key)) == &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt; ? &lt;span class=&quot;keyword&quot;&gt;null&lt;/span&gt; : e.value;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;了解更多&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关于&lt;code&gt;null&lt;/code&gt;的更多信息：&lt;a href=&quot;http://www.importnew.com/14229.html&quot;&gt;Java中有关Null的9件事&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;综上几点，可以说&lt;code&gt;null&lt;/code&gt;无处不在，因此导致到处需要判空操作 or 处理空指针异常（NullPointerException）。&lt;/p&gt;
     
     </summary>
     
