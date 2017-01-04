@@ -1428,8 +1428,8 @@ try {
             
               
                 
-                <a class="post-title-link" href="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" itemprop="url">
-                  JDK1.8 中 接口和抽象类的异同
+                <a class="post-title-link" href="/article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="url">
+                  表、栈和队列-数据结构与算法
                 </a>
               
             
@@ -1456,8 +1456,8 @@ try {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
+                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数学和算法</span>
                   </a>
                 </span>
 
@@ -1472,8 +1472,8 @@ try {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" itemprop="commentsCount"></span>
+                <a href="/article/数学和算法/表、栈和队列-数据结构与算法.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1483,7 +1483,7 @@ try {
 
           
           
-             <span id="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" class="leancloud_visitors" data-flag-title="JDK1.8 中 接口和抽象类的异同">
+             <span id="/article/数学和算法/表、栈和队列-数据结构与算法.html" class="leancloud_visitors" data-flag-title="表、栈和队列-数据结构与算法">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1507,22 +1507,29 @@ try {
       
         
           
-            <p>在最新版本Java1.8中的变化里， Stephen Colebourne 告诉Hartmut Schlosser，“我认为最重要的语言上的改变不是Lambdas表达式，而是在接口上的静态和默认方法”。ColeBoune补充道，“默认方法功能的增加减少了许多使用抽象类的原因”。当我读到这里时，我意识到Colebourne是正确的，而且我通常用抽象类的许多场景可以通过JDK1.8的默认方法（default method）替换为JDK1.8接口。</p>
-<p>在网上论坛和博客中讨论Java接口和抽象类异同的例子不胜枚举。这些讨论包括但不限于， <a href="http://www.javaworld.com/article/2077421/learn-java/abstract-classes-vs-interfaces.html&amp;usg=ALkJrhhe1JDAtAAePiPSeFh1a_fDBKdqQg" target="_blank" rel="external">JavaWorld ‘s Abstract classes vs. interfaces</a> , StackOverflow ‘s <a href="http://stackoverflow.com/questions/16781329/when-do-i-have-to-use-interfaces-instead-of-abstract-classes" target="_blank" rel="external">When do I have to use interfaces instead of abstract classes</a>? , <a href="http://javapapers.com/core-java/abstract-and-interface-core-java-2/difference-between-a-java-interface-and-a-java-abstract-class/&amp;usg=ALkJrhgKQek5dM2xZ98sZRLN8Csq6zJ_bQ" target="_blank" rel="external">Difference Between Interface and Abstract Class</a> , 10 <a href="http://javarevisited.blogspot.com/2013/04/10-abstract-class-and-interface-interview-question-java-answers.html&amp;usg=ALkJrhiFXycVbilpdqLhlKeppz5q2_eHdA" target="_blank" rel="external">Abstract Class and Interface Interview Questions Answers in Java</a> , 作为曾经有用的信息，许多现在已经过时了，可能会成为让Java体验更加混乱的部分。</p>
-<p>在我思考Java1.8中接口和抽象类尚存在的不同，我决定去看看<a href="http://docs.oracle.com/javase/tutorial/&amp;usg=ALkJrhj-rqreHzT3CKkBki9MFnUE9WRFwg" target="_blank" rel="external">Java Tutorial</a>关于这部分说过的信息。这个引导（Tutorial）已经更新到JDK 8 而且关于抽象方法和类的讨论有一个章节，称作 抽象类 vs 接口。这个章节指出在JDK 8 中接口和抽象类的异同点。着重强调的不同点是数据成员和方法的作用域（访问权限）：</p>
-<ul>
-<li>抽象类允许非静态和非final的域，允许方法成为public,static和final</li>
-<li>所有的接口方法本质为public的。</li>
+            <h2 id="第3章-表、栈和队列"><a href="#第3章-表、栈和队列" class="headerlink" title="第3章 表、栈和队列"></a>第3章 表、栈和队列</h2><h3 id="3-3-Java-Collection-API中的表"><a href="#3-3-Java-Collection-API中的表" class="headerlink" title="3.3 Java Collection API中的表"></a>3.3 Java Collection API中的表</h3><h4 id="3-3-1-Collection接口"><a href="#3-3-1-Collection接口" class="headerlink" title="3.3.1 Collection接口"></a>3.3.1 Collection接口</h4><h4 id="3-3-2-Iterator接口"><a href="#3-3-2-Iterator接口" class="headerlink" title="3.3.2 Iterator接口"></a>3.3.2 Iterator接口</h4><h4 id="3-3-3-List接口、ArrayList类和LinkedList类"><a href="#3-3-3-List接口、ArrayList类和LinkedList类" class="headerlink" title="3.3.3 List接口、ArrayList类和LinkedList类"></a>3.3.3 List接口、ArrayList类和LinkedList类</h4><h4 id="3-3-5关于ListIterator接口"><a href="#3-3-5关于ListIterator接口" class="headerlink" title="3.3.5关于ListIterator接口"></a>3.3.5关于ListIterator接口</h4><h3 id="3-4-ArrayList类的实现"><a href="#3-4-ArrayList类的实现" class="headerlink" title="3.4 ArrayList类的实现"></a>3.4 ArrayList类的实现</h3><ol>
+<li>基本类</li>
+<li>迭代其、Java嵌套类和内部类</li>
+</ol>
+<h3 id="3-5-LinkedList类的实现"><a href="#3-5-LinkedList类的实现" class="headerlink" title="3.5 LinkedList类的实现"></a>3.5 LinkedList类的实现</h3><h3 id="3-6-栈ADT"><a href="#3-6-栈ADT" class="headerlink" title="3.6 栈ADT"></a>3.6 栈ADT</h3><ol>
+<li>栈模型</li>
+<li>栈的实现</li>
+<li>应用<ul>
+<li>平衡符号</li>
+<li>后缀表达式</li>
+<li>方法调用</li>
 </ul>
-<p>在Java Tutorial接着列出了许多应该考虑抽象类的场景，和许多应该考虑接口的场景。不出意料，这些源于前面提到的不同、分歧，主要处理你是否<strong>需要域和方法成为private,protected,non-static,或者 not-final（偏向抽象类）</strong>，或者你需要<strong>把重点放在类型而不是考虑实现的能力（偏向接口）</strong>。</p>
-<p>因为Java语序一个类实现多个接口但只能继承一个类，接口可能被视为有利于多继承的实现。多亏JDK 8 的默认方法，这些接口甚至能提供默认的实现。</p>
-<p>那么，一个很自然的问题是：当一个类实现了两个接口，而这两个接口描述了一个具有相同特点的默认方法，Java怎么处理。答案是，这会报一个编译错误。这是一个屏幕截图，NetBeans8上运行报的这个错误。</p>
-<p><img src="http://a3ab771892fd198a96736e50.javacodegeeks.netdna-cdn.com/wp-content/uploads/2014/03/netBeans8CompilerErrorMultipleInterfacesSameDefaultMethodSignatures.png" alt="编译报错"></p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>JDK 8 争议性的把抽象类的优点带给接口。造成的影响是今天有大量的抽象类通过默认方法可能被替换为接口。</p>
-<blockquote>
-<p>翻译文章来源： <a href="http://www.javacodegeeks.com/2014/04/abstract-class-versus-interface-in-the-jdk-8-era.html" target="_blank" rel="external">Abstract Class Versus Interface in the JDK 8 Era</a></p>
+</li>
+</ol>
+<h3 id="3-7-队列ADT"><a href="#3-7-队列ADT" class="headerlink" title="3.7 队列ADT"></a>3.7 队列ADT</h3><ol>
+<li>队列模型</li>
+<li>队列的数组实现</li>
+<li>队列的应用</li>
+</ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
+<p>表、栈和队列或许是在全部计算机科学重视三个基本的数据结构，大量的例子证明了他们广泛的用途。 特别的，我们看到栈是如何用来<strong>记录过程</strong>和<strong>方法调用</strong>的，以及递归是如何实现的。这对我们的理解非常重要，其原因不只因为它使得过程语言成为可能，而且还因为知道递归的实现从而消除了围绕其使用的大量谜团。<br>–《教科书》</p>
 </blockquote>
-
+<h3 id="做课后习题"><a href="#做课后习题" class="headerlink" title="做课后习题"></a>做课后习题</h3>
           
         
       
@@ -1571,8 +1578,8 @@ try {
             
               
                 
-                <a class="post-title-link" href="/article/生活与心情/how-the-time-is-used.html" itemprop="url">
-                  how-the-time-is-used
+                <a class="post-title-link" href="/article/数学和算法/树-数据结构预算法.html" itemprop="url">
+                  树-数据结构预算法
                 </a>
               
             
@@ -1599,8 +1606,8 @@ try {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
-                    <span itemprop="name">生活与心情</span>
+                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数学和算法</span>
                   </a>
                 </span>
 
@@ -1615,8 +1622,8 @@ try {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/生活与心情/how-the-time-is-used.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/how-the-time-is-used.html" itemprop="commentsCount"></span>
+                <a href="/article/数学和算法/树-数据结构预算法.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/树-数据结构预算法.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1626,7 +1633,7 @@ try {
 
           
           
-             <span id="/article/生活与心情/how-the-time-is-used.html" class="leancloud_visitors" data-flag-title="how-the-time-is-used">
+             <span id="/article/数学和算法/树-数据结构预算法.html" class="leancloud_visitors" data-flag-title="树-数据结构预算法">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1650,21 +1657,38 @@ try {
       
         
           
-            <h2 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h2><p>昨天晚上，捣鼓微博和看codepiano的微博，<strong>remove掉了自己原先的微博记录，写了一个小脚本</strong>。</p>
-<p>早晨9：23第一次醒，没注意，接着睡。</p>
-<p>然后，过了一个钟头吧，又一次醒了，玩了会手机一直到12：00.期间下载了豆瓣，发了一条微博，刷了很多知乎。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这期间我收获了什么？</p>
-<p>貌似不多，大量的时间被浪费，截止到现在，估计浪费了2小时。2小时可以完成老师的任务了吧。</p>
-<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><blockquote>
-<p>斜体表示已经完成。</p>
+            <h2 id="4-1-预备知识"><a href="#4-1-预备知识" class="headerlink" title="4.1 预备知识"></a>4.1 预备知识</h2><ol>
+<li>树的实现-定义</li>
+<li>树的遍历及应用</li>
+</ol>
+<h2 id="4-2-二叉树"><a href="#4-2-二叉树" class="headerlink" title="4.2 二叉树"></a>4.2 二叉树</h2><ol>
+<li>实现</li>
+<li>例子：表达式树</li>
+</ol>
+<h2 id="4-3-查找树ADT-二叉查找树"><a href="#4-3-查找树ADT-二叉查找树" class="headerlink" title="4.3 查找树ADT-二叉查找树"></a>4.3 查找树ADT-二叉查找树</h2><ol>
+<li>contains方法</li>
+<li>findMin方法和findMax方法</li>
+<li>insert方法</li>
+<li>remove方法</li>
+<li>平均情况分析</li>
+</ol>
+<h2 id="4-4-AVL树"><a href="#4-4-AVL树" class="headerlink" title="4.4 AVL树"></a>4.4 AVL树</h2><ol>
+<li>单旋转</li>
+<li>双旋转</li>
+</ol>
+<h2 id="4-5-伸展树"><a href="#4-5-伸展树" class="headerlink" title="4.5 伸展树"></a>4.5 伸展树</h2><ol>
+<li>一个简单的想法（不能直接使用）</li>
+<li>展开</li>
+</ol>
+<h2 id="4-6-树的遍历"><a href="#4-6-树的遍历" class="headerlink" title="4.6 树的遍历"></a>4.6 树的遍历</h2><h2 id="4-7-B树"><a href="#4-7-B树" class="headerlink" title="4.7 B树"></a>4.7 B树</h2><h2 id="4-8-标准库中的集合与映射"><a href="#4-8-标准库中的集合与映射" class="headerlink" title="4.8 标准库中的集合与映射"></a>4.8 标准库中的集合与映射</h2><ol>
+<li>关于Set接口</li>
+<li>关于Map接口</li>
+<li>TreeSet接口和TreeMap类的实现</li>
+<li>使用多个映射的例</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><blockquote>
+<p>暂不能总结</p>
 </blockquote>
-<ul>
-<li><em>Python入门，重点是UDP和TCP的实现</em></li>
-<li><em>吴雄华老师的推荐系统</em></li>
-<li>理学院数学文化节</li>
-<li><em>我知科技的脚本执行shell实现，更改ip：重点有两个地方，<code>inip.pp</code> 和 <code>ifcfg-eth0</code> 修改</em></li>
-</ul>
-<p>加油！</p>
 
           
         
