@@ -275,6 +275,153 @@
             
               
                 
+                <a class="post-title-link" href="/article/知识记录/Java基础/use-optional-to-NullPointerException.html" itemprop="url">
+                  使用Optional处理NullPointerException
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-01-04T19:55:42+08:00" content="2017-01-04">
+              2017-01-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/Java基础/use-optional-to-NullPointerException.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/use-optional-to-NullPointerException.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/Java基础/use-optional-to-NullPointerException.html" class="leancloud_visitors" data-flag-title="使用Optional处理NullPointerException">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一、-Java中的null"><a href="#一、-Java中的null" class="headerlink" title="一、 Java中的null"></a>一、 Java中的<code>null</code></h3><p>在java中，使用<code>null</code>表示引用的默认值(<code>null</code>是Java中的关键字)。引用在声明的时候不指向任何实例，此时值为<code>null</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object o1; <span class="comment">// null</span></div><div class="line">Object o2 = <span class="keyword">null</span>; <span class="comment">// null</span></div><div class="line">Object o3 = <span class="keyword">new</span> Object(); <span class="comment">// not null</span></div></pre></td></tr></table></figure>
+<p>除此之外，在找不到对应资源的时候，除了抛异常，还可能返回<code>null</code>。</p>
+<p>例如在<code>java.util.HashMap#get</code>中，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 在没有输入key对应的value时，返回null</span></div><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    Node&lt;K,V&gt; e;</div><div class="line">    <span class="keyword">return</span> (e = getNode(hash(key), key)) == <span class="keyword">null</span> ? <span class="keyword">null</span> : e.value;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><em>了解更多</em></p>
+<blockquote>
+<p>关于<code>null</code>的更多信息：<a href="http://www.importnew.com/14229.html" target="_blank" rel="external">Java中有关Null的9件事</a></p>
+</blockquote>
+<p>综上几点，可以说<code>null</code>无处不在，因此导致到处需要判空操作 or 处理空指针异常（NullPointerException）。</p>
+<h3 id="二、-Optional是怎样处理null值的？"><a href="#二、-Optional是怎样处理null值的？" class="headerlink" title="二、 Optional是怎样处理null值的？"></a>二、 Optional是怎样处理<code>null</code>值的？</h3><p>业务中，我们可能有这样的场景：<br>一个Map：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, Object&gt; subMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">subMap.put(<span class="string">"subkey"</span>, <span class="string">"subValue"</span>);</div><div class="line"></div><div class="line">Map&lt;String, Map&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">map.put(<span class="string">"key"</span>, subMap);</div></pre></td></tr></table></figure></p>
+<p>然后获取嵌套Map中的某个值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Object res = <span class="keyword">null</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (map.containsKey(<span class="string">"key"</span>)) &#123;</div><div class="line">    Map valueMap = map.get(<span class="string">"key"</span>);</div><div class="line">    <span class="keyword">if</span> (valueMap.containsKey(<span class="string">"subkey"</span>)) &#123;</div><div class="line">        res = valueMap.get(<span class="string">"subkey"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (res == <span class="keyword">null</span>) &#123;</div><div class="line">    res = <span class="string">"Empty"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">System.out.println(res);</div></pre></td></tr></table></figure></p>
+<p>Or</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    res = map.get(<span class="string">"key"</span>).get(<span class="string">"subkey"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    res = <span class="string">"Empty"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总是不如Groovy等一些编程语言自带的<strong>安全的属性/方法访问操作符</strong>。</p>
+<p><code>user?.getUsername()?.toUpperCase();</code></p>
+<p>使用Optional处理NullPointerException，可以达到类似的效果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Object res = optional.map(o -&gt; o.get(<span class="string">"key"</span>))</div><div class="line">        .map(o -&gt; &#123;</div><div class="line">            Map omap = ((Map) o);</div><div class="line">            <span class="keyword">return</span> omap.get(<span class="string">"subkey"</span>);</div><div class="line">        &#125;).orElse(<span class="string">"Empty"</span>);</div><div class="line"></div><div class="line">System.out.println(res);</div></pre></td></tr></table></figure></p>
+<p>到此为止，最有用的特性之一已经讲完了。</p>
+<h3 id="三、-Optional其他方法"><a href="#三、-Optional其他方法" class="headerlink" title="三、 Optional其他方法"></a>三、 Optional其他方法</h3><p><img src="http://cshijiel.qiniudn.com/17-1-4/18091537-file_1483533846622_ecc7.png" alt="Optional全部方法"></p>
+<p>除<code>java.util.Optional#map</code>之外，还有<code>java.util.Optional#flatMap</code>。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/article/知识记录/Java基础/instanceof-in-java.html" itemprop="url">
                   [转] Java instanceof 关键字是如何实现的？
                 </a>
@@ -1442,139 +1589,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/article/任务和计划/2015年11月总结.html" itemprop="url">
-                  2015年11月总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-04T21:55:23+08:00" content="2015-11-04">
-              2015-11-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
-                    <span itemprop="name">生活与心情</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/article/任务和计划/2015年11月总结.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/任务和计划/2015年11月总结.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/article/任务和计划/2015年11月总结.html" class="leancloud_visitors" data-flag-title="2015年11月总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>在Qzone的“去年的今天”里，有这样一条说说，发现来北京一年一年了。</p>
-<p><img src="http://7d9owd.com1.z0.glb.clouddn.com/images/02ef11ad-7165-493c-980b-fef3ba475586.png" alt="去年的今天"></p>
-<p>在这一年里，很充实。现进行反思和总结，给自己。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/article/任务和计划/2015年11月总结.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1620,7 +1634,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1637,7 +1651,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

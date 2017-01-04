@@ -275,8 +275,8 @@
             
               
                 
-                <a class="post-title-link" href="/article/生活与心情/how-the-time-is-used.html" itemprop="url">
-                  how-the-time-is-used
+                <a class="post-title-link" href="/article/知识记录/SpringBoot中读取YAML.html" itemprop="url">
+                  SpringBoot中读取YAML
                 </a>
               
             
@@ -303,8 +303,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
-                    <span itemprop="name">生活与心情</span>
+                  <a href="/categories/知识记录/" itemprop="url" rel="index">
+                    <span itemprop="name">知识记录</span>
                   </a>
                 </span>
 
@@ -319,8 +319,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/生活与心情/how-the-time-is-used.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/how-the-time-is-used.html" itemprop="commentsCount"></span>
+                <a href="/article/知识记录/SpringBoot中读取YAML.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/SpringBoot中读取YAML.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -330,7 +330,7 @@
 
           
           
-             <span id="/article/生活与心情/how-the-time-is-used.html" class="leancloud_visitors" data-flag-title="how-the-time-is-used">
+             <span id="/article/知识记录/SpringBoot中读取YAML.html" class="leancloud_visitors" data-flag-title="SpringBoot中读取YAML">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -354,21 +354,36 @@
       
         
           
-            <h2 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h2><p>昨天晚上，捣鼓微博和看codepiano的微博，<strong>remove掉了自己原先的微博记录，写了一个小脚本</strong>。</p>
-<p>早晨9：23第一次醒，没注意，接着睡。</p>
-<p>然后，过了一个钟头吧，又一次醒了，玩了会手机一直到12：00.期间下载了豆瓣，发了一条微博，刷了很多知乎。</p>
-<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这期间我收获了什么？</p>
-<p>貌似不多，大量的时间被浪费，截止到现在，估计浪费了2小时。2小时可以完成老师的任务了吧。</p>
-<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><blockquote>
-<p>斜体表示已经完成。</p>
-</blockquote>
-<ul>
-<li><em>Python入门，重点是UDP和TCP的实现</em></li>
-<li><em>吴雄华老师的推荐系统</em></li>
-<li>理学院数学文化节</li>
-<li><em>我知科技的脚本执行shell实现，更改ip：重点有两个地方，<code>inip.pp</code> 和 <code>ifcfg-eth0</code> 修改</em></li>
-</ul>
-<p>加油！</p>
+            <ol>
+<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
+</ol>
+<ol>
+<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
+</ol>
+<hr>
+<p>读取YAML步骤：</p>
+<ol>
+<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
+<pre><code>my:
+    servers:
+        - dev.bar.com
+        - foo.bar.com
+</code></pre></li>
+<li><p>在需要注解信息的Java文件中进行以下注解：</p>
+<pre><code>@Component(&quot;config&quot;)
+@ConfigurationProperties(prefix = &quot;my&quot;)
+public class Config {
+    //@Value(&quot;my.servers&quot;) 
+        //这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！
+    private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
+    public List&lt;String&gt; getServers() {
+        return this.servers;
+    }
+}
+</code></pre></li>
+<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
+</li>
+</ol>
 
           
         
@@ -614,8 +629,8 @@
             
               
                 
-                <a class="post-title-link" href="/article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="url">
-                  表、栈和队列-数据结构与算法
+                <a class="post-title-link" href="/article/生活与心情/how-the-time-is-used.html" itemprop="url">
+                  how-the-time-is-used
                 </a>
               
             
@@ -642,8 +657,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数学和算法</span>
+                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
+                    <span itemprop="name">生活与心情</span>
                   </a>
                 </span>
 
@@ -658,8 +673,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/数学和算法/表、栈和队列-数据结构与算法.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="commentsCount"></span>
+                <a href="/article/生活与心情/how-the-time-is-used.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/how-the-time-is-used.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -669,7 +684,7 @@
 
           
           
-             <span id="/article/数学和算法/表、栈和队列-数据结构与算法.html" class="leancloud_visitors" data-flag-title="表、栈和队列-数据结构与算法">
+             <span id="/article/生活与心情/how-the-time-is-used.html" class="leancloud_visitors" data-flag-title="how-the-time-is-used">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -693,29 +708,22 @@
       
         
           
-            <h2 id="第3章-表、栈和队列"><a href="#第3章-表、栈和队列" class="headerlink" title="第3章 表、栈和队列"></a>第3章 表、栈和队列</h2><h3 id="3-3-Java-Collection-API中的表"><a href="#3-3-Java-Collection-API中的表" class="headerlink" title="3.3 Java Collection API中的表"></a>3.3 Java Collection API中的表</h3><h4 id="3-3-1-Collection接口"><a href="#3-3-1-Collection接口" class="headerlink" title="3.3.1 Collection接口"></a>3.3.1 Collection接口</h4><h4 id="3-3-2-Iterator接口"><a href="#3-3-2-Iterator接口" class="headerlink" title="3.3.2 Iterator接口"></a>3.3.2 Iterator接口</h4><h4 id="3-3-3-List接口、ArrayList类和LinkedList类"><a href="#3-3-3-List接口、ArrayList类和LinkedList类" class="headerlink" title="3.3.3 List接口、ArrayList类和LinkedList类"></a>3.3.3 List接口、ArrayList类和LinkedList类</h4><h4 id="3-3-5关于ListIterator接口"><a href="#3-3-5关于ListIterator接口" class="headerlink" title="3.3.5关于ListIterator接口"></a>3.3.5关于ListIterator接口</h4><h3 id="3-4-ArrayList类的实现"><a href="#3-4-ArrayList类的实现" class="headerlink" title="3.4 ArrayList类的实现"></a>3.4 ArrayList类的实现</h3><ol>
-<li>基本类</li>
-<li>迭代其、Java嵌套类和内部类</li>
-</ol>
-<h3 id="3-5-LinkedList类的实现"><a href="#3-5-LinkedList类的实现" class="headerlink" title="3.5 LinkedList类的实现"></a>3.5 LinkedList类的实现</h3><h3 id="3-6-栈ADT"><a href="#3-6-栈ADT" class="headerlink" title="3.6 栈ADT"></a>3.6 栈ADT</h3><ol>
-<li>栈模型</li>
-<li>栈的实现</li>
-<li>应用<ul>
-<li>平衡符号</li>
-<li>后缀表达式</li>
-<li>方法调用</li>
-</ul>
-</li>
-</ol>
-<h3 id="3-7-队列ADT"><a href="#3-7-队列ADT" class="headerlink" title="3.7 队列ADT"></a>3.7 队列ADT</h3><ol>
-<li>队列模型</li>
-<li>队列的数组实现</li>
-<li>队列的应用</li>
-</ol>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
-<p>表、栈和队列或许是在全部计算机科学重视三个基本的数据结构，大量的例子证明了他们广泛的用途。 特别的，我们看到栈是如何用来<strong>记录过程</strong>和<strong>方法调用</strong>的，以及递归是如何实现的。这对我们的理解非常重要，其原因不只因为它使得过程语言成为可能，而且还因为知道递归的实现从而消除了围绕其使用的大量谜团。<br>–《教科书》</p>
+            <h2 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h2><p>昨天晚上，捣鼓微博和看codepiano的微博，<strong>remove掉了自己原先的微博记录，写了一个小脚本</strong>。</p>
+<p>早晨9：23第一次醒，没注意，接着睡。</p>
+<p>然后，过了一个钟头吧，又一次醒了，玩了会手机一直到12：00.期间下载了豆瓣，发了一条微博，刷了很多知乎。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这期间我收获了什么？</p>
+<p>貌似不多，大量的时间被浪费，截止到现在，估计浪费了2小时。2小时可以完成老师的任务了吧。</p>
+<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><blockquote>
+<p>斜体表示已经完成。</p>
 </blockquote>
-<h3 id="做课后习题"><a href="#做课后习题" class="headerlink" title="做课后习题"></a>做课后习题</h3>
+<ul>
+<li><em>Python入门，重点是UDP和TCP的实现</em></li>
+<li><em>吴雄华老师的推荐系统</em></li>
+<li>理学院数学文化节</li>
+<li><em>我知科技的脚本执行shell实现，更改ip：重点有两个地方，<code>inip.pp</code> 和 <code>ifcfg-eth0</code> 修改</em></li>
+</ul>
+<p>加油！</p>
+
           
         
       
@@ -907,8 +915,8 @@
             
               
                 
-                <a class="post-title-link" href="/article/知识记录/IntelliJ Idea 常用快捷键列表.html" itemprop="url">
-                  IntelliJ Idea 常用快捷键列表
+                <a class="post-title-link" href="/article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="url">
+                  表、栈和队列-数据结构与算法
                 </a>
               
             
@@ -935,8 +943,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/知识记录/" itemprop="url" rel="index">
-                    <span itemprop="name">知识记录</span>
+                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数学和算法</span>
                   </a>
                 </span>
 
@@ -951,8 +959,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/知识记录/IntelliJ Idea 常用快捷键列表.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/IntelliJ Idea 常用快捷键列表.html" itemprop="commentsCount"></span>
+                <a href="/article/数学和算法/表、栈和队列-数据结构与算法.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/表、栈和队列-数据结构与算法.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -962,7 +970,7 @@
 
           
           
-             <span id="/article/知识记录/IntelliJ Idea 常用快捷键列表.html" class="leancloud_visitors" data-flag-title="IntelliJ Idea 常用快捷键列表">
+             <span id="/article/数学和算法/表、栈和队列-数据结构与算法.html" class="leancloud_visitors" data-flag-title="表、栈和队列-数据结构与算法">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -986,315 +994,304 @@
       
         
           
-            <p><code>Alt+Enter</code> 导入包，自动修正<br><code>Ctrl+N</code>   查找类<br><code>Ctrl+Shift+N</code> 查找文件<br><code>Ctrl+Alt+L</code>  格式化代码<br><code>Ctrl+Alt+O</code> 优化导入的类和包<br><code>Alt+Insert</code> 生成代码(如get,set方法,构造函数等)<br><code>Ctrl+E</code>或者Alt+Shift+C  最近更改的代码<br><code>Ctrl+R</code> 替换文本<br><code>Ctrl+F</code> 查找文本<br><code>Ctrl+Shift+Space</code> 自动补全代码<br><code>Ctrl+空格</code> 代码提示<br><code>Ctrl+Alt+Space</code> 类名或接口名提示<br><code>Ctrl+P</code> 方法参数提示<br><code>Ctrl+Shift+Alt+N</code> 查找类中的方法或变量<br><code>Alt+Shift+C</code> 对比最近修改的代码</p>
-<p><code>Shift+F6</code> 重构-重命名<br>Ctrl+Shift+先上键<br><code>Ctrl+X</code> 删除行<br><code>Ctrl+D</code> 复制行<br><code>Ctrl+/</code> 或 Ctrl+Shift+/ 注释（// 或者/<em>…</em>/ ）<br><code>Ctrl+J</code> 自动代码<br><code>Ctrl+E</code> 最近打开的文件<br><code>Ctrl+H</code> 显示类结构图<br><code>Ctrl+Q</code> 显示注释文档<br><code>Alt+F1</code> 查找代码所在位置<br><code>Alt+1</code> 快速打开或隐藏工程面板<br><code>Ctrl+Alt+ left/right</code> 返回至上次浏览的位置<br><code>Alt+ left/right</code> 切换代码视图<br><code>Alt+ Up/Down</code> 在方法间快速移动定位<br><code>Ctrl+Shift+Up/Down</code> 代码向上/下移动。<br><code>F2</code> 或<code>Shift+F2</code> 高亮错误或警告快速定位</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/article/知识记录/Java基础/Java5新特征之foreach语句使用总结.html" itemprop="url">
-                  Java5新特征之foreach语句使用总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-              2015-04-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/article/知识记录/Java基础/Java5新特征之foreach语句使用总结.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/Java5新特征之foreach语句使用总结.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/article/知识记录/Java基础/Java5新特征之foreach语句使用总结.html" class="leancloud_visitors" data-flag-title="Java5新特征之foreach语句使用总结">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Java5新特征之foreach语句使用总结"><a href="#Java5新特征之foreach语句使用总结" class="headerlink" title="Java5新特征之foreach语句使用总结"></a>Java5新特征之foreach语句使用总结</h3><p><code>java.util.List</code>继承了<code>java.lang.Iterable</code>接口.</p>
-<p>jdk api文档中是这样描述Iterable接口的：实现这个接口允许对象成为 “<code>foreach</code>“ 语句的目标。不过咋一看Iterable接口并没啥特别之处，只是定义了一个迭代器而已。</p>
-<p>  public interface Iterable&lt;T&gt; {</p>
-<pre><code>/**
-* Returns an iterator over a set of elements of type T.
-*
-* @return an Iterator.
-*/
-Iterator&amp;lt;T&gt; iterator();
-</code></pre><p>  }</p>
-<p>究竟是如何实现foreach的呢，想想可能是编译器做了优化，就看了下最终编译成的字节码</p>
-<p>  public class Iterable_eros {</p>
-<p> List&lt;String&gt; strings;</p>
-<p> public void display(){</p>
-<p> for(String s : strings){</p>
-<p> System.out.println(s);</p>
-<p> }</p>
-<p> }</p>
-<p>  }</p>
-<p>相应的字节码为：</p>
-<p>  public void display (){<br>  line0  : aload_0<br>       getfield java.util.List my.lang.Iterable_eros.strings<br>       invokeinterface java.util.Iterator java.util.List.iterator() 1<br>       astore_2<br>       goto line30<br>  line13  : aload_2<br>       invokeinterface java.lang.Object java.util.Iterator.next() 1<br>       checkcast java.lang.String<br>       astore_1<br>  line23  : getstatic java.io.PrintStream java.lang.System.out<br>       aload_1<br>  line27  : invokevirtual void java.io.PrintStream.println(java.lang.String)<br>  line30  : aload_2<br>       invokeinterface boolean java.util.Iterator.hasNext() 1<br>       ifne line13<br>  line39  : return </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/article/知识记录/SpringBoot中读取YAML.html" itemprop="url">
-                  SpringBoot中读取YAML
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-              2015-04-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/知识记录/" itemprop="url" rel="index">
-                    <span itemprop="name">知识记录</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/article/知识记录/SpringBoot中读取YAML.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/SpringBoot中读取YAML.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/article/知识记录/SpringBoot中读取YAML.html" class="leancloud_visitors" data-flag-title="SpringBoot中读取YAML">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
+            <h2 id="第3章-表、栈和队列"><a href="#第3章-表、栈和队列" class="headerlink" title="第3章 表、栈和队列"></a>第3章 表、栈和队列</h2><h3 id="3-3-Java-Collection-API中的表"><a href="#3-3-Java-Collection-API中的表" class="headerlink" title="3.3 Java Collection API中的表"></a>3.3 Java Collection API中的表</h3><h4 id="3-3-1-Collection接口"><a href="#3-3-1-Collection接口" class="headerlink" title="3.3.1 Collection接口"></a>3.3.1 Collection接口</h4><h4 id="3-3-2-Iterator接口"><a href="#3-3-2-Iterator接口" class="headerlink" title="3.3.2 Iterator接口"></a>3.3.2 Iterator接口</h4><h4 id="3-3-3-List接口、ArrayList类和LinkedList类"><a href="#3-3-3-List接口、ArrayList类和LinkedList类" class="headerlink" title="3.3.3 List接口、ArrayList类和LinkedList类"></a>3.3.3 List接口、ArrayList类和LinkedList类</h4><h4 id="3-3-5关于ListIterator接口"><a href="#3-3-5关于ListIterator接口" class="headerlink" title="3.3.5关于ListIterator接口"></a>3.3.5关于ListIterator接口</h4><h3 id="3-4-ArrayList类的实现"><a href="#3-4-ArrayList类的实现" class="headerlink" title="3.4 ArrayList类的实现"></a>3.4 ArrayList类的实现</h3><ol>
+<li>基本类</li>
+<li>迭代其、Java嵌套类和内部类</li>
 </ol>
-<ol>
-<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
-</ol>
-<hr>
-<p>读取YAML步骤：</p>
-<ol>
-<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
-<pre><code>my:
-    servers:
-        - dev.bar.com
-        - foo.bar.com
-</code></pre></li>
-<li><p>在需要注解信息的Java文件中进行以下注解：</p>
-<pre><code>@Component(&quot;config&quot;)
-@ConfigurationProperties(prefix = &quot;my&quot;)
-public class Config {
-    //@Value(&quot;my.servers&quot;) 
-        //这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！
-    private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
-    public List&lt;String&gt; getServers() {
-        return this.servers;
-    }
-}
-</code></pre></li>
-<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
+<h3 id="3-5-LinkedList类的实现"><a href="#3-5-LinkedList类的实现" class="headerlink" title="3.5 LinkedList类的实现"></a>3.5 LinkedList类的实现</h3><h3 id="3-6-栈ADT"><a href="#3-6-栈ADT" class="headerlink" title="3.6 栈ADT"></a>3.6 栈ADT</h3><ol>
+<li>栈模型</li>
+<li>栈的实现</li>
+<li>应用<ul>
+<li>平衡符号</li>
+<li>后缀表达式</li>
+<li>方法调用</li>
+</ul>
 </li>
 </ol>
+<h3 id="3-7-队列ADT"><a href="#3-7-队列ADT" class="headerlink" title="3.7 队列ADT"></a>3.7 队列ADT</h3><ol>
+<li>队列模型</li>
+<li>队列的数组实现</li>
+<li>队列的应用</li>
+</ol>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
+<p>表、栈和队列或许是在全部计算机科学重视三个基本的数据结构，大量的例子证明了他们广泛的用途。 特别的，我们看到栈是如何用来<strong>记录过程</strong>和<strong>方法调用</strong>的，以及递归是如何实现的。这对我们的理解非常重要，其原因不只因为它使得过程语言成为可能，而且还因为知道递归的实现从而消除了围绕其使用的大量谜团。<br>–《教科书》</p>
+</blockquote>
+<h3 id="做课后习题"><a href="#做课后习题" class="headerlink" title="做课后习题"></a>做课后习题</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/生活与心情/recall-3-days.html" itemprop="url">
+                  recall-3-days
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
+                    <span itemprop="name">生活与心情</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/生活与心情/recall-3-days.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/recall-3-days.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/生活与心情/recall-3-days.html" class="leancloud_visitors" data-flag-title="recall-3-days">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>完成了一个小项目：推荐系统-基于多维空间两向量近似度的计算</p>
+<p>这个项目运行在了MoPaas上，<a href="http://command.sturgeon.mopaas.com" target="_blank" rel="external">项目地址</a>。</p>
+<h1 id="反思："><a href="#反思：" class="headerlink" title="反思："></a>反思：</h1><p>每天晚上都会很晚才休息，早上起床也比较晚。时间观念不好，浪费了很多时间。</p>
+<h1 id="措施"><a href="#措施" class="headerlink" title="措施"></a>措施</h1><p>11:00 泡脚</p>
+<p>12:00 之前必须睡觉</p>
+<p>早晨8:00起床，慢慢练习到6:30。</p>
+<hr>
+<p>最后想问自己的是：<strong>你到底想要什么？敢不敢为了自己的梦想去奋斗！！！</strong></p>
+<p>赶紧休息吧，明天工作。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/知识记录/YAML格式简介.html" itemprop="url">
+                  YAML格式简介
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/知识记录/" itemprop="url" rel="index">
+                    <span itemprop="name">知识记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/YAML格式简介.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/YAML格式简介.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/YAML格式简介.html" class="leancloud_visitors" data-flag-title="YAML格式简介">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>YAML是一种人们可以轻松阅读的数据序列化格式，并且它非常适合对动态编程语言中使用的数据类型进行编码。YAML是<code>YAML Ain&#39;t Markup Language</code>简写，和GNU(“GNU’s Not Unix!”)一样，YAML是一个递归着说“不”的名字。不同的是，GNU对UNIX说不，YAML说不的对象是XML。YAML不是XML。它可以用作数据序列，配置文件，log文件，Internat信息和过滤。</p>
+<h2 id="2-优点"><a href="#2-优点" class="headerlink" title="2. 优点"></a>2. 优点</h2><ul>
+<li>YAML的可读性好</li>
+<li>YAML和脚本语言的交互性好</li>
+<li>YAML使用实现语言的数据类型</li>
+<li>YAML有一个一致的信息模型</li>
+<li>YAML易于实现</li>
+</ul>
+<h2 id="3-YAML的适用范围"><a href="#3-YAML的适用范围" class="headerlink" title="3. YAML的适用范围"></a>3. YAML的适用范围</h2><p>由于实现简单，解析成本很低，YAML特别适合在脚本语言中使用。列一下现有的语言实现：Ruby，Java，Perl，Python，PHP，OCaml，JavaScript。除了Java，其他都是脚本语言.<br>YAML比较适合做序列化。因为它是宿主语言数据类型直转的。<br>YAML做配置文件也不错。比如Ruby on Rails的配置就选用的YAML。对ROR而言，这很自然，也很省事。<br><strong>由于兼容性问题，不同语言间的数据流转建议现在不要用YAML.</strong></p>
+<h2 id="4-YAML不足"><a href="#4-YAML不足" class="headerlink" title="4. YAML不足"></a>4. YAML不足</h2><p>YAML和XML不同，没有自己的数据类型的定义，而是使用实现语言的数据类型。这一点，有可能是出奇制胜的地方，也可能是一个败笔。如果兼容性保证的不好的话，YAML数据在不同语言间流转会有问题。<br>假如兼容性没问题的话，YAML就太完美了。<strong>轻巧，敏捷，高效，简便，通用</strong>。</p>
+<h2 id="5-JYaml简介"><a href="#5-JYaml简介" class="headerlink" title="5. JYaml简介"></a>5. JYaml简介</h2><p><strong><code>JYAML</code></strong>是<code>YAML</code>的<code>Java</code>实现。<br>YAML使用实现语言的数据类型。我们看一下一些JYaml支持的Java数据类型：<br>原始数据和封装类（比如int，java.lang.Integer）<br>JavaBean兼容对象（Structure支持）<br>Collection （sequence支持）<br>List<br>Set<br>Map （map支持）<br>Arrays （sequence支持）<br>BigInteger 和BigDecimal<br>Date<br>注：我把我个人认为较好的文章推荐如下，方便我们共同学习和交流。<br>参考文献：<br>1 《YAML 简介》 <a href="http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/index.html" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/xml/x-cn-yamlintro/index.html</a><br>2 《YAML 对 XML 的改进》<a href="http://www.ibm.com/developerworks/cn/xml/x-matters/part23/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/xml/x-matters/part23/</a><br>3 <a href="http://jyaml.sourceforge.net/" target="_blank" rel="external">http://jyaml.sourceforge.net/</a><br>4 <a href="http://www.yaml.org/" target="_blank" rel="external">http://www.yaml.org/</a></p>
 
           
         
@@ -1892,7 +1889,7 @@ StringBuffer buf=new StringBuffer(&quot;this is a test&quot;)//在缓冲区中�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1909,7 +1906,7 @@ StringBuffer buf=new StringBuffer(&quot;this is a test&quot;)//在缓冲区中�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

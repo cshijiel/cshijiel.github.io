@@ -275,6 +275,176 @@
             
               
                 
+                <a class="post-title-link" href="/article/知识记录/JavaScript 中的回调函数.html" itemprop="url">
+                  JavaScript 中的回调函数
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/知识记录/" itemprop="url" rel="index">
+                    <span itemprop="name">知识记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/JavaScript 中的回调函数.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/JavaScript 中的回调函数.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/JavaScript 中的回调函数.html" class="leancloud_visitors" data-flag-title="JavaScript 中的回调函数">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在Node.js中使用异步的方式读取一个文件：</p>
+<pre><code>/**
+ * Created by chen on 1月14日.
+ */
+var fs = require(&apos;fs&apos;);
+fs.readFile(&apos;readfile.js&apos;,&apos;utf-8&apos;,function(err,data){
+    if(err){
+        console.error(err);
+    }else{
+        console.log(data);
+    }
+    console.log(&apos;21212123.&apos;)
+});
+console.log(&apos;end.&apos;);
+</code></pre><p>运行结果如下：</p>
+<pre><code>end.
+/**
+ * Created by chen on 1月14日.
+ */
+....
+</code></pre><blockquote>
+<p>基于多线程的模型也有相应的解决方案，如轻量级线程（<code>lightweight thread</code>）等。事件驱动的单线程异步模型与多线程同步模型到底谁更好是一件非常有争议的事情，因为尽管消耗资源，后者的吞吐率并不比前者低。</p>
+</blockquote>
+<p>Node.js也提供了同步读取文件的API：</p>
+<pre><code>/**
+ * Created by chen on 1月14日.
+ */
+
+/***另一种的读取方式***/
+//readfilesync.js
+
+var fs = require(&apos;fs&apos;);
+var data =  fs.readFileSync(&apos;index.js&apos;,&apos;utf-8&apos;);
+console.log(data);
+console.log(&apos;end.&apos;);
+</code></pre><p>运行结果与前面不同，如下所示：</p>
+<pre><code>$ node readfilesync.js
+Contents of the file.
+end.
+</code></pre><p>同步读取文件的方式比较容易理解，将文件名作为参数</p>
+<p>同步式读取文件的方式比较容易理解，将文件名作为参数传入 <code>fs.readFileSync</code> 函数，阻塞等待读取完成后，将文件的内容作为函数的返回值赋给 <code>data</code> 变量，接下来控制台<br>输出 <code>data</code> 的值，最后输出 <code>end.</code> 。<br>异步式读取文件就稍微有些违反直觉了， <code>end.</code> 先被输出。要想理解结果，我们必须先知道在 <code>Node.js</code> 中，异步式 <code>I/O</code> 是通过回调函数来实现的。 <code>fs.readFile</code> 接收了三个参数，第一个是文件名，第二个是编码方式，第三个是一个函数，我们称这个函数为<strong>回调函数</strong>。<br><code>JavaScript</code> 支持匿名的函数定义方式，譬如我们例子中回调函数的定义就是嵌套在 <code>fs.readFile</code> 的参数表中的。这种定义方式在 <code>JavaScript</code> 程序中极为普遍。</p>
+<p><code>fs.readFile</code> 调用时所做的工作只是将异步式 <code>I/O</code> 请求发送给了操作系统，然后立即返回并执行后面的语句，执行完以后进入事件循环监听事件。当 <code>fs</code> 接收到 <code>I/O</code> 请求完成的<br>事件时，事件循环会主动调用回调函数以完成后续工作。因此我们会先看到 <code>end.</code>，再看到<br><code>file.txt</code> 文件的内容。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/article/知识记录/Linux基础/shell-export.html" itemprop="url">
                   shell-export
                 </a>
@@ -773,8 +943,8 @@ exit
             
               
                 
-                <a class="post-title-link" href="/article/数学和算法/AES加密.html" itemprop="url">
-                  AES加密
+                <a class="post-title-link" href="/article/知识记录/what-is-cdn.html" itemprop="url">
+                  CDN是什么
                 </a>
               
             
@@ -801,8 +971,8 @@ exit
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数学和算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数学和算法</span>
+                  <a href="/categories/知识记录/" itemprop="url" rel="index">
+                    <span itemprop="name">知识记录</span>
                   </a>
                 </span>
 
@@ -817,8 +987,8 @@ exit
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/数学和算法/AES加密.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/AES加密.html" itemprop="commentsCount"></span>
+                <a href="/article/知识记录/what-is-cdn.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/what-is-cdn.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -828,7 +998,7 @@ exit
 
           
           
-             <span id="/article/数学和算法/AES加密.html" class="leancloud_visitors" data-flag-title="AES加密">
+             <span id="/article/知识记录/what-is-cdn.html" class="leancloud_visitors" data-flag-title="CDN是什么">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -852,42 +1022,25 @@ exit
       
         
           
-            <h2 id="加密的历程："><a href="#加密的历程：" class="headerlink" title="加密的历程："></a>加密的历程：</h2><p>从 <strong>按规则替换</strong> -&gt; <strong>对称加密</strong> -&gt; <strong>非对称加密</strong> 的过程，看到加密技术的不断进化。</p>
-<h3 id="破解方式："><a href="#破解方式：" class="headerlink" title="破解方式："></a>破解方式：</h3><p>按规则替换：根据频率破解。<br>对称加密：截获密钥。<br>非对称加密：？？？    </p>
-<h2 id="非对称加密："><a href="#非对称加密：" class="headerlink" title="非对称加密："></a>非对称加密：</h2><p>非对称加密又称公开密钥加密。</p>
-<blockquote>
-<p>公开密钥加密（英语：public-key cryptography，又译为公开密钥加密），也称为非对称加密（asymmetric cryptography），一种密码学算法类型，在这种密码学方法中，需要一对密钥，一是个私人密钥，另一个则是公开密钥。这两个密钥是数学相关，用某用户密钥加密后所得的信息，只能用该用户的解密密钥才能解密。如果知道了其中一个，并不能计算出另外一个。因此如果公开了一对密钥中的一个，并不会危害到另外一个的秘密性质。称公开的密钥为公钥；不公开的密钥为私钥。<br>–<strong>wiki</strong></p>
-</blockquote>
-<p>在非对称加密中使用的主要算法有：RSA、Elgamal、背包算法、Rabin、D-H、ECC（椭圆曲线加密算法）等。</p>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>与对称密钥加密相比，优点在于无需共享的通用密钥，解密的私钥不发往任何用户。即使公钥在网上被截获，如果没有与其匹配的私钥，也无法解密，所截获的公钥是没有任何用处的。</p>
-<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>假设两个用户A向B发送信息。B的公钥为c，对应私钥（也是属于B的）为d，明文为x.  </p>
+            <p>最近使用了一个免费的的CDN，使用的是<a href="https://www.cloudflare.com" target="_blank" rel="external">CloudFlare</a>。</p>
+<p>那先回顾一下，<strong>一个网站（网页）是怎么访问的。</strong></p>
+<p>首先，我们会在浏览器地址栏输入一个域名，例如<code>www.baidu.com</code>，本例中输入的是<code>usee.tk</code>，然后经过开始查询DNS，使用DNS解析，常见有两种方式解析到A记录或者CNAME记录，查询不到的话递归DNS直到查询到，递归顺序依次是浏览器、PC（hosts、DNS缓存）、网卡中设置的DNS……最终会到达DNS根服务器。</p>
+<p><img src="/images/cdn-http.gif" alt="cdn-http"> </p>
+<p><strong>那么DNS是怎么设置的呢？</strong></p>
+<p>首先我们会在域名提供商那里有一个域名，他会提供自己的解析或者设置自己的DNS解析服务器，国内著名的有<a href="https://www.dnspod.com" target="_blank" rel="external">DNSPOD</a>。然后这些服务商会广播你设置的解析信息，24小时之内全球即可刷新，一般来说minutes时间内就可以了。</p>
+<p><strong>CDN和上边有什么关系？</strong></p>
+<p>与传统访问方式不同，CDN网络则是在用户和服务器之间增加Cache层，将用户的访问请求引导到Cache节点而不是服务器源站点，要实现这一目的，主要是通过接管DNS实现，下图为使用CDN缓存后的网站访问过程：</p>
+<p><img src="/images/cdn-now.gif" alt="cdn-now"></p>
+<p>由上图可见，使用CDN缓存后的网站访问过程演变为：</p>
 <ol>
-<li>A用公钥对明文进行加密形成密文c(x)，然后传输密文；  </li>
-<li>B收到密文，用私钥对密文进行解密d(c(x)),得到要通信的明文x。<br>B向A发送信息反之。</li>
+<li>用户在浏览器中输入要访问的域名； </li>
+<li>浏览器向域名解析服务器发出解析请求，由于CDN对域名解析过程进行了调整，所以用户端一般得到的是该域名对应的CNAME记录，此时浏览器需要再次对获得的CNAME域名进行解析才能得到缓存服务器实际的IP地址。<br>注：在此过程中，全局负载均衡DNS解析服务器会根据用户端的源IP地址，如地理位置（深圳还是上海）、接入网类型（电信还是网通）将用户的访问请求定位到离用户路由最短、位置最近、负载最轻的Cache节点（缓存服务器）上，实现就近定位。定位优先原则可按位置、可按路由、也可按负载等。 </li>
+<li>再次解析后浏览器得到该域名CDN缓存服务器的实际IP地址，向缓存服务器发出访问请求； </li>
+<li>缓存服务器根据浏览器提供的域名，通过Cache内部专用DNS解析得到此域名源服务器的真实IP地址，再由缓存服务器向此真实IP地址提交访问请求； </li>
+<li>缓存服务器从真实IP地址得到内容后，一方面在本地进行保存，以备以后使用，同时把得到的数据发送到客户端浏览器，完成访问的响应过程； </li>
+<li>用户端得到由缓存服务器传回的数据后显示出来，至此完成整个域名访问过程。</li>
 </ol>
-<p>现在主要解释RSA加密原理。</p>
-<hr>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="互质关系"><a href="#互质关系" class="headerlink" title="互质关系"></a>互质关系</h3><p>如果两个正整数，除了1以外，没有其他公因子，我们就称这两个数是互质关系（coprime）。比如，15和32没有公因子，所以它们是互质关系。这说明，不是质数也可以构成互质关系。</p>
-<p>有以上，不难得到以下结论：  </p>
-<ol>
-<li>任意两个质数构成互质关系，比如13和61。  </li>
-<li>一个数是质数，另一个数只要不是前者的倍数，两者就构成互质关系，比如3和10。  </li>
-<li>如果两个数之中，较大的那个数是质数，则两者构成互质关系，比如97和57。  </li>
-<li>1和任意一个自然数是都是互质关系，比如1和99。  </li>
-<li>p是大于1的整数，则p和p-1构成互质关系，比如57和56。  </li>
-<li>p是大于1的奇数，则p和p-2构成互质关系，比如17和15。  </li>
-</ol>
-<h3 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h3><p>请思考一下问题：</p>
-<blockquote>
-<p>任意给定正整数n，请问在小于等于n的正整数之中，有多少个与n构成互质关系？（比如，在1到8之中，有多少个数与8构成互质关系？）<br>–阮一峰</p>
-</blockquote>
-<p>计算这个值的方法就叫做欧拉函数，以φ(n)表示。在1到8之中，与8形成互质关系的是1、3、5、7，所以 φ(n) = 4。<br>φ(n) 的计算方法并不复杂，但是为了得到最后那个公式，需要一步步讨论。  </p>
-<h4 id="第一种情况"><a href="#第一种情况" class="headerlink" title="第一种情况"></a>第一种情况</h4><p>如果n=1，则 φ(1) = 1 。因为1与任何数（包括自身）都构成互质关系。</p>
-<h4 id="第二种情况"><a href="#第二种情况" class="headerlink" title="第二种情况"></a>第二种情况</h4><p>如果n是质数，则 φ(n)=n-1 。因为质数与小于它的每一个数，都构成互质关系。比如5与1、2、3、4都构成互质关系。</p>
-<h4 id="第三种情况"><a href="#第三种情况" class="headerlink" title="第三种情况"></a>第三种情况</h4><p>如果n是质数的某一个次方，即 n = p^k (p为质数，k为大于等于1的整数)，则<br>$$\phi(p^k)=p^k-p^{k-1}$$<br>比如 φ(8) = φ(2^3) =2^3 - 2^2 = 8 -4 = 4。<br>这是因为只有当一个数不包含质数p，才可能与n互质。而包含质数p的数一共有p^(k-1)个，即1×p、2×p、3×p、…、p^(k-1)×p，把它们去除，剩下的就是与n互质的数。<br>上面的式子还可以写成下面的形式：<br>$$\phi(p^k)=p^k-p^{k-1}=p^k(1-\frac{1}{p})$$<br>可以看出，上面的第二种情况是 k=1 时的特例。</p>
-<h4 id="第四种情况"><a href="#第四种情况" class="headerlink" title="第四种情况"></a>第四种情况</h4><p>如果n可以分解成两个互质的整数之积，<br>$$n=p_1<em>p_2$$<br>则<br>$$\phi(n)=\phi(p_1p_2)=\phi(p_1)\phi(p_2)$$<br>即积的欧拉函数等于各个因子的欧拉函数之积。比如，<em>*φ(56)=φ(8×7)=φ(8)×φ(7)=4×6=24</em></em>。<br>这一条的证明要用到”中国剩余定理”，这里就不展开了，只简单说一下思路：如果a与p1互质(a&lt;p1)，b与p2互质(b&lt;p2)，c与p1p2互质(c&lt;p1p2)，则c与数对 (a,b) 是一一对应关系。由于a的值有φ(p1)种可能，b的值有φ(p2)种可能，则数对 (a,b) 有φ(p1)φ(p2)种可能，而c的值有φ(p1p2)种可能，所以φ(p1p2)就等于φ(p1)φ(p2)。</p>
-<h4 id="第五种情况"><a href="#第五种情况" class="headerlink" title="第五种情况"></a>第五种情况</h4><p>待续…</p>
-<p>—未完待续：<a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html</a></p>
+<p>通过以上分析可以看到，不论是否使用CDN网络，普通用户客户端设置不需做任何改变，直接使用被加速网站原有域名访问即可。对于要加速的网站，只需修改整个访问过程中的域名解析部分，便能实现透明的网络加速服务。 </p>
 
           
         
@@ -1047,143 +1200,6 @@ exit
 </blockquote>
 </li>
 </ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/article/生活与心情/recall-3-days.html" itemprop="url">
-                  recall-3-days
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-              2015-04-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活与心情/" itemprop="url" rel="index">
-                    <span itemprop="name">生活与心情</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/article/生活与心情/recall-3-days.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/recall-3-days.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/article/生活与心情/recall-3-days.html" class="leancloud_visitors" data-flag-title="recall-3-days">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>完成了一个小项目：推荐系统-基于多维空间两向量近似度的计算</p>
-<p>这个项目运行在了MoPaas上，<a href="http://command.sturgeon.mopaas.com" target="_blank" rel="external">项目地址</a>。</p>
-<h1 id="反思："><a href="#反思：" class="headerlink" title="反思："></a>反思：</h1><p>每天晚上都会很晚才休息，早上起床也比较晚。时间观念不好，浪费了很多时间。</p>
-<h1 id="措施"><a href="#措施" class="headerlink" title="措施"></a>措施</h1><p>11:00 泡脚</p>
-<p>12:00 之前必须睡觉</p>
-<p>早晨8:00起床，慢慢练习到6:30。</p>
-<hr>
-<p>最后想问自己的是：<strong>你到底想要什么？敢不敢为了自己的梦想去奋斗！！！</strong></p>
-<p>赶紧休息吧，明天工作。</p>
 
           
         
@@ -1938,6 +1954,346 @@ dependencies {
 
 
     
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/数学和算法/LeetCode/LeetCode-Two Sum.html" itemprop="url">
+                  LeetCode-Two Sum
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/数学和算法/LeetCode/LeetCode-Two Sum.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/数学和算法/LeetCode/LeetCode-Two Sum.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/数学和算法/LeetCode/LeetCode-Two Sum.html" class="leancloud_visitors" data-flag-title="LeetCode-Two Sum">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>Given an array of integers, find two numbers such that they add up to<br>a specific target number.</p>
+<p>The function twoSum should return indices of the two numbers such that<br>they add up to the target, where index1 must be less than index2.<br>Please note that your returned answers (both index1 and index2) are<br>not zero-based.</p>
+<p>You may assume that each input would have exactly one solution.</p>
+<p><strong>Input</strong>: numbers={2, 7, 11, 15}, target=9<br><strong>Output</strong>: index1=1, index2=2</p>
+</blockquote>
+<hr>
+<h3 id="Accepted-Code："><a href="#Accepted-Code：" class="headerlink" title="Accepted Code："></a>Accepted Code：</h3><pre><code>public class Solution {      
+    public int[] twoSum(int[] numbers, int target) {      
+        int[] a = new int[2];      
+        for (int i = 0; i &lt; numbers.length; i++) {      
+            for (int j = i + 1; j &lt; numbers.length; j++) {      
+                if (numbers[i] + numbers[j] == target) {      
+                    a[0] = i + 1;      
+                    a[1] = j + 1;
+                    return a;      
+                }      
+            }      
+        }      
+        return a;      
+    }
+}
+</code></pre><p>Problems:</p>
+<ol>
+<li>Time Limit Exceeded(超时)。</li>
+</ol>
+<p>Then:</p>
+<pre><code>if (numbers[i] + numbers[j] == target) {
+    a[0] = i + 1;
+    a[1] = j + 1;
+    return a;//this line is the Key Code.
+}
+</code></pre><p><strong>省略计算不必要的结果，得到正确结果立刻返回。</strong></p>
+<hr>
+<p>Other Solution:</p>
+<blockquote>
+<p>代码是其他语言。</p>
+</blockquote>
+<p>题目大意：给一个数组，找出其中是否有两个数之和等于给定的值。类似的还有3 sum ，4 sum ..等 K sum 问题。其实原理是差不多的，这样想：先取出一个数，那么我只要在剩下的数字里面找到两个数字使得他们的和等于(target – 那个取出的数)。</p>
+<p><strong>解法1：先排序，然后从开头和结尾同时向中间查找，原理也比较简单。复杂度O(nlogn)</strong></p>
+<pre><code>typedef struct Node{    
+    int id,val;
+}Node;
+
+bool compare(const Node &amp;amp; a,const Node &amp;amp; b){    
+    return a.val &lt; b.val;
+}
+
+class Solution {
+    public:
+    vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;amp;numbers, int target){
+
+        Node nodes[numbers.size()];
+
+        for(unsigned int i=0; i&lt;numbers.size(); i++){
+
+        nodes[i].id = i+1;
+
+        nodes[i].val = numbers[i];
+
+    }
+    sort(nodes, nodes+numbers.size(), compare);
+    int start=0,end=numbers.size()-1;
+    vector&lt;int&gt; ans;
+    while(start &lt; end){
+
+        if(nodes[start].val + nodes[end].val == target){
+
+        if(nodes[start].id &gt; nodes[end].id)
+
+        swap(nodes[start].id , nodes[end].id);
+
+        ans.push_back(nodes[start].id);
+
+        ans.push_back(nodes[end].id);
+
+        return ans;
+
+        }else if( nodes[start].val + nodes[end].val &lt;target ){        
+            start++;        
+        } else        
+            end--;
+        }
+    }
+};
+</code></pre><p><strong>解法2：使用HashMap。把每个数都存入map中，任何再逐个遍历，查找是否有 target – nubmers[i]。 时间复杂度 O(n)</strong></p>
+<pre><code>vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;numbers, int target) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        vector&lt;int&gt; res;
+        int length = numbers.size();
+        map&lt;int,int&gt; mp;
+        for(int i = 0; i &lt; length; ++i)
+            mp[numbers[i]] = i;
+        map&lt;int,int&gt;::iterator it = mp.end();
+        for(int i = 0; i &lt; length; ++i) {
+            it = mp.find(target - numbers[i]);
+            if(it != mp.end()) {
+                res.push_back(min(i+1,it-&gt;second +1));
+                res.push_back(max(i+1,it-&gt;second +1));
+                break;
+            }
+        }
+        return res;
+}
+</code></pre><p>其实可以优化一下，因为题目只要求要到一个解，找到后即可返回。</p>
+<pre><code>vector&lt;int&gt; twoSum(vector&lt;int&gt; &amp;numbers, int target) {
+        vector&lt;int&gt; res;
+        int length = numbers.size();
+        map&lt;int,int&gt; mp;
+        int find;
+        for(int i = 0; i &lt; length; ++i){
+            find=mp[target - numbers[i]];
+            if( find ){
+                res.push_back(find);
+                res.push_back(i+1);
+                break;
+            }
+            mp[numbers[i]] = i+1;
+        }
+        return res;
+}
+</code></pre><hr>
+<p>Java 版本解法：</p>
+<p>Two Sum</p>
+<p>Given an array of integers, find two numbers such that they add up to a specific target number.</p>
+<p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.</p>
+<p>You may assume that each input would have exactly one solution.</p>
+<p>思路：</p>
+<p>先把原数组复制一遍，然后进行排序。在排序后的数组中找这两个数。最后再在原数组中找这两个数字的index即可。</p>
+<p>时间复杂度O(nlogn)+O(n)+O(n) = O(nlogn)</p>
+<p>注意的是结果有可能是两个数是相同的，比如 0 3 4 0, 0要返回1和4，不要返回成1和1或者4和4.</p>
+<p>代码：</p>
+<pre><code>public int[] twoSum(int[] numbers, int target) {
+    // Start typing your Java solution below
+    // DO NOT write main() function
+    // Copy the original array and sort it
+    int N = numbers.length;
+    int[] sorted = new int[N];
+    System.arraycopy(numbers, 0, sorted, 0, N);
+    Arrays.sort(sorted);
+    // find the two numbers using the sorted arrays
+    int first = 0;
+    int second = sorted.length - 1;
+    while (first &lt; second) {
+
+        if (sorted[first] + sorted[second] &lt; target) {
+
+            first++;
+
+            continue;
+
+        }
+
+        else if (sorted[first] + sorted[second] &gt; target) {
+
+            second--;
+
+            continue;
+
+        }
+
+        else
+            break;
+    }
+    int number1 = sorted[first];
+    int number2 = sorted[second];
+    // Find the two indexes in the original array
+    int index1 = -1, index2 = -1;
+    for (int i = 0; i &lt; N; i++) {
+
+        if ((numbers[i] == number1) || (numbers[i] == number2)) {
+
+            if (index1 == -1)
+
+                index1 = i + 1;
+
+            else
+
+                index2 = i + 1;
+
+        }
+
+    }
+    int[] result = new int[] { index1, index2 };
+    Arrays.sort(result);
+    return result;
+}
+</code></pre><p>还有个无耻地利用hashmap的O(n)的算法，原理和暴力搜索没有本质区别，只不过hashmap的搜索速度是O(1)。</p>
+<pre><code>public int[] twoSum(int[] numbers, int target) {
+    // Start typing your Java solution below
+    // DO NOT write main() function
+
+    HashMap&lt;Integer, Integer&gt; map = new HashMap&lt;Integer, Integer&gt;();
+
+    int n = numbers.length;
+
+    int[] result = new int[2];
+
+    for (int i = 0; i &lt; numbers.length; i++) {
+        if (map.containsKey(target - numbers[i])) {
+            result[0] = map.get(target - numbers[i]) + 1;
+            result[1] = i + 1;
+            break;
+        } else {
+            map.put(numbers[i], i);
+        }
+    }
+
+    return result;
+}
+</code></pre><p>后记：你的想法很独特嘛。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1983,7 +2339,7 @@ dependencies {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">57</span>
+              <span class="site-state-item-count">58</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2000,7 +2356,7 @@ dependencies {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

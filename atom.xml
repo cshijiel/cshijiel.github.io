@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://coderroc.com/"/>
-  <updated>2016-10-18T13:25:59.000Z</updated>
+  <updated>2017-01-04T12:46:00.000Z</updated>
   <id>http://coderroc.com/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Optional处理NullPointerException</title>
+    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/use-optional-to-NullPointerException.html"/>
+    <id>http://coderroc.com/article/知识记录/Java基础/use-optional-to-NullPointerException.html</id>
+    <published>2017-01-04T11:55:42.000Z</published>
+    <updated>2017-01-04T12:46:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一、-Java中的null"><a href="#一、-Java中的null" class="headerlink" title="一、 Java中的null"></a>一、 Java中的<code>null</code></h3><p>在java中，使用<code>null</code>表示引用的默认值(<code>null</code>是Java中的关键字)。引用在声明的时候不指向任何实例，此时值为<code>null</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Object o1; <span class="comment">// null</span></div><div class="line">Object o2 = <span class="keyword">null</span>; <span class="comment">// null</span></div><div class="line">Object o3 = <span class="keyword">new</span> Object(); <span class="comment">// not null</span></div></pre></td></tr></table></figure>
+<p>除此之外，在找不到对应资源的时候，除了抛异常，还可能返回<code>null</code>。</p>
+<p>例如在<code>java.util.HashMap#get</code>中，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 在没有输入key对应的value时，返回null</span></div><div class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</div><div class="line">    Node&lt;K,V&gt; e;</div><div class="line">    <span class="keyword">return</span> (e = getNode(hash(key), key)) == <span class="keyword">null</span> ? <span class="keyword">null</span> : e.value;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><em>了解更多</em></p>
+<blockquote>
+<p>关于<code>null</code>的更多信息：<a href="http://www.importnew.com/14229.html" target="_blank" rel="external">Java中有关Null的9件事</a></p>
+</blockquote>
+<p>综上几点，可以说<code>null</code>无处不在，因此导致到处需要判空操作 or 处理空指针异常（NullPointerException）。</p>
+<h3 id="二、-Optional是怎样处理null值的？"><a href="#二、-Optional是怎样处理null值的？" class="headerlink" title="二、 Optional是怎样处理null值的？"></a>二、 Optional是怎样处理<code>null</code>值的？</h3><p>业务中，我们可能有这样的场景：<br>一个Map：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Map&lt;String, Object&gt; subMap = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">subMap.put(<span class="string">"subkey"</span>, <span class="string">"subValue"</span>);</div><div class="line"></div><div class="line">Map&lt;String, Map&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">map.put(<span class="string">"key"</span>, subMap);</div></pre></td></tr></table></figure></p>
+<p>然后获取嵌套Map中的某个值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Object res = <span class="keyword">null</span>;</div><div class="line"></div><div class="line"><span class="keyword">if</span> (map.containsKey(<span class="string">"key"</span>)) &#123;</div><div class="line">    Map valueMap = map.get(<span class="string">"key"</span>);</div><div class="line">    <span class="keyword">if</span> (valueMap.containsKey(<span class="string">"subkey"</span>)) &#123;</div><div class="line">        res = valueMap.get(<span class="string">"subkey"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (res == <span class="keyword">null</span>) &#123;</div><div class="line">    res = <span class="string">"Empty"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">System.out.println(res);</div></pre></td></tr></table></figure></p>
+<p>Or</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    res = map.get(<span class="string">"key"</span>).get(<span class="string">"subkey"</span>);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    res = <span class="string">"Empty"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总是不如Groovy等一些编程语言自带的<strong>安全的属性/方法访问操作符</strong>。</p>
+<p><code>user?.getUsername()?.toUpperCase();</code></p>
+<p>使用Optional处理NullPointerException，可以达到类似的效果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Object res = optional.map(o -&gt; o.get(<span class="string">"key"</span>))</div><div class="line">        .map(o -&gt; &#123;</div><div class="line">            Map omap = ((Map) o);</div><div class="line">            <span class="keyword">return</span> omap.get(<span class="string">"subkey"</span>);</div><div class="line">        &#125;).orElse(<span class="string">"Empty"</span>);</div><div class="line"></div><div class="line">System.out.println(res);</div></pre></td></tr></table></figure></p>
+<p>到此为止，最有用的特性之一已经讲完了。</p>
+<h3 id="三、-Optional其他方法"><a href="#三、-Optional其他方法" class="headerlink" title="三、 Optional其他方法"></a>三、 Optional其他方法</h3><p><img src="http://cshijiel.qiniudn.com/17-1-4/18091537-file_1483533846622_ecc7.png" alt="Optional全部方法"></p>
+<p>除<code>java.util.Optional#map</code>之外，还有<code>java.util.Optional#flatMap</code>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;一、-Java中的null&quot;&gt;&lt;a href=&quot;#一、-Java中的null&quot; class=&quot;headerlink&quot; title=&quot;一、 Java中的null&quot;&gt;&lt;/a&gt;一、 Java中的&lt;code&gt;null&lt;/code&gt;&lt;/h3&gt;&lt;p&gt;在java中，使用&lt;cod
+    
+    </summary>
+    
+      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="Optional" scheme="http://coderroc.com/tags/Optional/"/>
+    
+      <category term="NullPointerException" scheme="http://coderroc.com/tags/NullPointerException/"/>
+    
+  </entry>
   
   <entry>
     <title>[转] Java instanceof 关键字是如何实现的？</title>
@@ -1516,76 +1559,6 @@ DELETE /api/user/logins
       <category term="WebSocket" scheme="http://coderroc.com/tags/WebSocket/"/>
     
       <category term="权限" scheme="http://coderroc.com/tags/%E6%9D%83%E9%99%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈HashMap</title>
-    <link href="http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/%E6%B5%85%E8%B0%88HashMap.html"/>
-    <id>http://coderroc.com/article/知识记录/Java基础/浅谈HashMap.html</id>
-    <published>2015-07-21T00:13:30.000Z</published>
-    <updated>2015-10-28T02:21:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>导言：</p>
-<p>数组在O(1)时间复杂度可以定位元素(读)，但是随机插入元素(写)效率比较低。而链表则相反，随机插入元素效率很高，但是随机读取效率低。</p>
-<p>那有没有，读取和插入效率都很高的数据结构呢？</p>
-<p>答案当然是有，HashMap就是一种读取和插入效率都很高的数据结构。</p>
-<h3 id="基础特性"><a href="#基础特性" class="headerlink" title="基础特性"></a>基础特性</h3><p>HashMap的几个必要的基础特性：</p>
-<ul>
-<li>hashCode()</li>
-<li>KV键值对</li>
-<li>数组为基础，辅助以链表的数据结构</li>
-</ul>
-<p>因为是散列函数，实际的键在数组中是分散存在的，占有一定的比例，如果比例高的时候容易出现键一样值不一样的情况（在该处形成链表），所以有初始容量和加载因子两个参数。</p>
-<p>通常，默认加载因子是0.75，这是在时间和空间上的一种折中。</p>
-<a id="more"></a>
-<h3 id="存储节点"><a href="#存储节点" class="headerlink" title="存储节点"></a>存储节点</h3><p>HashMap中的Key-Value都是存储在Entry数组中的。</p>
-<pre><code>static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; {
-    final K key;
-    V value;
-    // 指向下一个节点
-    Entry&lt;K,V&gt; next;
-    final int hash;
-
-    //...other
-}
-</code></pre><h3 id="常用用法"><a href="#常用用法" class="headerlink" title="常用用法"></a>常用用法</h3><pre><code>clear()--清空HashMap
-boolean containsKey(Object key)
-boolean containsValue(Object value)
-getEntry(Object key)
-
-entrySet()/values()/keySet()
-
-get(Object key)
-put(Object key,Object value)
-</code></pre><h3 id="新的理解和问题"><a href="#新的理解和问题" class="headerlink" title="新的理解和问题"></a>新的理解和问题</h3><p>HashMap是一个数组，每个元素都是一个链表。由链表组成的数组。<br>HashMap属于Key-Value型数据结构。Key与元素在数组中的位置有关，插入顺序与元素在链表中的位置有关。引出问题：从Key到数组序号是怎么映射的，有哪些问题（怎样减少重复而且均匀、重复之后怎么办）被引入，又是怎么解决的。关键词：均匀不重复、Key+key.hashCode()查找元素。<br>HashMap的基础是数组，怎样扩容，扩容是的元素重排是怎样的。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;导言：&lt;/p&gt;
-&lt;p&gt;数组在O(1)时间复杂度可以定位元素(读)，但是随机插入元素(写)效率比较低。而链表则相反，随机插入元素效率很高，但是随机读取效率低。&lt;/p&gt;
-&lt;p&gt;那有没有，读取和插入效率都很高的数据结构呢？&lt;/p&gt;
-&lt;p&gt;答案当然是有，HashMap就是一种读取和插入效率都很高的数据结构。&lt;/p&gt;
-&lt;h3 id=&quot;基础特性&quot;&gt;&lt;a href=&quot;#基础特性&quot; class=&quot;headerlink&quot; title=&quot;基础特性&quot;&gt;&lt;/a&gt;基础特性&lt;/h3&gt;&lt;p&gt;HashMap的几个必要的基础特性：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;hashCode()&lt;/li&gt;
-&lt;li&gt;KV键值对&lt;/li&gt;
-&lt;li&gt;数组为基础，辅助以链表的数据结构&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;因为是散列函数，实际的键在数组中是分散存在的，占有一定的比例，如果比例高的时候容易出现键一样值不一样的情况（在该处形成链表），所以有初始容量和加载因子两个参数。&lt;/p&gt;
-&lt;p&gt;通常，默认加载因子是0.75，这是在时间和空间上的一种折中。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Java基础" scheme="http://coderroc.com/categories/Java%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="数据结构" scheme="http://coderroc.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-      <category term="java" scheme="http://coderroc.com/tags/java/"/>
-    
-      <category term="HashMap" scheme="http://coderroc.com/tags/HashMap/"/>
     
   </entry>
   

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/use-optional-to-NullPointerException.html</loc>
+    
+    <lastmod>2017-01-04T12:46:00.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/handler-picture.html</loc>
+    
+    <lastmod>2017-01-04T11:54:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/IoC-and-DI.html</loc>
     
     <lastmod>2016-11-01T06:21:21.000Z</lastmod>
@@ -173,13 +187,6 @@
     <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Resource-Autowired-Inject.html</loc>
     
     <lastmod>2015-04-21T09:22:56.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://coderroc.com/article/%E7%9F%A5%E8%AF%86%E8%AE%B0%E5%BD%95/Java%E5%9F%BA%E7%A1%80/handler-picture.html</loc>
-    
-    <lastmod>2015-04-20T15:10:56.000Z</lastmod>
     
   </url>
   
