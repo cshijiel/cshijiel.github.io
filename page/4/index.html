@@ -641,8 +641,8 @@ end.
             
               
                 
-                <a class="post-title-link" href="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" itemprop="url">
-                  JDK1.8 中 接口和抽象类的异同
+                <a class="post-title-link" href="/article/知识记录/SpringBoot中读取YAML.html" itemprop="url">
+                  SpringBoot中读取YAML
                 </a>
               
             
@@ -669,8 +669,8 @@ end.
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
+                  <a href="/categories/知识记录/" itemprop="url" rel="index">
+                    <span itemprop="name">知识记录</span>
                   </a>
                 </span>
 
@@ -685,8 +685,8 @@ end.
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" itemprop="commentsCount"></span>
+                <a href="/article/知识记录/SpringBoot中读取YAML.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/SpringBoot中读取YAML.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -696,7 +696,7 @@ end.
 
           
           
-             <span id="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" class="leancloud_visitors" data-flag-title="JDK1.8 中 接口和抽象类的异同">
+             <span id="/article/知识记录/SpringBoot中读取YAML.html" class="leancloud_visitors" data-flag-title="SpringBoot中读取YAML">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -720,21 +720,36 @@ end.
       
         
           
-            <p>在最新版本Java1.8中的变化里， Stephen Colebourne 告诉Hartmut Schlosser，“我认为最重要的语言上的改变不是Lambdas表达式，而是在接口上的静态和默认方法”。ColeBoune补充道，“默认方法功能的增加减少了许多使用抽象类的原因”。当我读到这里时，我意识到Colebourne是正确的，而且我通常用抽象类的许多场景可以通过JDK1.8的默认方法（default method）替换为JDK1.8接口。</p>
-<p>在网上论坛和博客中讨论Java接口和抽象类异同的例子不胜枚举。这些讨论包括但不限于， <a href="http://www.javaworld.com/article/2077421/learn-java/abstract-classes-vs-interfaces.html&amp;usg=ALkJrhhe1JDAtAAePiPSeFh1a_fDBKdqQg" target="_blank" rel="external">JavaWorld ‘s Abstract classes vs. interfaces</a> , StackOverflow ‘s <a href="http://stackoverflow.com/questions/16781329/when-do-i-have-to-use-interfaces-instead-of-abstract-classes" target="_blank" rel="external">When do I have to use interfaces instead of abstract classes</a>? , <a href="http://javapapers.com/core-java/abstract-and-interface-core-java-2/difference-between-a-java-interface-and-a-java-abstract-class/&amp;usg=ALkJrhgKQek5dM2xZ98sZRLN8Csq6zJ_bQ" target="_blank" rel="external">Difference Between Interface and Abstract Class</a> , 10 <a href="http://javarevisited.blogspot.com/2013/04/10-abstract-class-and-interface-interview-question-java-answers.html&amp;usg=ALkJrhiFXycVbilpdqLhlKeppz5q2_eHdA" target="_blank" rel="external">Abstract Class and Interface Interview Questions Answers in Java</a> , 作为曾经有用的信息，许多现在已经过时了，可能会成为让Java体验更加混乱的部分。</p>
-<p>在我思考Java1.8中接口和抽象类尚存在的不同，我决定去看看<a href="http://docs.oracle.com/javase/tutorial/&amp;usg=ALkJrhj-rqreHzT3CKkBki9MFnUE9WRFwg" target="_blank" rel="external">Java Tutorial</a>关于这部分说过的信息。这个引导（Tutorial）已经更新到JDK 8 而且关于抽象方法和类的讨论有一个章节，称作 抽象类 vs 接口。这个章节指出在JDK 8 中接口和抽象类的异同点。着重强调的不同点是数据成员和方法的作用域（访问权限）：</p>
-<ul>
-<li>抽象类允许非静态和非final的域，允许方法成为public,static和final</li>
-<li>所有的接口方法本质为public的。</li>
-</ul>
-<p>在Java Tutorial接着列出了许多应该考虑抽象类的场景，和许多应该考虑接口的场景。不出意料，这些源于前面提到的不同、分歧，主要处理你是否<strong>需要域和方法成为private,protected,non-static,或者 not-final（偏向抽象类）</strong>，或者你需要<strong>把重点放在类型而不是考虑实现的能力（偏向接口）</strong>。</p>
-<p>因为Java语序一个类实现多个接口但只能继承一个类，接口可能被视为有利于多继承的实现。多亏JDK 8 的默认方法，这些接口甚至能提供默认的实现。</p>
-<p>那么，一个很自然的问题是：当一个类实现了两个接口，而这两个接口描述了一个具有相同特点的默认方法，Java怎么处理。答案是，这会报一个编译错误。这是一个屏幕截图，NetBeans8上运行报的这个错误。</p>
-<p><img src="http://a3ab771892fd198a96736e50.javacodegeeks.netdna-cdn.com/wp-content/uploads/2014/03/netBeans8CompilerErrorMultipleInterfacesSameDefaultMethodSignatures.png" alt="编译报错"></p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>JDK 8 争议性的把抽象类的优点带给接口。造成的影响是今天有大量的抽象类通过默认方法可能被替换为接口。</p>
-<blockquote>
-<p>翻译文章来源： <a href="http://www.javacodegeeks.com/2014/04/abstract-class-versus-interface-in-the-jdk-8-era.html" target="_blank" rel="external">Abstract Class Versus Interface in the JDK 8 Era</a></p>
-</blockquote>
+            <ol>
+<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
+</ol>
+<ol>
+<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
+</ol>
+<hr>
+<p>读取YAML步骤：</p>
+<ol>
+<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
+<pre><code>my:
+    servers:
+        - dev.bar.com
+        - foo.bar.com
+</code></pre></li>
+<li><p>在需要注解信息的Java文件中进行以下注解：</p>
+<pre><code>@Component(&quot;config&quot;)
+@ConfigurationProperties(prefix = &quot;my&quot;)
+public class Config {
+    //@Value(&quot;my.servers&quot;) 
+        //这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！
+    private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
+    public List&lt;String&gt; getServers() {
+        return this.servers;
+    }
+}
+</code></pre></li>
+<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
+</li>
+</ol>
 
           
         
@@ -933,8 +948,8 @@ Iterator&amp;lt;T&gt; iterator();
             
               
                 
-                <a class="post-title-link" href="/article/知识记录/SpringBoot中读取YAML.html" itemprop="url">
-                  SpringBoot中读取YAML
+                <a class="post-title-link" href="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" itemprop="url">
+                  JDK1.8 中 接口和抽象类的异同
                 </a>
               
             
@@ -961,8 +976,8 @@ Iterator&amp;lt;T&gt; iterator();
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/知识记录/" itemprop="url" rel="index">
-                    <span itemprop="name">知识记录</span>
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
                   </a>
                 </span>
 
@@ -977,8 +992,8 @@ Iterator&amp;lt;T&gt; iterator();
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/知识记录/SpringBoot中读取YAML.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/SpringBoot中读取YAML.html" itemprop="commentsCount"></span>
+                <a href="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -988,7 +1003,7 @@ Iterator&amp;lt;T&gt; iterator();
 
           
           
-             <span id="/article/知识记录/SpringBoot中读取YAML.html" class="leancloud_visitors" data-flag-title="SpringBoot中读取YAML">
+             <span id="/article/知识记录/Java基础/JDK1.8 中 接口和抽象类的异同.html" class="leancloud_visitors" data-flag-title="JDK1.8 中 接口和抽象类的异同">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1012,36 +1027,21 @@ Iterator&amp;lt;T&gt; iterator();
       
         
           
-            <ol>
-<li>在使用框架的时候，能用框架解决的使用框架解决。实在不能用框架解决的再考虑使用其他办法。</li>
-</ol>
-<ol>
-<li>使用Spring注解填充信息的对象不可以自己实例化，应该使用注解（@Resource或这 @Autowired  ）实例化。</li>
-</ol>
-<hr>
-<p>读取YAML步骤：</p>
-<ol>
-<li><p>在<code>application.yml</code>文件中，加入需要注入的信息：</p>
-<pre><code>my:
-    servers:
-        - dev.bar.com
-        - foo.bar.com
-</code></pre></li>
-<li><p>在需要注解信息的Java文件中进行以下注解：</p>
-<pre><code>@Component(&quot;config&quot;)
-@ConfigurationProperties(prefix = &quot;my&quot;)
-public class Config {
-    //@Value(&quot;my.servers&quot;) 
-        //这一句完全不需要，无效。需要把该填充的数据放到`application.yml`即可！
-    private List&lt;String&gt; servers = new ArrayList&lt;String&gt;();
-    public List&lt;String&gt; getServers() {
-        return this.servers;
-    }
-}
-</code></pre></li>
-<li><p>在需要引用的地方使用Spring注入（<code>@Resource</code>或这 <code>@Autowired</code>）实例化。</p>
-</li>
-</ol>
+            <p>在最新版本Java1.8中的变化里， Stephen Colebourne 告诉Hartmut Schlosser，“我认为最重要的语言上的改变不是Lambdas表达式，而是在接口上的静态和默认方法”。ColeBoune补充道，“默认方法功能的增加减少了许多使用抽象类的原因”。当我读到这里时，我意识到Colebourne是正确的，而且我通常用抽象类的许多场景可以通过JDK1.8的默认方法（default method）替换为JDK1.8接口。</p>
+<p>在网上论坛和博客中讨论Java接口和抽象类异同的例子不胜枚举。这些讨论包括但不限于， <a href="http://www.javaworld.com/article/2077421/learn-java/abstract-classes-vs-interfaces.html&amp;usg=ALkJrhhe1JDAtAAePiPSeFh1a_fDBKdqQg" target="_blank" rel="external">JavaWorld ‘s Abstract classes vs. interfaces</a> , StackOverflow ‘s <a href="http://stackoverflow.com/questions/16781329/when-do-i-have-to-use-interfaces-instead-of-abstract-classes" target="_blank" rel="external">When do I have to use interfaces instead of abstract classes</a>? , <a href="http://javapapers.com/core-java/abstract-and-interface-core-java-2/difference-between-a-java-interface-and-a-java-abstract-class/&amp;usg=ALkJrhgKQek5dM2xZ98sZRLN8Csq6zJ_bQ" target="_blank" rel="external">Difference Between Interface and Abstract Class</a> , 10 <a href="http://javarevisited.blogspot.com/2013/04/10-abstract-class-and-interface-interview-question-java-answers.html&amp;usg=ALkJrhiFXycVbilpdqLhlKeppz5q2_eHdA" target="_blank" rel="external">Abstract Class and Interface Interview Questions Answers in Java</a> , 作为曾经有用的信息，许多现在已经过时了，可能会成为让Java体验更加混乱的部分。</p>
+<p>在我思考Java1.8中接口和抽象类尚存在的不同，我决定去看看<a href="http://docs.oracle.com/javase/tutorial/&amp;usg=ALkJrhj-rqreHzT3CKkBki9MFnUE9WRFwg" target="_blank" rel="external">Java Tutorial</a>关于这部分说过的信息。这个引导（Tutorial）已经更新到JDK 8 而且关于抽象方法和类的讨论有一个章节，称作 抽象类 vs 接口。这个章节指出在JDK 8 中接口和抽象类的异同点。着重强调的不同点是数据成员和方法的作用域（访问权限）：</p>
+<ul>
+<li>抽象类允许非静态和非final的域，允许方法成为public,static和final</li>
+<li>所有的接口方法本质为public的。</li>
+</ul>
+<p>在Java Tutorial接着列出了许多应该考虑抽象类的场景，和许多应该考虑接口的场景。不出意料，这些源于前面提到的不同、分歧，主要处理你是否<strong>需要域和方法成为private,protected,non-static,或者 not-final（偏向抽象类）</strong>，或者你需要<strong>把重点放在类型而不是考虑实现的能力（偏向接口）</strong>。</p>
+<p>因为Java语序一个类实现多个接口但只能继承一个类，接口可能被视为有利于多继承的实现。多亏JDK 8 的默认方法，这些接口甚至能提供默认的实现。</p>
+<p>那么，一个很自然的问题是：当一个类实现了两个接口，而这两个接口描述了一个具有相同特点的默认方法，Java怎么处理。答案是，这会报一个编译错误。这是一个屏幕截图，NetBeans8上运行报的这个错误。</p>
+<p><img src="http://a3ab771892fd198a96736e50.javacodegeeks.netdna-cdn.com/wp-content/uploads/2014/03/netBeans8CompilerErrorMultipleInterfacesSameDefaultMethodSignatures.png" alt="编译报错"></p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>JDK 8 争议性的把抽象类的优点带给接口。造成的影响是今天有大量的抽象类通过默认方法可能被替换为接口。</p>
+<blockquote>
+<p>翻译文章来源： <a href="http://www.javacodegeeks.com/2014/04/abstract-class-versus-interface-in-the-jdk-8-era.html" target="_blank" rel="external">Abstract Class Versus Interface in the JDK 8 Era</a></p>
+</blockquote>
 
           
         
@@ -1091,8 +1091,8 @@ public class Config {
             
               
                 
-                <a class="post-title-link" href="/article/生活与心情/recall-3-days.html" itemprop="url">
-                  recall-3-days
+                <a class="post-title-link" href="/article/生活与心情/how-the-time-is-used.html" itemprop="url">
+                  how-the-time-is-used
                 </a>
               
             
@@ -1135,8 +1135,8 @@ public class Config {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/生活与心情/recall-3-days.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/recall-3-days.html" itemprop="commentsCount"></span>
+                <a href="/article/生活与心情/how-the-time-is-used.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/生活与心情/how-the-time-is-used.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1146,7 +1146,7 @@ public class Config {
 
           
           
-             <span id="/article/生活与心情/recall-3-days.html" class="leancloud_visitors" data-flag-title="recall-3-days">
+             <span id="/article/生活与心情/how-the-time-is-used.html" class="leancloud_visitors" data-flag-title="how-the-time-is-used">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1170,145 +1170,21 @@ public class Config {
       
         
           
-            <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><p>完成了一个小项目：推荐系统-基于多维空间两向量近似度的计算</p>
-<p>这个项目运行在了MoPaas上，<a href="http://command.sturgeon.mopaas.com" target="_blank" rel="external">项目地址</a>。</p>
-<h1 id="反思："><a href="#反思：" class="headerlink" title="反思："></a>反思：</h1><p>每天晚上都会很晚才休息，早上起床也比较晚。时间观念不好，浪费了很多时间。</p>
-<h1 id="措施"><a href="#措施" class="headerlink" title="措施"></a>措施</h1><p>11:00 泡脚</p>
-<p>12:00 之前必须睡觉</p>
-<p>早晨8:00起床，慢慢练习到6:30。</p>
-<hr>
-<p>最后想问自己的是：<strong>你到底想要什么？敢不敢为了自己的梦想去奋斗！！！</strong></p>
-<p>赶紧休息吧，明天工作。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/article/知识记录/IntelliJ Idea 常用快捷键列表.html" itemprop="url">
-                  IntelliJ Idea 常用快捷键列表
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
-              2015-04-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/知识记录/" itemprop="url" rel="index">
-                    <span itemprop="name">知识记录</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/article/知识记录/IntelliJ Idea 常用快捷键列表.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/IntelliJ Idea 常用快捷键列表.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/article/知识记录/IntelliJ Idea 常用快捷键列表.html" class="leancloud_visitors" data-flag-title="IntelliJ Idea 常用快捷键列表">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><code>Alt+Enter</code> 导入包，自动修正<br><code>Ctrl+N</code>   查找类<br><code>Ctrl+Shift+N</code> 查找文件<br><code>Ctrl+Alt+L</code>  格式化代码<br><code>Ctrl+Alt+O</code> 优化导入的类和包<br><code>Alt+Insert</code> 生成代码(如get,set方法,构造函数等)<br><code>Ctrl+E</code>或者Alt+Shift+C  最近更改的代码<br><code>Ctrl+R</code> 替换文本<br><code>Ctrl+F</code> 查找文本<br><code>Ctrl+Shift+Space</code> 自动补全代码<br><code>Ctrl+空格</code> 代码提示<br><code>Ctrl+Alt+Space</code> 类名或接口名提示<br><code>Ctrl+P</code> 方法参数提示<br><code>Ctrl+Shift+Alt+N</code> 查找类中的方法或变量<br><code>Alt+Shift+C</code> 对比最近修改的代码</p>
-<p><code>Shift+F6</code> 重构-重命名<br>Ctrl+Shift+先上键<br><code>Ctrl+X</code> 删除行<br><code>Ctrl+D</code> 复制行<br><code>Ctrl+/</code> 或 Ctrl+Shift+/ 注释（// 或者/<em>…</em>/ ）<br><code>Ctrl+J</code> 自动代码<br><code>Ctrl+E</code> 最近打开的文件<br><code>Ctrl+H</code> 显示类结构图<br><code>Ctrl+Q</code> 显示注释文档<br><code>Alt+F1</code> 查找代码所在位置<br><code>Alt+1</code> 快速打开或隐藏工程面板<br><code>Ctrl+Alt+ left/right</code> 返回至上次浏览的位置<br><code>Alt+ left/right</code> 切换代码视图<br><code>Alt+ Up/Down</code> 在方法间快速移动定位<br><code>Ctrl+Shift+Up/Down</code> 代码向上/下移动。<br><code>F2</code> 或<code>Shift+F2</code> 高亮错误或警告快速定位</p>
+            <h2 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h2><p>昨天晚上，捣鼓微博和看codepiano的微博，<strong>remove掉了自己原先的微博记录，写了一个小脚本</strong>。</p>
+<p>早晨9：23第一次醒，没注意，接着睡。</p>
+<p>然后，过了一个钟头吧，又一次醒了，玩了会手机一直到12：00.期间下载了豆瓣，发了一条微博，刷了很多知乎。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>这期间我收获了什么？</p>
+<p>貌似不多，大量的时间被浪费，截止到现在，估计浪费了2小时。2小时可以完成老师的任务了吧。</p>
+<h2 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h2><blockquote>
+<p>斜体表示已经完成。</p>
+</blockquote>
+<ul>
+<li><em>Python入门，重点是UDP和TCP的实现</em></li>
+<li><em>吴雄华老师的推荐系统</em></li>
+<li>理学院数学文化节</li>
+<li><em>我知科技的脚本执行shell实现，更改ip：重点有两个地方，<code>inip.pp</code> 和 <code>ifcfg-eth0</code> 修改</em></li>
+</ul>
+<p>加油！</p>
 
           
         
@@ -1508,8 +1384,8 @@ public void readByBufferedReader() throws IOException {
             
               
                 
-                <a class="post-title-link" href="/article/知识记录/Java基础/String相关类对比2.html" itemprop="url">
-                  String相关类对比2
+                <a class="post-title-link" href="/article/知识记录/IntelliJ Idea 常用快捷键列表.html" itemprop="url">
+                  IntelliJ Idea 常用快捷键列表
                 </a>
               
             
@@ -1536,8 +1412,8 @@ public void readByBufferedReader() throws IOException {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java基础/" itemprop="url" rel="index">
-                    <span itemprop="name">Java基础</span>
+                  <a href="/categories/知识记录/" itemprop="url" rel="index">
+                    <span itemprop="name">知识记录</span>
                   </a>
                 </span>
 
@@ -1552,8 +1428,8 @@ public void readByBufferedReader() throws IOException {
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/article/知识记录/Java基础/String相关类对比2.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/String相关类对比2.html" itemprop="commentsCount"></span>
+                <a href="/article/知识记录/IntelliJ Idea 常用快捷键列表.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/IntelliJ Idea 常用快捷键列表.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1563,7 +1439,7 @@ public void readByBufferedReader() throws IOException {
 
           
           
-             <span id="/article/知识记录/Java基础/String相关类对比2.html" class="leancloud_visitors" data-flag-title="String相关类对比2">
+             <span id="/article/知识记录/IntelliJ Idea 常用快捷键列表.html" class="leancloud_visitors" data-flag-title="IntelliJ Idea 常用快捷键列表">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1587,22 +1463,8 @@ public void readByBufferedReader() throws IOException {
       
         
           
-            <p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间,StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象,StringBuffer和StringBuilder类功能基本相似.   </p>
-<h3 id="1-String-类"><a href="#1-String-类" class="headerlink" title="1. String 类"></a>1. String 类</h3><p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间。   </p>
-<pre><code>String a = &quot;a&quot;; //假设a指向地址0x0001 
-a = &quot;b&quot;;//重新赋值后a指向地址0x0002，但0x0001地址中保存的&quot;a&quot;依旧存在，但已经不再是a所指向的,a 已经指向了其它地址。 
-</code></pre><p>因此String的操作都是改变赋值地址而不是改变值操作。 </p>
-<h3 id="2-StringBuffer-类"><a href="#2-StringBuffer-类" class="headerlink" title="2. StringBuffer 类"></a>2. StringBuffer 类</h3><p>StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象。 每个StringBuffer对象都有一定的缓冲区容量，当字符串大小没有超过容量时，不会分配新的容量，当字符串大小超过容量时，会自动增加容量。 </p>
-<pre><code>StringBuffer buf=new StringBuffer(); //分配长16字节的字符缓冲区 
-StringBuffer buf=new StringBuffer(512); //分配长512字节的字符缓冲区 
-StringBuffer buf=new StringBuffer(&quot;this is a test&quot;)//在缓冲区中存放了字符串，并在后面预留了16字节的空缓冲区。 
-</code></pre><h3 id="3-StringBuffer"><a href="#3-StringBuffer" class="headerlink" title="3.StringBuffer"></a>3.StringBuffer</h3><p>StringBuffer和StringBuilder类功能基本相似，主要区别在于StringBuffer类的方法是多线程、安全的，而StringBuilder不是线程安全的，相比而言，StringBuilder类会略微快一点。对于经常要改变值的字符串应该使用StringBuffer和StringBuilder类。 </p>
-<h3 id="4-线程安全"><a href="#4-线程安全" class="headerlink" title="4.线程安全"></a>4.线程安全</h3><ul>
-<li>StringBuffer 线程安全   </li>
-<li>StringBuilder 线程不安全 </li>
-</ul>
-<h3 id="5-速度"><a href="#5-速度" class="headerlink" title="5.速度"></a>5.速度</h3><p>一般情况下,速度从快到慢:<strong>StringBuilder&gt;StringBuffer&gt;String</strong>,这种比较是相对的，不是绝对的。 </p>
-<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h3><p>（1）.如果要操作少量的数据用 = String<br>（2）.<strong>单线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuilder<br>（3）.<strong>多线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuffer </p>
+            <p><code>Alt+Enter</code> 导入包，自动修正<br><code>Ctrl+N</code>   查找类<br><code>Ctrl+Shift+N</code> 查找文件<br><code>Ctrl+Alt+L</code>  格式化代码<br><code>Ctrl+Alt+O</code> 优化导入的类和包<br><code>Alt+Insert</code> 生成代码(如get,set方法,构造函数等)<br><code>Ctrl+E</code>或者Alt+Shift+C  最近更改的代码<br><code>Ctrl+R</code> 替换文本<br><code>Ctrl+F</code> 查找文本<br><code>Ctrl+Shift+Space</code> 自动补全代码<br><code>Ctrl+空格</code> 代码提示<br><code>Ctrl+Alt+Space</code> 类名或接口名提示<br><code>Ctrl+P</code> 方法参数提示<br><code>Ctrl+Shift+Alt+N</code> 查找类中的方法或变量<br><code>Alt+Shift+C</code> 对比最近修改的代码</p>
+<p><code>Shift+F6</code> 重构-重命名<br>Ctrl+Shift+先上键<br><code>Ctrl+X</code> 删除行<br><code>Ctrl+D</code> 复制行<br><code>Ctrl+/</code> 或 Ctrl+Shift+/ 注释（// 或者/<em>…</em>/ ）<br><code>Ctrl+J</code> 自动代码<br><code>Ctrl+E</code> 最近打开的文件<br><code>Ctrl+H</code> 显示类结构图<br><code>Ctrl+Q</code> 显示注释文档<br><code>Alt+F1</code> 查找代码所在位置<br><code>Alt+1</code> 快速打开或隐藏工程面板<br><code>Ctrl+Alt+ left/right</code> 返回至上次浏览的位置<br><code>Alt+ left/right</code> 切换代码视图<br><code>Alt+ Up/Down</code> 在方法间快速移动定位<br><code>Ctrl+Shift+Up/Down</code> 代码向上/下移动。<br><code>F2</code> 或<code>Shift+F2</code> 高亮错误或警告快速定位</p>
 
           
         
@@ -1833,6 +1695,150 @@ public class RunTime{
     }  
 }  
 </code></pre><h2 id="★-镜头总结："><a href="#★-镜头总结：" class="headerlink" title="★ 镜头总结："></a>★ 镜头总结：</h2><p>(1) 在编译阶段就能够确定的字符串常量，完全没有必要创建String或StringBuffer对象。直接使用字符串常量的”+”连接操作效率最高。<br>(2) StringBuffer对象的append效率要高于String对象的”+”连接操作。<br>(3) 不停的创建对象是程序低效的一个重要原因。那么相同的字符串值能否在堆中只创建一个String对象那。显然拘留字符串能够做到这一点，除了程序中的字符串常量会被JVM自动创建拘留字符串之外，调用String的intern()方法也能做到这一点。当调用intern()时，如果常量池中已经有了当前String的值，那么返回这个常量指向拘留对象的地址。如果没有，则将String值加入常量池中，并创建一个新的拘留字符串对象。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/article/知识记录/Java基础/String相关类对比2.html" itemprop="url">
+                  String相关类对比2
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-04-07T00:20:36+08:00" content="2015-04-07">
+              2015-04-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/article/知识记录/Java基础/String相关类对比2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="article/知识记录/Java基础/String相关类对比2.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/article/知识记录/Java基础/String相关类对比2.html" class="leancloud_visitors" data-flag-title="String相关类对比2">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间,StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象,StringBuffer和StringBuilder类功能基本相似.   </p>
+<h3 id="1-String-类"><a href="#1-String-类" class="headerlink" title="1. String 类"></a>1. String 类</h3><p>String的值是不可变的，这就导致每次对String的操作都会生成新的String对象，不仅效率低下，而且大量浪费有限的内存空间。   </p>
+<pre><code>String a = &quot;a&quot;; //假设a指向地址0x0001 
+a = &quot;b&quot;;//重新赋值后a指向地址0x0002，但0x0001地址中保存的&quot;a&quot;依旧存在，但已经不再是a所指向的,a 已经指向了其它地址。 
+</code></pre><p>因此String的操作都是改变赋值地址而不是改变值操作。 </p>
+<h3 id="2-StringBuffer-类"><a href="#2-StringBuffer-类" class="headerlink" title="2. StringBuffer 类"></a>2. StringBuffer 类</h3><p>StringBuffer是可变类，和线程安全的字符串操作类，任何对它指向的字符串的操作都不会产生新的对象。 每个StringBuffer对象都有一定的缓冲区容量，当字符串大小没有超过容量时，不会分配新的容量，当字符串大小超过容量时，会自动增加容量。 </p>
+<pre><code>StringBuffer buf=new StringBuffer(); //分配长16字节的字符缓冲区 
+StringBuffer buf=new StringBuffer(512); //分配长512字节的字符缓冲区 
+StringBuffer buf=new StringBuffer(&quot;this is a test&quot;)//在缓冲区中存放了字符串，并在后面预留了16字节的空缓冲区。 
+</code></pre><h3 id="3-StringBuffer"><a href="#3-StringBuffer" class="headerlink" title="3.StringBuffer"></a>3.StringBuffer</h3><p>StringBuffer和StringBuilder类功能基本相似，主要区别在于StringBuffer类的方法是多线程、安全的，而StringBuilder不是线程安全的，相比而言，StringBuilder类会略微快一点。对于经常要改变值的字符串应该使用StringBuffer和StringBuilder类。 </p>
+<h3 id="4-线程安全"><a href="#4-线程安全" class="headerlink" title="4.线程安全"></a>4.线程安全</h3><ul>
+<li>StringBuffer 线程安全   </li>
+<li>StringBuilder 线程不安全 </li>
+</ul>
+<h3 id="5-速度"><a href="#5-速度" class="headerlink" title="5.速度"></a>5.速度</h3><p>一般情况下,速度从快到慢:<strong>StringBuilder&gt;StringBuffer&gt;String</strong>,这种比较是相对的，不是绝对的。 </p>
+<h3 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h3><p>（1）.如果要操作少量的数据用 = String<br>（2）.<strong>单线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuilder<br>（3）.<strong>多线程</strong>操作字符串缓冲区 下操作大量数据 = StringBuffer </p>
 
           
         
